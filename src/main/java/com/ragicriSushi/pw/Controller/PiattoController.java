@@ -25,7 +25,7 @@ public class PiattoController {
 
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti i piatti")
-    public ResponseEntity<Object> getAllUtente(){
+    public ResponseEntity<Object> getAll(){
         return ResponseEntity.ok(piattoService.getAll());
     }
 

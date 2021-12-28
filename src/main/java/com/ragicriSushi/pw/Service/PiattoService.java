@@ -17,7 +17,7 @@ public class PiattoService {
     @Autowired
     private Conversioni conversioni;
 
-    public List<PiattoDAO> getAll(){
+    public List<PiattoDTO> getAll(){
         return conversioni.toDTO(piattoRepository.findAll());
     }
 

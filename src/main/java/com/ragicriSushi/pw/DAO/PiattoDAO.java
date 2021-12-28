@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -35,13 +37,9 @@ public class PiattoDAO {
     private String allergeni;
 
     @Column
-    private boolean consegnato;
-
-    @Column
     private String img;
 
-    public boolean getConsegnato(){
-        return this.consegnato;
-    }
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "piatto")
+    List<PiattoOrdinato> piattiOrdinati;
 
 }
