@@ -1,8 +1,3 @@
-INSERT INTO 'utente' (id, nome) VALUES (1, 'Ragicri');
-CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
-);
+INSERT INTO utente (nome) VALUES ('Ragicri');
+INSERT INTO utente (nome) VALUES ('Ragicri2');
+
