@@ -8,15 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "Utente")
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-@Table(name = "UtenteDAO")
 public class UtenteDAO {
 
     @Id
     @GeneratedValue
     private Integer id;
+
+    private String nome;
 }
