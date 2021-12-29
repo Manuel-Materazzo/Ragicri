@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class PiattoOrdinatoDTO {
 
+    private int id;
+
     private int numeretto;
 
     private double prezzo;
@@ -18,5 +20,9 @@ public class PiattoOrdinatoDTO {
     private boolean consegnato;
 
     private int quantita;
+
+    public boolean getConsegnato(){
+        return this.consegnato;
+    }
 
 }

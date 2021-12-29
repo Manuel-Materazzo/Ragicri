@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "PiattoOrdinato")
 @NoArgsConstructor
@@ -13,16 +15,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class PiattoOrdinato {
 
-    @EmbeddedId
-    PiattoOrdinatoKey id;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    int id;
 
     @ManyToOne
-    @MapsId("idOrdinazione")
     @JoinColumn
     OrdinazioneDAO ordinazione;
 
     @ManyToOne
-    @MapsId("idPiatto")
     @JoinColumn
     PiattoDAO piatto;
 

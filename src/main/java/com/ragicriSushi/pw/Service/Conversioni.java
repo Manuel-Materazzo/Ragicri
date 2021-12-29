@@ -2,11 +2,10 @@ package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
+import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
-import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.PiattoDTO;
-import com.ragicriSushi.pw.DTO.PiattoOrdinatoDTO;
-import com.ragicriSushi.pw.DTO.UtenteDTO;
+import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class Conversioni {
 
     @Autowired
-    PiattoService piattoService;
+    PiattoRepository piattoRepository;
 
     public <T, S> T toDTO(S dao) {
         if (dao instanceof PiattoDAO) {
@@ -26,6 +25,17 @@ public class Conversioni {
             return (T) fromDaoToDto((UtenteDAO) dao);
         } else if (dao instanceof OrdinazioneDAO) {
             return (T) fromDaoToDto((OrdinazioneDAO) dao);
+        }
+        return null;
+    }
+
+    public <T, S> T toDAO(S dto) {
+        if (dto instanceof PiattoDTO) {
+            return (T) fromDtoToDao((PiattoDTO) dto);
+        } else if (dto instanceof UtenteDTO) {
+            return (T) fromDtoToDao((UtenteDTO) dto);
+        } else if (dto instanceof NewOrdinazioneDTO) {
+            return (T) fromDtoToDao((NewOrdinazioneDTO) dto);
         }
         return null;
     }
@@ -42,6 +52,20 @@ public class Conversioni {
             }
         }
         return dtoList;
+    }
+
+    public <T, S> List<T> toDAO(List<S> dtoList){
+        List<T> daoList = new ArrayList<T>();
+        for(S dto: dtoList) {
+            if(dto instanceof PiattoDTO) {
+                daoList.add((T) fromDtoToDao((PiattoDTO) dto));
+            } else if(dto instanceof UtenteDTO) {
+                daoList.add((T) fromDtoToDao((UtenteDTO) dto));
+            } else if(dto instanceof NewOrdinazioneDTO) {
+                daoList.add((T) fromDtoToDao((NewOrdinazioneDTO) dto));
+            }
+        }
+        return daoList;
     }
 
     //TODO toDAO anche per le liste
@@ -68,6 +92,7 @@ public class Conversioni {
         List<PiattoOrdinatoDTO> listaPiattiOrdinati = new ArrayList<>();
         for (int i = 0; i < dao.getPiattiOrdinati().size(); i++) {
             PiattoOrdinatoDTO piattoOrdinato = new PiattoOrdinatoDTO();
+            piattoOrdinato.setId(dao.getPiattiOrdinati().get(i).getId());
             piattoOrdinato.setNumeretto(dao.getPiattiOrdinati().get(i).getPiatto().getNumero());
             piattoOrdinato.setPrezzo(dao.getPiattiOrdinati().get(i).getPiatto().getPrezzo());
             piattoOrdinato.setNome(dao.getPiattiOrdinati().get(i).getPiatto().getNome());
@@ -93,8 +118,25 @@ public class Conversioni {
         return null;
     }
 
-    public OrdinazioneDAO fromDtoToDao(OrdinazioneDTO dto) {
-        return null;
+    public OrdinazioneDAO fromDtoToDao(NewOrdinazioneDTO dto) {
+        OrdinazioneDAO dao = new OrdinazioneDAO();
+        dao.setTavolo(dto.getTavolo());
+        dao.setTipologia(dto.getTipologia());
+        dao.setPagato(dto.getPagato());
+        dao.setPersone(dto.getPersone());
+
+        List<PiattoOrdinato> piattiOrdinati = new ArrayList<>();
+        for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
+            PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
+            piattoOrdinato.setOrdinazione(dao);
+            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
+            piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
+            piattoOrdinato.setConsegnato(false);
+            piattiOrdinati.add(piattoOrdinato);
+        }
+        dao.setPiattiOrdinati(piattiOrdinati);
+
+        return dao;
     }
 
 }

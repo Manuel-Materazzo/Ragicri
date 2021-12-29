@@ -9,4 +9,6 @@ public interface PiattoRepository extends JpaRepository<PiattoDAO, Integer> {
 
     List<PiattoDAO> findPiattoByTipologia(String tipologia);
 
+    PiattoDAO findPiattoByNumero(int numero);
+
 }

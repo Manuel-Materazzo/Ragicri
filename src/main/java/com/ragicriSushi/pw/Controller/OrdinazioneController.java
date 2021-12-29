@@ -1,13 +1,13 @@
 package com.ragicriSushi.pw.Controller;
 
+import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
+import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
@@ -20,9 +20,18 @@ public class OrdinazioneController {
     private OrdinazioneService ordinazioneService;
 
     @GetMapping(path = "")
-    @ApiOperation("Ritorna tutti i piatti")
+    @ApiOperation("Ritorna tutte le ordinazioni")
     public ResponseEntity<Object> getAll(){
         return ResponseEntity.ok(ordinazioneService.getAll());
+    }
+
+    @PostMapping(
+            path = "addOrdinazione",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    @ApiOperation("Aggiunge un'ordinazione")
+    public ResponseEntity<Object> add(@RequestBody NewOrdinazioneDTO dto){
+        return ResponseEntity.ok(ordinazioneService.add(dto));
     }
 
 }

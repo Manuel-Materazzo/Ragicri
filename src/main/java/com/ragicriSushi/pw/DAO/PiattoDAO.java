@@ -24,7 +24,7 @@ public class PiattoDAO {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private int numero;
 
     @Column(nullable = false)
