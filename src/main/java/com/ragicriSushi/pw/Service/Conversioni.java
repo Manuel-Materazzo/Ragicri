@@ -5,18 +5,22 @@ import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Conversioni {
 
     @Autowired
     PiattoRepository piattoRepository;
+    @Autowired
+    OrdinazioneRepository ordinazioneRepository;
 
     public <T, S> T toDTO(S dao) {
         if (dao instanceof PiattoDAO) {
@@ -36,6 +40,8 @@ public class Conversioni {
             return (T) fromDtoToDao((UtenteDTO) dto);
         } else if (dto instanceof NewOrdinazioneDTO) {
             return (T) fromDtoToDao((NewOrdinazioneDTO) dto);
+        } else if (dto instanceof AddPiattiOrdinazioneDTO) {
+            return (T) fromDtoToDao((AddPiattiOrdinazioneDTO) dto);
         }
         return null;
     }
@@ -137,6 +143,27 @@ public class Conversioni {
         dao.setPiattiOrdinati(piattiOrdinati);
 
         return dao;
+    }
+
+    public OrdinazioneDAO fromDtoToDao(AddPiattiOrdinazioneDTO dto) {
+        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(dto.getId());
+
+        if(dao.isPresent()){
+            List<PiattoOrdinato> piattiOrdinati = dao.get().getPiattiOrdinati();
+            for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
+                PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
+                piattoOrdinato.setOrdinazione(dao.get());
+                piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
+                piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
+                piattoOrdinato.setConsegnato(false);
+                piattiOrdinati.add(piattoOrdinato);
+            }
+            dao.get().setPiattiOrdinati(piattiOrdinati);
+
+            return dao.get();
+        } else {
+            return null;
+        }
     }
 
 }

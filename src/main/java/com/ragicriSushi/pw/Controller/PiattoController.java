@@ -1,15 +1,13 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.PiattoDTO;
+import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.Service.PiattoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +46,35 @@ public class PiattoController {
     @ApiOperation("Ritorna tutti i piatti di una data tipologia")
     public ResponseEntity<Object> getByTipologia(@PathVariable String tipologia){
         List<PiattoDTO> dto = piattoService.getByTipologia(tipologia);
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+    @DeleteMapping(path = "/delete")
+    @ApiOperation("Elimina il piatto")
+    public ResponseEntity<Object> delete(@RequestBody String idStr){
+        try{
+            int id = Integer.parseInt(idStr);
+            PiattoDTO dto = piattoService.delete(id);
+            if (dto != null){
+                return ResponseEntity.ok(dto);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (NumberFormatException e)
+        {
+            return ResponseEntity.badRequest().body("L'id " + idStr + " non è valido.");
+        }
+    }
+
+    @PostMapping(path = "/update")
+    @ApiOperation("Aggiorna un piatto")
+    public ResponseEntity<Object> update(@RequestBody UpdatePiattoDTO dto){
+        PiattoDTO result = piattoService.update(dto);
         if (dto == null){
             return ResponseEntity.notFound().build();
         }

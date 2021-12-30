@@ -1,6 +1,7 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
+import com.ragicriSushi.pw.DTO.AddPiattiOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
@@ -26,6 +27,16 @@ public class OrdinazioneService {
         ordinazioneRepository.save(dao);
 
         return conversioni.toDTO(dao);
+    }
+
+    public OrdinazioneDTO addPiattiOrdinazione(AddPiattiOrdinazioneDTO dto){
+        OrdinazioneDAO dao = conversioni.toDAO(dto);
+        if (dao != null){
+            ordinazioneRepository.save(dao);
+            return conversioni.toDTO(dao);
+        } else {
+            return null;
+        }
     }
 
 }
