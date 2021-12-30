@@ -1,0 +1,86 @@
+package com.ragicriSushi.pw.Controller;
+
+import com.ragicriSushi.pw.DTO.PiattoDTO;
+import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
+import com.ragicriSushi.pw.Service.PiattoService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(
+        path = "/piatto",
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
+public class PiattoController {
+
+    @Autowired
+    private PiattoService piattoService;
+
+    @GetMapping(path = "")
+    @ApiOperation("Ritorna tutti i piatti")
+    public ResponseEntity<Object> getAll(){
+        return ResponseEntity.ok(piattoService.getAll());
+    }
+
+    @GetMapping(path = "/{id}")
+    @ApiOperation("Ritorna il piatto con l'id inserito")
+    public ResponseEntity<Object> getById(@PathVariable int id){
+        PiattoDTO dto = piattoService.getById(id);
+
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Piatto non trovato.");
+            // funziona ma ritorna un risultato raw, da quindi convertire in JSON, gl&hf
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+    @GetMapping(path = "/tipologia/{tipologia}")
+    @ApiOperation("Ritorna tutti i piatti di una data tipologia")
+    public ResponseEntity<Object> getByTipologia(@PathVariable String tipologia){
+        List<PiattoDTO> dto = piattoService.getByTipologia(tipologia);
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+    @DeleteMapping(path = "/delete")
+    @ApiOperation("Elimina il piatto")
+    public ResponseEntity<Object> delete(@RequestBody String idStr){
+        try{
+            int id = Integer.parseInt(idStr);
+            PiattoDTO dto = piattoService.delete(id);
+            if (dto != null){
+                return ResponseEntity.ok(dto);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (NumberFormatException e)
+        {
+            return ResponseEntity.badRequest().body("L'id " + idStr + " non è valido.");
+        }
+    }
+
+    @PostMapping(path = "/update")
+    @ApiOperation("Aggiorna un piatto")
+    public ResponseEntity<Object> update(@RequestBody UpdatePiattoDTO dto){
+        PiattoDTO result = piattoService.update(dto);
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+}

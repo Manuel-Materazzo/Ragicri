@@ -7,7 +7,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PiattoDTO {
+public class UpdatePiattoDTO {
+
+    private int id;
 
     private String nome;
 

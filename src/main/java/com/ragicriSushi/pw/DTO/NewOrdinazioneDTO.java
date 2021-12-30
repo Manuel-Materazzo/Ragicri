@@ -9,11 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrdinazioneDTO {
-
-    private int idOrdinazione;
-
-    private String tipologia;
+public class NewOrdinazioneDTO {
 
     private double pagato;
 
@@ -21,8 +17,10 @@ public class OrdinazioneDTO {
 
     private int persone;
 
+    private String tipologia;
+
     //private datetime OrarioConsegna;
 
-    private List<PiattoOrdinatoDTO> piattiOrdinati;
+    private List<NewPiattoOrdinatoDTO> piattiOrdinati;
 
 }
