@@ -29,14 +29,25 @@
                                         <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
                                                                  [routerLinkActiveOptions]="{exact: true}"
                                                                  class="vsm-link"><span
-                                                class="vsm-title">HOME</span></a>
+                                                class="vsm-title">Home</span></a>
                                         </div>
                                     </button>
                                 </ng-template>
                             </ngb-panel>
 
-
-
+                            <ngb-panel >
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon fa fa-archive icon-gradient bg-sunny-morning"></i>
+                                        <div class="vsm-item"><a routerLink="MenuComponent" routerLinkActive="active-item"
+                                                                 [routerLinkActiveOptions]="{exact: true}"
+                                                                 class="vsm-link"><span
+                                                class="vsm-title">Menù</span></a>
+                                        </div>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--
                             <ngb-panel id="pagesMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">

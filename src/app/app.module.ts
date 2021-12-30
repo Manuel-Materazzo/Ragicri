@@ -104,6 +104,7 @@ import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughn
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
 import { SideBarCarrelloComponent } from './Layout/Components/side-bar-carrello/side-bar-carrello.component';
 import { HomeComponent } from './DemoPages/Dashboards/home/home/home.component';
+import { MenuComponent } from './DemoPages/Components/menu/menu.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -195,6 +196,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScatterChartComponent,
     SideBarCarrelloComponent,
     HomeComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

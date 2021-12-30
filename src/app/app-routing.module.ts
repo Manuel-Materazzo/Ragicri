@@ -52,6 +52,7 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 
 import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
 import {HomeComponent} from './DemoPages/Dashboards/home/home/home.component';
+import {MenuComponent} from './DemoPages/Components/menu/menu.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,8 @@ const routes: Routes = [
       {path: '', component: HomeComponent, data: {extraParameter: 'dashboardsMenu'}},
 
       // Elements
+
+      {path: 'MenuComponent', component: MenuComponent, data: {extraParameter: ''}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
