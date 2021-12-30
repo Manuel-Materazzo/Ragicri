@@ -1,0 +1,42 @@
+
+<h1 class="testo-centrato-titolo">RAGICRI SUSHI</h1>
+<div class="testo-Sinistra"><p class="testo-centrato">Testo di prova come presentazione ecccc</p></div>
+<iframe class="google-maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.60128169746724!2d11.747313133366456!3d45.174900000062316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477ee484a7bb7e07%3A0x6eab069854dabe31!2sRoccetto%20Bar!5e0!3m2!1sit!2sit!4v1640777707596!5m2!1sit!2sit" ></iframe>
+<p class="testo-Sinistra">Testo di prova come presentazione ecccc</p>
+
+<!--Carosello di sinistra   -->
+<ngb-carousel class="testo-Sinistra, carosello-home" *ngIf="listaImmaginiRistorante!=null" >
+    <ng-template ngbSlide *ngFor="let img of listaImmaginiRistorante;">
+        <img [src]="img" width="100%" alt="Random first slide">
+        <div class="carousel-caption">
+            <h3>Titolo immagine</h3>
+        </div>
+    </ng-template>
+</ngb-carousel>
+
+<!--Carosello di destra  -->
+
+<ngb-carousel class="testo-Sinistra, carosello-home" *ngIf="listaImmaginiPiatti!=null">
+    <ng-template ngbSlide>
+        <img [src]="listaImmaginiPiatti[0]" width="100%" alt="Random first slide">
+        <div class="carousel-caption">
+            <h3>Prima slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+    </ng-template>
+    <ng-template ngbSlide>
+        <img [src]="listaImmaginiPiatti[1]" width="100%" alt="Random second slide">
+        <div class="carousel-caption">
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </ng-template>
+    <ng-template ngbSlide>
+        <img [src]="listaImmaginiPiatti[2]" width="100%" alt="Random third slide">
+        <div class="carousel-caption">
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+    </ng-template>
+</ngb-carousel>
+

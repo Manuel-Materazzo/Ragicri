@@ -1,0 +1,30 @@
+.testo-centrato-titolo {
+  text-align: center;
+  line-height: 100px;
+  color: darkorange;
+}
+.testo-Sinistra{
+  float:left;
+  clear:left;
+}
+.testo-centrato{
+  text-align: center;
+}
+.testo-destra{
+  float:right;
+  clear:right;
+}
+
+.google-maps{
+  width:500px;
+  height:300px;
+  border:0;
+  loading:lazy;
+  float:right;
+  clear:right;
+}
+
+.carosello-home{
+  width: 45%;
+  margin-top:25%;
+}

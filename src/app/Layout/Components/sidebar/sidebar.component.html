@@ -25,23 +25,18 @@
                             <ngb-panel id="dashboardsMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
-                                        <i class="vsm-icon pe-7s-rocket"></i>
-                                        <span class="vsm-title">Home</span>
-                                        <i class="vsm-arrow"></i>
+                                        <i class="vsm-icon fa fa-archive icon-gradient bg-sunny-morning"></i>
+                                        <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
+                                                                 [routerLinkActiveOptions]="{exact: true}"
+                                                                 class="vsm-link"><span
+                                                class="vsm-title">HOME</span></a>
+                                        </div>
                                     </button>
                                 </ng-template>
-                                <ng-template ngbPanelContent>
-                                    <div class="vsm-dropdown">
-                                        <div class="vsm-list">
-                                            <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
-                                                                     [routerLinkActiveOptions]="{exact: true}"
-                                                                     class="vsm-link"><span
-                                                    class="vsm-title">Analytics</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ng-template>
                             </ngb-panel>
+
+
+
                             <ngb-panel id="pagesMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -72,11 +67,13 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel>
                                 <ng-template ngbPanelHeader>
                                     <div class="vsm-header">Bootstrap Components</div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="elementsMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -123,6 +120,7 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="componentsMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -174,6 +172,7 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="formElementsMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -199,6 +198,7 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="tablesMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -219,11 +219,13 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel>
                                 <ng-template ngbPanelHeader>
                                     <div class="vsm-header">Dashboard Boxes</div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="pagesMenu3">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -244,14 +246,18 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+
+
+                        -->
                         </ngb-accordion>
+                        <!--
                         <div class="vsm-header">Charts</div>
                         <div class="vsm-item">
                             <a routerLink="/charts/chartjs" routerLinkActive="active-item" class="vsm-link">
                                 <i class="vsm-icon pe-7s-graph2"></i>
                                 <span class="vsm-title">ChartJS</span>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </perfect-scrollbar>

@@ -1,8 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {ThemeOptions} from "../../../theme-options";
-import {ActivatedRoute} from "@angular/router";
-import {select} from "@angular-redux/store";
-import {Observable} from "rxjs";
+import {ThemeOptions} from '../../../theme-options';
+import {ActivatedRoute} from '@angular/router';
+import {select} from '@angular-redux/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-side-bar-carrello',

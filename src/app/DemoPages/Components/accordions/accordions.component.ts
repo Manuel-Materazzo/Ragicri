@@ -22,7 +22,7 @@ export class AccordionsComponent implements OnInit {
     if ($event.panelId === 'preventchange-3' && $event.nextState === false) {
       $event.preventDefault();
     }
-  };
+  }
 
   constructor() {
   }
