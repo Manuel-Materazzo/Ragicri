@@ -1,0 +1,44 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Piatto} from './Piatto';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PiattoService {
+
+  constructor(private http: HttpClient) { }
+
+  private baseUrl= "http://localhost:8080/ragicri";
+
+  getPiatti(): Observable<any[]>{
+    return this.http.get<Piatto[]>(`${this.baseUrl}`).pipe(map((res: any) => {
+      if (res) {
+        return res;
+      }
+      return null;
+    }));
+  }
+  getPiatto(id_piatto: number): Observable<any>{
+    return this.http.get((`${this.baseUrl}/${id_piatto}`));
+  }
+
+  getTipologiaPiatto(tipologia: string): Observable<any>{
+    return this.http.get((`${this.baseUrl}/tipologia/${tipologia}`));
+  }
+
+  updatePiatto(id_piatto, Piatto): Observable<any>{
+    return this.http.post(`${this.baseUrl}/${id_piatto}`,Piatto);
+  }
+
+
+  delete(id_piatto: string): Observable<any>{
+    // @ts-ignore
+    //TODO da provare potrebbere esserci un errore
+    return this.http.delete(`${this.baseUrl}/delete`,"{" + id_piatto + "}");
+  }
+
+
+}
