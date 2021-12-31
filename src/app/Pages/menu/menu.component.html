@@ -38,16 +38,28 @@
     </div>
 </nav>
 <div class="row">
-    <div class="col-md-4">
-        <div class="main-card mb-3 card"><img width="100%"
-                                              src="https://images.corsidia.com/ckeditor/pictures/data/000/000/086/content/immagini-e-tabelle-html-00.jpg"
-                                              alt="Card image cap" class="card-img-top">
-            <div class="card-body"><h5 class="card-title">Card title</h5><h6 class="card-subtitle">Card subtitle</h6>
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-                <br><br>
-                <button class="btn btn-secondary">Button</button>
+    <div class="col-md-4" *ngFor="let piatto of listaPiatti;">
+
+        <div class="main-card mb-3 card">
+            <div class="row">
+                <img style='height: 100%; width: 80%; object-fit: contain; margin-left:10%; '
+                                      src="{{piatto.img}}"
+                                      alt="Card image cap" class="card-img-top">
+
+                <div class="col">
+                    <div class="card-body"><h4 class="card-title">{{piatto.nome}}</h4><h5 class="card-subtitle">
+                        Numero: {{piatto.numero}}</h5>
+                        <h6>Prezzo: {{piatto.prezzo}}</h6>
+                        <p>Allergeni: {{piatto.allergeni}}</p>
+                        <br><br>
+                        <button class="btn btn-secondary">Aggiungi al carrello</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <!--
+    <div class="col-md-4">
         <div class="main-card mb-3 card">
             <div class="card-body"><h5 class="card-title">Card Title</h5>This is a wider card with supporting text below
                 as a natural lead-in to additional content. This content is a little bit longer.
@@ -58,5 +70,5 @@
                  src="https://images.corsidia.com/ckeditor/pictures/data/000/000/086/content/immagini-e-tabelle-html-00.jpg"
                  alt="Card image cap" class="card-img-bottom"
             ></div>
-    </div>
+    </div>-->
 </div>

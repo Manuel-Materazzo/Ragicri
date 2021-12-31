@@ -1,7 +1,16 @@
+.background {
+  background-image: linear-gradient(45deg, #f8a261, #6e9fc9), url("../../../../../assets/images/Sushi2Ridimensionata.jpg");
+  background-blend-mode: overlay;
+  background-size: contain;
+}
+p{
+  color: blue;
+}
+
 .testo-centrato-titolo {
   text-align: center;
   line-height: 100px;
-  color: darkorange;
+  color: #4facfe;
 }
 .testo-Sinistra{
   float:left;
@@ -24,7 +33,20 @@
   clear:right;
 }
 
-.carosello-home{
-  width: 45%;
-  margin-top:25%;
+.carosello-home-destra{
+  width: 80%;
+  margin-top:5%;
+  margin-left:10%;
+
+}
+.carosello-home-sinistra{
+  width: 80%;
+  margin-top:56%;
+  margin-left:15%;
+}
+.mapouter{
+  position:relative;
+  text-align:right;
+  height:350px;
+  width:450px;
 }

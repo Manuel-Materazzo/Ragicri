@@ -11,7 +11,7 @@ export class PiattoService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl= "http://localhost:8080/ragicri";
+  private baseUrl= "http://localhost:8080/ragicri/piatto";
 
   getPiatti(): Observable<any[]>{
     return this.http.get<Piatto[]>(`${this.baseUrl}`).pipe(map((res: any) => {
