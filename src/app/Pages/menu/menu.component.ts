@@ -21,6 +21,13 @@ export class MenuComponent implements OnInit {
     bevande: false
   };
 
+  allergeni={
+    glutine:false,
+    crostacei: false,
+    uova: false,
+    pesceCrudo: false,
+    pesceCotto: false
+  }
   constructor(
       private piattoService: PiattoService,
       private router: Router

@@ -7,8 +7,9 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="1"  (click)="filtroTipologie('') " >Menù completo
                     </label>
@@ -16,69 +17,117 @@
             </li>
 
             <li class="nav-item active">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
                     </label>
                 </div>
             </li>
+
             <li class="nav-item ">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="3" >Primi piatti
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">dessert
                     </label>
                 </div>
             </li>
+
             <li class="nav-item">
-                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                     <label ngbButtonLabel class="btn-primary">
                         <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
                     </label>
                 </div>
             </li>
 
+            <li>
+                <div class="d-inline-block," ngbDropdown>
+                    <button type="button" ngbDropdownToggle class="mb-2 mr-2 btn btn-primary">Allergeni</button>
+                    <div ngbDropdownMenu>
+
+                        <div class=" btn-group btn-group-toggle, dropdown-item">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.crostacei">
+                                Crostacei
+                            </label>
+                        </div>
+
+                        <div class=" btn-group btn-group-toggle, dropdown-item">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.glutine">
+                                Glutine
+                            </label>
+                        </div>
+
+                        <div class=" btn-group btn-group-toggle, dropdown-item">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.pesceCotto">
+                                Pesce Cotto
+                            </label>
+                        </div>
+
+                        <div class=" btn-group btn-group-toggle, dropdown-item">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.pesceCrudo">
+                                Pesce crudo
+                            </label>
+                        </div>
+
+                        <div class=" btn-group btn-group-toggle, dropdown-item">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.uova">
+                                Uova
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
             <!--
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
             -->
         </ul>
-
     </div>
 </nav>
 <div class="row">
