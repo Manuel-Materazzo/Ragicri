@@ -1,5 +1,6 @@
 package com.ragicriSushi.pw.Controller;
 
+import com.ragicriSushi.pw.DTO.GetPiattoDTO;
 import com.ragicriSushi.pw.DTO.PiattoDTO;
 import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.Service.PiattoService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(
         path = "/piatto",
         produces = MediaType.APPLICATION_JSON_VALUE
@@ -42,6 +44,7 @@ public class PiattoController {
         }
     }
 
+    /*
     @GetMapping(path = "/tipologia/{tipologia}")
     @ApiOperation("Ritorna tutti i piatti di una data tipologia")
     public ResponseEntity<Object> getByTipologia(@PathVariable String tipologia){
@@ -53,6 +56,7 @@ public class PiattoController {
             return ResponseEntity.ok(dto);
         }
     }
+     */
 
     @DeleteMapping(path = "/delete")
     @ApiOperation("Elimina il piatto")
@@ -80,6 +84,18 @@ public class PiattoController {
         }
         else {
             return ResponseEntity.ok(dto);
+        }
+    }
+
+    @PostMapping(path = "/get")
+    @ApiOperation("Ottieni i piatti di una certa tipologia SENZA i dati allergeni")
+    public ResponseEntity<Object> get(@RequestBody GetPiattoDTO dto){
+        List<PiattoDTO> result = piattoService.get(dto.getTipologia(), dto.getAllergeni());
+        if (result == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok(result);
         }
     }
 

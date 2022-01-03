@@ -7,7 +7,9 @@ import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -36,6 +38,23 @@ public class PiattoService {
     public List<PiattoDTO> getByTipologia(String tipologia){
         List<PiattoDAO> dao = piattoRepository.findPiattoByTipologia(tipologia);
         return conversioni.toDTO(dao);
+    }
+
+    public List<PiattoDTO> get(String tipologia, String allergeni){
+        List<PiattoDAO> dao = piattoRepository.findPiattoByTipologia(tipologia);
+
+        if(dao == null){
+            return null;
+        }
+        else {
+            List<PiattoDAO> result = new ArrayList<>();
+            for (int i = 0; i < dao.size(); i++) {
+                if(!allergeni.equalsIgnoreCase(dao.get(i).getAllergeni())){
+                    result.add(dao.get(i));
+                }
+            }
+            return conversioni.toDTO(result);
+        }
     }
 
     public PiattoDTO delete(int id){

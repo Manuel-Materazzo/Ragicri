@@ -4,19 +4,19 @@ INSERT INTO utente (nome) VALUES ('Cristian');
 
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Ravioli di carne al vapore', 1, "Antipasti", 4.50, '', '');
+    VALUES ('Ravioli di carne al vapore', 1, "Antipasti", 4.50, 'a', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Ravioli di carne alla griglia', 2, "Antipasti", 4.50, '', '');
+    VALUES ('Ravioli di carne alla griglia', 2, "Antipasti", 4.50, 'a', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Ravioli di verdura al vapore', 3, "Antipasti", 4.00, '', '');
+    VALUES ('Ravioli di verdura al vapore', 3, "Antipasti", 4.00, 'a', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Edamame', 4, "Antipasti", 4.00, '', '');
+    VALUES ('Edamame', 4, "Antipasti", 4.00, 'a', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Wakame', 5, "Antipasti", 4.50, '', '');
+    VALUES ('Wakame', 5, "Antipasti", 4.50, 'a', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Chele di granchio fritto', 6, "Antipasti", 4.00, '', '');
+    VALUES ('Chele di granchio fritto', 6, "Antipasti", 4.00, 'b', '');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Nuvolette di gambero', 7, "Antipasti", 1.50, '', '');
+    VALUES ('Nuvolette di gambero', 7, "Antipasti", 1.50, 'A', '');
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Salmone', 31, "Nigiri", 3.00, '', '');
