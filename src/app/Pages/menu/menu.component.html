@@ -5,29 +5,73 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="1"  (click)="filtroTipologie('') " >Menù completo
+                    </label>
+                </div>
+            </li>
+
             <li class="nav-item active">
-                <a class="nav-link" href="#">Antipasti <span class="sr-only">(current)</span></a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
+                    </label>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="3" >Primi piatti
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Primi piatti</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Nigiri</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Hosomaki</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Temaki</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Dessert</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">dessert
+                    </label>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bevande</a>
+                <div class="btn-group-sm btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
+                    </label>
+                </div>
             </li>
+
             <!--
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -38,11 +82,11 @@
     </div>
 </nav>
 <div class="row">
-    <div class="col-md-4" *ngFor="let piatto of listaPiatti;">
+    <div class="col-md-3" *ngFor="let piatto of listaPiatti;">
 
         <div class="main-card mb-3 card">
             <div class="row">
-                <img style='height: 100%; width: 80%; object-fit: contain; margin-left:10%; '
+                <img style='height: 45%; width: 80%; object-fit: contain; margin-left:10%; margin-top: 5%;'
                                       src="{{piatto.img}}"
                                       alt="Card image cap" class="card-img-top">
 
@@ -51,7 +95,7 @@
                         Numero: {{piatto.numero}}</h5>
                         <h6>Prezzo: {{piatto.prezzo}}</h6>
                         <p>Allergeni: {{piatto.allergeni}}</p>
-                        <br><br>
+
                         <button class="btn btn-secondary">Aggiungi al carrello</button>
                     </div>
                 </div>
