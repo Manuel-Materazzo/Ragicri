@@ -25,7 +25,7 @@ public class OrdinazioneDAO {
     private String tipologia;
 
     @Column(nullable = false)
-    private double pagato;
+    private boolean pagato;
 
     @Column
     private int tavolo;
@@ -38,5 +38,9 @@ public class OrdinazioneDAO {
 
     //@Column
     //private datetime OrarioConsegna;
+
+    public boolean getPagato() {
+        return this.pagato;
+    }
 
 }

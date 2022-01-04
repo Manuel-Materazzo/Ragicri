@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class NewOrdinazioneDTO {
 
-    private double pagato;
+    private boolean pagato;
 
     private int tavolo;
 
@@ -22,5 +22,9 @@ public class NewOrdinazioneDTO {
     //private datetime OrarioConsegna;
 
     private List<NewPiattoOrdinatoDTO> piattiOrdinati;
+
+    public boolean getPagato(){
+        return this.pagato;
+    }
 
 }

@@ -37,18 +37,4 @@ public class OrdinazioneController {
         return ResponseEntity.ok(ordinazioneService.add(dto));
     }
 
-    @PostMapping(
-            path = "addPiattiOrdinazione",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    @ApiOperation("Aggiungi piatti ordinati ad un'ordinazione già esistente")
-    public ResponseEntity<Object> addPiatti(@RequestBody AddPiattiOrdinazioneDTO dto){
-        OrdinazioneDTO result = ordinazioneService.addPiattiOrdinazione(dto);
-        if (result != null) {
-            return ResponseEntity.ok(result);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
 }

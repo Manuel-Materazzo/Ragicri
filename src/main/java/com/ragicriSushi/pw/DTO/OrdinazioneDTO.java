@@ -15,7 +15,7 @@ public class OrdinazioneDTO {
 
     private String tipologia;
 
-    private double pagato;
+    private boolean pagato;
 
     private int tavolo;
 
@@ -24,5 +24,13 @@ public class OrdinazioneDTO {
     //private datetime OrarioConsegna;
 
     private List<PiattoOrdinatoDTO> piattiOrdinati;
+
+    public void setPagato(boolean a){
+        this.pagato = a;
+    }
+
+    public boolean getPagato(){
+        return this.pagato;
+    }
 
 }

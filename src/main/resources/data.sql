@@ -34,7 +34,7 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Salmone', 41, "Sashimi", 8.00, 'Pesce', '../../../../assets/images/piatti/sashimiSalmone.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Tonno', 42, "Sashimi", 7.00, 'Pesce', '../../../../assets/images/piatti/nigiriTonno.jpg');
+    VALUES ('Tonno', 42, "Sashimi", 7.00, 'Pesce', '../../../../assets/images/piatti/sashimiTonno.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Branzino', 43, "Sashimi", 9.00, 'Pesce', '../../../../assets/images/piatti/sashimiBranzino.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)

@@ -63,14 +63,6 @@ public class PiattoService {
         int cont = 0;
         List<PiattoDAO> result = new ArrayList<>();
         for (int i = 0; i < dao.size(); i++) {
-            System.out.println("allergeni elemento in posizione " + i + ": " + dao.get(i).getAllergeni());
-            /*
-            if(dao.get(i).getAllergeni() == "" || dao.get(i).getAllergeni() == null){
-                result.add(dao.get(i));
-                continue;
-            }
-            */
-
             for (int j = 0; j < parts.length; j++) {
                 Pattern p = Pattern.compile("\\b" + parts[j] + "\\b");
                 Matcher m = p.matcher(dao.get(i).getAllergeni().toLowerCase());

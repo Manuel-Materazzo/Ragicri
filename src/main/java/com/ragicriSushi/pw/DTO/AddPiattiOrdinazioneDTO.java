@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class AddPiattiOrdinazioneDTO {
 
-    private int id;
+    private int tavolo;
 
     private List<NewPiattoOrdinatoDTO> piattiOrdinati;
 
