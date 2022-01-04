@@ -86,36 +86,36 @@
                     <div ngbDropdownMenu>
 
                         <div class=" btn-group btn-group-toggle, dropdown-item">
-                            <label ngbButtonLabel class="btn-primary">
-                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.crostacei">
+                            <label ngbButtonLabel class="btn-primary" >
+                                <input type="checkbox" ngbButton [value]="1" (click)="filtroAllergeni('Crostacei')">
                                 Crostacei
                             </label>
                         </div>
 
                         <div class=" btn-group btn-group-toggle, dropdown-item">
-                            <label ngbButtonLabel class="btn-primary">
-                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.glutine">
+                            <label ngbButtonLabel class="btn-primary" >
+                                <input type="checkbox" ngbButton [value]="2" (click)="filtroAllergeni('Glutine')">
                                 Glutine
                             </label>
                         </div>
 
                         <div class=" btn-group btn-group-toggle, dropdown-item">
                             <label ngbButtonLabel class="btn-primary">
-                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.pesceCotto">
+                                <input type="checkbox" ngbButton [value]="3" (click)="filtroAllergeni('Pesce-cotto')">
                                 Pesce Cotto
                             </label>
                         </div>
 
                         <div class=" btn-group btn-group-toggle, dropdown-item">
-                            <label ngbButtonLabel class="btn-primary">
-                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.pesceCrudo">
-                                Pesce crudo
+                            <label ngbButtonLabel class="btn-primary" >
+                                <input type="checkbox" ngbButton [value]="4" (click)="filtroAllergeni('Pesce-crudo')">
+                                <p  >Pesce crudo</p>
                             </label>
                         </div>
 
                         <div class=" btn-group btn-group-toggle, dropdown-item">
-                            <label ngbButtonLabel class="btn-primary">
-                                <input type="checkbox" ngbButton [(ngModel)]="allergeni.uova">
+                            <label ngbButtonLabel class="btn-primary" >
+                                <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Uova')">
                                 Uova
                             </label>
                         </div>

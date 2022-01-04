@@ -25,14 +25,20 @@ p{
 }
 
 .google-maps{
-  width:500px;
-  height:300px;
   border:0;
   loading:lazy;
   float:right;
   clear:right;
+  height:60%;
+  width:100%;
 }
 
+.gmap_canvas{
+  overflow:hidden;
+  background:none!important;
+  height:100%;
+  width:100%;
+}
 .carosello-home-destra{
   width: 80%;
   margin-top:5%;
@@ -47,6 +53,7 @@ p{
 .mapouter{
   position:relative;
   text-align:right;
-  height:350px;
-  width:450px;
+  height:50%;
+  width:100%;
 }
+

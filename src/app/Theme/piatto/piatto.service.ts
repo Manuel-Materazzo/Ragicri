@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Piatto} from './Piatto';
+import {getPiattoDto, Piatto} from './Piatto';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -29,11 +29,15 @@ export class PiattoService {
     return this.http.get((`${this.baseUrl}/tipologia/${tipologia}`));
   }
 
+
   updatePiatto(id_piatto, Piatto): Observable<any>{
     return this.http.post(`${this.baseUrl}/${id_piatto}`,Piatto);
   }
 
-
+  //con json non oggetto
+  getPiattiFiltrati(getPiattoDto: getPiattoDto): Observable<any>{
+    return this.http.post(`${this.baseUrl}/get`, getPiattoDto);
+  }
   delete(id_piatto: string): Observable<any>{
     // @ts-ignore
     //TODO da provare potrebbere esserci un errore

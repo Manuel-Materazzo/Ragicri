@@ -15,10 +15,10 @@ export class HomeComponent
   /**Idea lista di oggetti immagine e titolo immagine(salvato nel database)
    * Riempo la lista ricevuta dal database, lato client ciclo la lista e metto nell'img l'url dell'imm
    * e sotto il nome/titolo dell'immagine*/
-  listaImmaginiRistorante: String[]=["https://images.corsidia.com/ckeditor/pictures/data/000/000/086/content/immagini-e-tabelle-html-00.jpg",
-    "https://www.venetoformazione.it/wp-content/uploads/2020/11/ottimizzare-immagini-display-retina.jpg","../../../../../assets/images/immagini-gratis.jpg"];
-  listaImmaginiPiatti: String[]=[]=["https://images.corsidia.com/ckeditor/pictures/data/000/000/086/content/immagini-e-tabelle-html-00.jpg",
-  "https://www.venetoformazione.it/wp-content/uploads/2020/11/ottimizzare-immagini-display-retina.jpg","../../../../../assets/images/immagini-gratis.jpg"];
+  listaImmaginiRistorante: String[]=["../../../../../assets/images/ristorante/ristoranteAperto.jpg",
+    "../../../../../assets/images/ristorante/ristoranteInterni.jpg","../../../../../assets/images/ristorante/sushiCucina.jpg"];
+  listaImmaginiPiatti: String[]=[]=["../../../../assets/images/piatti/sashimiMisto.jpg",
+  "../../../../assets/images/piatti/sashimiSpeciale.jpg","../../../../assets/images/piatti/ravioliCarneVapore.jpg"];
 
 
   /**
