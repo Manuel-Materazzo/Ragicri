@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class PiattoService {
@@ -41,20 +43,50 @@ public class PiattoService {
     }
 
     public List<PiattoDTO> get(String tipologia, String allergeni){
-        List<PiattoDAO> dao = piattoRepository.findPiattoByTipologia(tipologia);
+        List<PiattoDAO> dao;
 
-        if(dao == null){
-            return null;
+        if (tipologia == ""){
+            dao = piattoRepository.findAll();
         }
         else {
-            List<PiattoDAO> result = new ArrayList<>();
-            for (int i = 0; i < dao.size(); i++) {
-                if(!allergeni.equalsIgnoreCase(dao.get(i).getAllergeni())){
+            dao = piattoRepository.findPiattoByTipologia(tipologia);
+            if(dao == null){
+                return null;
+            }
+        }
+
+        if(allergeni == ""){
+            return conversioni.toDTO(dao);
+        }
+
+        String[] parts = allergeni.toLowerCase().split("\\s+");
+        int cont = 0;
+        List<PiattoDAO> result = new ArrayList<>();
+        for (int i = 0; i < dao.size(); i++) {
+            System.out.println("allergeni elemento in posizione " + i + ": " + dao.get(i).getAllergeni());
+            /*
+            if(dao.get(i).getAllergeni() == "" || dao.get(i).getAllergeni() == null){
+                result.add(dao.get(i));
+                continue;
+            }
+            */
+
+            for (int j = 0; j < parts.length; j++) {
+                Pattern p = Pattern.compile("\\b" + parts[j] + "\\b");
+                Matcher m = p.matcher(dao.get(i).getAllergeni().toLowerCase());
+                if(!m.find()){
+                    cont++;
+                }
+                if(cont == parts.length){
                     result.add(dao.get(i));
+                    cont = 0;
+                }
+                else if(j == parts.length-1) {
+                    cont = 0;
                 }
             }
-            return conversioni.toDTO(result);
         }
+        return conversioni.toDTO(result);
     }
 
     public PiattoDTO delete(int id){
