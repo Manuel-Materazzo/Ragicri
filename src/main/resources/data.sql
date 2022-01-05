@@ -1,6 +1,7 @@
-INSERT INTO utente (nome) VALUES ('Radu');
-INSERT INTO utente (nome) VALUES ('Giacomo');
-INSERT INTO utente (nome) VALUES ('Cristian');
+INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via bae', 'PD', '35030', '5');
+
+INSERT INTO utente (nome, ruolo, user_name, password, indirizzo) VALUES ('Radu', 'Cuoco', 'radu01', 'radu', 1);
+
 
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
