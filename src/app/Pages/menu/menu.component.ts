@@ -95,7 +95,8 @@ export class MenuComponent implements OnInit {
             this.allergeniInvio += allergene + ' ';
         }
 
-        this.allergeniInvio=this.allergeniInvio.trim();
+        // @ts-ignore
+        this.allergeniInvio=this.allergeniInvio.trimLeft();
         this.piattiDto.setAllergeni(this.allergeniInvio);
         console.log("Tipologia: "+this.piattiDto.tipologia+ " AllergeniDto: "+this.piattiDto.allergeni)
         this.piattiFiltrati();

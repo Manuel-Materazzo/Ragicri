@@ -53,6 +53,7 @@ import {LayoutComponent} from './Pages/Forms/Elements/layout/layout.component';
 import {ChartjsComponent} from './Pages/Charts/chartjs/chartjs.component';
 import {HomeComponent} from './Pages/Dashboards/home/home/home.component';
 import {MenuComponent} from './Pages/menu/menu.component';
+import {OrdiniCamerieriComponent} from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
 
 const routes: Routes = [
   {
@@ -66,7 +67,8 @@ const routes: Routes = [
 
       // Elements
 
-      {path: 'MenuComponent', component: MenuComponent, data: {extraParameter: ''}},
+      {path: 'menuComponent', component: MenuComponent, data: {extraParameter: ''}},
+      {path: 'camerieri', component: OrdiniCamerieriComponent, data: {extraParameter: ''}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
@@ -117,7 +119,8 @@ const routes: Routes = [
       {path: 'pages/forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
     ]
   },
-  {path: '**', redirectTo: ''}
+    //se non trova la pagina
+  {path: '**', redirectTo: 'charts/chartjs'}
 ];
 
 @NgModule({
@@ -125,6 +128,7 @@ const routes: Routes = [
     {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
+      enableTracing: true
     })],
   exports: [RouterModule]
 })

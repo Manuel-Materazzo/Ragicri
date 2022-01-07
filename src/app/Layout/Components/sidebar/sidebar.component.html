@@ -22,6 +22,7 @@
                                     <div class="vsm-header">Menù di navigazione</div>
                                 </ng-template>
                             </ngb-panel>
+
                             <ngb-panel id="dashboardsMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -35,11 +36,12 @@
                                 </ng-template>
                             </ngb-panel>
 
-                            <ngb-panel >
+
+                            <ngb-panel id="menu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
-                                        <i class="vsm-icon fa fa-archive icon-gradient bg-sunny-morning"></i>
-                                        <div class="vsm-item"><a routerLink="MenuComponent" routerLinkActive="active-item"
+                                        <i class="vsm-icon fa fa-bars"></i>
+                                        <div class="vsm-item"><a routerLinkActive="active-item" routerLink="/menuComponent"
                                                                  [routerLinkActiveOptions]="{exact: true}"
                                                                  class="vsm-link"><span
                                                 class="vsm-title">Menù</span></a>
@@ -48,6 +50,20 @@
                                 </ng-template>
                             </ngb-panel>
 
+                            <ngb-panel id="camerieri">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-users"></i>
+                                        <div class="vsm-item"><a routerLinkActive="active-item" routerLink="/camerieri"
+                                                                 [routerLinkActiveOptions]="{exact: true}"
+                                                                 class="vsm-link"><span
+                                                class="vsm-title">Camerieri</span></a>
+                                        </div>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+
+                            <!--Pagine esempio elementi -->
                             <ngb-panel id="pagesMenu">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -259,7 +275,7 @@
                             </ngb-panel>
 
 
-                        -->
+                            -->
                         </ngb-accordion>
                         <!--
                         <div class="vsm-header">Charts</div>

@@ -105,6 +105,7 @@ import {PieChartComponent} from './Pages/Charts/chartjs/examples/pie-chart/pie-c
 import { SideBarCarrelloComponent } from './Layout/Components/side-bar-carrello/side-bar-carrello.component';
 import { HomeComponent } from './Pages/Dashboards/home/home/home.component';
 import { MenuComponent } from './Pages/menu/menu.component';
+import { OrdiniCamerieriComponent } from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -197,6 +198,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SideBarCarrelloComponent,
     HomeComponent,
     MenuComponent,
+    OrdiniCamerieriComponent,
   ],
   imports: [
     BrowserModule,
