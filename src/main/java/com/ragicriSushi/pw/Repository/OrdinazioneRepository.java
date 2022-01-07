@@ -9,4 +9,6 @@ public interface OrdinazioneRepository extends JpaRepository<OrdinazioneDAO, Int
 
     List<OrdinazioneDAO> findOrdinazioneByTavolo(int tavolo);
 
+    List<OrdinazioneDAO> findOrdinazioneByPagato(boolean pagato);
+
 }
