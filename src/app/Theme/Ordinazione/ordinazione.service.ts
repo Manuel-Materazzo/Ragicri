@@ -27,6 +27,6 @@ export class OrdinazioneService {
   }
 
   aggiungiOrdinazione(ordinazione: any) :Observable<any>{
-    return this.http.post(`${this.baseUrl}/addOrdinazione`,ordinazione);
+    return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione);
   }
 }

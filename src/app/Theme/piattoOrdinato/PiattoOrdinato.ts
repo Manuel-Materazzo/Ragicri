@@ -9,3 +9,4 @@ export class PiattoOrdinato {
     consegnato: boolean;
     quantita: number;
 }
+

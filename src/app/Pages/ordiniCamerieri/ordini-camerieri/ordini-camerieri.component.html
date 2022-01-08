@@ -6,32 +6,41 @@
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                 <div class="input-group"><label class="mr-sm-2">Numero tavolo:</label></div>
                 <input name="numeroTavolo" placeholder="Inserisci numero " (keyup)="inputTavolo($event)" type="text" class="form-control">
-                <div class="input-group-append">
+                <div class="input-group-append mr-2">
                     <button class="btn btn-primary " (click)="InfoTavolo(numeroTavolo)">Cerca</button>
                 </div>
-            </div>
-        </form>
-        <br>
-        <form class="form-inline">
-            <div class="position-relative form-group"><label class="mr-sm-2">Numero persone:</label>
-                <input value="{{Ordinazione.persone}}" placeholder="0"step="1" type="number" class="form-control">
+                <label id="statusTavolo" class="mr-sm-2" hidden >Tavolo libero!</label>
             </div>
         </form>
         <br>
         <form class="form-inline">
 
-          <div class="position-relative form-group"><label class="mr-sm-2" for="Numeretto" >Numeretto: </label>
-            <input name="Numeretto" id="Numeretto"  placeholder="Numeretto piatto" type="text" class="mr-2 form-control">
+            <div class="position-relative form-group"><label class="mr-sm-2">Numero persone:</label>
+                <input id="persone" value="" placeholder="0" min="0" step="1" type="number" class="mr-2 form-control">
+            </div>
+
+            <div class="position-relative form-group"><label class="mr-sm-2">Tipologia:</label>
+                <input id="tipologia" value="" placeholder="0"  type="text" class="mr-2 form-control">
+            </div>
+        </form>
+        <br>
+        <form class="form-inline">
+
+          <div class="position-relative form-group"><label class="mr-sm-2"  >Numeretto: </label>
+            <input  id="numeretto"  placeholder="Numeretto piatto" type="" class="mr-2 form-control">
           </div>
 
-            <div class="position-relative form-group"><label class="mr-sm-2" for="Quantita" >Quantità: </label>
-              <input name="Quantita" id="Quantita"  placeholder="0" type="number" class="mr-2 form-control">
+            <div class="position-relative form-group"><label class="mr-sm-2"  >Quantità: </label>
+              <input  id="quantita"  value="1" min="1" type="number" class="mr-2 form-control">
             </div>
 
         </form>
       <br>
       <br>
-      <button class="mb-2 mr-2 btn btn-primary btn-lg">Invia</button>
+        <form class="form-inline">
+            <button class="mb-2 mr-2 btn btn-success btn-lg" (click)="invioOrdinazione()">Invia ordinazione</button>
+            <button class="mb-2 mr-2 btn btn-primary btn-lg" (click)="AggiungiPiatto()">Aggiungi piatto</button>
+        </form>
     </div>
 </div>
 

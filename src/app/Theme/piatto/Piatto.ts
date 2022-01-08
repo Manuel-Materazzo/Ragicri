@@ -32,3 +32,13 @@ export class getPiattoDto {
         this.allergeni=aller;
     }
 }
+
+export class PiattoInvio{
+    numeretto: number;
+    quantita: number;
+
+    constructor(numeretto: number, quantita: number) {
+        this.numeretto = numeretto;
+        this.quantita = quantita;
+    }
+}

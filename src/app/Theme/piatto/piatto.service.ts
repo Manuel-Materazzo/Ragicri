@@ -29,6 +29,9 @@ export class PiattoService {
     return this.http.get((`${this.baseUrl}/tipologia/${tipologia}`));
   }
 
+  getEsiste(numeretto: number): Observable<any>{
+    return this.http.get((`${this.baseUrl}/getPiatto/${numeretto}`));
+  }
 
   updatePiatto(id_piatto, Piatto): Observable<any>{
     return this.http.post(`${this.baseUrl}/${id_piatto}`,Piatto);
