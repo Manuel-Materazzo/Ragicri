@@ -133,7 +133,7 @@ public class Conversioni {
         for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
             PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
             piattoOrdinato.setOrdinazione(dao);
-            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
+            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()).get());
             piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
             piattoOrdinato.setConsegnato(false);
             piattiOrdinati.add(piattoOrdinato);

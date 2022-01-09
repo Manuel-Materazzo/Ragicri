@@ -4,6 +4,7 @@ import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DTO.AddPiattiOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.TavoloDTO;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +45,13 @@ public class OrdinazioneController {
     @ApiOperation("Imposta \"pagato\" a true per l'ultima ordinazione del tavolo inserito.")
     public ResponseEntity<Object> setPagato(@PathVariable int tavolo){
         if (ordinazioneService.checkTavolo(tavolo) == false){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Status\":\"Tavolo non trovato.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Tavolo non trovato.\"}");
         }
 
         OrdinazioneDTO dto = ordinazioneService.setPagato(tavolo);
 
         if (dto == null){
-            return ResponseEntity.ok().body("{\"Status\":\"Ultima ordinazione per questo tavolo già pagata.\"}");
+            return ResponseEntity.ok().body("{\"status\":\"Ultima ordinazione per questo tavolo già pagata.\"}");
         }
         else {
             return ResponseEntity.ok(dto);
@@ -61,13 +62,13 @@ public class OrdinazioneController {
     @ApiOperation("Ritorna le principali informazioni per il cameriere sul tavolo passato.")
     public ResponseEntity<Object> infoTavolo(@PathVariable int tavolo){
         if (ordinazioneService.checkTavolo(tavolo) == false){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Status\":\"Tavolo non trovato.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Tavolo non trovato.\"}");
         }
 
         OrdinazioneDTO dto = ordinazioneService.info(tavolo);
 
         if (dto == null){
-            return ResponseEntity.ok().body("{\"Status\":\"Tavolo libero.\"}");
+            return ResponseEntity.ok().body("{\"status\":\"Tavolo libero.\"}");
         }
         else {
             return ResponseEntity.ok(dto);
@@ -80,11 +81,23 @@ public class OrdinazioneController {
         List<OrdinazioneDTO> dtoList = ordinazioneService.getNonPagato();
 
         if(dtoList == null){
-            return ResponseEntity.ok().body("{\"Status\":\"Tutti i tavoli hanno già pagato.\"}");
+            return ResponseEntity.ok().body("{\"status\":\"Tutti i tavoli hanno già pagato.\"}");
         }
         else {
             return ResponseEntity.ok(dtoList);
         }
+    }
+
+    @PostMapping(path = "consegnato")
+    @ApiOperation("Imposta l'attributo \"Consegnato\" a true degli elementi passati.")
+    public ResponseEntity<Object> setConsegnati(@RequestBody TavoloDTO dto){
+        if (ordinazioneService.checkTavolo(dto.getTavolo()) == false){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Tavolo non trovato.\"}");
+        }
+
+        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getTavolo());
+
+        return ResponseEntity.ok(result);
     }
 
 }

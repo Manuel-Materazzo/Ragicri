@@ -1,6 +1,7 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
+import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrdinazioneService {
@@ -39,9 +41,13 @@ public class OrdinazioneService {
             List<PiattoOrdinato> piattiOrdinati = dao.getPiattiOrdinati();
 
             for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
+                Optional<PiattoDAO> optionalDao = piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto());
+                if(!optionalDao.isPresent()){
+                    continue;
+                }
                 PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
                 piattoOrdinato.setOrdinazione(dao);
-                piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
+                piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()).get());
                 piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
                 piattoOrdinato.setConsegnato(false);
 
@@ -99,6 +105,22 @@ public class OrdinazioneService {
         }
         else {
             return conversioni.toDTO(daoList);
+        }
+    }
+
+    public OrdinazioneDTO setConsegnato(int tavolo){
+        List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
+        OrdinazioneDAO dao = daoList.get(daoList.size()-1);
+
+        if (dao.getPagato() == true){
+            return null;
+        }
+        else {
+            for (int i = 0; i < dao.getPiattiOrdinati().size(); i++) {
+                dao.getPiattiOrdinati().get(i).setConsegnato(true);
+            }
+            ordinazioneRepository.save(dao);
+            return conversioni.toDTO(dao);
         }
     }
 

@@ -6,6 +6,7 @@ import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.Service.PiattoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,18 @@ public class PiattoController {
         }
         else {
             return ResponseEntity.ok(dto);
+        }
+    }
+
+    @GetMapping(path = "/numero/{numero}")
+    @ApiOperation("Controlla se il numero inserito è un piatto esistente (ritorna un booleano)")
+    public ResponseEntity<Boolean> getByNumero(@PathVariable int numero){
+        boolean result = piattoService.checkByNumero(numero);
+        if (result == true){
+            return ResponseEntity.ok(true);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
     }
 

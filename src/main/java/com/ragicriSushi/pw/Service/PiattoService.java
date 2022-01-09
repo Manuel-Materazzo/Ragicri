@@ -111,4 +111,15 @@ public class PiattoService {
         }
     }
 
+    public boolean checkByNumero(int numero){
+        Optional<PiattoDAO> dao = piattoRepository.findPiattoByNumero(numero);
+
+        if(dao.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
