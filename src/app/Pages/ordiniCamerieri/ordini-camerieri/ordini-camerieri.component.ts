@@ -4,6 +4,7 @@ import {OrdinazioneService} from '../../../Theme/Ordinazione/ordinazione.service
 import {Ordinazione, OrdinazioneInvio} from '../../../Theme/Ordinazione/Ordinazione';
 import {PiattoService} from '../../../Theme/piatto/piatto.service';
 import {PiattoInvio} from '../../../Theme/piatto/Piatto';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-ordini-camerieri',
@@ -12,7 +13,7 @@ import {PiattoInvio} from '../../../Theme/piatto/Piatto';
 })
 export class OrdiniCamerieriComponent implements OnInit {
 
-
+    esiste: boolean;
     Ordinazione: Ordinazione = new Ordinazione();
     jsonRicevuto;
     numeroTavolo: number = 0;
@@ -22,11 +23,13 @@ export class OrdiniCamerieriComponent implements OnInit {
     quantita: number;
     //piattoOrdinati: string[] = [];
 
-    piattiOrdinati: PiattoInvio[]=[];
+    piattiOrdinati: PiattoInvio[] = [];
     persone: number;
     tipologia: string;
-    OrdinazioneAdd: OrdinazioneInvio= new OrdinazioneInvio();
-    constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService
+    OrdinazioneAdd: OrdinazioneInvio = new OrdinazioneInvio();
+
+    constructor(private router: Router, private ordinazioneService: OrdinazioneService,
+                private piattoservice: PiattoService, private modalService: NgbModal
     ) {
     }
 
@@ -35,10 +38,9 @@ export class OrdiniCamerieriComponent implements OnInit {
 
     //status: boolean=false;
     InfoTavolo(n: number) {
+
         this.ordinazioneService.getInfoTavolo(n).subscribe(data => {
             this.jsonRicevuto = data;
-            console.log('Status: ' + this.jsonRicevuto.Status);
-            console.log('Persone: ' + this.jsonRicevuto['persone']);
             if (this.jsonRicevuto.Status == 'Tavolo libero.') {
                 document.getElementById('statusTavolo').innerHTML = 'Tavolo libero!';
                 document.getElementById('statusTavolo').style.color = '#009933';
@@ -46,16 +48,16 @@ export class OrdiniCamerieriComponent implements OnInit {
                 document.getElementById('persone').setAttribute('value', '');
                 document.getElementById('tipologia').setAttribute('value', '');
             } else {
-                this.persone=this.jsonRicevuto['persone'];
-                this.tipologia=this.jsonRicevuto['tipologia'];
+                this.persone = this.jsonRicevuto['persone'];
+                this.tipologia = this.jsonRicevuto['tipologia'];
                 document.getElementById('statusTavolo').setAttribute('hidden', '');
-                document.getElementById('persone').setAttribute('value', this.jsonRicevuto['persone']);
-                document.getElementById('tipologia').setAttribute('value', this.jsonRicevuto['tipologia']);
+                (document.getElementById('persone') as HTMLInputElement).value = this.jsonRicevuto['persone'];
+                (document.getElementById('tipologia') as HTMLInputElement).value =this.jsonRicevuto['tipologia'];
 
             }
         }, error => {
-            document.getElementById('statusTavolo').innerHTML = 'Tavolo non esistente!';
-            document.getElementById('statusTavolo').style.color = 'Red';
+            document.getElementById('statusTavolo').innerHTML = 'Tavolo libero!';
+            document.getElementById('statusTavolo').style.color = '#009933';
             document.getElementById('persone').setAttribute('value', '');
             document.getElementById('tipologia').setAttribute('value', '');
             document.getElementById('statusTavolo').removeAttribute('hidden');
@@ -64,45 +66,56 @@ export class OrdiniCamerieriComponent implements OnInit {
 
     inputTavolo($event: any) {
         this.numeroTavolo = parseInt((event.target as HTMLInputElement).value);
-        console.log('Input ' + this.numeroTavolo);
+
     }
 
-    AggiungiPiatto() {
+    async AggiungiPiatto() {
         this.numeretto = parseInt((document.getElementById('numeretto') as HTMLInputElement).value);
         this.quantita = parseInt((document.getElementById('quantita') as HTMLInputElement).value);
-        //piattoEsiste()
+        console.log(this.numeretto);
+        console.log(this.piattoEsiste())
+        // if (this.piattoEsiste())
         if (true) {
-            //this.piattoOrdinati.push('{ "numeretto": ' + this.numeretto + ', "quantita": ' + this.quantita + '}');
-
-            this.piattiOrdinati.push(new PiattoInvio(this.numeretto,this.quantita));
-            console.log(this.piattiOrdinati[0]);
+            console.log("Esiste")
+            this.piattiOrdinati.push(new PiattoInvio(this.numeretto, this.quantita));
+            document.getElementById('statusPiatto').setAttribute('hidden', '');
+        } else {
+            document.getElementById('statusPiatto').removeAttribute('hidden');
         }
-        document.getElementById('numeretto').setAttribute('value', '');
-        document.getElementById('quantita').setAttribute('value', '');
+        (document.getElementById('numeretto') as HTMLInputElement).value = '' + 0;
+        (document.getElementById('quantita') as HTMLInputElement).value = '' + 1;
     }
 
     piattoEsiste() {
-        return this.piattoservice.getEsiste(this.numeretto);
+          this.piattoservice.getEsiste(this.numeretto).subscribe(data => {
+             return data
+        });
     }
 
     invioOrdinazione() {
 
-
-        this.OrdinazioneAdd.tavolo=this.numeroTavolo;
-        this.OrdinazioneAdd.tipologia=this.tipologia;
-        this.OrdinazioneAdd.pagato=false;
-        this.OrdinazioneAdd.persone=this.persone;
-        this.OrdinazioneAdd.piattiOrdinati=this.piattiOrdinati;
+        this.OrdinazioneAdd.tavolo = this.numeroTavolo;
+        this.OrdinazioneAdd.tipologia = this.tipologia;
+        this.OrdinazioneAdd.pagato = false;
+        this.OrdinazioneAdd.persone = this.persone;
+        this.OrdinazioneAdd.piattiOrdinati = this.piattiOrdinati;
         /**for (let i = 0; i < this.piattoOrdinati.length; i++) {
             this.OrdinazioneAdd.piattiOrdinati.push(this.piattoOrdinati[i].toString());
         }
          */
 
-            this.ordinazioneService.aggiungiOrdinazione(this.OrdinazioneAdd).subscribe((response: any) => {
-            });
-            this.piattiOrdinati.splice(0);
-            document.getElementById('numeretto').setAttribute('value', '');
-            document.getElementById('quantita').setAttribute('value', '');
+        this.ordinazioneService.aggiungiOrdinazione(this.OrdinazioneAdd).subscribe((response: any) => {
+        });
+        this.piattiOrdinati.splice(0);
+        (document.getElementById('numeretto') as HTMLInputElement).value = '' + 0;
+        (document.getElementById('quantita') as HTMLInputElement).value = '' + 1;
+        this.modalService.dismissAll();
 
+    }
+
+    openSmall(content) {
+        this.modalService.open(content, {
+            size: 'sm'
+        });
     }
 }
