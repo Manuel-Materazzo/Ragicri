@@ -69,28 +69,25 @@ export class OrdiniCamerieriComponent implements OnInit {
 
     }
 
-    async AggiungiPiatto() {
-        this.numeretto = parseInt((document.getElementById('numeretto') as HTMLInputElement).value);
-        this.quantita = parseInt((document.getElementById('quantita') as HTMLInputElement).value);
-        console.log(this.numeretto);
-        console.log(this.piattoEsiste())
-        // if (this.piattoEsiste())
-        if (true) {
-            console.log("Esiste")
-            this.piattiOrdinati.push(new PiattoInvio(this.numeretto, this.quantita));
-            document.getElementById('statusPiatto').setAttribute('hidden', '');
-        } else {
-            document.getElementById('statusPiatto').removeAttribute('hidden');
-        }
-        (document.getElementById('numeretto') as HTMLInputElement).value = '' + 0;
-        (document.getElementById('quantita') as HTMLInputElement).value = '' + 1;
+     AggiungiPiatto() {
+
+         this.numeretto = parseInt((document.getElementById('numeretto') as HTMLInputElement).value);
+         this.quantita = parseInt((document.getElementById('quantita') as HTMLInputElement).value);
+         this.piattoservice.getEsiste(this.numeretto).subscribe(data => {
+             if (data) {
+
+                 this.piattiOrdinati.push(new PiattoInvio(this.numeretto, this.quantita));
+                 document.getElementById('statusPiatto').setAttribute('hidden', '');
+             } else {
+                 document.getElementById('statusPiatto').removeAttribute('hidden');
+             }
+             (document.getElementById('numeretto') as HTMLInputElement).value = '' + 0;
+             (document.getElementById('quantita') as HTMLInputElement).value = '' + 1;
+         });
+
     }
 
-    piattoEsiste() {
-          this.piattoservice.getEsiste(this.numeretto).subscribe(data => {
-             return data
-        });
-    }
+
 
     invioOrdinazione() {
 
@@ -99,10 +96,6 @@ export class OrdiniCamerieriComponent implements OnInit {
         this.OrdinazioneAdd.pagato = false;
         this.OrdinazioneAdd.persone = this.persone;
         this.OrdinazioneAdd.piattiOrdinati = this.piattiOrdinati;
-        /**for (let i = 0; i < this.piattoOrdinati.length; i++) {
-            this.OrdinazioneAdd.piattiOrdinati.push(this.piattoOrdinati[i].toString());
-        }
-         */
 
         this.ordinazioneService.aggiungiOrdinazione(this.OrdinazioneAdd).subscribe((response: any) => {
         });
