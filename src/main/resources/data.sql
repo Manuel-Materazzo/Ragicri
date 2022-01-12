@@ -1,8 +1,10 @@
+-- UTENTI
+
 INSERT INTO utente (nome) VALUES ('Radu');
 INSERT INTO utente (nome) VALUES ('Giacomo');
 INSERT INTO utente (nome) VALUES ('Cristian');
 
-
+-- PIATTI
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Ravioli di carne al vapore', 1, "Antipasti", 4.50, '', '../../../../assets/images/piatti/ravioliCarneVapore.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
@@ -55,9 +57,17 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Misto maki', 56, "Hosomaki", 3.00, 'Pesce Glutine Vegetariano', '../../../../assets/images/piatti/mistoMaki.jpg');
 
-
+-- ORDINAZIONI:
+-- 1
 INSERT INTO ordinazione (tipologia, tavolo, persone, pagato) VALUES ('Ristorante', 1, 2, false);
-
-
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (1, 7, 1, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (1, 8, 3, false);
+
+-- 2
+INSERT INTO ordinazione (tipologia, tavolo, persone, pagato) VALUES ('Ristorante', 2, 3, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 2, 2, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 6, 1, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 8, 4, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 9, 2, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 17, 2, false);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 24, 3, false);
