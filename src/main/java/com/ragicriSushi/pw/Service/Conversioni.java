@@ -1,9 +1,6 @@
 package com.ragicriSushi.pw.Service;
 
-import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
-import com.ragicriSushi.pw.DAO.PiattoDAO;
-import com.ragicriSushi.pw.DAO.PiattoOrdinato;
-import com.ragicriSushi.pw.DAO.UtenteDAO;
+import com.ragicriSushi.pw.DAO.*;
 import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
@@ -112,8 +109,30 @@ public class Conversioni {
     }
 
     public UtenteDTO fromDaoToDto(UtenteDAO dao){
-        return null;    //TODO fromDaoToDto di utente
+        UtenteDTO dto = new UtenteDTO();
+
+        dto.setId(dao.getIdUtente());
+        dto.setNome(dao.getNome());
+        dto.setRuolo(dao.getRuolo());
+        dto.setUsername(dao.getUsername());
+        dto.setPassword((dao.getPassword()));
+        dto.setIndirizzoDTO(fromDaoToDto(dao.getIndirizzo()));
+
+        return dto;
     }
+
+    public IndirizzoDTO fromDaoToDto(IndirizzoDAO dao){
+        IndirizzoDTO dto=new IndirizzoDTO();
+
+        dto.setVia(dao.getVia());
+        dto.setProvincia(dao.getProvincia());
+        dto.setCAP(dao.getCAP());
+        dto.setCivico(dao.getCivico());
+
+        return dto;
+    }
+
+
 
     //TODO tutte le conversioni in DAO mancano
     public PiattoDAO fromDtoToDao(PiattoDTO dto){
@@ -121,7 +140,12 @@ public class Conversioni {
     }
 
     public UtenteDAO fromDtoToDao(UtenteDTO dto){
-        return null;
+        UtenteDAO dao=new UtenteDAO();
+        dao.setNome(dto.getNome());
+        dao.setRuolo(dao.getRuolo());
+        dao.setUsername(dao.getUsername());
+        dao.setPassword(dao.getPassword());
+        return dao;
     }
 
     public OrdinazioneDAO fromDtoToDao(NewOrdinazioneDTO dto) {
