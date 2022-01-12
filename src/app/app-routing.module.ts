@@ -54,6 +54,7 @@ import {ChartjsComponent} from './Pages/Charts/chartjs/chartjs.component';
 import {HomeComponent} from './Pages/Dashboards/home/home/home.component';
 import {MenuComponent} from './Pages/menu/menu.component';
 import {OrdiniCamerieriComponent} from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
+import {CucinaComponent} from './Pages/Cucina/cucina/cucina.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
 
       {path: 'menuComponent', component: MenuComponent, data: {extraParameter: ''}},
       {path: 'camerieri', component: OrdiniCamerieriComponent, data: {extraParameter: ''}},
+      {path: 'cucina', component: CucinaComponent, data:{extraParameter: ''}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},

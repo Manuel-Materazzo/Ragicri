@@ -1,0 +1,35 @@
+.testo-centrato-titolo {
+  text-align: center;
+  line-height: 100px;
+  color: darkturquoise;
+}
+
+.testo-Sinistra{
+  float:left;
+}
+
+.riga{
+  align-items: stretch !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 10px 0px 10px 0px;
+}
+
+.elementoRiga {
+  //max-width: 33.333% !important;
+  //padding: .75rem !important;
+  //margin-bottom: 2rem !important;
+  //border: 0 !important;
+  flex-basis: 33.333% !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.bottonePronto {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

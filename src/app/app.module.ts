@@ -106,6 +106,7 @@ import { SideBarCarrelloComponent } from './Layout/Components/side-bar-carrello/
 import { HomeComponent } from './Pages/Dashboards/home/home/home.component';
 import { MenuComponent } from './Pages/menu/menu.component';
 import { OrdiniCamerieriComponent } from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
+import { CucinaComponent } from './Pages/Cucina/cucina/cucina.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -199,6 +200,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HomeComponent,
     MenuComponent,
     OrdiniCamerieriComponent,
+    CucinaComponent,
   ],
   imports: [
     BrowserModule,
