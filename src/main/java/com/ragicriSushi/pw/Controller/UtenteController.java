@@ -1,13 +1,10 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.AddUtenteDTO;
-import com.ragicriSushi.pw.DTO.PiattoDTO;
-import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.DTO.UtenteDTO;
 import com.ragicriSushi.pw.Service.UtenteService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -89,5 +86,4 @@ public class UtenteController {
             return ResponseEntity.ok(dto);
         }
     }
-
 }

@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class IndirizzoDTO {
 
+    private int idIndirizzo;
+
     private String via;
 
     private String provincia;

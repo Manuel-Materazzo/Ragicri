@@ -24,6 +24,8 @@ public class Conversioni {
             return (T) fromDaoToDto((PiattoDAO) dao);
         } else if (dao instanceof UtenteDAO) {
             return (T) fromDaoToDto((UtenteDAO) dao);
+        } else if (dao instanceof IndirizzoDAO) {
+            return (T) fromDaoToDto((IndirizzoDAO) dao);
         } else if (dao instanceof OrdinazioneDAO) {
             return (T) fromDaoToDto((OrdinazioneDAO) dao);
         }
@@ -35,6 +37,8 @@ public class Conversioni {
             return (T) fromDtoToDao((PiattoDTO) dto);
         } else if (dto instanceof UtenteDTO) {
             return (T) fromDtoToDao((UtenteDTO) dto);
+        } else if (dto instanceof IndirizzoDTO) {
+            return (T) fromDtoToDao((IndirizzoDTO) dto);
         } else if (dto instanceof NewOrdinazioneDTO) {
             return (T) fromDtoToDao((NewOrdinazioneDTO) dto);
         } else if (dto instanceof AddPiattiOrdinazioneDTO) {
@@ -50,6 +54,8 @@ public class Conversioni {
                 dtoList.add((T) fromDaoToDto((PiattoDAO) dao));
             } else if(dao instanceof UtenteDAO) {
                 dtoList.add((T) fromDaoToDto((UtenteDAO) dao));
+            } else if(dao instanceof IndirizzoDAO) {
+                dtoList.add((T) fromDaoToDto((IndirizzoDAO) dao));
             } else if(dao instanceof OrdinazioneDAO) {
                 dtoList.add((T) fromDaoToDto((OrdinazioneDAO) dao));
             }
@@ -124,6 +130,7 @@ public class Conversioni {
     public IndirizzoDTO fromDaoToDto(IndirizzoDAO dao){
         IndirizzoDTO dto=new IndirizzoDTO();
 
+        dto.setIdIndirizzo(dao.getIdIndirizzo());
         dto.setVia(dao.getVia());
         dto.setProvincia(dao.getProvincia());
         dto.setCAP(dao.getCAP());
@@ -141,10 +148,23 @@ public class Conversioni {
 
     public UtenteDAO fromDtoToDao(UtenteDTO dto){
         UtenteDAO dao=new UtenteDAO();
+
         dao.setNome(dto.getNome());
         dao.setRuolo(dao.getRuolo());
         dao.setUsername(dao.getUsername());
         dao.setPassword(dao.getPassword());
+
+        return dao;
+    }
+
+    public IndirizzoDAO fromDtoToDao(IndirizzoDTO dto){
+        IndirizzoDAO dao=new IndirizzoDAO();
+
+        dao.setVia(dto.getVia());
+        dao.setProvincia(dto.getProvincia());
+        dao.setCAP(dto.getCAP());
+        dao.setCivico(dto.getCivico());
+
         return dao;
     }
 
