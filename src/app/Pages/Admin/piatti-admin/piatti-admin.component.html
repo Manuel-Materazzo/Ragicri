@@ -4,16 +4,18 @@
     <table class="mb-0 table table-hover">
         <thead class="intestazioneTabella">
         <tr>
-            <th scope="col">Numeretto</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Prezzo</th>
-            <th scope="col">Allergeni</th>
-            <th scope="col">Tipologia</th>
-            <th class="azioni" scope="col">Azioni</th>
+            <th>Numero</th>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th>Allergeni</th>
+            <th>Tipologia</th>
+            <th>
+                <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)"><i class="pe-7s-plus"></i>Create New</button>
+            </th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let piattino of listiPiattini;">
+        <tr *ngFor="let piattino of listiPiattini">
             <td>{{piattino.numero}}</td>
             <td>{{piattino.nome}}</td>
             <td>{{piattino.prezzo}}</td>
@@ -29,13 +31,87 @@
                     </button>
                 </div>
             </td>
-        </tr>
         </tbody>
     </table>
 </div>
 
+<!--Model per il Create -->
+<ng-template #create let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+        <h4 class="modal-title">Piatto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card-body">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="nomePiattoAdd" class="mr-sm-2">Nome:</label>
+                            <input name="text" id="nomePiattoAdd" value="" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="prezzoAdd" class="mr-sm-2">Prezzo:</label>
+                            <input name="text" id="prezzoAdd" value="" type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="numerettoPiattoAdd" class="mr-sm-2">Numeretto:</label>
+                            <input name="text" id="numerettoPiattoAdd" value="" type="number"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="allergeniAdd" class="mr-sm-2">Allergeni:</label>
+                            <input name="text" id="allergeniAdd" value="" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label  class="mr-sm-2">Immagine:</label>
+                            <!--<input name="text" id="imgAdd" value=""  type="file" class="mr-sm-2">-->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="tipologiaAdd" class="mr-sm-2">Tipologia:</label>
+                            <input name="text" id="tipologiaAdd" value="" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="createPiatto()">Save changes</button>
+    </div>
+</ng-template>
+
 <!--Model per il modifica -->
-<ng-template #update let-c="close" let-d="dismiss" [ngModel]=piatto>
+<ng-template #update let-c="close" let-d="dismiss" >
     <div class="modal-header">
         <h4 class="modal-title">Piatto</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -49,7 +125,7 @@
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="nomePiatto" class="mr-sm-2">Nome:</label>
-                            <input name="text" id="nomePiatto" [value]=piatto.nome type="text" class="form-control">
+                            <input name="text" id="nomePiatto" value="" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -58,7 +134,7 @@
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="prezzo" class="mr-sm-2">Prezzo:</label>
-                            <input name="text" id="prezzo" [value]=piatto.prezzo type="number" class="form-control">
+                            <input name="text" id="prezzo" value="" type="number" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -67,7 +143,7 @@
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="numerettoPiatto" class="mr-sm-2">Numeretto:</label>
-                            <input name="text" id="numerettoPiatto" [value]=piatto.numero type="number"
+                            <input name="text" id="numerettoPiatto" value="" type="number"
                                    class="form-control">
                         </div>
                     </div>
@@ -77,7 +153,7 @@
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="allergeni" class="mr-sm-2">Allergeni:</label>
-                            <input name="text" id="allergeni" [value]=piatto.allergeni type="text" class="form-control">
+                            <input name="text" id="allergeni" value="" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -85,8 +161,8 @@
                 <div class="form-row">
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="img" class="mr-sm-2">Immagine:</label>
-                            <input name="text" id="img" [value]=piatto.img type="file" class="mr-sm-2">
+                            <label  class="mr-sm-2">Immagine:</label>
+                            <!--<input name="text" id="img" value=""  type="file" class="mr-sm-2">-->
                         </div>
                     </div>
                 </div>
@@ -95,7 +171,7 @@
                     <div class="col-md-4">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="tipologia" class="mr-sm-2">Tipologia:</label>
-                            <input name="text" id="tipologia" [value]=piatto.tipologia type="text" class="form-control">
+                            <input name="text" id="tipologia" value="" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -105,7 +181,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="updatePiatto()">Save changes</button>
     </div>
 </ng-template>
 

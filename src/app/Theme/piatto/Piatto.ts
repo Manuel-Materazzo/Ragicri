@@ -47,12 +47,7 @@ export class AddPiattoDTO {
     allergeni: string;
     img: string;
 
-    constructor(nome: string, numero: number, tipologia: string, prezzo: number, allergeni: string, img: string) {
-        this.nome = nome;
-        this.numero = numero;
-        this.tipologia = tipologia;
-        this.prezzo = prezzo;
-        this.allergeni = allergeni;
-        this.img = img;
+
+    constructor() {
     }
 }
