@@ -1,8 +1,6 @@
 package com.ragicriSushi.pw.Controller;
 
-import com.ragicriSushi.pw.DTO.GetPiattoDTO;
-import com.ragicriSushi.pw.DTO.PiattoDTO;
-import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
+import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Service.PiattoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,24 +71,30 @@ public class PiattoController {
 
     @DeleteMapping(path = "/delete")
     @ApiOperation("Elimina il piatto")
-    public ResponseEntity<Object> delete(@RequestBody String idStr){
-        try{
-            int id = Integer.parseInt(idStr);
-            PiattoDTO dto = piattoService.delete(id);
-            if (dto != null){
-                return ResponseEntity.ok(dto);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (NumberFormatException e)
-        {
-            return ResponseEntity.badRequest().body("L'id " + idStr + " non è valido.");
+    public ResponseEntity<Object> delete(@RequestBody NumeroDTO dto){
+        PiattoDTO result = piattoService.delete(dto);
+        if (result != null){
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Piatto non trovato.\"}");
+        }
+    }
+
+    @PostMapping(path = "/add")
+    @ApiOperation("Aggiungi un piatto")
+    public ResponseEntity<Object> add(@RequestBody AddPiattoDTO dto){
+        PiattoDTO result = piattoService.add(dto);
+        if(result == null){
+            return ResponseEntity.badRequest().body("{\"status\": \"Numero già presente.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dto);
         }
     }
 
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un piatto")
-    public ResponseEntity<Object> update(@RequestBody UpdatePiattoDTO dto){
+    public ResponseEntity<Object> update(@RequestBody AddPiattoDTO dto){
         PiattoDTO result = piattoService.update(dto);
         if (dto == null){
             return ResponseEntity.notFound().build();

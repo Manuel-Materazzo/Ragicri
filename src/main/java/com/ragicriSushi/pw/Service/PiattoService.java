@@ -1,6 +1,8 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.PiattoDAO;
+import com.ragicriSushi.pw.DTO.AddPiattoDTO;
+import com.ragicriSushi.pw.DTO.NumeroDTO;
 import com.ragicriSushi.pw.DTO.PiattoDTO;
 import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
@@ -81,8 +83,8 @@ public class PiattoService {
         return conversioni.toDTO(result);
     }
 
-    public PiattoDTO delete(int id){
-        Optional<PiattoDAO> dao = piattoRepository.findById(id);
+    public PiattoDTO delete(NumeroDTO dtoIn){
+        Optional<PiattoDAO> dao = piattoRepository.findPiattoByNumero(dtoIn.getNumero());
 
         if (dao.isPresent()){
             PiattoDTO dto = conversioni.toDTO(dao.get());
@@ -94,8 +96,8 @@ public class PiattoService {
         }
     }
 
-    public PiattoDTO update(UpdatePiattoDTO dto){
-        Optional<PiattoDAO> dao = piattoRepository.findById(dto.getId());
+    public PiattoDTO update(AddPiattoDTO dto){
+        Optional<PiattoDAO> dao = piattoRepository.findPiattoByNumero(dto.getNumero());
         if(dao.isPresent()){
             dao.get().setAllergeni(dto.getAllergeni());
             dao.get().setImg(dto.getImg());
@@ -109,6 +111,23 @@ public class PiattoService {
         } else {
             return null;
         }
+    }
+
+    public PiattoDTO add(AddPiattoDTO dto){
+        if(checkByNumero(dto.getNumero())){
+            return null;
+        }
+
+        PiattoDAO dao = new PiattoDAO();
+        dao.setNome(dto.getNome());
+        dao.setPrezzo(dto.getPrezzo());
+        dao.setNumero(dto.getNumero());
+        dao.setImg(dto.getImg());
+        dao.setAllergeni(dto.getAllergeni());
+        dao.setTipologia(dto.getTipologia());
+
+        piattoRepository.save(dao);
+        return conversioni.toDTO(dao);
     }
 
     public boolean checkByNumero(int numero){
