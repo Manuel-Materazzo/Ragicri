@@ -141,4 +141,14 @@ public class PiattoService {
         }
     }
 
+    public PiattoDTO getNumero(int numero){
+        Optional<PiattoDAO> dao = piattoRepository.findPiattoByNumero(numero);
+        if(dao.isPresent()){
+            return conversioni.toDTO(dao.get());
+        }
+        else {
+            return null;
+        }
+    }
+
 }

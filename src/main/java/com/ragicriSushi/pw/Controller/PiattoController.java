@@ -45,7 +45,7 @@ public class PiattoController {
 
     @GetMapping(path = "/numero/{numero}")
     @ApiOperation("Controlla se il numero inserito è un piatto esistente (ritorna un booleano)")
-    public ResponseEntity<Boolean> getByNumero(@PathVariable int numero){
+    public ResponseEntity<Boolean> checkNumero(@PathVariable int numero){
         boolean result = piattoService.checkByNumero(numero);
         if (result == true){
             return ResponseEntity.ok(true);
@@ -69,7 +69,7 @@ public class PiattoController {
     }
      */
 
-    @DeleteMapping(path = "/delete")
+    @PostMapping(path = "/delete")
     @ApiOperation("Elimina il piatto")
     public ResponseEntity<Object> delete(@RequestBody NumeroDTO dto){
         PiattoDTO result = piattoService.delete(dto);
@@ -97,7 +97,7 @@ public class PiattoController {
     public ResponseEntity<Object> update(@RequestBody AddPiattoDTO dto){
         PiattoDTO result = piattoService.update(dto);
         if (dto == null){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Piatto non trovato.\"}");
         }
         else {
             return ResponseEntity.ok(dto);
@@ -109,7 +109,19 @@ public class PiattoController {
     public ResponseEntity<Object> get(@RequestBody GetPiattoDTO dto){
         List<PiattoDTO> result = piattoService.get(dto.getTipologia(), dto.getAllergeni());
         if (result == null){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Piatto non trovato.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @GetMapping(path = "/getByNumero/{numero}")
+    @ApiOperation("Restituisce il piatto con il numero inserito")
+    public ResponseEntity<Object> getByNumero(@PathVariable int numero){
+        PiattoDTO result = piattoService.getNumero(numero);
+        if (result == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Piatto non trovato.\"}");
         }
         else {
             return ResponseEntity.ok(result);
