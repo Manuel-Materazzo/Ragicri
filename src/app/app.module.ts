@@ -104,9 +104,10 @@ import {DoughnutChartComponent} from './Pages/Charts/chartjs/examples/doughnut-c
 import {PieChartComponent} from './Pages/Charts/chartjs/examples/pie-chart/pie-chart.component';
 import { SideBarCarrelloComponent } from './Layout/Components/side-bar-carrello/side-bar-carrello.component';
 import { HomeComponent } from './Pages/Dashboards/home/home/home.component';
-import { MenuComponent } from './Pages/menu/menu.component';
-import { OrdiniCamerieriComponent } from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
+import { MenuComponent } from './Pages/Menu/menu.component';
+import { OrdiniCamerieriComponent } from './Pages/OrdiniCamerieri/ordini-camerieri/ordini-camerieri.component';
 import { CucinaComponent } from './Pages/Cucina/cucina/cucina.component';
+import { PiattiAdminComponent } from './Pages/Admin/piatti-admin/piatti-admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -201,6 +202,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuComponent,
     OrdiniCamerieriComponent,
     CucinaComponent,
+    PiattiAdminComponent,
   ],
   imports: [
     BrowserModule,

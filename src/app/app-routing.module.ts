@@ -52,9 +52,10 @@ import {LayoutComponent} from './Pages/Forms/Elements/layout/layout.component';
 
 import {ChartjsComponent} from './Pages/Charts/chartjs/chartjs.component';
 import {HomeComponent} from './Pages/Dashboards/home/home/home.component';
-import {MenuComponent} from './Pages/menu/menu.component';
-import {OrdiniCamerieriComponent} from './Pages/ordiniCamerieri/ordini-camerieri/ordini-camerieri.component';
+import {MenuComponent} from './Pages/Menu/menu.component';
+import {OrdiniCamerieriComponent} from './Pages/OrdiniCamerieri/ordini-camerieri/ordini-camerieri.component';
 import {CucinaComponent} from './Pages/Cucina/cucina/cucina.component';
+import {PiattiAdminComponent} from './Pages/Admin/piatti-admin/piatti-admin.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,7 @@ const routes: Routes = [
       {path: 'menuComponent', component: MenuComponent, data: {extraParameter: ''}},
       {path: 'camerieri', component: OrdiniCamerieriComponent, data: {extraParameter: ''}},
       {path: 'cucina', component: CucinaComponent, data:{extraParameter: ''}},
+      {path: 'adminPiatti', component: PiattiAdminComponent, data:{extraParameter: 'admin'}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},

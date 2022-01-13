@@ -1,52 +1,55 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {getPiattoDto, Piatto} from './Piatto';
-import { map } from 'rxjs/operators';
+import {AddPiattoDTO, getPiattoDto, Piatto} from './Piatto';
+import {map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PiattoService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  private baseUrl= "http://localhost:8080/ragicri/piatto";
+    private baseUrl = 'http://localhost:8080/ragicri/piatto';
 
-  getPiatti(): Observable<any[]>{
-    return this.http.get<Piatto[]>(`${this.baseUrl}`).pipe(map((res: any) => {
-      if (res) {
-        return res;
-      }
-      return null;
-    }));
-  }
-  getPiatto(id_piatto: number): Observable<any>{
-    return this.http.get((`${this.baseUrl}/${id_piatto}`));
-  }
+    getPiatti(): Observable<any[]> {
+        return this.http.get<Piatto[]>(`${this.baseUrl}`).pipe(map((res: any) => {
+            if (res) {
+                return res;
+            }
+            return null;
+        }));
+    }
 
-  getTipologiaPiatto(tipologia: string): Observable<any>{
-    return this.http.get((`${this.baseUrl}/tipologia/${tipologia}`));
-  }
+    getPiatto(numeretto: number): Observable<any> {
+        return this.http.get((`${this.baseUrl}/getByNumero/${numeretto}`));
+    }
 
-  //controlla se il numero del piatto esiste
-  getEsiste(numeretto: number): Observable<any>{
-    return this.http.get((`${this.baseUrl}/numero/${numeretto}`));
-  }
+    getTipologiaPiatto(tipologia: string): Observable<any> {
+        return this.http.get((`${this.baseUrl}/tipologia/${tipologia}`));
+    }
 
-  updatePiatto(id_piatto, Piatto): Observable<any>{
-    return this.http.post(`${this.baseUrl}/${id_piatto}`,Piatto);
-  }
+    //controlla se il numero del piatto esiste
+    getEsiste(numeretto: number): Observable<any> {
+        return this.http.get((`${this.baseUrl}/numero/${numeretto}`));
+    }
 
-  //con json non oggetto
-  getPiattiFiltrati(getPiattoDto: getPiattoDto): Observable<any>{
-    return this.http.post(`${this.baseUrl}/get`, getPiattoDto);
-  }
-  delete(id_piatto: string): Observable<any>{
-    // @ts-ignore
-    //TODO da provare potrebbere esserci un errore
-    return this.http.delete(`${this.baseUrl}/delete`,"{" + id_piatto + "}");
-  }
+    getPiattiFiltrati(getPiattoDto: getPiattoDto): Observable<any> {
+        return this.http.post(`${this.baseUrl}/get`, getPiattoDto);
+    }
 
+    updatePiatto(Piatto: AddPiattoDTO): Observable<any> {
+        return this.http.post(`${this.baseUrl}/update`, Piatto);
+    }
 
+    addPiatto(Piatto: AddPiattoDTO): Observable<any> {
+        return this.http.post(`${this.baseUrl}/add`, Piatto);
+    }
+
+    deletePiatto(numerettoPiatto: any): Observable<any> {
+        let piatto = '{ "numero": ' + numerettoPiatto + '}';
+        return this.http.post(`${this.baseUrl}/delete`, JSON.parse(piatto));
+    }
 }

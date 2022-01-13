@@ -1,6 +1,6 @@
-import { PiattoOrdinato}  from "../piattoOrdinato/PiattoOrdinato";
+import {PiattoOrdinato} from '../piattoOrdinato/PiattoOrdinato';
 
-export class Piatto{
+export class Piatto {
     idPiatto: number;
     nome: string;
     numero: number;
@@ -15,30 +15,44 @@ export class getPiattoDto {
     tipologia: string;
     allergeni: string;
 
-    public constructor(tip:string,aller:string) {
-        this.tipologia=tip;
-        this.allergeni=aller;
+    public constructor(tip: string, aller: string) {
+        this.tipologia = tip;
+        this.allergeni = aller;
     }
-    public  getAllergeni():string{
-        return this.allergeni;
-    }
-    public  getTipologia():string{
-        return this.tipologia;
-    }
+
     public setTipologia(tip: string) {
-        this.tipologia=tip;
+        this.tipologia = tip;
     }
-    public setAllergeni(aller: string){
-        this.allergeni=aller;
+
+    public setAllergeni(aller: string) {
+        this.allergeni = aller;
     }
 }
 
-export class PiattoInvio{
+export class PiattoInvio {
     numeretto: number;
     quantita: number;
 
     constructor(numeretto: number, quantita: number) {
         this.numeretto = numeretto;
         this.quantita = quantita;
+    }
+}
+
+export class AddPiattoDTO {
+    nome: string;
+    numero: number;
+    tipologia: string;
+    prezzo: number;
+    allergeni: string;
+    img: string;
+
+    constructor(nome: string, numero: number, tipologia: string, prezzo: number, allergeni: string, img: string) {
+        this.nome = nome;
+        this.numero = numero;
+        this.tipologia = tipologia;
+        this.prezzo = prezzo;
+        this.allergeni = allergeni;
+        this.img = img;
     }
 }
