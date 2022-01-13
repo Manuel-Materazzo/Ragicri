@@ -52,22 +52,13 @@ public class UtenteService {
             return null;
         }
     }
-/*
-    public UtenteDTO update(UtenteDTO dto){
-        Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
-        if(dao.isPresent()){
-            dao.get().setNome(dto.getNome());
-            dao.get().setRuolo(dto.getRuolo());
-            dao.get().setNome(dto.getNome());
-            dao.get().setUsername(dto.getUsername());
-            dao.get().setPassword(dto.getPassword());
 
-            dao.get().setIndirizzo();
-            utenteRepository.save(dao.get());
-            return conversioni.toDTO(dao.get());
-        } else {
-            return null;
-        }*/
+    public UtenteDTO save(UtenteDTO dto) {
+        UtenteDAO dao = conversioni.toDTO(dto);
+        dao = utenteRepository.save(dao);
+        return conversioni.toDTO(dao);
+    }
+
 
 }
 

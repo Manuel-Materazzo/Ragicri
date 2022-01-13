@@ -1,6 +1,7 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.PiattoDTO;
+import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.DTO.UtenteDTO;
 import com.ragicriSushi.pw.Service.UtenteService;
 import io.swagger.annotations.ApiOperation;
@@ -69,4 +70,11 @@ public class UtenteController {
             return ResponseEntity.badRequest().body("L'id " + idStr + " non è valido.");
         }
     }
+
+    @PostMapping("/save")
+    @ApiOperation("Crea un utente")
+    public UtenteDTO save(@RequestBody UtenteDTO dto) {
+        return utenteService.save(dto);
+    }
+
 }
