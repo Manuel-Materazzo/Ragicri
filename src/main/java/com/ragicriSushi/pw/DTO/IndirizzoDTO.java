@@ -13,8 +13,8 @@ public class IndirizzoDTO {
 
     private String provincia;
 
-    private String CAP;
+    private int CAP;
 
-    private String civico;
+    private int civico;
 
 }

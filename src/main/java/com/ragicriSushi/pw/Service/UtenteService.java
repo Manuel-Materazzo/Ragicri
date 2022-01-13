@@ -1,10 +1,13 @@
 package com.ragicriSushi.pw.Service;
 
+import com.ragicriSushi.pw.DAO.IndirizzoDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
+import com.ragicriSushi.pw.DTO.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.PiattoDTO;
 import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.DTO.UtenteDTO;
+import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,8 @@ public class UtenteService {
 
     @Autowired
     private UtenteRepository utenteRepository;
+    @Autowired
+    private IndirizzoRepository indirizzoRepository;
     @Autowired
     private Conversioni conversioni;
 
@@ -53,12 +58,40 @@ public class UtenteService {
         }
     }
 
-    public UtenteDTO save(UtenteDTO dto) {
-        UtenteDAO dao = conversioni.toDTO(dto);
+    public UtenteDTO save(AddUtenteDTO dto) {
+        IndirizzoDAO daoIndi = new IndirizzoDAO();
+        daoIndi.setVia(dto.getIndirizzoDTO().getVia());
+        daoIndi.setCivico(dto.getIndirizzoDTO().getCivico());
+        daoIndi.setCAP(dto.getIndirizzoDTO().getCAP());
+        daoIndi.setProvincia(dto.getIndirizzoDTO().getProvincia());
+        daoIndi=indirizzoRepository.save(daoIndi);
+
+        UtenteDAO dao = new UtenteDAO();
+        dao.setNome(dto.getNome());
+        dao.setRuolo(dto.getRuolo());
+        dao.setUsername(dto.getUsername());
+        dao.setPassword(dto.getPassword());
+        dao.setIndirizzo(daoIndi);
+
         dao = utenteRepository.save(dao);
         return conversioni.toDTO(dao);
     }
 
+    public UtenteDTO update(UtenteDTO dto){
+        Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
+        if(dao.isPresent()){
 
+            dao.get().setNome(dto.getNome());
+            dao.get().setRuolo(dto.getRuolo());
+            dao.get().setNome(dto.getNome());
+            dao.get().setUsername(dto.getUsername());
+            dao.get().setPassword(dto.getPassword());
+
+            utenteRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
+        } else {
+            return null;
+        }
+    }
 }
 

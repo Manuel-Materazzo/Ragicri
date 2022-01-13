@@ -1,5 +1,6 @@
 package com.ragicriSushi.pw.Controller;
 
+import com.ragicriSushi.pw.DTO.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.PiattoDTO;
 import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.DTO.UtenteDTO;
@@ -73,8 +74,20 @@ public class UtenteController {
 
     @PostMapping("/save")
     @ApiOperation("Crea un utente")
-    public UtenteDTO save(@RequestBody UtenteDTO dto) {
+    public UtenteDTO save(@RequestBody AddUtenteDTO dto) {
         return utenteService.save(dto);
+    }
+
+    @PostMapping(path = "/update")
+    @ApiOperation("Aggiorna un utente")
+            public ResponseEntity<Object> update(@RequestBody UtenteDTO dto){
+        UtenteDTO result = utenteService.update(dto);
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
     }
 
 }

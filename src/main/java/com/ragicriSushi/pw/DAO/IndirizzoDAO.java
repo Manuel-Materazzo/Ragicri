@@ -27,10 +27,10 @@ public class IndirizzoDAO {
     private String provincia;
 
     @Column(nullable = false)
-    private String CAP;
+    private int CAP;
 
     @Column(nullable = false)
-    private String civico;
+    private int civico;
 
     @OneToOne(mappedBy = "Indirizzo")
     private UtenteDAO utenteDAO;
