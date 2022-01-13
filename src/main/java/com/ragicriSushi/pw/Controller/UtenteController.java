@@ -43,13 +43,30 @@ public class UtenteController {
 
     @GetMapping(path = "/ruolo/{ruolo}")
     @ApiOperation("Ritorna tutti gli utenti con un ruolo")
-    public ResponseEntity<Object> getByTipologia(@PathVariable String ruolo){
+    public ResponseEntity<Object> getByRuolo(@PathVariable String ruolo){
         List<UtenteDTO> dto = utenteService.getByRuolo(ruolo);
         if (dto == null){
             return ResponseEntity.notFound().build();
         }
         else {
             return ResponseEntity.ok(dto);
+        }
+    }
+
+    @DeleteMapping(path = "/delete")
+    @ApiOperation("Elimina l'utente")
+    public ResponseEntity<Object> delete(@RequestBody String idStr){
+        try{
+            int id = Integer.parseInt(idStr);
+            UtenteDTO dto = utenteService.delete(id);
+            if (dto != null){
+                return ResponseEntity.ok(dto);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (NumberFormatException e)
+        {
+            return ResponseEntity.badRequest().body("L'id " + idStr + " non è valido.");
         }
     }
 }

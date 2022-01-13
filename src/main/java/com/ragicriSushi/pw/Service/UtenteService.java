@@ -3,6 +3,7 @@ package com.ragicriSushi.pw.Service;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.PiattoDTO;
+import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
 import com.ragicriSushi.pw.DTO.UtenteDTO;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,35 @@ public class UtenteService {
         List<UtenteDAO> dao = utenteRepository.findUtenteByRuolo(ruolo);
         return conversioni.toDTO(dao);
     }
+
+    public UtenteDTO delete(int id){
+        Optional<UtenteDAO> dao = utenteRepository.findById(id);
+
+        if (dao.isPresent()){
+            UtenteDTO dto = conversioni.toDTO(dao.get());
+            utenteRepository.delete(dao.get());
+            return dto;
+        }
+        else {
+            return null;
+        }
+    }
+/*
+    public UtenteDTO update(UtenteDTO dto){
+        Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
+        if(dao.isPresent()){
+            dao.get().setNome(dto.getNome());
+            dao.get().setRuolo(dto.getRuolo());
+            dao.get().setNome(dto.getNome());
+            dao.get().setUsername(dto.getUsername());
+            dao.get().setPassword(dto.getPassword());
+
+            dao.get().setIndirizzo();
+            utenteRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
+        } else {
+            return null;
+        }*/
+
 }
+
