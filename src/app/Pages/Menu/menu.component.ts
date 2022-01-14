@@ -68,7 +68,6 @@ export class MenuComponent implements OnInit {
     }
 
     piattiFiltrati() {
-
         this.piattoService.getPiattiFiltrati(this.piattiDto).subscribe((response: any) => {
             this.listaPiatti = [];
             response.forEach(element => {
@@ -77,8 +76,11 @@ export class MenuComponent implements OnInit {
         });
     }
 
-    filtroAllergeni(allergene: string) {
+    test(){
+        console.log();
+    }
 
+    filtroAllergeni(allergene: string) {
         if (this.allergeniInvio.includes(allergene)) {
             let parts = this.allergeniInvio.split(' ');
 

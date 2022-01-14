@@ -1,35 +1,77 @@
 <h1 class="testo-centrato-titolo">Menù</h1>
 
 <div>
-    <p style="display: inline-block;">Filtro allergeni: </p>&nbsp;
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="1" (click)="filtroAllergeni('Crostacei')" hidden>
-        <img src="../../../../assets/images/icone/glutine.png" alt="glutine" width="25" height="25">
+    <p style="display: inline-block;">Filtro allergeni: </p> &nbsp;
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Glutine')" id="checkbox1">
+    <label for="checkbox1">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="2" (click)="filtroAllergeni('Glutine')" hidden>
-        <img src="../../../../assets/images/icone/crostacei.png" alt="crostacei" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Crostacei')" id="checkbox2">
+    <label for="checkbox2">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="4" (click)="filtroAllergeni('Vegetariano')" hidden>
-        <img src="../../../../assets/images/icone/pesce.png" alt="pesce" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Pesce')" id="checkbox3">
+    <label for="checkbox3">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="3" (click)="filtroAllergeni('Pesce')" hidden>
-        <img src="../../../../assets/images/icone/molluschi.png" alt="molluschi" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Molluschi')" id="checkbox4">
+    <label for="checkbox4">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Surgelati')" hidden>
-        <img src="../../../../assets/images/icone/soia.png" alt="soia" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Soia')" id="checkbox5">
+    <label for="checkbox5">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Senza-glutine')" hidden>
-        <img src="../../../../assets/images/icone/uovo.png" alt="uovo" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Uova/Derivati')" id="checkbox6">
+    <label for="checkbox6">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
     </label>
-    <label ngbButtonLabel class="btn-primary">
-        <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Senza-glutine')" hidden>
-        <img src="../../../../assets/images/icone/sedano.png" alt="verdura" width="25" height="25">
+
+    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Verdura')" id="checkbox7">
+    <label for="checkbox7">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
     </label>
+
+    <!--
+    <br>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="1" (click)="filtroAllergeni('Glutine')" id="checkbox1">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="2" (click)="filtroAllergeni('Glutine')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="3" (click)="filtroAllergeni('Vegetariano')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="4" (click)="filtroAllergeni('Pesce')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Surgelati')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="6" (click)="filtroAllergeni('Senza-glutine')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
+    </label>
+    <label ngbButtonLabel>
+        <input class="checkboxNone" type="checkbox" ngbButton [value]="7" (click)="filtroAllergeni('Senza-glutine')">
+        <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
+    </label>
+    <br>
+    <button type="button" class="btn btn-warning" (click)="test()">Test</button>
+    -->
+
 </div>
 
 

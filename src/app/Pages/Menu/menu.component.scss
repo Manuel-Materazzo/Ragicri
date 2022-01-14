@@ -30,8 +30,30 @@
   width: 90%;
 }
 
+.iconaAllergene{
+  width: 50px;
+  height: 50px;
+}
+
+.iconaAllergene:hover{
+  cursor: pointer;
+}
+
+.checkboxNone{
+  display: none;
+}
+
+input[type="checkbox"]:checked + label img{
+  filter: grayscale(100%);
+}
+
 @media only screen and (max-width: 770px) {
   .imgPiatto{
     height: 150px;
+  }
+
+  .iconaAllergene{
+    width: 25px;
+    height: 25px;
   }
 }
