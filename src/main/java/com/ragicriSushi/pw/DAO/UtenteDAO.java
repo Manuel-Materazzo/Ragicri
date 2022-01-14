@@ -2,10 +2,7 @@ package com.ragicriSushi.pw.DAO;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -20,7 +17,21 @@ public class UtenteDAO {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Integer id;
+    private int idUtente;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
+    private String ruolo;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Indirizzo", referencedColumnName = "idIndirizzo", nullable = true)
+    private IndirizzoDAO Indirizzo;
 }

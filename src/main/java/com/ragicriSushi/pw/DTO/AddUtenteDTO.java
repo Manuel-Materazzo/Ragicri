@@ -7,9 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UtenteDTO {
-
-    private int id;
+public class AddUtenteDTO {
 
     private String nome;
 
