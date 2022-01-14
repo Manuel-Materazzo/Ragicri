@@ -81,7 +81,7 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Miura', 67, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiMiura.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Tempura', 68, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiTempura.jpg');
+    VALUES ('Tempura', 68, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiTempura.jpg');;
 
 -- ORDINAZIONI:
 -- 1
