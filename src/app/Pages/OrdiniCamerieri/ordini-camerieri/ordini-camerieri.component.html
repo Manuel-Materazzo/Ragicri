@@ -45,6 +45,7 @@
         </form>
         <form class="form-inline">
             <button class="mb-2 mr-2 btn btn-primary btn-lg" (click)="AggiungiPiatto()">Aggiungi piatto</button>
+            <button class="mb-2 mr-2 btn btn-success btn-lg" (click)="openSmall(content7)">Invia ordinazione</button>
             <div class="card-body">
                 <ng-template #content7 let-c="close" let-d="dismiss">
                     <div class="modal-header">
@@ -63,8 +64,6 @@
                         <button type="button" class="btn btn-primary" (click)="invioOrdinazione()">Si</button>
                     </div>
                 </ng-template>
-                <button class="mb-2 mr-2 btn btn-success btn-lg" (click)="openSmall(content7)">Invia ordinazione
-                </button>
             </div>
         </form>
     </div>

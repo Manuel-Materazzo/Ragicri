@@ -16,4 +16,22 @@
   float:left;
 }
 
+.imgPiatto{
+  display: inline-block;
+  object-fit: contain;
+  position: relative;
+  margin-top: 5%;
+  height: 325px;
+}
 
+.divPiatto{
+  display: inline-block;
+  margin: auto;
+  width: 90%;
+}
+
+@media only screen and (max-width: 770px) {
+  .imgPiatto{
+    height: 150px;
+  }
+}

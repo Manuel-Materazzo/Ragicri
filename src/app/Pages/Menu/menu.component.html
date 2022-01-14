@@ -1,14 +1,16 @@
 <h1 class="testo-centrato-titolo">Menù</h1>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <div class="row">
             <div class="col">
-            <ul class="navbar-nav mr-auto  mt-lg-0">
+                <ul class="navbar-nav mr-auto  mt-lg-0">
 
                     <li class="nav-item">
                         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
@@ -21,7 +23,8 @@
                     <li class="nav-item active">
                         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                             <label ngbButtonLabel class="btn-primary">
-                                <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
+                                <input ngbButton type="radio" [value]="2"
+                                    (click)="filtroTipologie('Antipasti') ">Antipasto
                             </label>
                         </div>
                     </li>
@@ -81,7 +84,7 @@
                             </label>
                         </div>
                     </li>
-            </ul>
+                </ul>
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
@@ -127,23 +130,25 @@
         </div>
     </div>
 </nav>
+
+<br>
+
 <div class="row">
     <div class="col-md-3" *ngFor="let piatto of listaPiatti;">
-
         <div class="main-card mb-3 card">
-            <div class="row">
-                <img style='height: 45%; width: 80%; object-fit: contain; margin-left:10%; margin-top: 5%;'
-                     src="{{piatto.img}}"
-                     alt="Card image cap" class="card-img-top">
+            <div class="divPiatto">
+                <img src="{{piatto.img}}" alt="Card image cap" class="card-img-top imgPiatto">
+            </div>
 
-                <div class="col">
-                    <div class="card-body"><h4 class="card-title">{{piatto.nome}}</h4><h5 class="card-subtitle">
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title"><b>{{piatto.nome}}</b></h4>
+                    <h5 class="card-subtitle">
                         Numero: {{piatto.numero}}</h5>
-                        <h6>Prezzo: {{piatto.prezzo}}</h6>
-                        <p>Allergeni: {{piatto.allergeni}}</p>
+                    <h6>Prezzo: {{piatto.prezzo}}</h6>
+                    <p>Allergeni: {{piatto.allergeni}}</p>
 
-                        <button class="btn btn-secondary">Aggiungi al carrello</button>
-                    </div>
+                    <button class="btn btn-secondary">Aggiungi al carrello</button>
                 </div>
             </div>
         </div>
