@@ -4,15 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @NoArgsConstructor
 @Getter
 @Setter
-public class AddPiattiOrdinazioneDTO {
+public class GetPiattoDTO {
 
-    private int tavolo;
+    private String tipologia;
 
-    private List<NewPiattoOrdinatoDTO> piattiOrdinati;
+    private String allergeni;
 
 }

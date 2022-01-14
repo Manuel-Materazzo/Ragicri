@@ -41,8 +41,6 @@ public class Conversioni {
             return (T) fromDtoToDao((IndirizzoDTO) dto);
         } else if (dto instanceof NewOrdinazioneDTO) {
             return (T) fromDtoToDao((NewOrdinazioneDTO) dto);
-        } else if (dto instanceof AddPiattiOrdinazioneDTO) {
-            return (T) fromDtoToDao((AddPiattiOrdinazioneDTO) dto);
         }
         return null;
     }
@@ -179,7 +177,7 @@ public class Conversioni {
         for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
             PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
             piattoOrdinato.setOrdinazione(dao);
-            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
+            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()).get());
             piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
             piattoOrdinato.setConsegnato(false);
             piattiOrdinati.add(piattoOrdinato);
@@ -187,27 +185,6 @@ public class Conversioni {
         dao.setPiattiOrdinati(piattiOrdinati);
 
         return dao;
-    }
-
-    public OrdinazioneDAO fromDtoToDao(AddPiattiOrdinazioneDTO dto) {
-        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(dto.getId());
-
-        if(dao.isPresent()){
-            List<PiattoOrdinato> piattiOrdinati = dao.get().getPiattiOrdinati();
-            for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
-                PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
-                piattoOrdinato.setOrdinazione(dao.get());
-                piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()));
-                piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
-                piattoOrdinato.setConsegnato(false);
-                piattiOrdinati.add(piattoOrdinato);
-            }
-            dao.get().setPiattiOrdinati(piattiOrdinati);
-
-            return dao.get();
-        } else {
-            return null;
-        }
     }
 
 }
