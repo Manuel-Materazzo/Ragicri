@@ -1,1 +1,6 @@
 @import "assets/base";
+
+@font-face {
+  font-family: "MaybugMSHandwritten";
+  src: local("MaybugMSHandwritten"), url(./assets/fonts/MaybugMSHandwritten.ttf) format("truetype");
+}
