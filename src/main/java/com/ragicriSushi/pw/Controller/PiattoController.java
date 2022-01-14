@@ -88,7 +88,7 @@ public class PiattoController {
             return ResponseEntity.badRequest().body("{\"status\": \"Numero già presente.\"}");
         }
         else {
-            return ResponseEntity.ok(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         }
     }
 

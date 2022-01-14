@@ -19,8 +19,6 @@ public class IndirizzoController {
 
     @Autowired
     private IndirizzoService indirizzoService;
-    @Autowired
-    private IndirizzoRepository indirizzoRepository;
 
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti gli indirizzi")

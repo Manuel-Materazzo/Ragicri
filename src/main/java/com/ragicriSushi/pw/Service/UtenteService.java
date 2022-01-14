@@ -80,7 +80,6 @@ public class UtenteService {
     public UtenteDTO update(UtenteDTO dto){
         Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
         if(dao.isPresent()){
-
             dao.get().setNome(dto.getNome());
             dao.get().setRuolo(dto.getRuolo());
             dao.get().setNome(dto.getNome());
@@ -91,6 +90,16 @@ public class UtenteService {
             return conversioni.toDTO(dao.get());
         } else {
             return null;
+        }
+    }
+
+    public boolean checkPresenzaUsername(String username){
+        Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
+        if(dao.isPresent()){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

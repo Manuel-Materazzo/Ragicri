@@ -31,7 +31,7 @@ public class UtenteDAO {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "Indirizzo", referencedColumnName = "idIndirizzo", nullable = true)
     private IndirizzoDAO Indirizzo;
 }

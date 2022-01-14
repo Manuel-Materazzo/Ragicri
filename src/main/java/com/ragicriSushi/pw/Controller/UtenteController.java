@@ -5,6 +5,7 @@ import com.ragicriSushi.pw.DTO.UtenteDTO;
 import com.ragicriSushi.pw.Service.UtenteService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class UtenteController {
         }
     }
 
-    @DeleteMapping(path = "/delete")
+    @PostMapping(path = "/delete")
     @ApiOperation("Elimina l'utente")
     public ResponseEntity<Object> delete(@RequestBody String idStr){
         try{
@@ -62,7 +63,7 @@ public class UtenteController {
             if (dto != null){
                 return ResponseEntity.ok(dto);
             } else {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Utente non trovato.\"}");
             }
         } catch (NumberFormatException e)
         {
@@ -70,18 +71,24 @@ public class UtenteController {
         }
     }
 
-    @PostMapping("/save")
+    @PostMapping("/add")
     @ApiOperation("Crea un utente")
-    public UtenteDTO save(@RequestBody AddUtenteDTO dto) {
-        return utenteService.save(dto);
+    public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {
+        if(utenteService.checkPresenzaUsername(dto.getUsername())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Username già in uso.\"}");
+        }
+        else{
+            UtenteDTO result = utenteService.save(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }
     }
 
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un utente")
-            public ResponseEntity<Object> update(@RequestBody UtenteDTO dto){
+    public ResponseEntity<Object> update(@RequestBody UtenteDTO dto){
         UtenteDTO result = utenteService.update(dto);
         if (dto == null){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Utente non trovato.\"}");
         }
         else {
             return ResponseEntity.ok(dto);
