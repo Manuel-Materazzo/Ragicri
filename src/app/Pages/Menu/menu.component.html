@@ -1,161 +1,108 @@
 <h1 class="testo-centrato-titolo">Menù</h1>
 
-<div>
-    <p style="display: inline-block;">Filtro allergeni: </p> &nbsp;
+<div class="card-border mb-3 card card-body border-warning">
+    <h5 class="card-title">Filtri menù</h5>
+    <div>
+        <div class="riga inline">
+            <p style="display: inline-block;">Allergeni: </p> &nbsp;
 
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Glutine')" id="checkbox1">
-    <label for="checkbox1">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
-    </label>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Glutine')" id="checkbox1">
+                <label for="checkbox1">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Crostacei')" id="checkbox2">
+                <label for="checkbox2">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Pesce')" id="checkbox3">
+                <label for="checkbox3">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Molluschi')" id="checkbox4">
+                <label for="checkbox4">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Soia')" id="checkbox5">
+                <label for="checkbox5">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Uova/Derivati')" id="checkbox6">
+                <label for="checkbox6">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Verdura')" id="checkbox7">
+                <label for="checkbox7">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                </label>
+            </div>
 
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Crostacei')" id="checkbox2">
-    <label for="checkbox2">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
-    </label>
+        </div>
 
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Pesce')" id="checkbox3">
-    <label for="checkbox3">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
-    </label>
+    </div>
 
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Molluschi')" id="checkbox4">
-    <label for="checkbox4">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
-    </label>
-
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Soia')" id="checkbox5">
-    <label for="checkbox5">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
-    </label>
-
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Uova/Derivati')" id="checkbox6">
-    <label for="checkbox6">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
-    </label>
-
-    <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Verdura')" id="checkbox7">
-    <label for="checkbox7">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
-    </label>
-
-    <!--
-    <br>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="1" (click)="filtroAllergeni('Glutine')" id="checkbox1">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="2" (click)="filtroAllergeni('Glutine')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="3" (click)="filtroAllergeni('Vegetariano')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="4" (click)="filtroAllergeni('Pesce')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Surgelati')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="6" (click)="filtroAllergeni('Senza-glutine')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
-    </label>
-    <label ngbButtonLabel>
-        <input class="checkboxNone" type="checkbox" ngbButton [value]="7" (click)="filtroAllergeni('Senza-glutine')">
-        <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
-    </label>
-    <br>
-    <button type="button" class="btn btn-warning" (click)="test()">Test</button>
-    -->
-
-</div>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-
-    <div class="row">
-        <div class="col">
-            <ul class="navbar-nav mr-auto  mt-lg-0">
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('') ">Menù completo
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item active">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item ">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="3">Primi piatti
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">dessert
-                        </label>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-                        <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
-                        </label>
-                    </div>
-                </li>
-            </ul>
+    <div>
+        <p class="inline">Tipologia: </p> &nbsp;
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary bottone">
+                <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('') ">Menù completo
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="3" (click)="filtroTipologie('Primi')">Primi piatti
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">Dessert
+            </label>
+        </div>
+        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+            <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
+            </label>
         </div>
     </div>
-</nav>
+    
+</div>
 
 <br>
 
@@ -180,45 +127,3 @@
         </div>
     </div>
 </div>
-
-<!-- 
-<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    <li class="nav-item">
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="1" (click)="filtroAllergeni('Crostacei')">
-            Crostacei
-        </label>
-    </li>
-    <li>
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="2" (click)="filtroAllergeni('Glutine')">
-            Glutine
-        </label>
-    </li>
-    <li>
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="3" (click)="filtroAllergeni('Pesce')">
-            Pesce
-        </label>
-    </li>
-    <li>
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="4" (click)="filtroAllergeni('Vegetariano')">
-            Vegetariano
-        </label>
-    </li>
-    <li>
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Surgelati')">
-            Surgelati
-        </label>
-    </li>
-    <li>
-        <label ngbButtonLabel class="btn-primary">
-            <input type="checkbox" ngbButton [value]="5" (click)="filtroAllergeni('Senza-glutine')">
-            Senza-glutine
-        </label>
-    </li>
-</ul>
-
--->
