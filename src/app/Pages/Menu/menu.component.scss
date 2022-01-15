@@ -51,7 +51,6 @@
   color: #fff !important;
   background: #FF530D linear-gradient(180deg, #FF530D, #FF7B3C) repeat-x !important;
   border-color: #FF7B3C !important;
-  margin-right: 5px !important;
 }
 
 .active{
@@ -75,11 +74,10 @@ input[type="checkbox"]:checked + label img{
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-  padding: 10px 0px 10px 0px;
 }
 
 .elementoRiga {
-  margin-left: 10px;
+  margin-right: 5px;
   flex-grow: 0 !important;
   flex-shrink: 0 !important;
 }

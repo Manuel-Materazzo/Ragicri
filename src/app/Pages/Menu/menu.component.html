@@ -4,8 +4,6 @@
     <h5 class="card-title">Filtri menù</h5>
     <div>
         <div class="riga inline">
-            <p style="display: inline-block;">Allergeni: </p> &nbsp;
-
             <div class="elementoRiga">
                 <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Glutine')" id="checkbox1">
                 <label for="checkbox1">
@@ -54,51 +52,52 @@
     </div>
 
     <div>
-        <p class="inline">Tipologia: </p> &nbsp;
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary bottone">
-                <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('') ">Menù completo
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="3" (click)="filtroTipologie('Primi')">Primi piatti
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">Dessert
-            </label>
-        </div>
-        <div class="btn-group btn-group-toggle inline" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
-            <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
-            </label>
+        <div class="riga inline">
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary bottone">
+                    <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('') ">Menù completo
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="2" (click)="filtroTipologie('Antipasti') ">Antipasto
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="3" (click)="filtroTipologie('Primi')">Primi piatti
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="4" (click)="filtroTipologie('Nigiri')">Nigiri
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="5" (click)="filtroTipologie('Hosomaki')">Hosomaki
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="6" (click)="filtroTipologie('Temaki')">Temaki
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="7" (click)="filtroTipologie('Sashimi')">Sashimi
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="8" (click)="filtroTipologie('Dessert')">Dessert
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="9" (click)="filtroTipologie('Bevande')">Bevande
+                </label>
+            </div>
         </div>
     </div>
     
