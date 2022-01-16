@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {PiattoService} from '../../../Theme/piatto/piatto.service';
 import {Router} from '@angular/router';
 import {AddPiattoDTO, Piatto} from '../../../Theme/piatto/Piatto';
-import {element} from 'protractor';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { saveAs } from 'file-saver'
 @Component({
     selector: 'app-piatti-admin',
     templateUrl: './piatti-admin.component.html',
@@ -18,6 +17,8 @@ export class PiattiAdminComponent implements OnInit {
     closeResult: string;
     numerettoPiatto: number;
     indice: number;
+    fileToUpload: File = null;
+    url: string | ArrayBuffer;
     constructor(private piattoService: PiattoService,
                 private router: Router, private modalService: NgbModal) {
 
@@ -60,7 +61,8 @@ export class PiattiAdminComponent implements OnInit {
     }
 
     //funzione per il model elimina
-    openDeleteModal(content, numeretto: number) {
+    openDeleteModal(content, numeretto: number, nomePiatto : string) {
+        this.piatto.nome=nomePiatto.toLocaleLowerCase();
         this.modalService.open(content, {
             size: 'sm'
         });
@@ -91,6 +93,7 @@ export class PiattiAdminComponent implements OnInit {
         //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
         this.piatto.tipologia=(document.getElementById('tipologia') as HTMLInputElement).value;
         this.piattoService.updatePiatto(this.piatto).subscribe();
+        this.saveToFileSystem(this.fileToUpload);
         this.modalService.dismissAll();
         window.location.reload();
     }
@@ -116,4 +119,42 @@ export class PiattiAdminComponent implements OnInit {
         this.modalService.dismissAll();
         window.location.reload();
     }
+
+    riceviFile(eventTarget: EventTarget) {
+        if (eventTarget.files && eventTarget.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = (event: ProgressEvent) => {
+                this.url = (<FileReader>event.target).result;
+            }
+
+            reader.readAsDataURL(eventTarget.files[0]);
+        }
+        this.fileToUpload = eventTarget.files.item(0);
+    }
+
+    private saveToFileSystem(fileName: File) {
+        const blob = new Blob(["Please Save Me!"], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, fileName,);
+    }
+/**
+ * Metodo per file in cloud
+    uploadFileToActivity() {
+        this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
+            // do something, if upload success
+        }, error => {
+            console.log(error);
+        });
+    }
+
+ postFile(fileToUpload: File): Observable<boolean> {
+    const endpoint = 'your-destination-url';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.httpClient
+      .post(endpoint, formData, { headers: yourHeadersConfig })
+      .map(() => { return true; })
+      .catch((e) => this.handleError(e));
+}
+ */
 }

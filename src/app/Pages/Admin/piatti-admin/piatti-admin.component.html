@@ -9,8 +9,10 @@
             <th>Prezzo</th>
             <th>Allergeni</th>
             <th>Tipologia</th>
-            <th>
-                <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)"><i class="pe-7s-plus"></i>Create New</button>
+            <th class="text-center">
+                <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)">
+                    <i class="pe-7s-plus"></i>
+                </button>
             </th>
         </tr>
         </thead>
@@ -23,10 +25,10 @@
             <td>{{piattino.tipologia}}</td>
             <td class="text-center">
                 <div role="group" class="btn-group-sm btn-group">
-                    <button class="mb-2 mr-2 btn btn-success" (click)="openUpdateModal(update,piattino.numero)">
+                    <button class="mb-2 mr-2 btn btn-update" (click)="openUpdateModal(update,piattino.numero)">
                         <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
                     </button>
-                    <button class="mb-2 mr-2 btn btn-danger" (click)="openDeleteModal(delete, piattino.numero)">
+                    <button class="mb-2 mr-2 btn btn-danger" (click)="openDeleteModal(delete, piattino.numero,piattino.nome)">
                         <i class="pe-7s-trash"> </i>
                     </button>
                 </div>
@@ -36,82 +38,79 @@
 </div>
 
 <!--Model per il Create -->
-<ng-template #create let-c="close" let-d="dismiss" >
+<ng-template #create let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Piatto</h4>
+        <h4 class="modal-title">Creazione Piatto</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    <form (ngSubmit)="createPiatto()" #form="ngForm">
     <div class="modal-body">
         <div class="card-body">
-            <form>
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="nomePiattoAdd" class="mr-sm-2">Nome:</label>
-                            <input name="text" id="nomePiattoAdd" value="" type="text" class="form-control">
+                            <label for="addPiatto" class="mr-sm-2">Nome:</label>
+                            <input name="text" id="addPiatto" value="" type="text" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addPrezzo" class="mr-sm-2">Prezzo:</label>
+                            <input name="text" id="addPrezzo" value="" type="number" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row input">
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addNumerettoPiatto" class="mr-sm-2">Numeretto:</label>
+                            <input name="text" id="addNumerettoPiatto" value="" type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addAllergeni" class="mr-sm-2">Allergeni:</label>
+                            <input name="text" id="addAllergeni" value="" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-row input">
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+
+                            <input type="file" id="addFile" (change)="riceviFile($event.target)" >
+                            <label class="mr-sm-2">Nome nuova immagine:</label>
+                            <input type="text" id="addNomeFile">
+                            <img *ngIf=url [src]="url" alt="Inserisci nuova immagine" class="mr-sm-2 card-img-top imgPiatto " >
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="prezzoAdd" class="mr-sm-2">Prezzo:</label>
-                            <input name="text" id="prezzoAdd" value="" type="number" class="form-control">
+                            <label for="addTipologia" class="mr-sm-2">Tipologia:</label>
+                            <input name="text" id="addTipologia" value="" type="text" class="form-control" required>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="numerettoPiattoAdd" class="mr-sm-2">Numeretto:</label>
-                            <input name="text" id="numerettoPiattoAdd" value="" type="number"
-                                   class="form-control">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="allergeniAdd" class="mr-sm-2">Allergeni:</label>
-                            <input name="text" id="allergeniAdd" value="" type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label  class="mr-sm-2">Immagine:</label>
-                            <!--<input name="text" id="imgAdd" value=""  type="file" class="mr-sm-2">-->
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label for="tipologiaAdd" class="mr-sm-2">Tipologia:</label>
-                            <input name="text" id="tipologiaAdd" value="" type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-
-            </form>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-        <button type="button" class="btn btn-primary" (click)="createPiatto()">Save changes</button>
-    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">Chiudi</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.form.invalid" >Crea</button>
+        </div>
+    </form>
 </ng-template>
 
 <!--Model per il modifica -->
-<ng-template #update let-c="close" let-d="dismiss" >
+<ng-template #update let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title">Piatto</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -122,16 +121,14 @@
         <div class="card-body">
             <form>
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="nomePiatto" class="mr-sm-2">Nome:</label>
                             <input name="text" id="nomePiatto" value="" type="text" class="form-control">
                         </div>
                     </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="prezzo" class="mr-sm-2">Prezzo:</label>
                             <input name="text" id="prezzo" value="" type="number" class="form-control">
@@ -139,18 +136,15 @@
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="col-md-4">
+                <div class="form-row input">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="numerettoPiatto" class="mr-sm-2">Numeretto:</label>
                             <input name="text" id="numerettoPiatto" value="" type="number"
                                    class="form-control">
                         </div>
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="allergeni" class="mr-sm-2">Allergeni:</label>
                             <input name="text" id="allergeni" value="" type="text" class="form-control">
@@ -158,30 +152,52 @@
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="col-md-4">
+
+                <div class="form-row input">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <label  class="mr-sm-2">Immagine:</label>
+                            <label class="mr-sm-2">Vecchia Immagine:</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <input type="file" id="file" (change)="riceviFile($event.target)">
+                            <label class="mr-sm-2">Nome nuova immagine:</label>
+                            <input type="text" id="nomeFile">
                             <!--<input name="text" id="img" value=""  type="file" class="mr-sm-2">-->
                         </div>
                     </div>
                 </div>
-                <br>
+
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <img src="{{piatto.img}}" alt="Card image cap" class="mr-sm-2 card-img-top imgPiatto">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <img [src]="url" alt="Inserisci nuova immagine" class="mr-sm-2 card-img-top imgPiatto " >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="tipologia" class="mr-sm-2">Tipologia:</label>
                             <input name="text" id="tipologia" value="" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updatePiatto()">Save changes</button>
+        <button type="button" class="mb-2 mr-2 btn btn-danger" (click)="c('Close click')">Chiudi</button>
+        <button type="button" class="mb-2 mr-2 btn btn-update " (click)="updatePiatto()">Aggiorna</button>
     </div>
 </ng-template>
 
@@ -189,19 +205,19 @@
 <div class="card-body">
     <ng-template #delete let-c="close" let-d="dismiss">
         <div class="modal-header">
-            <h4 class="modal-title">Elimina piatto</h4>
+            <h4 class="modal-title">Eliminazione piatto</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
             <p>
-                Sei sicuro di voler eliminare questo piatto?
+                Sei sicuro di voler eliminare {{this.piatto.nome}}?
             </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="c('Close click')">No</button>
-            <button type="button" class="btn btn-primary" (click)="deletePiatto(numerettoPiatto)">Si</button>
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">No</button>
+            <button type="button" class="btn btn-success" (click)="deletePiatto(numerettoPiatto)">Si</button>
         </div>
     </ng-template>
 </div>
