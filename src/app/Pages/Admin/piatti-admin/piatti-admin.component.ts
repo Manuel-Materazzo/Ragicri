@@ -3,7 +3,6 @@ import {PiattoService} from '../../../Theme/piatto/piatto.service';
 import {Router} from '@angular/router';
 import {AddPiattoDTO, Piatto} from '../../../Theme/piatto/Piatto';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { saveAs } from 'file-saver'
 @Component({
     selector: 'app-piatti-admin',
     templateUrl: './piatti-admin.component.html',
@@ -19,6 +18,7 @@ export class PiattiAdminComponent implements OnInit {
     indice: number;
     fileToUpload: File = null;
     url: string | ArrayBuffer;
+    allergeni:string="";
     constructor(private piattoService: PiattoService,
                 private router: Router, private modalService: NgbModal) {
 
@@ -93,7 +93,9 @@ export class PiattiAdminComponent implements OnInit {
         //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
         this.piatto.tipologia=(document.getElementById('tipologia') as HTMLInputElement).value;
         this.piattoService.updatePiatto(this.piatto).subscribe();
-        this.saveToFileSystem(this.fileToUpload);
+        if((document.getElementById('file') as HTMLInputElement).value!=null) {
+            this.saveToFileSystem((document.getElementById('nomeFile') as HTMLInputElement).value);
+        }
         this.modalService.dismissAll();
         window.location.reload();
     }
@@ -109,17 +111,43 @@ export class PiattiAdminComponent implements OnInit {
 
     createPiatto() {
         console.log(this.piatto.nome)
-        this.piatto.nome=(document.getElementById('nomePiattoAdd') as HTMLInputElement).value;
-        this.piatto.prezzo=parseInt((document.getElementById('prezzoAdd') as HTMLInputElement).value);
-        this.piatto.numero=parseInt((document.getElementById('numerettoPiattoAdd') as HTMLInputElement).value);
-        this.piatto.allergeni=(document.getElementById('allergeniAdd') as HTMLInputElement).value;
-        //this.piatto.img=(document.getElementById('imgAdd') as HTMLInputElement).value;
-        this.piatto.tipologia=(document.getElementById('tipologiaAdd') as HTMLInputElement).value;
+        this.saveToFileSystem((document.getElementById('addNomeFile') as HTMLInputElement).value);
+        this.piatto.nome=(document.getElementById('addPiatto') as HTMLInputElement).value;
+        this.piatto.prezzo=parseInt((document.getElementById('addPrezzo') as HTMLInputElement).value);
+        this.piatto.numero=parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
+        this.controlloAllergeni();
+        this.piatto.allergeni=this.allergeni;
+        console.log(this.allergeni);
+        //this.piatto.img=;
+        this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
         this.piattoService.addPiatto(this.piatto).subscribe();
         this.modalService.dismissAll();
         window.location.reload();
     }
 
+    controlloAllergeni(){
+        if((document.getElementById('Glutine') as HTMLInputElement).checked==true){
+            this.allergeni+="Glutine "
+        }
+        if((document.getElementById('Crostacei') as HTMLInputElement).checked==true){
+            this.allergeni+="Crostacei "
+        }
+        if((document.getElementById('Pesce') as HTMLInputElement).checked==true){
+            this.allergeni+="Pesce "
+        }
+        if((document.getElementById('Molluschi') as HTMLInputElement).checked==true){
+            this.allergeni+="Molluschi "
+        }
+        if((document.getElementById('Soia') as HTMLInputElement).checked==true){
+            this.allergeni+="Soia "
+        }
+        if((document.getElementById('Uova/Derivati') as HTMLInputElement).checked==true){
+            this.allergeni+="Uova/Derivati "
+        }
+        if((document.getElementById('Verdura') as HTMLInputElement).checked==true){
+            this.allergeni+="Verdura "
+        }
+    }
     riceviFile(eventTarget: EventTarget) {
         if (eventTarget.files && eventTarget.files[0]) {
             var reader = new FileReader();
@@ -133,9 +161,8 @@ export class PiattiAdminComponent implements OnInit {
         this.fileToUpload = eventTarget.files.item(0);
     }
 
-    private saveToFileSystem(fileName: File) {
-        const blob = new Blob(["Please Save Me!"], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, fileName,);
+    private saveToFileSystem(fileName: string) {
+
     }
 /**
  * Metodo per file in cloud
