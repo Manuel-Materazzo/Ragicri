@@ -128,4 +128,12 @@ public class PiattoController {
         }
     }
 
+    @GetMapping(path = "/tipologie")
+    @ApiOperation("Ritorna un JSON contenente una lista con tutte le tipolgoie)")
+    public ResponseEntity<Object> getTipologie(){
+        TipologieDTO dto = piattoService.getTipologie();
+
+        return ResponseEntity.ok(dto);
+    }
+
 }

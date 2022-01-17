@@ -1,10 +1,7 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.PiattoDAO;
-import com.ragicriSushi.pw.DTO.AddPiattoDTO;
-import com.ragicriSushi.pw.DTO.NumeroDTO;
-import com.ragicriSushi.pw.DTO.PiattoDTO;
-import com.ragicriSushi.pw.DTO.UpdatePiattoDTO;
+import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -149,6 +146,20 @@ public class PiattoService {
         else {
             return null;
         }
+    }
+
+    public TipologieDTO getTipologie(){
+        List<PiattoDAO> dao = piattoRepository.getTipologie();
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < dao.size(); i++) {
+            list.add(dao.get(i).getTipologia());
+        }
+
+        TipologieDTO dto = new TipologieDTO();
+        dto.setTipologie(list);
+        
+        return dto;
     }
 
 }
