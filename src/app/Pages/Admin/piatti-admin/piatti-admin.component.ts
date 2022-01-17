@@ -115,7 +115,7 @@ export class PiattiAdminComponent implements OnInit {
         this.piatto.nome=(document.getElementById('addPiatto') as HTMLInputElement).value;
         this.piatto.prezzo=parseInt((document.getElementById('addPrezzo') as HTMLInputElement).value);
         this.piatto.numero=parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
-        this.controlloAllergeni();
+        //this.controlloAllergeni();
         this.piatto.allergeni=this.allergeni;
         console.log(this.allergeni);
         //this.piatto.img=;
@@ -125,6 +125,7 @@ export class PiattiAdminComponent implements OnInit {
         window.location.reload();
     }
 
+    /** Da controllare non va il checked
     controlloAllergeni(){
         if((document.getElementById('Glutine') as HTMLInputElement).checked==true){
             this.allergeni+="Glutine "
@@ -148,6 +149,8 @@ export class PiattiAdminComponent implements OnInit {
             this.allergeni+="Verdura "
         }
     }
+
+     */
     riceviFile(eventTarget: EventTarget) {
         if (eventTarget.files && eventTarget.files[0]) {
             var reader = new FileReader();
