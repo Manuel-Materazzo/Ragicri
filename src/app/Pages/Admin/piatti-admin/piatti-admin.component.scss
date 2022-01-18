@@ -94,3 +94,39 @@
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
+
+.elementoRiga {
+  margin-right: 5px;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.iconaAllergene{
+  width: 45px;
+  height: 45px;
+}
+
+.iconaAllergene:hover{
+  cursor: pointer;
+}
+
+.checkboxNone{
+  display: none;
+}
+
+@media only screen and (max-width: 770px) {
+  .imgPiatto{
+    height: 150px;
+  }
+
+  .iconaAllergene{
+    width: 30px;
+    height: 30px;
+  }
+}
+
+input[type="checkbox"]:checked + label img{
+  filter: grayscale(100%);
+}
+
+
