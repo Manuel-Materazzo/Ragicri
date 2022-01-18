@@ -108,6 +108,7 @@ import { MenuComponent } from './Pages/Menu/menu.component';
 import { OrdiniCamerieriComponent } from './Pages/OrdiniCamerieri/ordini-camerieri/ordini-camerieri.component';
 import { CucinaComponent } from './Pages/Cucina/cucina/cucina.component';
 import { PiattiAdminComponent } from './Pages/Admin/piatti-admin/piatti-admin.component';
+import { CarrelloComponent } from './Pages/Carrello/carrello/carrello.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -203,6 +204,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OrdiniCamerieriComponent,
     CucinaComponent,
     PiattiAdminComponent,
+    CarrelloComponent,
   ],
   imports: [
     BrowserModule,
