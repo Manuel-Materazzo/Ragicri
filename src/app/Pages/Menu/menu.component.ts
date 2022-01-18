@@ -13,17 +13,8 @@ export class MenuComponent implements OnInit {
     allergeniInvio: string = '';
     tipologiaInvio: string='';
     piattiDto: getPiattoDto = new getPiattoDto(this.tipologiaInvio, this.allergeniInvio);
-    tipologie = {
-        menuCompleto: true,
-        antipasti: false,
-        primiPiatti: false,
-        nigiri: false,
-        hosomaki: false,
-        temaki: false,
-        sashimi: false,
-        dessert: false,
-        bevande: false
-    };
+    tipologie;
+    tipologiePiatto;
 
     allergeni = {
         glutine: false,
@@ -44,6 +35,7 @@ export class MenuComponent implements OnInit {
                 this.listaPiatti = [...this.listaPiatti];
             });
         });
+        this.getTipologie();
     }
 
     listaPiatti: Piatto[] = [];
@@ -68,7 +60,6 @@ export class MenuComponent implements OnInit {
     }
 
     piattiFiltrati() {
-
         this.piattoService.getPiattiFiltrati(this.piattiDto).subscribe((response: any) => {
             this.listaPiatti = [];
             response.forEach(element => {
@@ -77,8 +68,11 @@ export class MenuComponent implements OnInit {
         });
     }
 
-    filtroAllergeni(allergene: string) {
+    test(){
+        console.log();
+    }
 
+    filtroAllergeni(allergene: string) {
         if (this.allergeniInvio.includes(allergene)) {
             let parts = this.allergeniInvio.split(' ');
 
@@ -109,5 +103,11 @@ export class MenuComponent implements OnInit {
           "tipologia": ""
         }
          */
+    }
+
+    getTipologie(){
+        this.piattoService.getTipologie().subscribe(data => {
+            this.tipologiePiatto = data.tipologie;
+        });
     }
 }
