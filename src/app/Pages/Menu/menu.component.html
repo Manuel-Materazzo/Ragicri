@@ -55,7 +55,7 @@
         <div class="riga inline">
             <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
                 <label ngbButtonLabel class="btn-primary bottone">
-                    <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('') ">Menù completo
+                    <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('')">Menù completo
                 </label>
             </div>
             <div *ngFor="let tipo of tipologiePiatto" class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
@@ -78,12 +78,15 @@
             <div class="col">
                 <div class="card-body">
                     <h4 class="card-title"><b>{{piatto.nome}}</b></h4>
-                    <h5 class="card-subtitle">
-                        Numero: {{piatto.numero}}</h5>
+                    <h5 class="card-subtitle">Numero: {{piatto.numero}}</h5>
                     <h6>Prezzo: {{piatto.prezzo}}</h6>
                     <p>Allergeni: {{piatto.allergeni}}</p>
 
-                    <button class="btn btn-secondary">Aggiungi al carrello</button>
+                    <button class="btn btn-secondary" style="margin-top: -6px;" (click)="aggiungiCarrello(piatto.numero, piatto.nome, piatto.prezzo)">
+                        Aggiungi al carrello</button> X
+                    <div style="width: 60px; display: inline-block;">
+                        <input id="quantita{{piatto.numero}}" value="1" min="1" step="1" type="number" class="mr-2 form-control" style="height: 34px;">
+                    </div>
                 </div>
             </div>
         </div>

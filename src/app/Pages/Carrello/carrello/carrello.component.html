@@ -1,3 +1,26 @@
-<p>
-  carrello works!
-</p>
+<h1 class="testo-centrato-titolo">Carrello</h1>
+
+<div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">Ordinazioni:</h5>
+
+    <table class="mb-0 table table-hover">
+      <thead class="intestazioneTabella">
+        <tr>
+          <th>Nome</th>
+          <th>Quantità</th>
+          <th>Prezzo totale</th>
+          <th>Numeretto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ord of piattiOrdinati">
+          <td *ngIf="ord.consegnato == false">{{ord.nome}}</td>
+          <td *ngIf="ord.consegnato == false">{{ord.numeretto}}</td>
+          <td *ngIf="ord.consegnato == false">{{ord.quantita}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

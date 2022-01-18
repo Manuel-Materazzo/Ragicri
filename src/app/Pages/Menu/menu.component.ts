@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
     piattiDto: getPiattoDto = new getPiattoDto(this.tipologiaInvio, this.allergeniInvio);
     tipologie;
     tipologiePiatto;
+    carrello;
 
     allergeni = {
         glutine: false,
@@ -36,6 +37,14 @@ export class MenuComponent implements OnInit {
             });
         });
         this.getTipologie();
+
+        if(sessionStorage.getItem("carrello") == null){
+            this.carrello = [];
+        }
+        else {
+            this.carrello = JSON.parse(sessionStorage.getItem("carrello"));
+            alert(this.carrello);
+        }
     }
 
     listaPiatti: Piatto[] = [];
@@ -109,5 +118,12 @@ export class MenuComponent implements OnInit {
         this.piattoService.getTipologie().subscribe(data => {
             this.tipologiePiatto = data.tipologie;
         });
+    }
+
+    aggiungiCarrello(numero: number, nome: string, prezzo: number){
+        let quant = Number((<HTMLInputElement>document.getElementById("quantita" + numero)).value);
+        this.carrello.push('{"numeretto": ' + numero + ', "quantita": ' +  quant + ', "nome": ' + nome + ', "prezzo": ' + prezzo * quant +'}');
+        sessionStorage.setItem("carrello", JSON.stringify(this.carrello));
+        alert(this.carrello);
     }
 }
