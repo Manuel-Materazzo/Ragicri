@@ -211,16 +211,16 @@ export class PiattiAdminComponent implements OnInit {
 
 
     riceviFile(eventTarget: EventTarget) {
-        if (eventTarget.files && eventTarget.files[0]) {
+        if ((<HTMLInputElement>eventTarget).files && (<HTMLInputElement>eventTarget).files[0]) {
             var reader = new FileReader();
 
             reader.onload = (event: ProgressEvent) => {
                 this.url = (<FileReader>event.target).result;
             }
 
-            reader.readAsDataURL(eventTarget.files[0]);
+            reader.readAsDataURL((<HTMLInputElement>eventTarget).files[0]);
         }
-        this.fileToUpload = eventTarget.files.item(0);
+        this.fileToUpload = (<HTMLInputElement>eventTarget).files.item(0);
     }
 
     private saveToFileSystem(fileName: string) {

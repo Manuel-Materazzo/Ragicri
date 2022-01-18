@@ -11,15 +11,14 @@ import { PiattoService } from 'src/app/Theme/piatto/piatto.service';
 })
 export class CarrelloComponent implements OnInit {
 
-  piattiOrdinati;
+  carrello;
 
   constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) {
-    this.piattiOrdinati = sessionStorage.getItem("carrello");
 
-    alert(this.piattiOrdinati);
   }
 
   ngOnInit() {
+    this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
   }
 
 }

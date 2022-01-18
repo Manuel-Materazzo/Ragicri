@@ -55,8 +55,4 @@ export class PiattoService {
         let piatto = '{ "numero": ' + numerettoPiatto + '}';
         return this.http.post(`${this.baseUrl}/delete`, JSON.parse(piatto));
     }
-
-    getTipologie(): Observable<any>{
-        return this.http.get((`${this.baseUrl}/tipologie`));
-    }
 }
