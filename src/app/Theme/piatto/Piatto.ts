@@ -51,3 +51,7 @@ export class AddPiattoDTO {
     constructor() {
     }
 }
+
+export class TipologieDTO {
+    tipologie:string[];
+}

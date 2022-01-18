@@ -52,14 +52,16 @@
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="addPiatto" class="mr-sm-2">Nome:</label>
-                            <input name="text" id="addPiatto" value="" type="text" class="form-control" required>
+                            <label hidden id="ControlloNome" class="mr-sm-2">Inserire nome</label>
+                            <input name="text" id="addPiatto" value="" type="text" class="form-control" >
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="addPrezzo" class="mr-sm-2">Prezzo:</label>
-                            <input name="text" id="addPrezzo" value="" type="number" class="form-control" required>
+                            <label hidden id="ControlloPrezzo" class="mr-sm-2">Inserire prezzo</label>
+                            <input name="text" id="addPrezzo" value="" type="number" class="form-control" >
                         </div>
                     </div>
                 </div>
@@ -68,42 +70,78 @@
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="addNumerettoPiatto" class="mr-sm-2">Numeretto:</label>
-                            <input name="text" id="addNumerettoPiatto" value="" type="number" class="form-control" required>
+                            <label hidden id="ControlloNumeretto" class="mr-sm-2">Inserire numeretto</label>
+                            <input name="text" id="addNumerettoPiatto" value="" type="number" class="form-control" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label  class="mr-sm-2">Allergeni:</label>
                             <form>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        glutine: <input  name="Glutine" type="checkbox" class="form-check-input"></label>
+                                <div class="form-row input">
+                                    <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Glutine">
+                                    <label for="Glutine">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                                    </label>
                                 </div>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        crostacei: <input name="Crostacei" type="checkbox" class="form-check-input"></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Crostacei">
+                                    <label for="Crostacei">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+                                    </label>
                                 </div>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        pesce: <input name="Pesce" type="checkbox" class="form-check-input"></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Pesce">
+                                    <label for="Pesce">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                                    </label>
                                 </div>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        molluschi: <input name="Molluschi" type="checkbox" class="form-check-input"></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox"  id="Molluschi">
+                                            <label for="Molluschi">
+                                                <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        uova/derivati: <input name="Uova/Derivati" type="checkbox" class="form-check-input"></label>
+                                <div class="form-row input">
+                                    <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Soia">
+                                    <label for="Soia">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
+                                    </label>
                                 </div>
-                                <div class="position-relative form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        sedano: <input name="Verdura" type="checkbox" class="form-check-input"></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Uova/Derivati">
+                                    <label for="Uova/Derivati">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                                    </label>
                                 </div>
-                            </form>
+                                    </div>
+                                        <div class="col-md-3">
+                                <div class="elementoRiga">
+                                    <input class="checkboxNone" type="checkbox"  id="Sedano">
+                                    <label for="Sedano">
+                                        <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                                    </label>
+                                </div>
+                                        </div>
+
                         </div>
+                            </form>
                     </div>
                 </div>
-
 
                 <div class="form-row input">
                     <div class="col-md-6">
@@ -113,24 +151,34 @@
                             <label class="mr-sm-2">Nome nuova immagine:</label>
                             <input type="text" id="addNomeFile">
                             <img *ngIf=url [src]="url" alt="Inserisci nuova immagine" class="mr-sm-2 card-img-top imgPiatto " >
+                            <label hidden id="ControlloImmagine" class="mr-sm-2">Inserire immagine o nome immagine</label>
                         </div>
                     </div>
                 </div>
-
+<!--
                 <div class="form-row">
                     <div class="col-md-6">
-                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group" >
                             <label for="addTipologia" class="mr-sm-2">Tipologia:</label>
-                            <input name="text" id="addTipologia" value="" type="text" class="form-control" required>
+
+                            <select id="addTipologia" name="addTipologia" id="cars" >
+                                <div *ngFor="let tipologie">
+                                <option value="{{tipologie}}">{{tipologie}}</option>
+                                </div>
+                            </select>
+
                         </div>
                     </div>
                 </div>
+                    -->
         </div>
+
     </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="c('Close click')">Chiudi</button>
             <button type="submit" class="btn btn-success" [disabled]="form.form.invalid" >Crea</button>
         </div>
+    </div>
     </form>
 </ng-template>
 
