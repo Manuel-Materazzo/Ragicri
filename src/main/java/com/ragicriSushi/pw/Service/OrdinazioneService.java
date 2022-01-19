@@ -23,26 +23,25 @@ public class OrdinazioneService {
     @Autowired
     private PiattoRepository piattoRepository;
 
-    public List<OrdinazioneDTO> getAll(){
+    public List<OrdinazioneDTO> getAll() {
         return conversioni.toDTO(ordinazioneRepository.findAll());
     }
 
-    public OrdinazioneDTO add(NewOrdinazioneDTO dto){
+    public OrdinazioneDTO add(NewOrdinazioneDTO dto) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(dto.getTavolo());
 
-        if(daoList.isEmpty() || daoList.get(daoList.size()-1).getPagato() == true){
+        if (daoList.isEmpty() || daoList.get(daoList.size() - 1).getPagato() == true) {
             OrdinazioneDAO dao = conversioni.toDAO(dto);
             ordinazioneRepository.save(dao);
 
             return conversioni.toDTO(dao);
-        }
-        else {
-            OrdinazioneDAO dao = daoList.get(daoList.size()-1);
+        } else {
+            OrdinazioneDAO dao = daoList.get(daoList.size() - 1);
             List<PiattoOrdinato> piattiOrdinati = dao.getPiattiOrdinati();
 
             for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
                 Optional<PiattoDAO> optionalDao = piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto());
-                if(!optionalDao.isPresent()){
+                if (!optionalDao.isPresent()) {
                     continue;
                 }
                 PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
@@ -60,67 +59,96 @@ public class OrdinazioneService {
         }
     }
 
-    public OrdinazioneDTO setPagato(int tavolo){
+    public OrdinazioneDTO setPagato(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
-        OrdinazioneDAO dao = daoList.get(daoList.size()-1);
+        OrdinazioneDAO dao = daoList.get(daoList.size() - 1);
 
-        if (dao.getPagato() == true){
+        if (dao.getPagato() == true) {
             return null;
-        }
-        else {
+        } else {
             dao.setPagato(true);
             ordinazioneRepository.save(dao);
             return conversioni.toDTO(dao);
         }
     }
 
-    public OrdinazioneDTO info(int tavolo){
+    public OrdinazioneDTO info(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
-        OrdinazioneDAO dao = daoList.get(daoList.size()-1);
+        OrdinazioneDAO dao = daoList.get(daoList.size() - 1);
 
-        if (dao.getPagato() == true){
+        if (dao.getPagato() == true) {
             return null;
-        }
-        else {
+        } else {
             return conversioni.toDTO(dao);
         }
     }
 
-    public boolean checkTavolo(int tavolo){
+    public OrdinazioneDTO infoOrd(int id) {
+        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
+
+        if (dao.isPresent()) {
+            return conversioni.toDTO(dao.get());
+        } else {
+            return null;
+        }
+    }
+
+    public boolean checkTavolo(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
 
-        if (daoList.isEmpty()){
+        if (daoList.isEmpty()) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
-    public List<OrdinazioneDTO> getNonPagato(){
+    public List<OrdinazioneDTO> getNonPagato() {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByPagato(false);
 
-        if (daoList.isEmpty()){
+        if (daoList.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return conversioni.toDTO(daoList);
         }
     }
 
-    public OrdinazioneDTO setConsegnato(int tavolo){
+    public OrdinazioneDTO setConsegnato(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
-        OrdinazioneDAO dao = daoList.get(daoList.size()-1);
+        OrdinazioneDAO dao = daoList.get(daoList.size() - 1);
 
-        if (dao.getPagato() == true){
+        if (dao.getPagato() == true) {
             return null;
-        }
-        else {
+        } else {
             for (int i = 0; i < dao.getPiattiOrdinati().size(); i++) {
                 dao.getPiattiOrdinati().get(i).setConsegnato(true);
             }
             ordinazioneRepository.save(dao);
             return conversioni.toDTO(dao);
+        }
+    }
+
+    public OrdinazioneDTO setConsegnatoId(int id) {
+        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
+
+        if (dao.isPresent()) {
+            for (int i = 0; i < dao.get().getPiattiOrdinati().size(); i++) {
+                dao.get().getPiattiOrdinati().get(i).setConsegnato(true);
+            }
+            ordinazioneRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
+        } else {
+            return null;
+        }
+    }
+
+    public List<OrdinazioneDTO> getAsportoDomicilio() {
+        List<OrdinazioneDAO> daoList = ordinazioneRepository.getAsportoDomicilio();
+
+        if (daoList == null) {
+            return null;
+        } else {
+            return conversioni.toDTO(daoList);
         }
     }
 

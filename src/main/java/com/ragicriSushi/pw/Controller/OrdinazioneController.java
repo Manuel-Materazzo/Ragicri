@@ -75,6 +75,19 @@ public class OrdinazioneController {
         }
     }
 
+    @GetMapping(path = "infoOrd/{id}")
+    @ApiOperation("Ritorna tutte le informazio su di un'ordinazione.")
+    public ResponseEntity<Object> infoOrd(@PathVariable int id){
+        OrdinazioneDTO dto = ordinazioneService.infoOrd(id);
+
+        if (dto == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
     @GetMapping(path = "nonPagato")
     @ApiOperation("Ritorna i tavoli che non hanno ancora pagato.")
     public ResponseEntity<Object> getNonPagato(){
@@ -98,6 +111,32 @@ public class OrdinazioneController {
         OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getTavolo());
 
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(path = "consegnatoId/{id}")
+    @ApiOperation("Importa l'attributo \"Consegato\" ai piatti dell'ordinazione passata.")
+    public ResponseEntity<Object> setConsegnatiId(@PathVariable int id){
+        OrdinazioneDTO dto = ordinazioneService.setConsegnatoId(id);
+
+        if(dto == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+    @GetMapping(path = "asportoDomicilio")
+    @ApiOperation("Ritorna i tavoli che non hanno ancora pagato.")
+    public ResponseEntity<Object> getAsportoDomicilio(){
+        List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilio();
+
+        if(dtoList == null){
+            return ResponseEntity.ok().body("{\"status\":\"Non ci sono ordinazioni.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dtoList);
+        }
     }
 
 }
