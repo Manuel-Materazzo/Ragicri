@@ -31,6 +31,10 @@ export class OrdinazioneService {
     return this.http.get((`${this.baseUrl}/info/${numeroTavolo}`));
   }
 
+  getInfoOrd(id: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/infoOrd/${id}`);
+  }
+
   aggiungiOrdinazione(ordinazione: any) :Observable<any>{
     return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione);
   }
@@ -38,5 +42,13 @@ export class OrdinazioneService {
   consegnato(tavolo: string): Observable<any>{
     let dto = "{\"tavolo\": " + tavolo + "}";
     return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto));    
+  }
+
+  consegnatoId(id: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/consegnatoId/${id}`);    
+  }
+
+  getAsportoDomicilio(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/asportoDomicilio`);
   }
 }

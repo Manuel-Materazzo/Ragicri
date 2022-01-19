@@ -19,6 +19,31 @@ export class CarrelloComponent implements OnInit {
 
   ngOnInit() {
     this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
+    console.log(this.carrello[0])
+  }
+
+  elimina() {
+
+  }
+
+  annulla(){
+    this.modalService.dismissAll();
+  }
+
+  conferma(){
+    this.modalService.dismissAll();
+    sessionStorage.removeItem("carrello");
+    let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "Domicilio"}';
+    console.log(json);
+    this.ordinazioneService.aggiungiOrdinazione(JSON.parse(json)).subscribe(data => {
+
+    });
+  }
+
+  pagamento(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
   }
 
 }
