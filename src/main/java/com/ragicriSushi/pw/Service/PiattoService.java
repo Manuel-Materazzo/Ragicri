@@ -5,11 +5,11 @@ import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -162,4 +162,28 @@ public class PiattoService {
         return dto;
     }
 
+    public String saveImage(MultipartFile multipartFile,String nomeFile) {
+        //controllare se il file è vuoto
+        if (multipartFile.isEmpty()) {
+          throw new IllegalStateException("Cannot upload empty file");
+      }
+        //controllare se il file è un'immagine
+       if (!Arrays.asList("image/png","image/bmp","image/gif","image/jpeg").contains(multipartFile.getContentType())) {
+            throw new IllegalStateException("FIle uploaded is not an image");
+        }
+
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("Content-Type", multipartFile.getContentType());
+        metadata.put("Content-Length", String.valueOf(multipartFile.getSize()));
+
+        String dirName = "C:\\immaginiRagicri";
+
+        try {
+            File actualFile = new File (dirName, nomeFile+"."+multipartFile.getOriginalFilename().split("\\.")[1]);
+            multipartFile.transferTo(actualFile);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to upload file", e);
+        }
+        return dirName+"\\"+nomeFile;
+    }
 }
