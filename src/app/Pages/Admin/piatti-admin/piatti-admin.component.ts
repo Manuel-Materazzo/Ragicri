@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {PiattoService} from '../../../Theme/piatto/piatto.service';
 import {Router} from '@angular/router';
-import {AddPiattoDTO, Piatto} from '../../../Theme/piatto/Piatto';
+import {AddPiattoDTO, Piatto, TipologieDTO} from '../../../Theme/piatto/Piatto';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+
+
 @Component({
     selector: 'app-piatti-admin',
     templateUrl: './piatti-admin.component.html',
@@ -19,10 +22,13 @@ export class PiattiAdminComponent implements OnInit {
     fileToUpload: File = null;
     url: string | ArrayBuffer;
     allergeni:string="";
+    tipologie:TipologieDTO[];
+    resultControllo: boolean;
     constructor(private piattoService: PiattoService,
                 private router: Router, private modalService: NgbModal) {
 
     }
+
 
     ngOnInit() {
         this.piattoService.getPiatti().subscribe((response: any) => {
@@ -31,7 +37,10 @@ export class PiattiAdminComponent implements OnInit {
                 this.listiPiattini.push(element);
                 this.listiPiattini = [...this.listiPiattini];
             });
-
+        });
+        this.piattoService.getTipologie().subscribe((response: any)=>
+        {
+            this.tipologie=response;
         });
     }
 
@@ -110,29 +119,78 @@ export class PiattiAdminComponent implements OnInit {
     }
 
     createPiatto() {
-        console.log(this.piatto.nome)
+        //aggoiungere controllo dei dati
+        if(this.controlloInput())
+        {
+            return
+        }
         this.saveToFileSystem((document.getElementById('addNomeFile') as HTMLInputElement).value);
         this.piatto.nome=(document.getElementById('addPiatto') as HTMLInputElement).value;
         this.piatto.prezzo=parseInt((document.getElementById('addPrezzo') as HTMLInputElement).value);
         this.piatto.numero=parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
-        //this.controlloAllergeni();
+        this.controlloAllergeni();
         this.piatto.allergeni=this.allergeni;
-        console.log(this.allergeni);
-        //this.piatto.img=;
-        this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
-        this.piattoService.addPiatto(this.piatto).subscribe();
+        this.piatto.img="";
+        //this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
+        this.piatto.tipologia="";
+        this.allergeni="";
+        this.piattoService.addPiatto(this.piatto).subscribe((response: any) => { });
+
         this.modalService.dismissAll();
-        window.location.reload();
+        //window.location.reload();
     }
 
-    /** Da controllare non va il checked
+     controlloInput() {
+         this.resultControllo=false;
+         if((document.getElementById('addPiatto') as HTMLInputElement).value=="") {
+             document.getElementById('ControlloNome').style.color = '#FF0000';
+             document.getElementById('ControlloNome').removeAttribute('hidden');
+             this.resultControllo=true;
+         }
+         else
+         {
+             document.getElementById('ControlloNome').setAttribute('hidden','');
+         }
+         if((document.getElementById('addPrezzo') as HTMLInputElement).value=="") {
+             document.getElementById('ControlloPrezzo').style.color = '#FF0000';
+             document.getElementById('ControlloPrezzo').removeAttribute('hidden');
+             this.resultControllo=true;
+         }
+         else
+         {
+             document.getElementById('ControlloPrezzo').setAttribute('hidden','');
+         }
+         if((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value=="") {
+             document.getElementById('ControlloNumeretto').style.color = '#FF0000';
+             document.getElementById('ControlloNumeretto').removeAttribute('hidden');
+             this.resultControllo=true;
+         }
+         else
+         {
+             document.getElementById('ControlloNumeretto').setAttribute('hidden','');
+         }
+         if((document.getElementById('addFile') as HTMLInputElement).value==""||
+             (document.getElementById('addNomeFile') as HTMLInputElement).value=="") {
+             document.getElementById('ControlloImmagine').style.color = '#FF0000';
+             document.getElementById('ControlloImmagine').removeAttribute('hidden');
+             this.resultControllo=true;
+         }
+         else
+         {
+             document.getElementById('ControlloImmagine').setAttribute('hidden','');
+         }
+         return this.resultControllo;
+    }
+//SIstemare
     controlloAllergeni(){
+
         if((document.getElementById('Glutine') as HTMLInputElement).checked==true){
             this.allergeni+="Glutine "
         }
         if((document.getElementById('Crostacei') as HTMLInputElement).checked==true){
             this.allergeni+="Crostacei "
         }
+
         if((document.getElementById('Pesce') as HTMLInputElement).checked==true){
             this.allergeni+="Pesce "
         }
@@ -145,12 +203,13 @@ export class PiattiAdminComponent implements OnInit {
         if((document.getElementById('Uova/Derivati') as HTMLInputElement).checked==true){
             this.allergeni+="Uova/Derivati "
         }
-        if((document.getElementById('Verdura') as HTMLInputElement).checked==true){
-            this.allergeni+="Verdura "
+        if((document.getElementById('Sedano') as HTMLInputElement).checked==true){
+            this.allergeni+="Sedano "
         }
+
     }
 
-     */
+
     riceviFile(eventTarget: EventTarget) {
         if ((<HTMLInputElement>eventTarget).files && (<HTMLInputElement>eventTarget).files[0]) {
             var reader = new FileReader();

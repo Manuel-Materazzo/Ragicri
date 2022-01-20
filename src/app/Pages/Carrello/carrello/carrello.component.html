@@ -1,0 +1,91 @@
+<h1 class="testo-centrato-titolo">Carrello</h1>
+
+<div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">Ordinazioni:</h5>
+
+    <table class="mb-0 table table-hover">
+      <thead class="intestazioneTabella">
+        <tr>
+          <th>Nome</th>
+          <th>Quantità</th>
+          <th>Prezzo totale</th>
+          <th>Numeretto</th>
+          <th style="width: 120px;">Operazioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let piatto of carrello">
+          <td>{{piatto.nome}}</td>
+          <td>{{piatto.quantita}}</td>
+          <td>{{piatto.prezzo}}</td>
+          <td>{{piatto.numeretto}}</td>
+          <td class="text-center">
+            <div>
+              <button class="btn btn-danger" (click)="elimina()">
+                <i class="pe-7s-trash"> </i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      <br />
+
+      <button class="btn btn-warning" (click)="pagamento(pagamentoCard)">Paga</button>
+
+    </table>
+
+  </div>
+</div>
+
+<div class="card-body">
+  <ng-template #pagamentoCard let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Pagamento</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="position-relative form-group"><label for="exampleEmail11">Nome</label><input name="email"
+                id="exampleEmail11" placeholder="" type="email" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="position-relative form-group"><label for="examplePassword11">Cognome</label><input
+                name="password" id="examplePassword11" placeholder="" type="password"
+                class="form-control"></div>
+          </div>
+        </div>
+        <div class="position-relative form-group"><label for="exampleAddress">Indirizzo di fatturazione</label><input name="address"
+            id="exampleAddress" placeholder="" type="text" class="form-control">
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="position-relative form-group"><label for="exampleCity">Carta</label><input name="city"
+                id="exampleCity" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group"><label for="exampleState">Scadenza</label><input name="state"
+                id="exampleState" type="date" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="position-relative form-group"><label for="exampleZip">CVV</label><input name="zip"
+                id="exampleZip" type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="annulla()">Annulla</button>
+      <button type="button" class="btn btn-success" (click)="conferma()">Conferma</button>
+    </div>
+  </ng-template>
+</div>

@@ -40,6 +40,9 @@ export class PiattoService {
         return this.http.post(`${this.baseUrl}/get`, getPiattoDto);
     }
 
+    getTipologie():Observable<any>{
+        return this.http.get(`${this.baseUrl}/tipologie`);
+    }
     updatePiatto(Piatto: AddPiattoDTO): Observable<any> {
         return this.http.post(`${this.baseUrl}/update`, Piatto);
     }
@@ -51,9 +54,5 @@ export class PiattoService {
     deletePiatto(numerettoPiatto: any): Observable<any> {
         let piatto = '{ "numero": ' + numerettoPiatto + '}';
         return this.http.post(`${this.baseUrl}/delete`, JSON.parse(piatto));
-    }
-
-    getTipologie(): Observable<any>{
-        return this.http.get((`${this.baseUrl}/tipologie`));
     }
 }
