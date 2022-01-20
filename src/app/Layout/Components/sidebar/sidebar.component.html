@@ -48,6 +48,20 @@
                                 </ng-template>
                             </ngb-panel>
 
+                            <ngb-panel id="carrello">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-users"></i>
+                                        <div class="vsm-item">
+                                            <div class="vsm-item"><a routerLinkActive="active-item"
+                                                routerLink="/carrello" [routerLinkActiveOptions]="{exact: true}"
+                                                class="vsm-link"><span class="vsm-title">Carrello</span></a>
+                                        </div>
+                                        </div>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+
                             <ngb-panel id="camerieri">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
@@ -95,6 +109,7 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+                            
                             <!--Pagine esempio elementi -->
                             <ngb-panel id="pagesMenu">
                                 <ng-template ngbPanelHeader>

@@ -16,7 +16,9 @@ export class CucinaComponent implements OnInit {
   ordinazione;
   piattiOrdinati;
   ordinazioni;
+  ordinazioniAsporto;
   tavolo;
+  ordinazioneId;
 
   constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) {
 
@@ -25,7 +27,7 @@ export class CucinaComponent implements OnInit {
   infoOrdini() {
     this.ordinazioneService.getNonPagato().subscribe(data => {
       if (data.Status == 'Tutti i tavoli hanno già pagato.') {
-        //TODO gestione errore
+        //niente
       }
       else {
         let cont = 0;
@@ -47,20 +49,58 @@ export class CucinaComponent implements OnInit {
         this.ordinazioni = data;
       }
     })
+
+    this.ordinazioneService.getAsportoDomicilio().subscribe(data => {
+      if (data.Status == 'Non ci sono ordinazioni.') {
+        //niente
+      }
+      else {
+        let cont = 0;
+        for (let i = 0; i < data.length; i++) {
+          for(let y = 0; y < data[i].piattiOrdinati.length; y++){
+            if(data[i].piattiOrdinati[y].consegnato == true){
+              cont++;
+            }
+          }
+          if(cont == data[i].piattiOrdinati.length){
+            data[i].preparato = "Sì";
+          }
+          else {
+            data[i].preparato = "No";
+          }
+          cont = 0;
+        }
+
+        this.ordinazioniAsporto = data;
+      }
+    });
   }
 
   infoTavolo(n: number) {
     this.ordinazioneService.getInfoTavolo(n).subscribe(data => {
       if (data.Status == 'Tavolo libero.' || data.Status == 'Tavolo non trovato.') {
-        //TODO gestire l'errore
+        //niente
       } else {
+        document.getElementById('bottoneProntoAsporto').setAttribute('hidden', '');
         this.piattiOrdinati = data.piattiOrdinati;
         document.getElementById('tavoloOrdinazione').innerHTML = "Ordinazione del tavolo " + data.tavolo + ":";
         document.getElementById('bottonePronto').removeAttribute('hidden');
         this.tavolo = data.tavolo;
       }
-    }, error => {
-      //TODO boh, da gestire o togliere, idk
+    });
+  }
+
+  infoOrdinazione(id: number){
+    this.ordinazioneService.getInfoOrd(id).subscribe(data => {
+      if (data.Status == 'Ordinazione non trovata.') {
+        //niente
+      } else {
+        document.getElementById('bottonePronto').setAttribute('hidden', '');
+        this.piattiOrdinati = data.piattiOrdinati;
+        document.getElementById('tavoloOrdinazione').innerHTML = "Ordinazione " + data.tipologia + " " + data.idOrdinazione + ":";
+        document.getElementById('bottoneProntoAsporto').removeAttribute('hidden');
+        this.ordinazioneId = data.idOrdinazione;
+      }
     });
   }
 
@@ -70,10 +110,18 @@ export class CucinaComponent implements OnInit {
     });
   }
 
+  consegnatoAsporto(){
+    this.ordinazioneService.consegnatoId(this.ordinazioneId).subscribe(data => {
+      this.infoOrdini();
+    });
+  }
+
   ngOnInit() {
     this.infoOrdini();
     document.getElementById('bottonePronto').setAttribute('hidden', '');
+    document.getElementById('bottoneProntoAsporto').setAttribute('hidden', '');
     this.tavolo = 0;
+    this.ordinazioneId = 0;
   }
 
 }
