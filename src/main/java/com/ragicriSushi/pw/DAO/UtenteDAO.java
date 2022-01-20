@@ -26,6 +26,9 @@ public class UtenteDAO {
     private String ruolo;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)

@@ -15,6 +15,8 @@ public class UtenteDTO {
 
     private String ruolo;
 
+    private String email;
+
     private String username;
 
     private String password;

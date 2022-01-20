@@ -13,6 +13,8 @@ public class AddUtenteDTO {
 
     private String ruolo;
 
+    private String email;
+
     private String username;
 
     private String password;

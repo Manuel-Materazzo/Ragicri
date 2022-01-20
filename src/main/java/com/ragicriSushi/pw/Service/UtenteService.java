@@ -69,6 +69,7 @@ public class UtenteService {
         UtenteDAO dao = new UtenteDAO();
         dao.setNome(dto.getNome());
         dao.setRuolo(dto.getRuolo());
+        dao.setEmail(dto.getEmail());
         dao.setUsername(dto.getUsername());
         dao.setPassword(dto.getPassword());
         dao.setIndirizzo(daoIndi);
@@ -82,7 +83,7 @@ public class UtenteService {
         if(dao.isPresent()){
             dao.get().setNome(dto.getNome());
             dao.get().setRuolo(dto.getRuolo());
-            dao.get().setNome(dto.getNome());
+            dao.get().setEmail(dto.getEmail());
             dao.get().setUsername(dto.getUsername());
             dao.get().setPassword(dto.getPassword());
 

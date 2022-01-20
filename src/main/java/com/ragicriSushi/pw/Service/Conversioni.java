@@ -118,6 +118,7 @@ public class Conversioni {
         dto.setId(dao.getIdUtente());
         dto.setNome(dao.getNome());
         dto.setRuolo(dao.getRuolo());
+        dto.setEmail(dao.getEmail());
         dto.setUsername(dao.getUsername());
         dto.setPassword((dao.getPassword()));
         dto.setIndirizzoDTO(fromDaoToDto(dao.getIndirizzo()));
@@ -149,6 +150,7 @@ public class Conversioni {
 
         dao.setNome(dto.getNome());
         dao.setRuolo(dao.getRuolo());
+        dao.setEmail(dao.getEmail());
         dao.setUsername(dao.getUsername());
         dao.setPassword(dao.getPassword());
 
