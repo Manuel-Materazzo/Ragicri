@@ -110,4 +110,6 @@ export class MenuComponent implements OnInit {
             this.tipologiePiatto = data.tipologie;
         });
     }
+
+
 }

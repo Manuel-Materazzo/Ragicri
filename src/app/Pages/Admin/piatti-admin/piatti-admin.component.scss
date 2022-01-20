@@ -104,6 +104,7 @@
 .iconaAllergene{
   width: 45px;
   height: 45px;
+  filter: grayscale(100%);
 }
 
 .iconaAllergene:hover{
@@ -122,11 +123,12 @@
   .iconaAllergene{
     width: 30px;
     height: 30px;
+    filter: grayscale(100%);
   }
 }
 
 input[type="checkbox"]:checked + label img{
-  filter: grayscale(100%);
+  filter: grayscale(0%);
 }
 
 
