@@ -1,40 +1,46 @@
 <div class="h-100 bg-premium-dark">
   <div class="d-flex h-100 justify-content-center align-items-center">
     <div class="mx-auto app-login-box col-md-8">
-      <div class="app-logo-inverse mx-auto mb-3"></div>
+      <div class="logo-src" style="margin: auto "></div>
       <div class="modal-dialog w-100">
         <div class="modal-content">
           <div class="modal-body">
             <h5 class="modal-title">
               <h4 class="mt-2">
-                <div>Welcome,</div>
-                <span>It only takes a <span class="text-success">few seconds</span> to create your account</span></h4>
+                <div>Benvenuto!,</div>
+                <span>Registrati in <span class="text-success">pochi secondi</span> e crea il tuo account!</span></h4>
             </h5>
             <div class="divider"></div>
             <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
                  class="form-group">
-              <div><input id="exampleInput1" type="email" placeholder="Enter email..." required="required"
+                 <div id="exampleInputGroup12" role="group" class="form-group">
+
+              <div><input id="textBoxUserNome" type="text" placeholder="Inserisci il tuo nome e cognome ..." required="required"
+                              aria-required="true" class="form-control"></div>
+              </div>
+      
+              <div><input id="textBoxEmail" type="email" placeholder="Inserisci la mail ..." required="required"
                           aria-required="true" class="form-control"
                           aria-describedby="exampleInputGroup1__BV_description_">
-                <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">We'll never
-                  share your email with anyone else.
+                <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">Non condivideremo la tua mail
+                   con nessuno.
                 </small>
               </div>
             </div>
             <div id="exampleInputGroup12" role="group" class="form-group">
-              <div><input id="exampleInput12" type="text" placeholder="Enter username..." required="required"
+              <div><input id="textBoxUsername" type="text" placeholder="Inserisci l'username..." required="required"
                           aria-required="true" class="form-control"></div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="exampleInput2" type="password" placeholder="Enter password..." required="required"
+                  <div><input id="textBoxPassword" type="password" placeholder="Inserisci la password..." required="required"
                               aria-required="true" class="form-control"></div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="exampleInputGroup3" role="group" class="form-group">
-                  <div><input id="exampleInput3" type="password" placeholder="Repeat password..." required="required"
+                  <div><input id="textBoxRipetiPass" type="password" placeholder="Ripeti la password..." required="required"
                               aria-required="true" class="form-control"></div>
                 </div>
               </div>
@@ -47,20 +53,19 @@
             </label></div>
             <div class="divider"></div>
             <h6 class="mb-0">
-              Already have an account?
-              <a [routerLink]="" class="text-primary">Sign in</a>
+              Hai già un altro account?
+              <a [routerLink]="" class="text-primary">Accedi</a>
               |
-              <a [routerLink]="" class="text-primary">Recover
-                Password</a></h6></div>
+              <a [routerLink]="" class="text-primary">Recupera password</a></h6></div>
           <div class="modal-footer d-block text-center">
             <button  type="button"
-                    class="btn btn-wide btn-pill btn-shadow btn-hover-shine btn-secondary btn-lg">Create Account
+                    class="btn btn-wide btn-pill btn-shadow btn-hover-shine btn-secondary btn-lg">Crea account
             </button>
           </div>
         </div>
       </div>
       <div class="text-center text-white opacity-8 mt-3">
-        Copyright © ArchitectUI 2019
+        Copyright © Ragicri 2021
       </div>
     </div>
   </div>
