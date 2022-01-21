@@ -1,12 +1,15 @@
 package com.ragicriSushi.pw.Service;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat;
 import com.ragicriSushi.pw.DAO.*;
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +21,8 @@ public class Conversioni {
     PiattoRepository piattoRepository;
     @Autowired
     OrdinazioneRepository ordinazioneRepository;
+    @Autowired
+    IndirizzoRepository indirizzoRepository;
 
     public <T, S> T toDTO(S dao) {
         if (dao instanceof PiattoDAO) {
@@ -41,6 +46,8 @@ public class Conversioni {
             return (T) fromDtoToDao((IndirizzoDTO) dto);
         } else if (dto instanceof NewOrdinazioneDTO) {
             return (T) fromDtoToDao((NewOrdinazioneDTO) dto);
+        } else if (dto instanceof NewOrdinazioneIndirizzoDTO) {
+            return (T) fromDtoToDao((NewOrdinazioneIndirizzoDTO) dto);
         }
         return null;
     }
@@ -70,6 +77,8 @@ public class Conversioni {
                 daoList.add((T) fromDtoToDao((UtenteDTO) dto));
             } else if(dto instanceof NewOrdinazioneDTO) {
                 daoList.add((T) fromDtoToDao((NewOrdinazioneDTO) dto));
+            } else if(dto instanceof NewOrdinazioneIndirizzoDTO) {
+                daoList.add((T) fromDtoToDao((NewOrdinazioneIndirizzoDTO) dto));
             }
         }
         return daoList;
@@ -95,6 +104,19 @@ public class Conversioni {
         dto.setTavolo(dao.getTavolo());
         dto.setPersone(dao.getPersone());
         dto.setPagato(dao.getPagato());
+
+        if (dao.getOrarioConsegna() == null){
+            dto.setOrarioConsegna(null);
+        }
+        else {
+            dto.setOrarioConsegna(dao.getOrarioConsegna().toString());
+        }
+        if (dao.getIndirizzo() == null){
+            dto.setIdIndirizzo(0);
+        }
+        else {
+            dto.setIdIndirizzo(dao.getIndirizzo().getIdIndirizzo());
+        }
 
         List<PiattoOrdinatoDTO> listaPiattiOrdinati = new ArrayList<>();
         for (int i = 0; i < dao.getPiattiOrdinati().size(); i++) {
@@ -172,6 +194,37 @@ public class Conversioni {
         dao.setTipologia(dto.getTipologia());
         dao.setPagato(dto.getPagato());
         dao.setPersone(dto.getPersone());
+        dao.setIdOrdinazione(0);
+        dao.setOrarioConsegna(null);
+
+        List<PiattoOrdinato> piattiOrdinati = new ArrayList<>();
+        for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
+            PiattoOrdinato piattoOrdinato = new PiattoOrdinato();
+            piattoOrdinato.setOrdinazione(dao);
+            piattoOrdinato.setPiatto(piattoRepository.findPiattoByNumero(dto.getPiattiOrdinati().get(i).getNumeretto()).get());
+            piattoOrdinato.setQuantita(dto.getPiattiOrdinati().get(i).getQuantita());
+            piattoOrdinato.setConsegnato(false);
+            piattiOrdinati.add(piattoOrdinato);
+        }
+        dao.setPiattiOrdinati(piattiOrdinati);
+
+        return dao;
+    }
+
+    public OrdinazioneDAO fromDtoToDao(NewOrdinazioneIndirizzoDTO dto){
+        Optional<IndirizzoDAO> indirizzoDao = indirizzoRepository.findById(dto.getIdIndirizzo());
+
+        if(!indirizzoDao.isPresent()){
+            return null;
+        }
+
+        OrdinazioneDAO dao = new OrdinazioneDAO();
+        dao.setTavolo(dto.getTavolo());
+        dao.setTipologia(dto.getTipologia());
+        dao.setPagato(dto.getPagato());
+        dao.setPersone(dto.getPersone());
+        dao.setIndirizzo(indirizzoDao.get());
+        dao.setOrarioConsegna(LocalTime.parse(dto.getOrarioConsegna()));
 
         List<PiattoOrdinato> piattiOrdinati = new ArrayList<>();
         for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {

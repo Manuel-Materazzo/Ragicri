@@ -4,6 +4,7 @@ import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
@@ -57,6 +58,14 @@ public class OrdinazioneService {
             ordinazioneRepository.save(dao);
             return conversioni.toDTO(dao);
         }
+    }
+
+    public OrdinazioneDTO addConIndirizzo(NewOrdinazioneIndirizzoDTO dto){
+        OrdinazioneDAO dao = conversioni.toDAO(dto);
+
+        ordinazioneRepository.save(dao);
+
+        return conversioni.toDTO(dao);
     }
 
     public OrdinazioneDTO setPagato(int tavolo) {

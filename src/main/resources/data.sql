@@ -97,3 +97,7 @@ INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quant
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 9, 2, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 17, 2, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 24, 3, false);
+
+-- 3
+INSERT INTO ordinazione (tipologia, tavolo, persone, pagato, orario_consegna, indirizzo) VALUES ('Domicilio', 0, 4, true, '19:30', 1);
+INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (3, 2, 2, false);

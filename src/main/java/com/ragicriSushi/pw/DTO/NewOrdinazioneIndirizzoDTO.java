@@ -1,19 +1,18 @@
 package com.ragicriSushi.pw.DTO;
 
+
+import com.ragicriSushi.pw.DAO.IndirizzoDAO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrdinazioneDTO {
-
-    private int idOrdinazione;
-
-    private String tipologia;
+public class NewOrdinazioneIndirizzoDTO {
 
     private boolean pagato;
 
@@ -21,15 +20,13 @@ public class OrdinazioneDTO {
 
     private int persone;
 
+    private String tipologia;
+
     private String OrarioConsegna;
 
+    private List<NewPiattoOrdinatoDTO> piattiOrdinati;
+
     private int idIndirizzo;
-
-    private List<PiattoOrdinatoDTO> piattiOrdinati;
-
-    public void setPagato(boolean a){
-        this.pagato = a;
-    }
 
     public boolean getPagato(){
         return this.pagato;

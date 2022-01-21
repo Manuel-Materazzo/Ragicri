@@ -1,10 +1,7 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
-import com.ragicriSushi.pw.DTO.AddPiattiOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.TavoloDTO;
+import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,18 @@ public class OrdinazioneController {
     @ApiOperation("Aggiunge un'ordinazione")
     public ResponseEntity<Object> add(@RequestBody NewOrdinazioneDTO dto){
         return ResponseEntity.ok(ordinazioneService.add(dto));
+    }
+
+    @PostMapping(path = "addOrdinazioneIndirizzo")
+    @ApiOperation("Aggiunge un'ordinazione da Asporto/Domicilio (richiede l'id dell'indirizzo)")
+    public ResponseEntity<Object> addConIndirizzo(@RequestBody NewOrdinazioneIndirizzoDTO dto){
+        OrdinazioneDTO result = ordinazioneService.addConIndirizzo(dto);
+        if (result == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Indirizzo non trovato.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
     }
 
     @GetMapping(path = "pagato/{tavolo}")

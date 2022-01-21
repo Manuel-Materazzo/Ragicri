@@ -34,4 +34,7 @@ public class IndirizzoDAO {
 
     @OneToOne(mappedBy = "Indirizzo")
     private UtenteDAO utenteDAO;
+
+    @OneToOne(mappedBy = "indirizzo")
+    private OrdinazioneDAO ordinazione;
 }
