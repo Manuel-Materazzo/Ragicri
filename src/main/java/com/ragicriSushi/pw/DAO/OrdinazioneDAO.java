@@ -37,8 +37,10 @@ public class OrdinazioneDAO {
     @Column
     private LocalTime orarioConsegna;
 
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "indirizzo", referencedColumnName = "idIndirizzo", nullable = true)
+//    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+//    private IndirizzoDAO indirizzo;
+    @ManyToOne
+    @JoinColumn(name="indirizzo", nullable = true)
     private IndirizzoDAO indirizzo;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "ordinazione")
