@@ -1,6 +1,13 @@
 <h1 class="testo-centrato-titolo">Carrello</h1>
 
-<div class="main-card mb-3 card">
+<div class="main-card mb-3 card" id="carrelloVuoto">
+  <div class="card-body">
+    <h5 class="card-title">Il carrello è vuoto.</h5>
+    <p>Aggiungi dei piatti dalla sezione "Menù" e poi torna qui!</p>
+  </div>
+</div>
+
+<div class="main-card mb-3 card" id="contenutoPrincipale">
   <div class="card-body">
     <h5 class="card-title">Ordinazioni:</h5>
 
@@ -22,7 +29,7 @@
           <td>{{piatto.numeretto}}</td>
           <td class="text-center">
             <div>
-              <button class="btn btn-danger" (click)="elimina()">
+              <button class="btn btn-danger" (click)="elimina(piatto.numeretto)">
                 <i class="pe-7s-trash"> </i>
               </button>
             </div>
@@ -30,14 +37,32 @@
         </tr>
       </tbody>
 
-      <br />
-
-      <button class="btn btn-warning" (click)="pagamento(pagamentoCard)">Paga</button>
-
     </table>
+
+    <hr />
+
+    <h5 class="card-title">Informazioni:</h5>
+
+    <div class="divInfo">
+      <label for="exampleSelect">Modalità:</label>
+      <select name="select" id="modalita" class="form-control inputInfo">
+        <option>Domicilio</option>
+        <option>Asporto</option>
+      </select>
+    </div>
+
+    <div class="divInfo">
+      <label for="orario">Orario:</label>
+      <input name="email" id="orario" placeholder="00:00" type="time" class="form-control inputInfo" step="1800">
+    </div>
+
+    <br> <br>
+
+    <button class="btn btn-warning" style="display: block;" (click)="pagamento(pagamentoCard, errore)">Paga</button>
 
   </div>
 </div>
+
 
 <div class="card-body">
   <ng-template #pagamentoCard let-c="close" let-d="dismiss">
@@ -57,12 +82,11 @@
           </div>
           <div class="col-md-6">
             <div class="position-relative form-group"><label for="examplePassword11">Cognome</label><input
-                name="password" id="examplePassword11" placeholder="" type="password"
-                class="form-control"></div>
+                name="password" id="examplePassword11" placeholder="" type="password" class="form-control"></div>
           </div>
         </div>
-        <div class="position-relative form-group"><label for="exampleAddress">Indirizzo di fatturazione</label><input name="address"
-            id="exampleAddress" placeholder="" type="text" class="form-control">
+        <div class="position-relative form-group"><label for="exampleAddress">Indirizzo di fatturazione</label><input
+            name="address" id="exampleAddress" placeholder="" type="text" class="form-control">
         </div>
         <div class="form-row">
           <div class="col-md-6">
@@ -86,6 +110,24 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" (click)="annulla()">Annulla</button>
       <button type="button" class="btn btn-success" (click)="conferma()">Conferma</button>
+    </div>
+  </ng-template>
+</div>
+
+
+<div class="card-body" id="modalErrore">
+  <ng-template #errore let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Errore</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Inserisci tutti i campi richiesti.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="annulla()">Chiudi</button>
     </div>
   </ng-template>
 </div>

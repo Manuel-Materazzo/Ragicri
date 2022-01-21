@@ -18,13 +18,40 @@ export class CarrelloComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
-    console.log(this.carrello[0])
+    if (sessionStorage.getItem("carrello") == null){
+      document.getElementById("contenutoPrincipale").setAttribute('hidden', '');
+    }
+    else {
+      this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
+      document.getElementById("carrelloVuoto").setAttribute('hidden', '');
+    }
   }
 
-  elimina() {
+  elimina(numeretto: number) {
 
+    for (let i = 0; i < this.carrello.length; i++) {
+      if (this.carrello[i].numeretto == numeretto){
+        this.carrello.splice(i, 1);
+
+        let json = '{"carrello": ' + JSON.stringify(this.carrello) + '}';
+        sessionStorage.setItem("carrello", json);
+      }
+    }
   }
+
+  removeEmptyOrNull = (obj) => { 
+
+    Object.keys(obj).forEach(k => 
+
+      (obj[k] && typeof obj[k] === 'object') && this.removeEmptyOrNull(obj[k]) || 
+
+      (!obj[k] && obj[k] !== undefined) && delete obj[k] 
+
+    ); 
+
+    return obj; 
+
+  };
 
   annulla(){
     this.modalService.dismissAll();
@@ -33,17 +60,29 @@ export class CarrelloComponent implements OnInit {
   conferma(){
     this.modalService.dismissAll();
     sessionStorage.removeItem("carrello");
-    let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "Domicilio"}';
+    let tipologia = (<HTMLInputElement>document.getElementById("modalita")).value;
+    let orario = String((<HTMLInputElement>document.getElementById("orario")).value);
+    let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
+    '"idIndirizzo": 1, "orarioConsegna": "' + orario + '"}';
     console.log(json);
-    this.ordinazioneService.aggiungiOrdinazione(JSON.parse(json)).subscribe(data => {
-
+    this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data => {
+      //window.location.reload();
     });
   }
 
-  pagamento(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
+  pagamento(contentTrue, contentFalse) {
+    if((<HTMLInputElement>document.getElementById("orario")).value == null || (<HTMLInputElement>document.getElementById("orario")).value == undefined
+    || (<HTMLInputElement>document.getElementById("orario")).value == ""){
+      console.log("entrato");
+      this.modalService.open(contentFalse, {
+        size: 'sm'
+      });
+    }
+    else {
+      this.modalService.open(contentTrue, {
+        size: 'lg'
+      });
+    }
   }
 
 }

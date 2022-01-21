@@ -315,16 +315,16 @@ export class PiattiAdminComponent implements OnInit {
     }
 
     riceviFile(eventTarget: EventTarget) {
-        if (eventTarget.files && eventTarget.files[0]) {
+        if ((<HTMLInputElement>eventTarget).files && (<HTMLInputElement>eventTarget).files[0]) {
             var reader = new FileReader();
 
             reader.onload = (event: ProgressEvent) => {
                 this.url = (<FileReader> event.target).result;
             };
 
-            reader.readAsDataURL(eventTarget.files[0]);
+            reader.readAsDataURL((<HTMLInputElement>eventTarget).files[0]);
         }
-        this.immaginePiatto = eventTarget.files[0];
+        this.immaginePiatto = (<HTMLInputElement>eventTarget).files[0];
     }
 
     ordinaLista() {
