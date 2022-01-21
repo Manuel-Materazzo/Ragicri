@@ -13,7 +13,6 @@ export class OrdinazioneService {
 
   private baseUrl= "http://localhost:8080/ragicri/ordinazione";
 
-
   getOrdinazioni(): Observable<any[]>{
     return this.http.get<Ordinazione[]>(`${this.baseUrl}`).pipe(map((res: any) => {
       if (res) {
