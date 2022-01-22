@@ -51,7 +51,17 @@ export class OrdinazioneService {
     return this.http.get(`${this.baseUrl}/asportoDomicilio`);
   }
 
+  getAsportoDomicilioNonConsegnato(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/asportoDomicilioNonConsegnato`);
+  }
+
   aggiungiOrdinazioneIndirizzo(ordinazione: any) :Observable<any>{
     return this.http.post(`${this.baseUrl}/addOrdinazioneIndirizzo`, ordinazione);
+  }
+
+  setConsegnato(idOrdinazione: any) :Observable<any>{
+    let json = "{\"idOrdinazione\": " + idOrdinazione + "}";
+    console.log(json);
+    return this.http.post(`${this.baseUrl}/setConsegnato`, JSON.parse(json));
   }
 }

@@ -1,7 +1,9 @@
 <h1 class="testo-centrato-titolo">Cucina</h1>
 
 <div class="main-card mb-3 card riga">
-
+  <div id="ordinazioniNonPresenti" class="elementoRiga">
+    <h4>Ordinazioni in ristorante non presenti.</h4>
+  </div>
   <div class="elementoRiga" *ngFor="let ord of ordinazioni">
     <div class="mb-0 card text-white card-body bg-info">
       <h4 class="text-white card-title" style="margin-top: -10px;">Tavolo {{ord.tavolo}}</h4>
@@ -18,7 +20,9 @@
 </div>
 
 <div class="main-card mb-3 card riga">
-
+  <div id="ordinazioniAsportoNonPresenti" class="elementoRiga">
+    <h4>Ordinazioni Asporto/Domicilio non presenti.</h4>
+  </div>
   <div class="elementoRiga" *ngFor="let ord of ordinazioniAsporto">
     <div class="mb-0 card text-white card-body bg-info">
       <h4 class="text-white card-title" style="margin-top: -10px;">{{ord.tipologia}} {{ord.idOrdinazione}}</h4>

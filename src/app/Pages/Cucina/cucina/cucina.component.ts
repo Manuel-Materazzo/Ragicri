@@ -13,7 +13,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CucinaComponent implements OnInit {
 
-  ordinazione;
   piattiOrdinati;
   ordinazioni;
   ordinazioniAsporto;
@@ -24,10 +23,21 @@ export class CucinaComponent implements OnInit {
 
   }
 
+  ngOnInit() {
+    this.infoOrdini();
+    document.getElementById('bottonePronto').setAttribute('hidden', '');
+    document.getElementById('bottoneProntoAsporto').setAttribute('hidden', '');
+    document.getElementById('ordinazioniNonPresenti').setAttribute('hidden', '');
+    document.getElementById('ordinazioniAsportoNonPresenti').setAttribute('hidden', '');
+    this.tavolo = 0;
+    this.ordinazioneId = 0;
+  }
+
   infoOrdini() {
     this.ordinazioneService.getNonPagato().subscribe(data => {
-      if (data.Status == 'Tutti i tavoli hanno già pagato.') {
-        //niente
+      if (data.status == 'Tutti i tavoli hanno già pagato.') {
+        document.getElementById("ordinazioniNonPresenti").removeAttribute("hidden");
+        this.ordinazioni = null;
       }
       else {
         let cont = 0;
@@ -50,9 +60,10 @@ export class CucinaComponent implements OnInit {
       }
     })
 
-    this.ordinazioneService.getAsportoDomicilio().subscribe(data => {
-      if (data.Status == 'Non ci sono ordinazioni.') {
-        //niente
+    this.ordinazioneService.getAsportoDomicilioNonConsegnato().subscribe(data => {
+      if (data.status == 'Non ci sono ordinazioni.') {
+        document.getElementById("ordinazioniAsportoNonPresenti").removeAttribute("hidden");
+        this.ordinazioniAsporto = null;
       }
       else {
         let cont = 0;
@@ -114,14 +125,6 @@ export class CucinaComponent implements OnInit {
     this.ordinazioneService.consegnatoId(this.ordinazioneId).subscribe(data => {
       this.infoOrdini();
     });
-  }
-
-  ngOnInit() {
-    this.infoOrdini();
-    document.getElementById('bottonePronto').setAttribute('hidden', '');
-    document.getElementById('bottoneProntoAsporto').setAttribute('hidden', '');
-    this.tavolo = 0;
-    this.ordinazioneId = 0;
   }
 
 }

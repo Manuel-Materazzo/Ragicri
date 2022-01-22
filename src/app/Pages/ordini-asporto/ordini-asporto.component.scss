@@ -1,0 +1,43 @@
+.testo-centrato-titolo {
+    text-align: center;
+    color: #FF530D;
+    margin-bottom: 25px;
+    font-family: "MaybugMSHandwritten", Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-shadow:
+      3px 3px 0 #000,
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+}
+
+.testo-Sinistra{
+  float:left;
+}
+
+.riga{
+  align-items: stretch !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 10px 0px 10px 0px;
+}
+
+.elementoRiga {
+  margin-left: 10px;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.intestazioneTabella{
+  font-size: 17px;
+}
+
+.bottoneConsegnato {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
