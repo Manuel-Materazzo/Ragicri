@@ -17,6 +17,10 @@ public class OrdinazioneDTO {
 
     private boolean pagato;
 
+    private boolean preparato;
+
+    private boolean consegnato;
+
     private int tavolo;
 
     private int persone;
@@ -25,14 +29,32 @@ public class OrdinazioneDTO {
 
     private int idIndirizzo;
 
+    private IndirizzoDTO indirizzo;
+
     private List<PiattoOrdinatoDTO> piattiOrdinati;
 
-    public void setPagato(boolean a){
-        this.pagato = a;
+    public boolean getPagato() {
+        return pagato;
     }
 
-    public boolean getPagato(){
-        return this.pagato;
+    public boolean getPreparato() {
+        return preparato;
+    }
+
+    public boolean getConsegnato() {
+        return consegnato;
+    }
+
+    public void setPagato(boolean pagato) {
+        this.pagato = pagato;
+    }
+
+    public void setPreparato(boolean preparato) {
+        this.preparato = preparato;
+    }
+
+    public void setConsegnato(boolean consegnato) {
+        this.consegnato = consegnato;
     }
 
 }

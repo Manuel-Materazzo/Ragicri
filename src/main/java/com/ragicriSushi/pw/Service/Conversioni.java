@@ -104,6 +104,8 @@ public class Conversioni {
         dto.setTavolo(dao.getTavolo());
         dto.setPersone(dao.getPersone());
         dto.setPagato(dao.getPagato());
+        dto.setConsegnato(dao.getConsegnato());
+        dto.setPreparato(dao.getPreparato());
 
         if (dao.getOrarioConsegna() == null){
             dto.setOrarioConsegna(null);
@@ -113,9 +115,11 @@ public class Conversioni {
         }
         if (dao.getIndirizzo() == null){
             dto.setIdIndirizzo(0);
+            dto.setIndirizzo(null);
         }
         else {
             dto.setIdIndirizzo(dao.getIndirizzo().getIdIndirizzo());
+            dto.setIndirizzo(toDTO(dao.getIndirizzo()));
         }
 
         List<PiattoOrdinatoDTO> listaPiattiOrdinati = new ArrayList<>();
@@ -196,6 +200,8 @@ public class Conversioni {
         dao.setPersone(dto.getPersone());
         dao.setIdOrdinazione(0);
         dao.setOrarioConsegna(null);
+        dao.setConsegnato(dto.getConsegnato());
+        dao.setPreparato(dto.getPreparato());
 
         List<PiattoOrdinato> piattiOrdinati = new ArrayList<>();
         for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {
@@ -225,6 +231,8 @@ public class Conversioni {
         dao.setPersone(dto.getPersone());
         dao.setIndirizzo(indirizzoDao.get());
         dao.setOrarioConsegna(LocalTime.parse(dto.getOrarioConsegna()));
+        dao.setConsegnato(dto.getConsegnato());
+        dao.setPreparato(dto.getPreparato());
 
         List<PiattoOrdinato> piattiOrdinati = new ArrayList<>();
         for (int i = 0; i < dto.getPiattiOrdinati().size(); i++) {

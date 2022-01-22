@@ -85,12 +85,12 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
 
 -- ORDINAZIONI:
 -- 1
-INSERT INTO ordinazione (tipologia, tavolo, persone, pagato) VALUES ('Ristorante', 1, 2, false);
+INSERT INTO ordinazione (tipologia, tavolo, persone, pagato, preparato, consegnato) VALUES ('Ristorante', 1, 2, false, false, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (1, 7, 1, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (1, 8, 3, false);
 
 -- 2
-INSERT INTO ordinazione (tipologia, tavolo, persone, pagato) VALUES ('Ristorante', 2, 3, false);
+INSERT INTO ordinazione (tipologia, tavolo, persone, pagato, preparato, consegnato) VALUES ('Ristorante', 2, 3, false, false, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 2, 2, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 6, 1, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 8, 4, false);
@@ -99,5 +99,5 @@ INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quant
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (2, 24, 3, false);
 
 -- 3
-INSERT INTO ordinazione (tipologia, tavolo, persone, pagato, orario_consegna, indirizzo) VALUES ('Domicilio', 0, 4, true, '19:30', 1);
+INSERT INTO ordinazione (tipologia, tavolo, persone, pagato, orario_consegna, indirizzo, preparato, consegnato) VALUES ('Domicilio', 0, 4, true, '19:30', 1, false, false);
 INSERT INTO piatto_ordinato (ordinazione_id_ordinazione, piatto_id_piatto, quantita, consegnato) VALUES (3, 2, 2, false);

@@ -117,7 +117,7 @@ public class OrdinazioneController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Tavolo non trovato.\"}");
         }
 
-        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getTavolo());
+        OrdinazioneDTO result = ordinazioneService.setConsegnatoPiatti(dto.getTavolo());
 
         return ResponseEntity.ok(result);
     }
@@ -136,7 +136,7 @@ public class OrdinazioneController {
     }
 
     @GetMapping(path = "asportoDomicilio")
-    @ApiOperation("Ritorna i tavoli che non hanno ancora pagato.")
+    @ApiOperation("Ritorna tutte le ordinazioni da Asporto/Domicilio.")
     public ResponseEntity<Object> getAsportoDomicilio(){
         List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilio();
 
@@ -145,6 +145,45 @@ public class OrdinazioneController {
         }
         else {
             return ResponseEntity.ok(dtoList);
+        }
+    }
+
+    @GetMapping(path = "asportoDomicilioNonConsegnato")
+    @ApiOperation("Ritorna Le ordinazioni da Asporto/Domicilio ancora non consegnate.")
+    public ResponseEntity<Object> getAsportoDomicilioNonConsegnato(){
+        List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilioNonConsegnato();
+
+        if(dtoList == null){
+            return ResponseEntity.ok().body("{\"status\":\"Non ci sono ordinazioni.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dtoList);
+        }
+    }
+
+    @PostMapping(path = "setPreparato")
+    @ApiOperation("Imposta il campo preparato a true.")
+    public ResponseEntity<Object> setPreparato(@RequestBody IdOrdinazioneDTO dto){
+        OrdinazioneDTO result = ordinazioneService.setPreparato(dto.getIdOrdinazione());
+
+        if(result == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @PostMapping(path = "setConsegnato")
+    @ApiOperation("Imposta il campo consegnato a true.")
+    public ResponseEntity<Object> setConsegnato(@RequestBody IdOrdinazioneDTO dto){
+        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getIdOrdinazione());
+
+        if(result == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
         }
     }
 

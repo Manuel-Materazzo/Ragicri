@@ -28,6 +28,10 @@ public class OrdinazioneDAO {
     @Column(nullable = false)
     private boolean pagato;
 
+    private boolean preparato;
+
+    private boolean consegnato;
+
     @Column
     private int tavolo;
 
@@ -37,8 +41,6 @@ public class OrdinazioneDAO {
     @Column
     private LocalTime orarioConsegna;
 
-//    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-//    private IndirizzoDAO indirizzo;
     @ManyToOne
     @JoinColumn(name="indirizzo", nullable = true)
     private IndirizzoDAO indirizzo;
@@ -47,7 +49,15 @@ public class OrdinazioneDAO {
     List<PiattoOrdinato> piattiOrdinati;
 
     public boolean getPagato() {
-        return this.pagato;
+        return pagato;
+    }
+
+    public boolean getPreparato() {
+        return preparato;
+    }
+
+    public boolean getConsegnato() {
+        return consegnato;
     }
 
 }
