@@ -23,15 +23,16 @@ public class UtenteDAO {
     private String nome;
 
     @Column(nullable = false)
-    private String ruolo;
-
-    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
     private String password;
 
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Indirizzo", referencedColumnName = "idIndirizzo", nullable = true)
+    @JoinColumn(name = "Indirizzo", referencedColumnName = "idIndirizzo")
     private IndirizzoDAO Indirizzo;
+
+    @ManyToOne
+    @JoinColumn(name="ruolo", nullable=false)
+    private RoleDAO ruolo;
 }

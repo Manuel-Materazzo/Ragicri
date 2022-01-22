@@ -1,8 +1,6 @@
 package com.ragicriSushi.pw.Controller;
 
-import com.ragicriSushi.pw.DTO.IndirizzoDTO;
-import com.ragicriSushi.pw.DTO.UtenteDTO;
-import com.ragicriSushi.pw.Repository.IndirizzoRepository;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
 import com.ragicriSushi.pw.Service.IndirizzoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

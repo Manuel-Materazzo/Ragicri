@@ -1,23 +1,34 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.*;
-import com.ragicriSushi.pw.DTO.*;
-import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
-import com.ragicriSushi.pw.Repository.PiattoRepository;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.OrdinazioniPiatto.PiattoOrdinatoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
+import com.ragicriSushi.pw.DTO.Role.RoleDTO;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
+import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
+import com.ragicriSushi.pw.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class Conversioni {
 
     @Autowired
     PiattoRepository piattoRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
     @Autowired
     OrdinazioneRepository ordinazioneRepository;
+
+    @Autowired
+    IndirizzoRepository indirizzoRepository;
 
     public <T, S> T toDTO(S dao) {
         if (dao instanceof PiattoDAO) {
@@ -29,8 +40,12 @@ public class Conversioni {
         } else if (dao instanceof OrdinazioneDAO) {
             return (T) fromDaoToDto((OrdinazioneDAO) dao);
         }
+        else if (dao instanceof RoleDAO) {
+            return (T) fromDaoToDto((RoleDAO) dao);
+        }
         return null;
     }
+
 
     public <T, S> T toDAO(S dto) {
         if (dto instanceof PiattoDTO) {
@@ -45,6 +60,8 @@ public class Conversioni {
         return null;
     }
 
+
+
     public <T, S> List<T> toDTO(List<S> daoList){
         List<T> dtoList = new ArrayList<T>();
         for(S dao: daoList) {
@@ -56,6 +73,9 @@ public class Conversioni {
                 dtoList.add((T) fromDaoToDto((IndirizzoDAO) dao));
             } else if(dao instanceof OrdinazioneDAO) {
                 dtoList.add((T) fromDaoToDto((OrdinazioneDAO) dao));
+            }
+            else if(dao instanceof RoleDAO) {
+                dtoList.add((T) fromDaoToDto((RoleDAO) dao));
             }
         }
         return dtoList;
@@ -71,6 +91,7 @@ public class Conversioni {
             } else if(dto instanceof NewOrdinazioneDTO) {
                 daoList.add((T) fromDtoToDao((NewOrdinazioneDTO) dto));
             }
+
         }
         return daoList;
     }
@@ -114,13 +135,17 @@ public class Conversioni {
 
     public UtenteDTO fromDaoToDto(UtenteDAO dao){
         UtenteDTO dto = new UtenteDTO();
-
         dto.setId(dao.getIdUtente());
         dto.setNome(dao.getNome());
-        dto.setRuolo(dao.getRuolo());
+
+        RoleDTO roleDto=new RoleDTO();
+        roleDto.setId(dao.getRuolo().getId());
+        roleDto.setName(dao.getRuolo().getName());
+
+        dto.setRuolo(roleDto);
         dto.setUsername(dao.getUsername());
         dto.setPassword((dao.getPassword()));
-        dto.setIndirizzoDTO(fromDaoToDto(dao.getIndirizzo()));
+        dto.setIndirizzo(fromDaoToDto(dao.getIndirizzo()));
 
         return dto;
     }
@@ -137,6 +162,12 @@ public class Conversioni {
         return dto;
     }
 
+    private RoleDTO fromDaoToDto(RoleDAO dao) {
+        RoleDTO dto= new RoleDTO();
+        dto.setId(dao.getId());
+        dto.setName(dao.getName());
+        return dto;
+    }
 
 
     //TODO tutte le conversioni in DAO mancano
@@ -148,10 +179,21 @@ public class Conversioni {
         UtenteDAO dao=new UtenteDAO();
 
         dao.setNome(dto.getNome());
-        dao.setRuolo(dao.getRuolo());
-        dao.setUsername(dao.getUsername());
-        dao.setPassword(dao.getPassword());
+        RoleDAO roleDao=new RoleDAO();
+        roleDao.setId(dto.getRuolo().getId());
+        roleDao.setName(dto.getRuolo().getName());
 
+        IndirizzoDAO indirizzoDao= new IndirizzoDAO();
+        dao.setIndirizzo(indirizzoRepository.getById(dto.getIndirizzo().getIdIndirizzo()));
+        indirizzoDao.setCAP(dto.getIndirizzo().getCAP());
+        indirizzoDao.setProvincia(dto.getIndirizzo().getProvincia());
+        indirizzoDao.setCivico(dto.getIndirizzo().getCivico());
+        indirizzoDao.setVia(dto.getIndirizzo().getVia());
+
+        dao.setIndirizzo(indirizzoDao);
+        dao.setRuolo(roleDao);
+        dao.setUsername(dto.getUsername());
+        dao.setPassword(dto.getPassword());
         return dao;
     }
 

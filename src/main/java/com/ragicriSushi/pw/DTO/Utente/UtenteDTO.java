@@ -1,5 +1,6 @@
-package com.ragicriSushi.pw.DTO;
+package com.ragicriSushi.pw.DTO.Utente;
 
+import com.ragicriSushi.pw.DTO.Role.RoleDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,12 +14,11 @@ public class UtenteDTO {
 
     private String nome;
 
-    private String ruolo;
-
     private String username;
 
     private String password;
 
-    private IndirizzoDTO indirizzoDTO;
+    private IndirizzoDTO indirizzo;
 
+    private RoleDTO ruolo;
 }

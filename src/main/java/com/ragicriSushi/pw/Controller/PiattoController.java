@@ -1,6 +1,10 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.DTO.Piatto.AddPiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.GetPiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.TipologieDTO;
 import com.ragicriSushi.pw.Service.PiattoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

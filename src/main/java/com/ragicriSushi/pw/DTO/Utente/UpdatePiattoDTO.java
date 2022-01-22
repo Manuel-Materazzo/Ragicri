@@ -1,4 +1,4 @@
-package com.ragicriSushi.pw.DTO;
+package com.ragicriSushi.pw.DTO.Utente;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PiattoDTO {
+public class UpdatePiattoDTO {
+
+    private int id;
 
     private String nome;
 

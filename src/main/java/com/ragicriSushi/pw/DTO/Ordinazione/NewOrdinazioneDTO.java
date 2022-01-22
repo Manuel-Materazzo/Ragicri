@@ -1,5 +1,6 @@
-package com.ragicriSushi.pw.DTO;
+package com.ragicriSushi.pw.DTO.Ordinazione;
 
+import com.ragicriSushi.pw.DTO.OrdinazioniPiatto.NewPiattoOrdinatoDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,11 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrdinazioneDTO {
-
-    private int idOrdinazione;
-
-    private String tipologia;
+public class NewOrdinazioneDTO {
 
     private boolean pagato;
 
@@ -21,13 +18,11 @@ public class OrdinazioneDTO {
 
     private int persone;
 
+    private String tipologia;
+
     //private datetime OrarioConsegna;
 
-    private List<PiattoOrdinatoDTO> piattiOrdinati;
-
-    public void setPagato(boolean a){
-        this.pagato = a;
-    }
+    private List<NewPiattoOrdinatoDTO> piattiOrdinati;
 
     public boolean getPagato(){
         return this.pagato;

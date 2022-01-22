@@ -1,9 +1,7 @@
 package com.ragicriSushi.pw.Controller;
 
-import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
-import com.ragicriSushi.pw.DTO.AddPiattiOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.TavoloDTO;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
