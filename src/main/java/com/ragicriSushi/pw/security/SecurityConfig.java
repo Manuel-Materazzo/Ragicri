@@ -1,6 +1,7 @@
 package com.ragicriSushi.pw.security;
 
 import com.ragicriSushi.pw.security.filter.CustomAuthenticationFilter;
+import com.ragicriSushi.pw.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,8 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/ragicri/login/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/ragicri/utentecustomAuthenticationFIlter**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/ragicri/utente/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(GET,"/ragicri/utentecustomAuthenticationFIlter**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
