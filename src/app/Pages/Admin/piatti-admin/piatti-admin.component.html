@@ -4,38 +4,38 @@
     <table class="mb-0 table table-hover">
         <!--Intestazione tabella  iniziale-->
         <thead class="intestazioneTabella">
-        <tr>
-            <th>Numero</th>
-            <th>Nome</th>
-            <th>Prezzo</th>
-            <th>Allergeni</th>
-            <th>Tipologia</th>
-            <th class="text-center">
-                <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)">
-                    <i class="pe-7s-plus"></i>
-                </button>
-            </th>
-        </tr>
+            <tr>
+                <th>Numero</th>
+                <th>Nome</th>
+                <th>Prezzo</th>
+                <th>Allergeni</th>
+                <th>Tipologia</th>
+                <th class="text-center">
+                    <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)">
+                        <i class="pe-7s-plus"></i>
+                    </button>
+                </th>
+            </tr>
         </thead>
         <!--Corpo tabella iniziale-->
         <tbody>
-        <tr *ngFor="let piattino of listiPiattini">
-            <td>{{piattino.numero}}</td>
-            <td>{{piattino.nome}}</td>
-            <td>{{piattino.prezzo}}</td>
-            <td>{{piattino.allergeni}}</td>
-            <td>{{piattino.tipologia}}</td>
-            <td class="text-center">
-                <div role="group" class="btn-group-sm btn-group">
-                    <button class="mb-2 mr-2 btn btn-update" (click)="openUpdateModal(update,piattino.numero)">
-                        <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
-                    </button>
-                    <button class="mb-2 mr-2 btn btn-danger"
+            <tr *ngFor="let piattino of listiPiattini">
+                <td>{{piattino.numero}}</td>
+                <td>{{piattino.nome}}</td>
+                <td>{{piattino.prezzo}}</td>
+                <td>{{piattino.allergeni}}</td>
+                <td>{{piattino.tipologia}}</td>
+                <td class="text-center">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <button class="mb-2 mr-2 btn btn-update" (click)="openUpdateModal(update,piattino.numero)">
+                            <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
+                        </button>
+                        <button class="mb-2 mr-2 btn btn-danger"
                             (click)="openDeleteModal(delete, piattino.numero,piattino.nome)">
-                        <i class="pe-7s-trash"> </i>
-                    </button>
-                </div>
-            </td>
+                            <i class="pe-7s-trash"> </i>
+                        </button>
+                    </div>
+                </td>
         </tbody>
     </table>
 </div>
@@ -90,7 +90,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Glutine">
                                             <label for="Glutine">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                                                    src="../../../../assets/images/icone/glutine.png" alt="glutine">
                                             </label>
                                         </div>
                                     </div>
@@ -99,8 +99,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Crostacei">
                                             <label for="Crostacei">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/crostacei.png"
-                                                     alt="crostacei">
+                                                    src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
                                             </label>
                                         </div>
                                     </div>
@@ -109,7 +108,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Pesce">
                                             <label for="Pesce">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                                                    src="../../../../assets/images/icone/pesce.png" alt="pesce">
                                             </label>
                                         </div>
                                     </div>
@@ -118,8 +117,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Molluschi">
                                             <label for="Molluschi">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/molluschi.png"
-                                                     alt="molluschi">
+                                                    src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
                                             </label>
                                         </div>
                                     </div>
@@ -130,7 +128,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Soia">
                                             <label for="Soia">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/soia.png" alt="soia">
+                                                    src="../../../../assets/images/icone/soia.png" alt="soia">
                                             </label>
                                         </div>
                                     </div>
@@ -139,7 +137,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Uova/Derivati">
                                             <label for="Uova/Derivati">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                                                    src="../../../../assets/images/icone/uovo.png" alt="uovo">
                                             </label>
                                         </div>
                                     </div>
@@ -148,7 +146,7 @@
                                             <input class="checkboxNone" type="checkbox" id="Verdura">
                                             <label for="Verdura">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                                                    src="../../../../assets/images/icone/sedano.png" alt="verdura">
                                             </label>
                                         </div>
                                     </div>
@@ -157,7 +155,7 @@
                         </div>
                     </div>
                     <div class="form-row input">
-                    <!--Immagine piatto-->
+                        <!--Immagine piatto-->
                         <div class="col-md-6">
                             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
 
@@ -165,29 +163,29 @@
                                 <label class="mr-sm-2">Nome nuova immagine:</label>
                                 <input type="text" id="addNomeFile">
                                 <img *ngIf=url [src]="url" alt="Inserisci nuova immagine"
-                                     class="mr-sm-2 card-img-top imgPiatto ">
+                                    class="mr-sm-2 card-img-top imgPiatto ">
                                 <label hidden id="ControlloImmagine" class="mr-sm-2">Inserire immagine o nome
                                     immagine</label>
                             </div>
                         </div>
-                    </div>
-                    <!--Tipologia -->
-                    <!--
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group" >
-                                                <label for="addTipologia" class="mr-sm-2">Tipologia:</label>
-
-                                                <select id="addTipologia" name="addTipologia" id="cars" >
-                                                    <div *ngFor="let tipologie">
-                                                    <option value="{{tipologie}}">{{tipologie}}</option>
-                                                    </div>
-                                                </select>
-
-                                            </div>
-                                        </div>
+                        <!--Tipologia -->
+                        <div class="col-md-6">
+                            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                                <label for="addTipologia" class="mr-sm-2">Tipologia:</label>
+                                <select class="form-control" id="addTipologia" name="addTipologia">
+                                    <option *ngFor="let tipo of tipologie" value="{{tipo}}">{{tipo}}</option>
+                                </select>
+                                <!--
+                                <select id="addTipologia" name="addTipologia" id="cars">
+                                    <div *ngFor="let tipologie">
+                                        <option value="{{tipologie}}">{{tipologie}}</option>
                                     </div>
-                                       -->
+                                </select>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -237,7 +235,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateGlutine">
                                             <label for="updateGlutine">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                                                    src="../../../../assets/images/icone/glutine.png" alt="glutine">
                                             </label>
                                         </div>
                                     </div>
@@ -246,8 +244,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateCrostacei">
                                             <label for="updateCrostacei">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/crostacei.png"
-                                                     alt="crostacei">
+                                                    src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
                                             </label>
                                         </div>
                                     </div>
@@ -256,7 +253,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updatePesce">
                                             <label for="updatePesce">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                                                    src="../../../../assets/images/icone/pesce.png" alt="pesce">
                                             </label>
                                         </div>
                                     </div>
@@ -265,8 +262,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateMolluschi">
                                             <label for="updateMolluschi">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/molluschi.png"
-                                                     alt="molluschi">
+                                                    src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
                                             </label>
                                         </div>
                                     </div>
@@ -275,7 +271,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateSoia">
                                             <label for="updateSoia">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/soia.png" alt="soia">
+                                                    src="../../../../assets/images/icone/soia.png" alt="soia">
                                             </label>
                                         </div>
                                     </div>
@@ -284,7 +280,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateUova/Derivati">
                                             <label for="updateUova/Derivati">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                                                    src="../../../../assets/images/icone/uovo.png" alt="uovo">
                                             </label>
                                         </div>
                                     </div>
@@ -293,7 +289,7 @@
                                             <input class="checkboxNone" type="checkbox" id="updateVerdura">
                                             <label for="updateVerdura">
                                                 <img class="iconaAllergene"
-                                                     src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                                                    src="../../../../assets/images/icone/sedano.png" alt="verdura">
                                             </label>
                                         </div>
                                     </div>
@@ -324,13 +320,15 @@
                     <!--Nuova immagine piatto -->
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <img src="{{piatto.img}}" id="vecchiaImmagine" alt="Card image cap" class="mr-sm-2 card-img-top imgPiatto">
+                            <img src="{{piatto.img}}" id="vecchiaImmagine" alt="Card image cap"
+                                class="mr-sm-2 card-img-top imgPiatto">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <img [src]="url" id="nuovaImmagine" alt="Inserisci nuova immagine" class="mr-sm-2 card-img-top imgPiatto ">
+                            <img [src]="url" id="nuovaImmagine" alt="Inserisci nuova immagine"
+                                class="mr-sm-2 card-img-top imgPiatto ">
                         </div>
                     </div>
                 </div>
@@ -340,7 +338,9 @@
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="updateTipologia" class="mr-sm-2">Tipologia:</label>
-                            <input name="text" id="updateTipologia" value="" type="text" class="form-control">
+                            <select class="form-control" id="updateTipologia" name="addTipologia">
+                                <option *ngFor="let tipo of tipologie" value="{{tipo}}">{{tipo}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>

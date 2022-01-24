@@ -24,3 +24,19 @@
     display: inline-block;
     margin-right: 20px;
 }
+
+.elementoRiga {
+    margin-left: 10px;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.riga{
+    align-items: stretch !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 10px 0px 10px 0px;
+}

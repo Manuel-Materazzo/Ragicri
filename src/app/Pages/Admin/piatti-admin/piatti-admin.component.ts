@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {PiattoService} from '../../../Theme/piatto/piatto.service';
-import {Router} from '@angular/router';
-import {AddPiattoDTO, Piatto, TipologieDTO} from '../../../Theme/piatto/Piatto';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { PiattoService } from '../../../Theme/piatto/piatto.service';
+import { Router } from '@angular/router';
+import { AddPiattoDTO, Piatto, TipologieDTO } from '../../../Theme/piatto/Piatto';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -24,13 +24,10 @@ export class PiattiAdminComponent implements OnInit {
     tipologie: TipologieDTO[];
     resultControllo: boolean;
     allergeniSingoloPiatto: string = '';
-    nomeImmagine: string="";
+    nomeImmagine: string = "";
 
-    constructor(private piattoService: PiattoService,
-                private router: Router, private modalService: NgbModal) {
-
+    constructor(private piattoService: PiattoService, private router: Router, private modalService: NgbModal) {
     }
-
 
     ngOnInit() {
         this.piattoService.getPiatti().subscribe((response: any) => {
@@ -40,23 +37,28 @@ export class PiattiAdminComponent implements OnInit {
                 this.ordinaLista();
             });
         });
-        this.piattoService.getTipologie().subscribe((response: any) => {
-            this.tipologie = response;
+        this.piattoService.getTipologie().subscribe(data => {
+            this.tipologie = data.tipologie;
         });
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     //funzione per il model modfica
     openUpdateModal(content, numeretto: number) {
-        this.piattoService.getPiatto(numeretto).subscribe((response: any) => {
-            this.piatto = response;
-            this.allergeniSingoloPiatto = this.piatto.allergeni;
+        this.piattoService.getPiatto(numeretto).subscribe(async (response: any) => {
             this.modalService.open(content, {
                 size: 'lg'
             });
+            this.piatto = response;
+            this.allergeniSingoloPiatto = this.piatto.allergeni;
             this.riempimentoAllergeniUpdate();
             (document.getElementById('updateNomePiatto') as HTMLInputElement).value = this.piatto.nome;
             (document.getElementById('updatePrezzo') as HTMLInputElement).value = this.piatto.prezzo + '';
             //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
+            await this.sleep(200);
             (document.getElementById('updateTipologia') as HTMLInputElement).value = this.piatto.tipologia;
         });
     }
@@ -103,9 +105,8 @@ export class PiattiAdminComponent implements OnInit {
         this.piatto.allergeni = this.allergeni;
         //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
         this.piatto.tipologia = (document.getElementById('updateTipologia') as HTMLInputElement).value;
-        this.nomeImmagine=(document.getElementById('updateNomeFile') as HTMLInputElement).value;
-        if(this.url=='')
-        {
+        this.nomeImmagine = (document.getElementById('updateNomeFile') as HTMLInputElement).value;
+        if (this.url == '') {
             this.piattoService.updatePiatto(this.piatto).subscribe(element => {
                 for (var index = 0; index < this.listiPiattini.length; index++) {
                     if (this.listiPiattini[index].numero == element.numero) {
@@ -135,7 +136,7 @@ export class PiattiAdminComponent implements OnInit {
         }
         this.allergeni = '';
         this.url = '';
-        this.nomeImmagine="";
+        this.nomeImmagine = "";
         this.modalService.dismissAll();
         //window.location.reload();
     }
@@ -159,7 +160,7 @@ export class PiattiAdminComponent implements OnInit {
         this.piatto.numero = parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
         this.controlloAllergeni();
         this.piatto.allergeni = this.allergeni;
-        this.nomeImmagine=(document.getElementById('addNomeFile') as HTMLInputElement).value;
+        this.nomeImmagine = (document.getElementById('addNomeFile') as HTMLInputElement).value;
         //this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
         this.piatto.tipologia = 'Prova';
         let input = new FormData();
@@ -176,7 +177,7 @@ export class PiattiAdminComponent implements OnInit {
             this.ordinaLista();
         });
         this.url = '';
-        this.nomeImmagine="";
+        this.nomeImmagine = "";
         this.modalService.dismissAll();
         //window.location.reload();
     }
@@ -227,7 +228,7 @@ export class PiattiAdminComponent implements OnInit {
     }
 
 
-//SIstemare
+    //SIstemare
     controlloAllergeni() {
 
         if ((document.getElementById('Glutine') as HTMLInputElement).checked == true) {
@@ -319,7 +320,7 @@ export class PiattiAdminComponent implements OnInit {
             var reader = new FileReader();
 
             reader.onload = (event: ProgressEvent) => {
-                this.url = (<FileReader> event.target).result;
+                this.url = (<FileReader>event.target).result;
             };
 
             reader.readAsDataURL((<HTMLInputElement>eventTarget).files[0]);

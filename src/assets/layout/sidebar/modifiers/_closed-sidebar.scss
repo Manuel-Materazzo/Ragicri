@@ -13,7 +13,8 @@
 
     .logo-src {
       width: 20px;
-      margin: 0 auto;
+      //margin: 0 auto;
+      background: url(/assets/images/soloLogoRidimensionato.png);
     }
 
     .header__pane {
@@ -84,6 +85,7 @@
       .logo-src {
         width: $logo-width;
         margin: 0;
+        background: url(/assets/images/soloLogoRidimensionato.png);
       }
 
       .header__pane {

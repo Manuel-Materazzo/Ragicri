@@ -15,10 +15,12 @@ export class HomeComponent
   /**Idea lista di oggetti immagine e titolo immagine(salvato nel database)
    * Riempo la lista ricevuta dal database, lato client ciclo la lista e metto nell'img l'url dell'imm
    * e sotto il nome/titolo dell'immagine*/
-  listaImmaginiRistorante: String[]=["../../../../../assets/images/ristorante/ristoranteAperto.jpg",
-    "../../../../../assets/images/ristorante/ristoranteInterni.jpg","../../../../../assets/images/ristorante/sushiCucina.jpg"];
-  listaImmaginiPiatti: String[]=[]=["../../../../assets/images/piatti/sashimiMisto.jpg",
-  "../../../../assets/images/piatti/sashimiSpeciale.jpg","../../../../assets/images/piatti/ravioliCarneVapore.jpg"];
+   //listaImmaginiRistorante: String[]=["../../../../../assets/images/ristorante/ristoranteAperto.jpg",
+   //"../../../../../assets/images/ristorante/ristoranteInterni.jpg","../../../../../assets/images/ristorante/sushiCucina.jpg"];
+   listaImmaginiRistorante: String[]=["../../../../../assets/images/ristorante/Ristorante1.jpg",
+   "../../../../../assets/images/ristorante/Ristorante2.jpg","../../../../../assets/images/ristorante/Ristorante3.jpg"];
+  listaImmaginiPiatti: String[]=[]=["../../../../assets/images/piattihome/piattohome1.jpg",
+  "../../../../assets/images/piattihome/piattohome2.jpg","../../../../assets/images/piattihome/piattohome4.jpg"];
 
 
   /**
