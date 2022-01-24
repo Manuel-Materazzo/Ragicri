@@ -182,7 +182,6 @@ public class Conversioni {
         RoleDAO roleDao=new RoleDAO();
         roleDao.setId(dto.getRuolo().getId());
         roleDao.setName(dto.getRuolo().getName());
-
         IndirizzoDAO indirizzoDao= new IndirizzoDAO();
         dao.setIndirizzo(indirizzoRepository.getById(dto.getIndirizzo().getIdIndirizzo()));
         indirizzoDao.setCAP(dto.getIndirizzo().getCAP());

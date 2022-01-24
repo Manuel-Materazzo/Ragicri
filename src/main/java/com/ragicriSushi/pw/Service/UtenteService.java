@@ -6,15 +6,24 @@ import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
+import com.ragicriSushi.pw.Repository.RoleRepository;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UtenteService {
+public class UtenteService implements UserDetailsService {
 
     @Autowired
     private UtenteRepository utenteRepository;
@@ -22,6 +31,10 @@ public class UtenteService {
     private IndirizzoRepository indirizzoRepository;
     @Autowired
     private Conversioni conversioni;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     public List<UtenteDTO> getAll() {
         return conversioni.toDTO(utenteRepository.findAll());
@@ -73,7 +86,7 @@ public class UtenteService {
 
         dao.setRuolo(roleDao);
         dao.setUsername(dto.getUsername());
-        dao.setPassword(dto.getPassword());
+        dao.setPassword(passwordEncoder.encode(dto.getPassword()));
         dao.setIndirizzo(daoIndi);
 
         dao = utenteRepository.save(dao);
@@ -94,6 +107,21 @@ public class UtenteService {
     public boolean checkPresenzaUsername(String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
         return dao.isPresent();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UtenteDAO> utente=utenteRepository.findUtenteByUsername(username);
+        if(!utente.isPresent())
+        {
+            throw new UsernameNotFoundException("Utente non trovato");
+        }
+        Collection<SimpleGrantedAuthority> authorities= new ArrayList<>();
+        roleRepository.findAll().forEach(ruolo ->{ authorities.add(new SimpleGrantedAuthority(
+                ruolo.getName()));
+        });
+        return new org.springframework.security.core.userdetails.User(utente.get().getUsername(),
+                utente.get().getPassword(),authorities);
     }
 }
 

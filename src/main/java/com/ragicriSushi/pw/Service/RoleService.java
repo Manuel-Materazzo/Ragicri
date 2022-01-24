@@ -36,6 +36,7 @@ public class RoleService {
     public RoleDTO getByName(String name) {
         Optional<RoleDAO> optional = roleRepository.findByName(name);
 
+
         if (optional.isPresent()) {
             return conversioni.toDTO(optional.get());
         } else {
