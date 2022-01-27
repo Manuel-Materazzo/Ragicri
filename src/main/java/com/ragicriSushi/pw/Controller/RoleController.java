@@ -24,6 +24,7 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti i ruoli")
     public ResponseEntity<Object> getAll() {

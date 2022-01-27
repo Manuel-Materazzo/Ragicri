@@ -1,10 +1,11 @@
 INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via bae', 'PD', 35030, 5);
 INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via Roma', 'GG', 156548, 2);
-
+INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via bob', 'GG', 156548, 3);
 INSERT INTO ruolo (name) VALUES( 'ROLE_ADMIN');
-INSERT INTO ruolo (name) VALUES( 'ROLE_CUOCO');
+INSERT INTO ruolo (name) VALUES( 'ROLE_DIPENDENTE');
 INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Radu', 'radu01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', 1,1);
-INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Giacomo', 'Jeck09', 'jeck', 2,1);
+INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Giacomo', 'Jeck01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', 2,1);
+INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Cristian', 'Cristian_tomasiPd', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', 3,1);
 
 
 -- PIATTI

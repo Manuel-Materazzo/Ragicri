@@ -34,7 +34,6 @@ public class AuthController {
 //    @Autowired
 //    UtenteService utenteService;
 //
-//
 //    JwtTokenProvider jwtTokenProvider= new JwtTokenProvider();
 //
 //    @SuppressWarnings("rawtypes")

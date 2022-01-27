@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,12 +21,14 @@ public class IndirizzoController {
     @Autowired
     private IndirizzoService indirizzoService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti gli indirizzi")
     public ResponseEntity<Object> getAll(){
         return ResponseEntity.ok(indirizzoService.getAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna un indirizzo con l'id inserito")
     public ResponseEntity<Object> getById(@PathVariable int id) {
@@ -38,6 +41,7 @@ public class IndirizzoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un indirizzo")
     public ResponseEntity<Object> update(@RequestBody IndirizzoDTO dto){

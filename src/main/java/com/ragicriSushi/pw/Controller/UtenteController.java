@@ -36,6 +36,7 @@ public class UtenteController {
         return ResponseEntity.ok(utenteService.getAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna un utente con l'id inserito")
     public ResponseEntity<Object> getById(@PathVariable int id) {
@@ -48,6 +49,7 @@ public class UtenteController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/ruolo/{ruolo}")
     @ApiOperation("Ritorna tutti gli utenti con un ruolo")
     public ResponseEntity<Object> getByRuolo(@PathVariable String ruolo) {
@@ -88,6 +90,7 @@ public class UtenteController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Ruolo non esistente.\"}");
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un utente")
     public ResponseEntity<Object> update(@RequestBody UtenteDTO dto) {
