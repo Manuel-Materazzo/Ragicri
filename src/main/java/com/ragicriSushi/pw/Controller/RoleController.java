@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +30,7 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/add")
     @ApiOperation("Aggiungi un ruolo")
     public ResponseEntity<Object> add(@RequestBody RoleAddDto dto) {
@@ -40,6 +42,7 @@ public class RoleController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/delete")
     @ApiOperation("Elimina il ruolo")
     public ResponseEntity<Object> delete(@RequestBody NameRuoloDTO dto) {

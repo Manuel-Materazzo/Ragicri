@@ -29,8 +29,8 @@ public class UtenteController {
     @Autowired
     private RoleService roleService;
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(path = "/lista")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "")
     @ApiOperation("Ritorna tutti gli utenti")
     public ResponseEntity<Object> getAllUtente() {
         return ResponseEntity.ok(utenteService.getAll());
@@ -59,6 +59,7 @@ public class UtenteController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/delete")
     @ApiOperation("Elimina l'utente")
     public ResponseEntity<Object> delete(@RequestBody NumeroDTO id) {
@@ -74,6 +75,7 @@ public class UtenteController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     @ApiOperation("Crea un utente")
     public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {
