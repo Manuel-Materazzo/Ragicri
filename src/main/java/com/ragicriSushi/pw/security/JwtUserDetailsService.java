@@ -30,10 +30,9 @@ public class JwtUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Utente non trovato");
         }
         Collection<SimpleGrantedAuthority> authorities= new ArrayList<>();
-        roleRepository.findAll().forEach(ruolo ->{ authorities.add(new SimpleGrantedAuthority(
-                ruolo.getName()));
-        });
-        return new org.springframework.security.core.userdetails.User(utente.get().getUsername(),
+        authorities.add(new SimpleGrantedAuthority(
+                utente.get().getRuolo().getName()));
+        return new User(utente.get().getUsername(),
                 utente.get().getPassword(),authorities);
     }
 //    @Override

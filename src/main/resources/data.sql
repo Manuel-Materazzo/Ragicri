@@ -3,7 +3,7 @@ INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via Roma', 'GG', 156
 
 INSERT INTO ruolo (name) VALUES( 'ADMIN');
 INSERT INTO ruolo (name) VALUES( 'CUOCO');
-INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Radu', 'radu01', 'radu', 1,1);
+INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Radu', 'radu01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', 1,1);
 INSERT INTO utente (nome,  username, password, indirizzo,ruolo) VALUES ('Giacomo', 'Jeck09', 'jeck', 2,1);
 
 

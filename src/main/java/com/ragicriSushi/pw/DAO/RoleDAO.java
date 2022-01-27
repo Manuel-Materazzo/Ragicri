@@ -22,6 +22,4 @@ public class RoleDAO {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy="ruolo")
-    private List<UtenteDAO> utenti;
 }
