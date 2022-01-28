@@ -2,6 +2,7 @@ package com.ragicriSushi.pw.DTO;
 
 
 import com.ragicriSushi.pw.DAO.IndirizzoDAO;
+import com.ragicriSushi.pw.DTO.OrdinazioniPiatto.NewPiattoOrdinatoDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

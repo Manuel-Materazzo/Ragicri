@@ -19,7 +19,6 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(
         path = "/piatto",
         produces = MediaType.APPLICATION_JSON_VALUE
@@ -29,14 +28,14 @@ public class PiattoController {
     @Autowired
     private PiattoService piattoService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti i piatti")
     public ResponseEntity<Object> getAll() {
         return ResponseEntity.ok(piattoService.getAll());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna il piatto con l'id inserito")
     public ResponseEntity<Object> getById(@PathVariable int id) {
@@ -51,7 +50,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/numero/{numero}")
     @ApiOperation("Controlla se il numero inserito è un piatto esistente (ritorna un booleano)")
     public ResponseEntity<Boolean> checkNumero(@PathVariable int numero) {
@@ -77,7 +76,7 @@ public class PiattoController {
     }
      */
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/delete")
     @ApiOperation("Elimina il piatto")
     public ResponseEntity<Object> delete(@RequestBody NumeroDTO dto) {
@@ -89,7 +88,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Aggiungi un piatto")
     public ResponseEntity<Object> add(@RequestPart("nomePiatto") String nomePiatto, @RequestPart("prezzoPiatto") String prezzoPiatto,
@@ -119,7 +118,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un piatto")
     public ResponseEntity<Object> update(@RequestBody AddPiattoDTO dto) {
@@ -131,7 +130,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/get")
     @ApiOperation("Ottieni i piatti di una certa tipologia SENZA i dati allergeni")
     public ResponseEntity<Object> get(@RequestBody GetPiattoDTO dto) {
@@ -143,7 +142,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/getByNumero/{numero}")
     @ApiOperation("Restituisce il piatto con il numero inserito")
     public ResponseEntity<Object> getByNumero(@PathVariable int numero) {
@@ -155,7 +154,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/tipologie")
     @ApiOperation("Ritorna un JSON contenente una lista con tutte le tipolgoie)")
     public ResponseEntity<Object> getTipologie() {

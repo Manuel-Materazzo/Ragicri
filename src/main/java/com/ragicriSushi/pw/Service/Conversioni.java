@@ -45,8 +45,7 @@ public class Conversioni {
             return (T) fromDaoToDto((IndirizzoDAO) dao);
         } else if (dao instanceof OrdinazioneDAO) {
             return (T) fromDaoToDto((OrdinazioneDAO) dao);
-        }
-        else if (dao instanceof RoleDAO) {
+        } else if (dao instanceof RoleDAO) {
             return (T) fromDaoToDto((RoleDAO) dao);
         }
         return null;
@@ -78,8 +77,7 @@ public class Conversioni {
                 dtoList.add((T) fromDaoToDto((IndirizzoDAO) dao));
             } else if(dao instanceof OrdinazioneDAO) {
                 dtoList.add((T) fromDaoToDto((OrdinazioneDAO) dao));
-            }
-            else if(dao instanceof RoleDAO) {
+            } else if(dao instanceof RoleDAO) {
                 dtoList.add((T) fromDaoToDto((RoleDAO) dao));
             }
         }

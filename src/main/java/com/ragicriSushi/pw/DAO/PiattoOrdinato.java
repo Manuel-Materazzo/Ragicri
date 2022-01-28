@@ -28,7 +28,7 @@ public class PiattoOrdinato {
     PiattoDAO piatto;
 
     @Column
-    boolean consegnato = false;
+    boolean consegnato;
 
     @Column
     int quantita;

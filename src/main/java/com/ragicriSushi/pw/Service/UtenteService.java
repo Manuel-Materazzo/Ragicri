@@ -96,14 +96,6 @@ public class UtenteService implements UserDetailsService {
 
     public UtenteDTO update(UtenteDTO dto) {
         Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
-        if(dao.isPresent()){
-            dao.get().setNome(dto.getNome());
-            dao.get().setEmail(dto.getEmail());
-            dao.get().setUsername(dto.getUsername());
-            dao.get().setPassword(dto.getPassword());
-
-            utenteRepository.save(dao.get());
-            return conversioni.toDTO(dao.get());
         if (dao.isPresent()) {
             UtenteDAO utente = conversioni.toDAO(dto);
             utenteRepository.save(utente);
@@ -113,7 +105,7 @@ public class UtenteService implements UserDetailsService {
         }
     }
 
-    public boolean checkPresenzaUsername(String username) {
+    public boolean checkPresenzaUsername (String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
         return dao.isPresent();
     }
