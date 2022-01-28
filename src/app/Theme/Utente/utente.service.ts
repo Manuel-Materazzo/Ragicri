@@ -13,30 +13,15 @@ export class UtenteService {
 
   private baseUrl= "http://localhost:8080/ragicri/utente";
 
-/*
-  getOrdinazioni(): Observable<any[]>{
-    return this.http.get<Ordinazione[]>(`${this.baseUrl}`).pipe(map((res: any) => {
-      if (res) {
-        return res;
-      }
-      return null;
+  createUtente( utente: any): any {
+    const data = utente;
+    return this.http.post<any>('http://localhost:8080/ragicri/utente/save', data).pipe(map(r => {
+      return r;
     }));
   }
 
-  getNonPagato(): Observable<any>{
-    return this.http.get((`${this.baseUrl}/nonPagato`));
+  login(numeretto: number): Observable<any> {
+    return this.http.get((`${this.baseUrl}/createAuthenticationToken/`));
   }
 
-  getInfoTavolo(numeroTavolo: number): Observable<any>{
-    return this.http.get((`${this.baseUrl}/info/${numeroTavolo}`));
-  }
-
-  aggiungiOrdinazione(ordinazione: any) :Observable<any>{
-    return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione);
-  }
-
-  consegnato(tavolo: string): Observable<any>{
-    let dto = "{\"tavolo\": " + tavolo + "}";
-    return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto));    
-  }*/
 }

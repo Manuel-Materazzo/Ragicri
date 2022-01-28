@@ -14,12 +14,18 @@ export class LoginBoxedComponent implements OnInit {
   password: String;
 
 
-  constructor(private router: Router, private ordinazioneService: UtenteService, private modalService: NgbModal) {
+  constructor(private router: Router, private utenteService: UtenteService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
   }
 
+  Login() {
+    this.username = (document.getElementById('username') as HTMLInputElement).value;
+    this.password = (document.getElementById('password') as HTMLInputElement).value;
+    
+        
+}
   
 
 }
