@@ -39,5 +39,8 @@ export class UtenteService {
     let dto = "{\"tavolo\": " + tavolo + "}";
     return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto));    
   }
-  
+
+  authenticate(json): Observable<any>{
+    return this.http.post("http://localhost:8080/ragicri/authenticate", JSON.parse(json));
+  } 
 }
