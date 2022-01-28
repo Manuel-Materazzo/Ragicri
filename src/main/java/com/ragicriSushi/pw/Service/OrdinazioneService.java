@@ -6,6 +6,8 @@ import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

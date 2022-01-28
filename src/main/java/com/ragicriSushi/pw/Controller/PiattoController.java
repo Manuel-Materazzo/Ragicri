@@ -1,12 +1,17 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.DTO.Piatto.AddPiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.GetPiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.TipologieDTO;
 import com.ragicriSushi.pw.Service.PiattoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,12 +29,14 @@ public class PiattoController {
     @Autowired
     private PiattoService piattoService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti i piatti")
     public ResponseEntity<Object> getAll() {
         return ResponseEntity.ok(piattoService.getAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna il piatto con l'id inserito")
     public ResponseEntity<Object> getById(@PathVariable int id) {
@@ -44,6 +51,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/numero/{numero}")
     @ApiOperation("Controlla se il numero inserito è un piatto esistente (ritorna un booleano)")
     public ResponseEntity<Boolean> checkNumero(@PathVariable int numero) {
@@ -69,6 +77,7 @@ public class PiattoController {
     }
      */
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/delete")
     @ApiOperation("Elimina il piatto")
     public ResponseEntity<Object> delete(@RequestBody NumeroDTO dto) {
@@ -80,6 +89,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Aggiungi un piatto")
     public ResponseEntity<Object> add(@RequestPart("nomePiatto") String nomePiatto, @RequestPart("prezzoPiatto") String prezzoPiatto,
@@ -109,6 +119,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un piatto")
     public ResponseEntity<Object> update(@RequestBody AddPiattoDTO dto) {
@@ -120,6 +131,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/get")
     @ApiOperation("Ottieni i piatti di una certa tipologia SENZA i dati allergeni")
     public ResponseEntity<Object> get(@RequestBody GetPiattoDTO dto) {
@@ -131,6 +143,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/getByNumero/{numero}")
     @ApiOperation("Restituisce il piatto con il numero inserito")
     public ResponseEntity<Object> getByNumero(@PathVariable int numero) {
@@ -142,6 +155,7 @@ public class PiattoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/tipologie")
     @ApiOperation("Ritorna un JSON contenente una lista con tutte le tipolgoie)")
     public ResponseEntity<Object> getTipologie() {

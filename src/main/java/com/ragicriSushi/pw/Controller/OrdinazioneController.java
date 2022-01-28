@@ -2,12 +2,16 @@ package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.TavoloDTO;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +27,14 @@ public class OrdinazioneController {
     @Autowired
     private OrdinazioneService ordinazioneService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutte le ordinazioni")
     public ResponseEntity<Object> getAll(){
         return ResponseEntity.ok(ordinazioneService.getAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(
             path = "addOrdinazione",
             consumes = {MediaType.APPLICATION_JSON_VALUE}
@@ -38,6 +44,7 @@ public class OrdinazioneController {
         return ResponseEntity.ok(ordinazioneService.add(dto));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "addOrdinazioneIndirizzo")
     @ApiOperation("Aggiunge un'ordinazione da Asporto/Domicilio (richiede l'id dell'indirizzo)")
     public ResponseEntity<Object> addConIndirizzo(@RequestBody NewOrdinazioneIndirizzoDTO dto){
@@ -67,6 +74,7 @@ public class OrdinazioneController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "info/{tavolo}")
     @ApiOperation("Ritorna le principali informazioni per il cameriere sul tavolo passato.")
     public ResponseEntity<Object> infoTavolo(@PathVariable int tavolo){
@@ -84,6 +92,7 @@ public class OrdinazioneController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "infoOrd/{id}")
     @ApiOperation("Ritorna tutte le informazio su di un'ordinazione.")
     public ResponseEntity<Object> infoOrd(@PathVariable int id){
@@ -97,6 +106,7 @@ public class OrdinazioneController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "nonPagato")
     @ApiOperation("Ritorna i tavoli che non hanno ancora pagato.")
     public ResponseEntity<Object> getNonPagato(){
@@ -110,6 +120,7 @@ public class OrdinazioneController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "consegnato")
     @ApiOperation("Imposta l'attributo \"Consegnato\" a true degli elementi passati.")
     public ResponseEntity<Object> setConsegnati(@RequestBody TavoloDTO dto){
@@ -122,6 +133,7 @@ public class OrdinazioneController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "consegnatoId/{id}")
     @ApiOperation("Importa l'attributo \"Consegato\" ai piatti dell'ordinazione passata.")
     public ResponseEntity<Object> setConsegnatiId(@PathVariable int id){
@@ -153,38 +165,7 @@ public class OrdinazioneController {
     public ResponseEntity<Object> getAsportoDomicilioNonConsegnato(){
         List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilioNonConsegnato();
 
-        if(dtoList == null){
-            return ResponseEntity.ok().body("{\"status\":\"Non ci sono ordinazioni.\"}");
-        }
-        else {
-            return ResponseEntity.ok(dtoList);
-        }
-    }
-
-    @PostMapping(path = "setPreparato")
-    @ApiOperation("Imposta il campo preparato a true.")
-    public ResponseEntity<Object> setPreparato(@RequestBody IdOrdinazioneDTO dto){
-        OrdinazioneDTO result = ordinazioneService.setPreparato(dto.getIdOrdinazione());
-
-        if(result == null){
-            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
-        }
-        else {
-            return ResponseEntity.ok(result);
-        }
-    }
-
-    @PostMapping(path = "setConsegnato")
-    @ApiOperation("Imposta il campo consegnato a true.")
-    public ResponseEntity<Object> setConsegnato(@RequestBody IdOrdinazioneDTO dto){
-        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getIdOrdinazione());
-
-        if(result == null){
-            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
-        }
-        else {
-            return ResponseEntity.ok(result);
-        }
+        return ResponseEntity.ok(result);
     }
 
 }
