@@ -3,6 +3,7 @@ package com.ragicriSushi.pw.DAO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -34,4 +35,7 @@ public class IndirizzoDAO {
 
     @OneToOne(mappedBy = "Indirizzo")
     private UtenteDAO utenteDAO;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "indirizzo")
+    private List<OrdinazioneDAO> ordinazione;
 }

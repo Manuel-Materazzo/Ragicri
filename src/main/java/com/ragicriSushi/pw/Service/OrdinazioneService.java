@@ -4,6 +4,7 @@ import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
@@ -53,10 +54,19 @@ public class OrdinazioneService {
                 piattiOrdinati.add(piattoOrdinato);
             }
             dao.setPiattiOrdinati(piattiOrdinati);
+            dao.setPreparato(false);
 
             ordinazioneRepository.save(dao);
             return conversioni.toDTO(dao);
         }
+    }
+
+    public OrdinazioneDTO addConIndirizzo(NewOrdinazioneIndirizzoDTO dto){
+        OrdinazioneDAO dao = conversioni.toDAO(dto);
+
+        ordinazioneRepository.save(dao);
+
+        return conversioni.toDTO(dao);
     }
 
     public OrdinazioneDTO setPagato(int tavolo) {
@@ -113,7 +123,7 @@ public class OrdinazioneService {
         }
     }
 
-    public OrdinazioneDTO setConsegnato(int tavolo) {
+    public OrdinazioneDTO setConsegnatoPiatti(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
         OrdinazioneDAO dao = daoList.get(daoList.size() - 1);
 
@@ -123,6 +133,7 @@ public class OrdinazioneService {
             for (int i = 0; i < dao.getPiattiOrdinati().size(); i++) {
                 dao.getPiattiOrdinati().get(i).setConsegnato(true);
             }
+            dao.setPreparato(true);
             ordinazioneRepository.save(dao);
             return conversioni.toDTO(dao);
         }
@@ -135,6 +146,7 @@ public class OrdinazioneService {
             for (int i = 0; i < dao.get().getPiattiOrdinati().size(); i++) {
                 dao.get().getPiattiOrdinati().get(i).setConsegnato(true);
             }
+            dao.get().setPreparato(true);
             ordinazioneRepository.save(dao.get());
             return conversioni.toDTO(dao.get());
         } else {
@@ -145,10 +157,46 @@ public class OrdinazioneService {
     public List<OrdinazioneDTO> getAsportoDomicilio() {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.getAsportoDomicilio();
 
-        if (daoList == null) {
+        if (daoList.isEmpty()) {
             return null;
         } else {
             return conversioni.toDTO(daoList);
+        }
+    }
+
+    public List<OrdinazioneDTO> getAsportoDomicilioNonConsegnato() {
+        List<OrdinazioneDAO> daoList = ordinazioneRepository.getAsportoDomicilioNonConsegnato();
+
+        if (daoList.isEmpty()) {
+            return null;
+        } else {
+            return conversioni.toDTO(daoList);
+        }
+    }
+
+    public OrdinazioneDTO setPreparato(int id){
+        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
+
+        if(dao.isPresent()){
+            dao.get().setPreparato(true);
+            ordinazioneRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
+        }
+        else {
+            return null;
+        }
+    }
+
+    public OrdinazioneDTO setConsegnato(int id){
+        Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
+
+        if(dao.isPresent()){
+            dao.get().setConsegnato(true);
+            ordinazioneRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
+        }
+        else {
+            return null;
         }
     }
 

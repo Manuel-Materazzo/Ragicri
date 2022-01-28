@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface OrdinazioneRepository extends JpaRepository<OrdinazioneDAO, Integer> {
 
+    Optional<OrdinazioneDAO> findOrdinazioneByIdOrdinazione(int id_ordinazione);
+
     List<OrdinazioneDAO> findOrdinazioneByTavolo(int tavolo);
 
     List<OrdinazioneDAO> findOrdinazioneByPagato(boolean pagato);
@@ -17,5 +19,10 @@ public interface OrdinazioneRepository extends JpaRepository<OrdinazioneDAO, Int
             value = "SELECT * FROM ordinazione WHERE tipologia='Domicilio' OR tipologia='Asporto'",
             nativeQuery = true)
     List<OrdinazioneDAO> getAsportoDomicilio();
+
+    @Query(
+            value = "SELECT * FROM ordinazione WHERE consegnato=false AND (tipologia='Domicilio' OR tipologia='Asporto')",
+            nativeQuery = true)
+    List<OrdinazioneDAO> getAsportoDomicilioNonConsegnato();
 
 }

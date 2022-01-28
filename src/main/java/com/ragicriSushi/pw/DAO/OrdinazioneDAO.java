@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -27,20 +28,36 @@ public class OrdinazioneDAO {
     @Column(nullable = false)
     private boolean pagato;
 
+    private boolean preparato;
+
+    private boolean consegnato;
+
     @Column
     private int tavolo;
 
     @Column
     private int persone;
 
+    @Column
+    private LocalTime orarioConsegna;
+
+    @ManyToOne
+    @JoinColumn(name="indirizzo", nullable = true)
+    private IndirizzoDAO indirizzo;
+
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "ordinazione")
     List<PiattoOrdinato> piattiOrdinati;
 
-    //@Column
-    //private datetime OrarioConsegna;
-
     public boolean getPagato() {
-        return this.pagato;
+        return pagato;
+    }
+
+    public boolean getPreparato() {
+        return preparato;
+    }
+
+    public boolean getConsegnato() {
+        return consegnato;
     }
 
 }

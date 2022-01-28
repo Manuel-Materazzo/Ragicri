@@ -1,10 +1,7 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
-import com.ragicriSushi.pw.DTO.AddPiattiOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
-import com.ragicriSushi.pw.DTO.TavoloDTO;
+import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,18 @@ public class OrdinazioneController {
     @ApiOperation("Aggiunge un'ordinazione")
     public ResponseEntity<Object> add(@RequestBody NewOrdinazioneDTO dto){
         return ResponseEntity.ok(ordinazioneService.add(dto));
+    }
+
+    @PostMapping(path = "addOrdinazioneIndirizzo")
+    @ApiOperation("Aggiunge un'ordinazione da Asporto/Domicilio (richiede l'id dell'indirizzo)")
+    public ResponseEntity<Object> addConIndirizzo(@RequestBody NewOrdinazioneIndirizzoDTO dto){
+        OrdinazioneDTO result = ordinazioneService.addConIndirizzo(dto);
+        if (result == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Indirizzo non trovato.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
     }
 
     @GetMapping(path = "pagato/{tavolo}")
@@ -108,7 +117,7 @@ public class OrdinazioneController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"Tavolo non trovato.\"}");
         }
 
-        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getTavolo());
+        OrdinazioneDTO result = ordinazioneService.setConsegnatoPiatti(dto.getTavolo());
 
         return ResponseEntity.ok(result);
     }
@@ -127,7 +136,7 @@ public class OrdinazioneController {
     }
 
     @GetMapping(path = "asportoDomicilio")
-    @ApiOperation("Ritorna i tavoli che non hanno ancora pagato.")
+    @ApiOperation("Ritorna tutte le ordinazioni da Asporto/Domicilio.")
     public ResponseEntity<Object> getAsportoDomicilio(){
         List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilio();
 
@@ -136,6 +145,45 @@ public class OrdinazioneController {
         }
         else {
             return ResponseEntity.ok(dtoList);
+        }
+    }
+
+    @GetMapping(path = "asportoDomicilioNonConsegnato")
+    @ApiOperation("Ritorna Le ordinazioni da Asporto/Domicilio ancora non consegnate.")
+    public ResponseEntity<Object> getAsportoDomicilioNonConsegnato(){
+        List<OrdinazioneDTO> dtoList = ordinazioneService.getAsportoDomicilioNonConsegnato();
+
+        if(dtoList == null){
+            return ResponseEntity.ok().body("{\"status\":\"Non ci sono ordinazioni.\"}");
+        }
+        else {
+            return ResponseEntity.ok(dtoList);
+        }
+    }
+
+    @PostMapping(path = "setPreparato")
+    @ApiOperation("Imposta il campo preparato a true.")
+    public ResponseEntity<Object> setPreparato(@RequestBody IdOrdinazioneDTO dto){
+        OrdinazioneDTO result = ordinazioneService.setPreparato(dto.getIdOrdinazione());
+
+        if(result == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @PostMapping(path = "setConsegnato")
+    @ApiOperation("Imposta il campo consegnato a true.")
+    public ResponseEntity<Object> setConsegnato(@RequestBody IdOrdinazioneDTO dto){
+        OrdinazioneDTO result = ordinazioneService.setConsegnato(dto.getIdOrdinazione());
+
+        if(result == null){
+            return ResponseEntity.ok().body("{\"status\":\"Ordinazione non trovata.\"}");
+        }
+        else {
+            return ResponseEntity.ok(result);
         }
     }
 
