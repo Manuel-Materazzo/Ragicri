@@ -23,12 +23,6 @@ export class UtenteService {
     }));
   }
 
-<<<<<<< HEAD
-  login(numeretto: number): Observable<any> {
-    return this.http.get((`${this.baseUrl}/createAuthenticationToken/`));
-  }
-
-=======
   getNonPagato(): Observable<any>{
     return this.http.get(`${this.baseUrl}/nonPagato`);
   }
@@ -44,6 +38,6 @@ export class UtenteService {
   consegnato(tavolo: string): Observable<any>{
     let dto = "{\"tavolo\": " + tavolo + "}";
     return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto));    
-  }*/
->>>>>>> 4e4b4b3b17edc007146d789806578d13fd2ef3c0
+  }
+  
 }
