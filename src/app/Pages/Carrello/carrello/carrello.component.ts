@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrdinazioneService } from 'src/app/Theme/Ordinazione/ordinazione.service';
 import { PiattoService } from 'src/app/Theme/piatto/piatto.service';
+import { UtenteService } from 'src/app/Theme/Utente/utente.service';
 
 @Component({
   selector: 'app-carrello',
@@ -13,7 +14,7 @@ export class CarrelloComponent implements OnInit {
 
   carrello;
 
-  constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) {
+  constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private utenteService: UtenteService, private modalService: NgbModal) {
 
   }
 
@@ -62,11 +63,13 @@ export class CarrelloComponent implements OnInit {
     sessionStorage.removeItem("carrello");
     let tipologia = (<HTMLInputElement>document.getElementById("modalita")).value;
     let orario = String((<HTMLInputElement>document.getElementById("orario")).value);
-    let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
-    '"idIndirizzo": 1, "orarioConsegna": "' + orario + '"}';
-    console.log(json);
-    this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data => {
-      //window.location.reload();
+    this.utenteService.getIndirizzoByUsername(sessionStorage.getItem("username")).subscribe(data => {
+      let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
+      '"idIndirizzo": ' + data.idIndirizzo + ', "orarioConsegna": "' + orario + '"}';
+      console.log(json);
+      this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data2 => {
+        window.location.reload();
+      });
     });
   }
 

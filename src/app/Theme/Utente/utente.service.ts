@@ -21,20 +21,24 @@ export class UtenteService {
   }
 
   getNonPagato(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/nonPagato`);
+    return this.http.get(`${this.baseUrl}/nonPagato`, this.header);
   }
 
   getInfoTavolo(numeroTavolo: number): Observable<any>{
-    return this.http.get(`${this.baseUrl}/info/${numeroTavolo}`);
+    return this.http.get(`${this.baseUrl}/info/${numeroTavolo}`, this.header);
+  }
+
+  getIndirizzoByUsername(username: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/indirizzo/${username}`, this.header);
   }
 
   aggiungiOrdinazione(ordinazione: any) :Observable<any>{
-    return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione);
+    return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione, this.header);
   }
 
   consegnato(tavolo: string): Observable<any>{
     let dto = "{\"tavolo\": " + tavolo + "}";
-    return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto));    
+    return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto), this.header);    
   }
 
   authenticate(json): Observable<any>{
