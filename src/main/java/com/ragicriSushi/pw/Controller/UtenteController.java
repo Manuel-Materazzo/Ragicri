@@ -2,6 +2,7 @@ package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Service.RoleService;
 import com.ragicriSushi.pw.Service.UtenteService;
@@ -42,7 +43,7 @@ public class UtenteController {
         UtenteDTO dto = utenteService.getById(id);
 
         if (dto == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
         } else {
             return ResponseEntity.ok(dto);
         }
@@ -54,9 +55,22 @@ public class UtenteController {
     public ResponseEntity<Object> getByRuolo(@PathVariable String ruolo) {
         List<UtenteDTO> dto = utenteService.getByRuolo(ruolo);
         if (dto == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
         } else {
             return ResponseEntity.ok(dto);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "/indirizzo/{username}")
+    @ApiOperation("Ritorna l'indirozzo dell'utente con lo username specificato")
+    public ResponseEntity<Object> getIndirizzoByUsername(@PathVariable String username) {
+        IndirizzoDTO result = utenteService.getIndirizzoByUsername(username);
+
+        if (result == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
+        } else {
+            return ResponseEntity.ok(result);
         }
     }
 
@@ -69,7 +83,7 @@ public class UtenteController {
             if (dto != null) {
                 return ResponseEntity.ok(dto);
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Utente non trovato.\"}");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
             }
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().body("L'id " + id + " non è valido.");
@@ -95,7 +109,7 @@ public class UtenteController {
     public ResponseEntity<Object> update(@RequestBody UtenteDTO dto) {
         UtenteDTO result = utenteService.update(dto);
         if (result == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Utente non trovato.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
         } else {
             return ResponseEntity.ok(result);
         }

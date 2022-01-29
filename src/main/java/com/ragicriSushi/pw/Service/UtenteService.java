@@ -4,6 +4,7 @@ import com.ragicriSushi.pw.DAO.IndirizzoDAO;
 import com.ragicriSushi.pw.DAO.RoleDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.RoleRepository;
@@ -108,6 +109,26 @@ public class UtenteService implements UserDetailsService {
     public boolean checkPresenzaUsername (String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
         return dao.isPresent();
+    }
+
+    public UtenteDTO getByUsername (String username){
+        Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
+        if (!dao.isPresent()){
+            return null;
+        }
+        else {
+            return conversioni.toDTO(dao.get());
+        }
+    }
+
+    public IndirizzoDTO getIndirizzoByUsername (String username){
+        Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
+        if (!dao.isPresent()){
+            return null;
+        }
+        else {
+            return conversioni.toDTO(dao.get().getIndirizzo());
+        }
     }
 
     @Override
