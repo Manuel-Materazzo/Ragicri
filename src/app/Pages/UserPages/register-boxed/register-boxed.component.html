@@ -8,7 +8,7 @@
             <h5 class="modal-title">
               <h4 class="mt-2">
                 <div>Benvenuto!</div>
-                <span>Registrati in <span class="text-success">pochi secondi</span> e crea il tuo account!</span>
+                  <span id="textError">Registrati in <span class="text-success">pochi secondi</span> e crea il tuo account!</span>
               </h4>
             </h5>
             <div class="divider"></div>
@@ -82,7 +82,7 @@
             <div class="divider"></div>
             <h6 class="mb-0">
               Hai già un altro account?
-              <a [routerLink]="" class="text-primary">Accedi</a>
+              <a [routerLink]="" class="text-primary" (click)="Login()">Accedi</a>
               <!--|
               <a [routerLink]="" class="text-primary">Recupera password</a>-->
             </h6>

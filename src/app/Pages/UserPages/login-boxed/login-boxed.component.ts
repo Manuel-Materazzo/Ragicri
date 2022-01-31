@@ -36,8 +36,11 @@ export class LoginBoxedComponent implements OnInit {
 
       }
     });
-    
-}
+  }
+
+  Registrati(){
+    window.location.replace("/pages/register-boxed");
+  }
   
 
 }
