@@ -62,7 +62,7 @@
                                 </ng-template>
                             </ngb-panel>
 
-                            <ngb-panel id="camerieri">
+                            <ngb-panel *ngIf="ruolo!=3" id="camerieri">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon fa fa-pencil-square-o icon-gradient bg-love-kiss"></i>
@@ -76,7 +76,7 @@
                                 </ng-template>
                             </ngb-panel>
 
-                            <ngb-panel id="cucina">
+                            <ngb-panel *ngIf="ruolo!=3" id="cucina">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon fa fa-book icon-gradient bg-strong-bliss"></i>
@@ -90,7 +90,7 @@
                                 </ng-template>
                             </ngb-panel>
 
-                            <ngb-panel id="ordiniAsporto">
+                            <ngb-panel *ngIf="ruolo!=3" id="ordiniAsporto">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon fa fa-car icon-gradient bg-plum-plate"></i>
@@ -104,7 +104,7 @@
                                 </ng-template>
                             </ngb-panel>
 
-                            <ngb-panel id="admin">
+                            <ngb-panel *ngIf="ruolo==1" id="admin">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon fa fa-key icon-gradient bg-happy-fisher"></i>
