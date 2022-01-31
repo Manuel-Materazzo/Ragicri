@@ -23,9 +23,6 @@ export class LoginBoxedComponent implements OnInit {
   Login() {
     this.username = (document.getElementById('username') as HTMLInputElement).value;
     this.password = (document.getElementById('password') as HTMLInputElement).value;
-    
-    console.log("username: " + this.username);
-    console.log("password: "+ this.password);
       
     let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
 
@@ -33,7 +30,10 @@ export class LoginBoxedComponent implements OnInit {
       if(data.token != null){
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("username", String(this.username));
-        window.location.replace("http://localhost:4200/");
+        window.location.replace("/");
+      }
+      else{
+
       }
     });
     

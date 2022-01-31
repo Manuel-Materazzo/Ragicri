@@ -13,12 +13,12 @@ export class PiattoService {
     }
 
     private baseUrl = 'http://localhost:8080/ragicri/piatto';
-    private header = {                                                                                                                                                                                 
+    private header = {
         headers: new HttpHeaders({ Authorization: "Bearer " + sessionStorage.getItem("token")}), 
     };
 
     getPiatti(): Observable<any> {
-        return this.http.get(this.baseUrl, this.header);
+        return this.http.get(this.baseUrl);
     }
 
     getPiatto(numeretto: number): Observable<any> {
@@ -35,11 +35,11 @@ export class PiattoService {
     }
 
     getPiattiFiltrati(getPiattoDto: getPiattoDto): Observable<any> {
-        return this.http.post(`${this.baseUrl}/get`, getPiattoDto, this.header);
+        return this.http.post(`${this.baseUrl}/get`, getPiattoDto);
     }
 
     getTipologie():Observable<any>{
-        return this.http.get(`${this.baseUrl}/tipologie`, this.header);
+        return this.http.get(`${this.baseUrl}/tipologie`);
     }
 
     updatePiattoConFoto(piatto: FormData): Observable<any> {
