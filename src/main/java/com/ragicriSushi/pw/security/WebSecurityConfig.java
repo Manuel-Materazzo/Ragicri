@@ -69,7 +69,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable().cors().and()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate").permitAll().
+                .authorizeRequests().antMatchers("/authenticate").permitAll().and()
+                .authorizeRequests().antMatchers("/piatto/get").permitAll().and()
+                .authorizeRequests().antMatchers("/piatto/tipologie").permitAll().and()
+                .authorizeRequests().antMatchers("/piatto").permitAll().
                 antMatchers(AUTH_WHITELIST).permitAll().  // whitelist Swagger UI resources
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().
