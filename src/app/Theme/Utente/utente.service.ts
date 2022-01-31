@@ -16,11 +16,8 @@ export class UtenteService {
       headers: new HttpHeaders({ Authorization: "Bearer " + sessionStorage.getItem("token")}), 
   };
 
-  createUtente( utente: any): any {
-    const data = utente;
-    return this.http.post<any>('http://localhost:8080/ragicri/utente/save', data).pipe(map(r => {
-      return r;
-    }));
+  registraUtente(json): Observable<any>{
+    return this.http.post("http://localhost:8080/ragicri/utente/add", JSON.parse(json));
   }
 
   getNonPagato(): Observable<any>{

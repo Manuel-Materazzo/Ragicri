@@ -11,8 +11,17 @@ import { UtenteService } from 'src/app/Theme/Utente/utente.service';
 })
 export class RegisterBoxedComponent implements OnInit {
 
-  utente: AddUtenteDTO = new AddUtenteDTO();
   url: string | ArrayBuffer = '';
+  nome: String;
+  email: String;
+  username: String;
+  password: String;
+  via: String;
+  provincia: String;
+  cap: number;
+  civico: number;
+
+   
 
   constructor(private utenteService: UtenteService, private router: Router, private modalService: NgbModal) {
   }
@@ -20,24 +29,30 @@ export class RegisterBoxedComponent implements OnInit {
   ngOnInit() {
   }
 
-  createUtente() {
-    this.utente.nome = (document.getElementById('addNome') as HTMLInputElement).value;
-    this.utente.email = (document.getElementById('addEmail') as HTMLInputElement).value;
-    this.utente.username = (document.getElementById('addUsername') as HTMLInputElement).value;
-    this.utente.password = (document.getElementById('addPassword') as HTMLInputElement).value;
-    //this.utente.indirizzo = (document.getElementById('addIndirizzo') as HTMLInputElement).value;
-    this.utente.ruolo = (document.getElementById('addRuolo') as HTMLInputElement).value;
+  Registrazione() {
+    this.nome = (document.getElementById('nome') as HTMLInputElement).value;
+    this.email = (document.getElementById('email') as HTMLInputElement).value;
+    this.username = (document.getElementById('username') as HTMLInputElement).value;
+    this.password = (document.getElementById('password') as HTMLInputElement).value;
+    this.via = (document.getElementById('via') as HTMLInputElement).value;
+    this.provincia = (document.getElementById('provincia') as HTMLInputElement).value;
+    this.cap = parseInt((document.getElementById('cap') as HTMLInputElement).value);
+    this.civico = parseInt((document.getElementById('civico') as HTMLInputElement).value);
 
-    let input = new FormData();
-    input.append('nome', this.utente.nome);
-    input.append('email', this.utente.email + '');
-    input.append('username', this.utente.username);
-    input.append('password', this.utente.password);
-    input.append('ruolo', this.utente.ruolo);
-    this.utenteService.createUtente(input).subscribe((response: any) => {
+    let json='{ "indirizzoDTO": {"cap": ' + this.cap + ', "civico": '+ this.civico + ', "provincia:" "'+ this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 1, "name": "ROLE_ADMIN"}, "username": "' + this.username +'"}';
+    this.utenteService.registraUtente(json).subscribe(data =>{ 
+      
+      let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
+      this.utenteService.authenticate(json).subscribe(data => {
+        
+        if(data.token != null){
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("username", String(this.username));
+          window.location.replace("http://localhost:4200/");
+        }
+      });
     });
-    this.url = '';
-    this.modalService.dismissAll();
+
 }
 
 }
