@@ -90,7 +90,7 @@ public class UtenteController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     @ApiOperation("Crea un utente")
     public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {

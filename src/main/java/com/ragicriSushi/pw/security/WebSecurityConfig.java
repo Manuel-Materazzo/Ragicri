@@ -72,7 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/authenticate").permitAll().and()
                 .authorizeRequests().antMatchers("/piatto/get").permitAll().and()
                 .authorizeRequests().antMatchers("/piatto/tipologie").permitAll().and()
-                .authorizeRequests().antMatchers("/piatto").permitAll().
+                .authorizeRequests().antMatchers("/piatto").permitAll().and()
+                .authorizeRequests().antMatchers("/utente/add").permitAll().
                 antMatchers(AUTH_WHITELIST).permitAll().  // whitelist Swagger UI resources
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().
