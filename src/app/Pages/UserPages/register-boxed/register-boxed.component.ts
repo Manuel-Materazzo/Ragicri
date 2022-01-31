@@ -39,8 +39,8 @@ export class RegisterBoxedComponent implements OnInit {
     this.cap = parseInt((document.getElementById('cap') as HTMLInputElement).value);
     this.civico = parseInt((document.getElementById('civico') as HTMLInputElement).value);
 
-    let json='{ "indirizzoDTO": {"cap": ' + this.cap + ', "civico": '+ this.civico + ', "provincia:" "'+ this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 1, "name": "ROLE_ADMIN"}, "username": "' + this.username +'"}';
-    this.utenteService.registraUtente(json).subscribe(data =>{ 
+    let json='{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": '+ this.civico + ', "provincia": "'+ this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 3, "name": "ROLE_UTENTE"}, "username": "' + this.username +'"}';
+    this.utenteService.registraUtente(json).subscribe(data1 =>{
       
       let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
       this.utenteService.authenticate(json).subscribe(data => {
@@ -48,7 +48,7 @@ export class RegisterBoxedComponent implements OnInit {
         if(data.token != null){
           sessionStorage.setItem("token", data.token);
           sessionStorage.setItem("username", String(this.username));
-          window.location.replace("http://localhost:4200/");
+          window.location.replace("/");
         }
       });
     });
