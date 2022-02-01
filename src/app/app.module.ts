@@ -102,7 +102,6 @@ import {BubbleChartComponent} from './Pages/Charts/chartjs/examples/bubble-chart
 import {DynamicChartComponent} from './Pages/Charts/chartjs/examples/dynamic-chart/dynamic-chart.component';
 import {DoughnutChartComponent} from './Pages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component';
 import {PieChartComponent} from './Pages/Charts/chartjs/examples/pie-chart/pie-chart.component';
-import { SideBarCarrelloComponent } from './Layout/Components/side-bar-carrello/side-bar-carrello.component';
 import { HomeComponent } from './Pages/Dashboards/home/home/home.component';
 import { MenuComponent } from './Pages/Menu/menu.component';
 import { OrdiniCamerieriComponent } from './Pages/OrdiniCamerieri/ordini-camerieri/ordini-camerieri.component';
@@ -110,6 +109,7 @@ import { CucinaComponent } from './Pages/Cucina/cucina/cucina.component';
 import { PiattiAdminComponent } from './Pages/Admin/piatti-admin/piatti-admin.component';
 import { CarrelloComponent } from './Pages/Carrello/carrello/carrello.component';
 import { OrdiniAsportoComponent } from './Pages/ordini-asporto/ordini-asporto.component';
+import { UtenteAdminComponent } from './Pages/Admin/utente-admin/utente-admin/utente-admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -199,7 +199,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DynamicChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
-    SideBarCarrelloComponent,
     HomeComponent,
     MenuComponent,
     OrdiniCamerieriComponent,
@@ -207,6 +206,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PiattiAdminComponent,
     CarrelloComponent,
     OrdiniAsportoComponent,
+    UtenteAdminComponent,
   ],
   imports: [
     BrowserModule,

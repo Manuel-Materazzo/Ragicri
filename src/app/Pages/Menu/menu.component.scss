@@ -58,10 +58,7 @@
   border-color: #585155 !important;
 }
 
-.hover{
-  background: #000 linear-gradient(180deg, #000, #000) repeat-x !important;
-  border-color: #000 !important;
-}
+
 
 input[type="checkbox"]:checked + label img{
   filter: grayscale(100%);
@@ -82,6 +79,16 @@ input[type="checkbox"]:checked + label img{
   flex-shrink: 0 !important;
 }
 
+.btn-secondary{
+  background: #FF530D linear-gradient(180deg, #FF530D, #FF7B3C) repeat-x;
+  color: white;
+  border-color: #FF7B3C;
+}
+
+.btn-secondary:active{
+  background: #FF290D linear-gradient(180deg, #FF290D, #FF290D) repeat-x !important;
+  color: white !important;
+}
 
 @media only screen and (max-width: 770px) {
   .imgPiatto{
@@ -91,5 +98,37 @@ input[type="checkbox"]:checked + label img{
   .iconaAllergene{
     width: 30px;
     height: 30px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .testa{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    padding: 10px 0px 10px 0px;
+    height: 172px;
+  }
+  
+  /* width */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
   }
 }

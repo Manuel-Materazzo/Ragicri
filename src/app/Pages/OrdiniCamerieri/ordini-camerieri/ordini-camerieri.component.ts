@@ -101,7 +101,8 @@ export class OrdiniCamerieriComponent implements OnInit {
         this.OrdinazioneAdd.persone = parseInt((document.getElementById('persone') as HTMLInputElement).value);
         this.OrdinazioneAdd.piattiOrdinati = this.piattiOrdinati;
 
-        this.ordinazioneService.aggiungiOrdinazione(this.OrdinazioneAdd).subscribe((response: any) => { });
+        this.ordinazioneService.aggiungiOrdinazione(this.OrdinazioneAdd).subscribe((response: any) => {
+        });
         this.piattiOrdinati.splice(0);
         (document.getElementById('numeretto') as HTMLInputElement).value = '' + 0;
         (document.getElementById('quantita') as HTMLInputElement).value = '' + 1;
