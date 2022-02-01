@@ -21,7 +21,14 @@ export class OrdiniAsportoComponent implements OnInit {
   preparato;
   noOrdinazioni;
 
-  constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) { }
+  constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) {
+    if (sessionStorage.getItem("token") == null) {
+      window.location.replace("/");
+    }
+    if (this.parseJwt(sessionStorage.getItem("token")).roles.id == 3) {
+      window.location.replace("/");
+    }
+  }
 
   ngOnInit() {
     this.getOrdinazioni();
@@ -29,6 +36,16 @@ export class OrdiniAsportoComponent implements OnInit {
     document.getElementById("bottoneConsegnato").setAttribute("hidden", "");
     document.getElementById("ordinazioniNonPresenti").setAttribute("hidden", "");
   }
+
+  parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  };
 
   getOrdinazioni() {
     this.ordinazioneService.getAsportoDomicilioNonConsegnato().subscribe(data => {

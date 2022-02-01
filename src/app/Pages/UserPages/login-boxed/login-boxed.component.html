@@ -10,32 +10,24 @@
                 <div>Benvenuto!</div>
                 <span>Per favore inserisci i tuoi dati personali.</span></h4>
             </div>
+            
             <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
                  class="form-group">
-              <div><input id="username" type="email" placeholder="Inserisci username..." required="required"
-                          aria-required="true" class="form-control"
-                          aria-describedby="exampleInputGroup1__BV_description_">
-                <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">Non comunicheremo la tua mail con nessuno.
-                </small>
+              <div><input id="username" type="email" placeholder="Inserisci username..." class="form-control">
               </div>
             </div>
             <div id="exampleInputGroup2" role="group" class="form-group">
-              <div><input id="password" type="password" placeholder="Inserisci password..." required="required"
-                          aria-required="true" class="form-control"></div>
+              <div>
+                <form (keypress)="keyPressFunction($event)"><input id="password" type="password" placeholder="Inserisci password..." class="form-control"></form>
+                        </div>
             </div>
-            <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
-                                                               autocomplete="off" class="custom-control-input"
-                                                               value="true"><label for="exampleCheck"
-                                                                                   class="custom-control-label">
-              Rimani connesso
-            </label></div>
+           
             <div class="divider"></div>
             <h6 class="mb-0">
               Nessun account?
-              <a [routerLink]="" class="text-primary">Registrati ora!</a></h6></div>
+              <a [routerLink]="" class="text-primary" (click)="Registrati()">Registrati ora!</a></h6></div>
           <div class="modal-footer clearfix">
-            <!--<div class="float-left"><a [routerLink]="" class="btn-lg btn btn-link">Recover
-              Password</a></div> -->
+            <div class="float-left"><label hidden id="ErroreLogin">Username e password non corretti </label></div> 
             <div class="float-right">
               <button type="button" class="btn btn-primary btn-lg" (click)="Login()">Accedi alla pagina</button>
             </div>

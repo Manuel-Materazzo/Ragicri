@@ -20,7 +20,12 @@ export class CucinaComponent implements OnInit {
   ordinazioneId;
 
   constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private modalService: NgbModal) {
-
+    if (sessionStorage.getItem("token") == null) {
+      window.location.replace("/");
+    }
+    if (this.parseJwt(sessionStorage.getItem("token")).roles.id == 3) {
+      window.location.replace("/");
+    }
   }
 
   ngOnInit() {
@@ -33,6 +38,17 @@ export class CucinaComponent implements OnInit {
     this.ordinazioneId = 0;
   }
 
+  parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  };
+
+
   infoOrdini() {
     this.ordinazioneService.getNonPagato().subscribe(data => {
       if (data.status == 'Tutti i tavoli hanno già pagato.') {
@@ -42,12 +58,12 @@ export class CucinaComponent implements OnInit {
       else {
         let cont = 0;
         for (let i = 0; i < data.length; i++) {
-          for(let y = 0; y < data[i].piattiOrdinati.length; y++){
-            if(data[i].piattiOrdinati[y].consegnato == true){
+          for (let y = 0; y < data[i].piattiOrdinati.length; y++) {
+            if (data[i].piattiOrdinati[y].consegnato == true) {
               cont++;
             }
           }
-          if(cont == data[i].piattiOrdinati.length){
+          if (cont == data[i].piattiOrdinati.length) {
             data[i].preparato = "Sì";
           }
           else {
@@ -68,12 +84,12 @@ export class CucinaComponent implements OnInit {
       else {
         let cont = 0;
         for (let i = 0; i < data.length; i++) {
-          for(let y = 0; y < data[i].piattiOrdinati.length; y++){
-            if(data[i].piattiOrdinati[y].consegnato == true){
+          for (let y = 0; y < data[i].piattiOrdinati.length; y++) {
+            if (data[i].piattiOrdinati[y].consegnato == true) {
               cont++;
             }
           }
-          if(cont == data[i].piattiOrdinati.length){
+          if (cont == data[i].piattiOrdinati.length) {
             data[i].preparato = "Sì";
           }
           else {
@@ -101,7 +117,7 @@ export class CucinaComponent implements OnInit {
     });
   }
 
-  infoOrdinazione(id: number){
+  infoOrdinazione(id: number) {
     this.ordinazioneService.getInfoOrd(id).subscribe(data => {
       if (data.Status == 'Ordinazione non trovata.') {
         //niente
@@ -115,13 +131,13 @@ export class CucinaComponent implements OnInit {
     });
   }
 
-  consegnato(){
+  consegnato() {
     this.ordinazioneService.consegnato(this.tavolo).subscribe(data => {
       this.infoOrdini();
     });
   }
 
-  consegnatoAsporto(){
+  consegnatoAsporto() {
     this.ordinazioneService.consegnatoId(this.ordinazioneId).subscribe(data => {
       this.infoOrdini();
     });
