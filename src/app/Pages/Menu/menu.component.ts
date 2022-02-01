@@ -16,6 +16,8 @@ export class MenuComponent implements OnInit {
     tipologie;
     tipologiePiatto;
     carrello;
+    listaPiatti: Piatto[] = [];
+    token = false;
 
     allergeni = {
         glutine: false,
@@ -25,10 +27,11 @@ export class MenuComponent implements OnInit {
         pesceCotto: false
     };
 
-    constructor(
-        private piattoService: PiattoService,
-        private router: Router
-    ) {
+    constructor(private piattoService: PiattoService, private router: Router) {
+        if(sessionStorage.getItem("token") != null){
+            this.token = true;
+        }
+
         this.piattoService.getPiatti().subscribe((response: any) => {
             this.listaPiatti = [];
             response.forEach(element => {
@@ -46,10 +49,18 @@ export class MenuComponent implements OnInit {
         }
     }
 
-    listaPiatti: Piatto[] = [];
-
     ngOnInit() {
     }
+
+    parseJwt(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    };
 
     getPiattiLista() {
         return this.piattoService.getPiatti().subscribe((response: any) => {
