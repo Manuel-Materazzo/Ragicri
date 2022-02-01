@@ -26,6 +26,7 @@ export class LoginBoxedComponent implements OnInit {
       
     let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
 
+    
     this.utenteService.authenticate(json).subscribe(data =>{
       if(data.token != null){
         sessionStorage.setItem("token", data.token);
@@ -35,6 +36,10 @@ export class LoginBoxedComponent implements OnInit {
       else{
 
       }
+    }, error => {
+      document.getElementById('ErroreLogin').style.color = '#cc0000';
+            document.getElementById('ErroreLogin').removeAttribute('hidden');
+            (document.getElementById('password') as HTMLInputElement).value='';
     });
   }
 
@@ -42,5 +47,10 @@ export class LoginBoxedComponent implements OnInit {
     window.location.replace("/pages/register-boxed");
   }
   
+  keyPressFunction(event) {
+    if (event.keyCode === 13) {
+      this.Login();
+    }
+  }
 
 }
