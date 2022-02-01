@@ -41,6 +41,9 @@ public class UtenteService implements UserDetailsService {
         return conversioni.toDTO(utenteRepository.findAll());
     }
 
+    public List<UtenteDTO> getAllUtentiAzienda() {
+        return conversioni.toDTO(utenteRepository.getUtentiAzienda());
+    }
     public UtenteDTO getById(int id) {
         Optional<UtenteDAO> optional = utenteRepository.findById(id);
 
@@ -70,16 +73,18 @@ public class UtenteService implements UserDetailsService {
 
     public UtenteDTO save(AddUtenteDTO dto) {
 
-        IndirizzoDAO daoIndi = new IndirizzoDAO();
-
-        daoIndi.setVia(dto.getIndirizzoDTO().getVia());
-        daoIndi.setCivico(dto.getIndirizzoDTO().getCivico());
-        daoIndi.setCAP(dto.getIndirizzoDTO().getCAP());
-        daoIndi.setProvincia(dto.getIndirizzoDTO().getProvincia());
-
-        daoIndi = indirizzoRepository.save(daoIndi);
-
         UtenteDAO dao = new UtenteDAO();
+        if(dto.getIndirizzoDTO()!=null) {
+            IndirizzoDAO daoIndi = new IndirizzoDAO();
+
+            daoIndi.setVia(dto.getIndirizzoDTO().getVia());
+            daoIndi.setCivico(dto.getIndirizzoDTO().getCivico());
+            daoIndi.setCAP(dto.getIndirizzoDTO().getCAP());
+            daoIndi.setProvincia(dto.getIndirizzoDTO().getProvincia());
+
+            daoIndi = indirizzoRepository.save(daoIndi);
+            dao.setIndirizzo(daoIndi);
+        }
         dao.setNome(dto.getNome());
         dao.setEmail(dto.getEmail());
         RoleDAO roleDao = new RoleDAO();
@@ -89,7 +94,7 @@ public class UtenteService implements UserDetailsService {
         dao.setRuolo(roleDao);
         dao.setUsername(dto.getUsername());
         dao.setPassword(passwordEncoder.encode(dto.getPassword()));
-        dao.setIndirizzo(daoIndi);
+
 
         dao = utenteRepository.save(dao);
         return conversioni.toDTO(dao);

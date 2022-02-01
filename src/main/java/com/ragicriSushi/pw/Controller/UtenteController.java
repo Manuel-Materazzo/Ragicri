@@ -36,6 +36,14 @@ public class UtenteController {
         return ResponseEntity.ok(utenteService.getAll());
     }
 
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "/utentiAzienda")
+    @ApiOperation("Ritorna tutti i dipendenti e amministratori")
+    public ResponseEntity<Object> getAllUtentiAzienda() {
+        return ResponseEntity.ok(utenteService.getAllUtentiAzienda());
+    }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna un utente con l'id inserito")

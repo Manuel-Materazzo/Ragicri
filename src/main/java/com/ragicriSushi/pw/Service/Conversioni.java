@@ -1,6 +1,5 @@
 package com.ragicriSushi.pw.Service;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat;
 import com.ragicriSushi.pw.DAO.*;
 import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
@@ -159,7 +158,7 @@ public class Conversioni {
 
         dto.setId(dao.getIdUtente());
         dto.setNome(dao.getNome());
-
+        dto.setEmail(dao.getEmail());
         RoleDTO roleDto=new RoleDTO();
         roleDto.setId(dao.getRuolo().getId());
         roleDto.setName(dao.getRuolo().getName());
@@ -167,7 +166,9 @@ public class Conversioni {
         dto.setRuolo(roleDto);
         dto.setUsername(dao.getUsername());
         dto.setPassword((dao.getPassword()));
-        dto.setIndirizzo(fromDaoToDto(dao.getIndirizzo()));
+        if(dao.getIndirizzo()!=null) {
+            dto.setIndirizzo(fromDaoToDto(dao.getIndirizzo()));
+        }
 
         return dto;
     }
@@ -201,6 +202,7 @@ public class Conversioni {
         UtenteDAO dao=new UtenteDAO();
 
         dao.setNome(dto.getNome());
+        dao.setEmail(dto.getEmail());
         RoleDAO roleDao=new RoleDAO();
         roleDao.setId(dto.getRuolo().getId());
         roleDao.setName(dto.getRuolo().getName());
