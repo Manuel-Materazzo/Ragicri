@@ -1,14 +1,15 @@
 import {PiattoOrdinato} from '../piattoOrdinato/PiattoOrdinato';
 import {Indirizzo} from '../indirizzo/Indirizzo';
+import {Role} from '../Role/role';
 
 export class Utente{
-    idUtente: number;
+    id: number;
     nome: string;
     email: string;
     username: string;
     password: string;
     indirizzo: Indirizzo;
-    ruolo: string;
+    ruolo: Role;
 }
 
 export class UtenteLogin{

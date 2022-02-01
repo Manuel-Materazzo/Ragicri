@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -12,6 +12,9 @@ export class IndirizzoService {
 
   private baseUrl= "http://localhost:8080/ragicri/indirizzo";
 
-  
+  private header = {
+    headers: new HttpHeaders({ Authorization: "Bearer " + sessionStorage.getItem("token")}),
+  };
+
 
 }

@@ -58,6 +58,7 @@ import {CucinaComponent} from './Pages/Cucina/cucina/cucina.component';
 import {PiattiAdminComponent} from './Pages/Admin/piatti-admin/piatti-admin.component';
 import {CarrelloComponent} from './Pages/Carrello/carrello/carrello.component';
 import {OrdiniAsportoComponent} from './Pages/ordini-asporto/ordini-asporto.component';
+import {UtenteAdminComponent} from './Pages/Admin/utente-admin/utente-admin/utente-admin.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,7 @@ const routes: Routes = [
       {path: 'camerieri', component: OrdiniCamerieriComponent, data: {extraParameter: ''}},
       {path: 'cucina', component: CucinaComponent, data:{extraParameter: ''}},
       {path: 'adminPiatti', component: PiattiAdminComponent, data:{extraParameter: 'admin'}},
+      {path: 'adminUtenti', component: UtenteAdminComponent, data:{extraParameter: 'admin'}},
       {path: 'ordiniAsporto', component: OrdiniAsportoComponent, data:{extraParameter: 'ordiniAsporto'}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},

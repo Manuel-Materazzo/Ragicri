@@ -16,8 +16,15 @@ export class UtenteService {
       headers: new HttpHeaders({ Authorization: "Bearer " + sessionStorage.getItem("token")}), 
   };
 
+  getAllUtente(): Observable<any>{
+    return this.http.get("http://localhost:8080/ragicri/utente",this.header);
+  }
   registraUtente(json): Observable<any>{
     return this.http.post("http://localhost:8080/ragicri/utente/add", JSON.parse(json));
+  }
+
+  getAllUtentiAzienda(): Observable<any>{
+    return this.http.get("http://localhost:8080/ragicri/utente/utentiAzienda",this.header);
   }
 
   getNonPagato(): Observable<any>{
@@ -41,6 +48,10 @@ export class UtenteService {
     return this.http.post(`${this.baseUrl}/consegnato`, JSON.parse(dto), this.header);    
   }
 
+  eliminaUtente(id: any): Observable<any>{
+    let utente = '{ "numero": ' + id + '}';
+    return this.http.post(`${this.baseUrl}/delete`, JSON.parse(utente), this.header);
+  }
   authenticate(json): Observable<any>{
     return this.http.post("http://localhost:8080/ragicri/authenticate", JSON.parse(json));
   } 

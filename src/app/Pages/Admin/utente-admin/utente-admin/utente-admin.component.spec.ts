@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SideBarCarrelloComponent } from './side-bar-carrello.component';
+import { UtenteAdminComponent } from './utente-admin.component';
 
-describe('SideBarCarrelloComponent', () => {
-  let component: SideBarCarrelloComponent;
-  let fixture: ComponentFixture<SideBarCarrelloComponent>;
+describe('UtenteAdminComponent', () => {
+  let component: UtenteAdminComponent;
+  let fixture: ComponentFixture<UtenteAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SideBarCarrelloComponent ]
+      declarations: [ UtenteAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SideBarCarrelloComponent);
+    fixture = TestBed.createComponent(UtenteAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
