@@ -7,7 +7,7 @@ import { UtenteService } from 'src/app/Theme/Utente/utente.service';
 @Component({
   selector: 'app-register-boxed',
   templateUrl: './register-boxed.component.html',
-  styles: []
+  styleUrls: ['./register-boxed.scss']
 })
 export class RegisterBoxedComponent implements OnInit {
 
@@ -22,16 +22,19 @@ export class RegisterBoxedComponent implements OnInit {
   civico: number;
   ripetipass: String;
   textError: String;
-  
+  controllo: boolean;
+  checkBox;
+
   constructor(private utenteService: UtenteService, private router: Router, private modalService: NgbModal) {
   }
 
   ngOnInit() {
   }
 
-  Login(){
+  Login() {
     window.location.replace("/pages/login-boxed");
   }
+
   Registrazione() {
     this.nome = (document.getElementById('nome') as HTMLInputElement).value;
     this.email = (document.getElementById('email') as HTMLInputElement).value;
@@ -42,27 +45,65 @@ export class RegisterBoxedComponent implements OnInit {
     this.provincia = (document.getElementById('provincia') as HTMLInputElement).value;
     this.cap = parseInt((document.getElementById('cap') as HTMLInputElement).value);
     this.civico = parseInt((document.getElementById('civico') as HTMLInputElement).value);
-    var textError = (document.getElementById('textError') as HTMLInputElement).innerText;
-    console.log(textError);
-    if(this.password==this.ripetipass){
-      let json='{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": '+ this.civico + ', "provincia": "'+ this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 3, "name": "ROLE_UTENTE"}, "username": "' + this.username +'"}';
-      this.utenteService.registraUtente(json).subscribe(data1 =>{
-        
+    this.checkBox = (document.getElementById('checkTermini') as HTMLInputElement).checked;
+    console.log(this.checkBox);
+
+    if (this.ControlloDati()) {
+      let json = '{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": ' + this.civico + ', "provincia": "' + this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 3, "name": "ROLE_UTENTE"}, "username": "' + this.username + '"}';
+      this.utenteService.registraUtente(json).subscribe(data1 => {
+
         let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
         this.utenteService.authenticate(json).subscribe(data => {
-          
-          if(data.token != null){
+
+          if (data.token != null) {
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("username", String(this.username));
             window.location.replace("/");
           }
         });
+      }, error => {
+        document.getElementById('ErroreLogin').removeAttribute('hidden');
       });
-    }else{
-      (document.getElementById('textError') as HTMLInputElement).innerHTML = 'Password inserita errata, riprova';
-      document.getElementById('textError').style.color = '#FF0000';
+
+    } else {
+      document.getElementById('erroreDati').removeAttribute('hidden');
+    }
+  }
+
+  ControlloDati() {
+    this.controllo = true;
+
+    if (this.nome == "")
+      return false;
+    if (this.email == "")
+      return false;
+    if (this.provincia == "")
+      return false;
+    if (this.via == "")
+      return false;
+    if (this.civico == null)
+      return false;
+    if (this.cap == null)
+      return false;
+    if (this.username == "")
+      return false;
+    if (this.password == "")
+      return false;
+    if (this.ripetipass == "")
+      return false;
+
+    if (this.password != this.ripetipass) {
+      document.getElementById('errorePass').removeAttribute('hidden');
+      (document.getElementById('password') as HTMLInputElement).value = "";
+      (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
+      return false;
     }
 
-}
+    if (this.checkBox == false) {
+      document.getElementById('erroreTermini').removeAttribute('hidden');
+      return false;
+    }
+    return true;
+  }
 
 }

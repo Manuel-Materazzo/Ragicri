@@ -1,5 +1,5 @@
-<div class="h-100 bg-premium-dark">
-  <div class="d-flex h-100 justify-content-center align-items-center">
+<div class="h-100 bg-plum-plate bg-animation">
+  <div class="d-flex justify-content-center align-items-center">
     <div class="mx-auto app-login-box col-md-8">
       <div class="logo-src" style="margin: auto "></div>
       <div class="modal-dialog w-100">
@@ -8,19 +8,21 @@
             <h5 class="modal-title">
               <h4 class="mt-2">
                 <div>Benvenuto!</div>
-                  <span id="textError">Registrati in <span class="text-success">pochi secondi</span> e crea il tuo account!</span>
+                <span>Registrati in <span class="text-success">pochi secondi</span> e crea il tuo account!</span><br>
+                <span id="erroreDati" hidden class="errorDati">Non hai inserito tutti i campi</span>
               </h4>
             </h5>
-            <div class="divider"></div>
+            <div class="divider dividerTop"></div>
             <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
               class="form-group">
               <div id="exampleInputGroup12" role="group" class="form-group">
 
-                <div><input id="nome" type="text" placeholder="Inserisci il tuo nome e cognome ..." class="form-control"> </div>
+                <div><input id="nome" type="text" placeholder="Inserisci il tuo nome e cognome ..."
+                    class="form-control"> </div>
               </div>
 
-              <div><input id="email" type="text" placeholder="Inserisci la mail ..." required="required"
-                  aria-required="true" class="form-control" aria-describedby="exampleInputGroup1__BV_description_">
+              <div><input id="email" type="text" placeholder="Inserisci la mail ..." class="form-control"
+                  aria-describedby="exampleInputGroup1__BV_description_">
                 <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">Non
                   condivideremo la tua mail
                   con nessuno.
@@ -35,19 +37,22 @@
               </div>
               <div class="col-md-6">
                 <div id="exampleInputGroup3" role="group" class="form-group">
-                  <div><input id="provincia" type="text" placeholder="Inserisci la provincia..." class="form-control"></div>
+                  <div><input id="provincia" type="text" size="2" placeholder="Inserisci la provincia..."
+                      onkeyup="this.value = this.value.toUpperCase()" class="form-control"></div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="cap" type="number" placeholder="Inserisci il CAP ..." class="form-control"></div>
+                  <div><input id="cap" type="number" min="10000" max="99999" placeholder="Inserisci il CAP ..."
+                      class="form-control"></div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="exampleInputGroup3" role="group" class="form-group">
-                  <div><input id="civico" type="number" placeholder="Inserisci il numero civico ..." class="form-control"></div>
+                  <div><input id="civico" type="number" min="1" placeholder="Inserisci il numero civico ..."
+                      class="form-control"></div>
                 </div>
               </div>
             </div>
@@ -57,21 +62,25 @@
             <div class="row">
               <div class="col-md-6">
                 <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="password" type="password" placeholder="Inserisci la password..." class="form-control"></div>
+                  <div><input id="password" type="password" placeholder="Inserisci la password..." class="form-control">
+                  </div>
+                  <label id="errorePass" hidden class="errorePassword">Le due password non corrispondono</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="exampleInputGroup3" role="group" class="form-group">
                   <div><input id="ripetiPassword" type="password" placeholder="Ripeti la password..."
-                      required="required" aria-required="true" class="form-control"></div>
+                      class="form-control"></div>
                 </div>
               </div>
             </div>
-            <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
-                autocomplete="off" class="custom-control-input" value="true"><label for="exampleCheck"
-                class="custom-control-label">
+            <div class="custom-control custom-checkbox"><input id="checkTermini" type="checkbox" name="check"
+                value="false" class="custom-control-input">
+              <label for="checkTermini" class="custom-control-label">
                 Accetto i <a [routerLink]="">Termini e Condizioni</a>.
-              </label></div>
+              </label>
+            </div>
+            <label id="erroreTermini" hidden class="errorePassword">Accetta i termini e condizioni</label>
             <div class="divider"></div>
             <h6 class="mb-0">
               Hai già un altro account?
