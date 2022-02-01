@@ -9,9 +9,8 @@
       <th>Email</th>
       <th>Ruolo</th>
       <th>Username</th>
-      <th>Password</th>
       <th class="text-center">
-        <button class="mb-2s mr-2 btn btn-success " >
+        <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)">
           <i class="pe-7s-plus"></i>
         </button>
       </th>
@@ -24,10 +23,9 @@
       <td>{{utente.email}}</td>
       <td>{{utente.ruolo.name}}</td>
       <td>{{utente.username}}</td>
-      <td>{{utente.password}}</td>
       <td class="text-center">
         <div role="group" class="btn-group-sm btn-group">
-          <button class="mb-2 mr-2 btn btn-update" >
+          <button class="mb-2 mr-2 btn btn-update" (click)="openUpdateModal(update,utente.id)">
             <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
           </button>
           <button class="mb-2 mr-2 btn btn-danger" (click)="openDeleteModal(delete, utente.id,utente.nome)"
@@ -53,7 +51,7 @@
     <div class="modal-body">
       <div class="card-body">
         <div class="form-row">
-          <!--Nome piatto -->
+          <!--Nome utente -->
           <div class="col-md-6">
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
               <label for="addNome" class="mr-sm-2">Nome:</label>
@@ -61,30 +59,118 @@
               <input name="text" id="addNome" value="" type="text" class="form-control">
             </div>
           </div>
-          <!--Prezzo piatto -->
+          <!--Username utente-->
           <div class="col-md-6">
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-              <label for="addPrezzo" class="mr-sm-2">Prezzo:</label>
-              <label hidden id="ControlloPrezzo" class="mr-sm-2">Inserire prezzo</label>
-              <input name="text" id="addPrezzo" value="" type="number" class="form-control">
+              <label for="addUsername" class="mr-sm-2">Username:</label>
+              <label hidden id="ControlloUsername" class="mr-sm-2">Inserire username</label>
+              <input name="text" id="addUsername" value="" type="text" class="form-control">
             </div>
           </div>
         </div>
 
         <div class="form-row input">
-          <!--Numeretto piatto -->
+          <!--Password utente -->
           <div class="col-md-6">
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-              <label for="addNumerettoPiatto" class="mr-sm-2">Numeretto:</label>
-              <label hidden id="ControlloNumeretto" class="mr-sm-2">Inserire numeretto</label>
-              <input name="text" id="addNumerettoPiatto" value="" type="number" class="form-control">
+              <label for="addPassword" class="mr-sm-2">Password:</label>
+              <label hidden id="ControlloPassword" class="mr-sm-2">Inserire password</label>
+              <input name="text" id="addPassword" value="" type="text" class="form-control">
+            </div>
+          </div>
+          <!--Ruolo utente -->
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="addRuolo" class="mr-sm-2">Ruoli:</label>
+              <select class="form-control" id="addRuolo" name="addRuolo">
+                <option *ngFor="let ruolo of listaRuoli" value="{{ruolo.name}}">{{ruolo.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--Email utente -->
+        <div class="form-row input">
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="addEmail" class="mr-sm-2">Email:</label>
+              <label hidden id="ControlloEmail" class="mr-sm-2">Inserire email</label>
+              <input name="text" id="addEmail" value="" type="email" class="form-control">
+            </div>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="c('Close click')">Chiudi</button>
+        <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Crea</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+<!--Model per l'update -->
+<ng-template #update let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Utente</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="createUtente()" #form="ngForm">
+    <div class="modal-body">
+      <div class="card-body">
+        <div class="form-row">
+          <!--Nome utente -->
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="updateNome" class="mr-sm-2">Nome:</label>
+              <label hidden id="ControlloNomeUpdate" class="mr-sm-2">Inserire nome</label>
+              <input name="text" id="updateNome" value="" type="text" class="form-control">
+            </div>
+          </div>
+          <!--Username utente-->
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="updateUsername" class="mr-sm-2">Username:</label>
+              <label hidden id="ControlloUsernameUpdate" class="mr-sm-2">Inserire username</label>
+              <input name="text" id="updateUsername" value="" type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row input">
+          <!--Password utente -->
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="updatePassword" class="mr-sm-2">Password:</label>
+              <label hidden id="ControlloPasswordUpdate" class="mr-sm-2">Inserire password</label>
+              <input name="text" id="updatePassword" value="" type="text" class="form-control">
+            </div>
+          </div>
+          <!--Ruolo utente -->
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="updateRuolo" class="mr-sm-2">Ruoli:</label>
+              <select class="form-control" id="updateRuolo" name="addRuolo">
+                <option *ngFor="let ruolo of listaRuoli" value="{{ruolo.name}}">{{ruolo.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--Email utente -->
+        <div class="form-row input">
+          <div class="col-md-6">
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="updateEmail" class="mr-sm-2">Email:</label>
+              <label hidden id="ControlloEmailUpdate" class="mr-sm-2">Inserire email</label>
+              <input name="text" id="updateEmail" value="" type="email" class="form-control">
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="c('Close click')">Chiudi</button>
-        <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Crea</button>
+        <button type="button" class="mb-2 mr-2 btn btn-danger" (click)="c('Close click')">Chiudi</button>
+        <button type="button" class="mb-2 mr-2 btn btn-update " (click)="updateUtente()">Aggiorna</button>
       </div>
     </div>
   </form>
@@ -110,4 +196,3 @@
     </div>
   </ng-template>
 </div>
-

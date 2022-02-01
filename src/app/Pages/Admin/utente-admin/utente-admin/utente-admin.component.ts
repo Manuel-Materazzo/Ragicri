@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {UtenteService} from '../../../../Theme/Utente/utente.service';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AddUtenteDTO, Utente} from '../../../../Theme/Utente/Utente';
+import {AddUtenteDTO, UpdateUtenteDTO, Utente} from '../../../../Theme/Utente/Utente';
 import {element} from 'protractor';
 import {Piatto} from '../../../../Theme/piatto/Piatto';
 import {IndirizzoService} from '../../../../Theme/Indirizzo/indirizzo.service';
+import {Role} from '../../../../Theme/Role/role';
+import {RoleService} from '../../../../Theme/Role/role.service';
 
 @Component({
   selector: 'app-utente-admin',
@@ -15,10 +17,13 @@ import {IndirizzoService} from '../../../../Theme/Indirizzo/indirizzo.service';
 export class UtenteAdminComponent implements OnInit {
 
   listaUtenti: Utente[];
+  listaRuoli: Role[];
   closeResult: string;
   utente: AddUtenteDTO= new AddUtenteDTO();
   idUtente: number;
-  constructor(private utenteService: UtenteService,
+  resultControllo: boolean;
+  bodyUpdateUtente: UpdateUtenteDTO= new UpdateUtenteDTO();
+  constructor(private utenteService: UtenteService,private roleService: RoleService,
               private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -28,6 +33,13 @@ export class UtenteAdminComponent implements OnInit {
       response.forEach(element=>{
         this.listaUtenti.push(element);
         this.ordinaUtenti();
+      })
+    })
+
+    this.roleService.getAllRuoli().subscribe((response: any)=>{
+      this.listaRuoli=[];
+      response.forEach(element=>{
+        this.listaRuoli.push(element);
       })
     })
   }
@@ -65,6 +77,23 @@ export class UtenteAdminComponent implements OnInit {
     this.idUtente=idUtente;
   }
 
+  //funzione per il model modifica
+  openUpdateModal(content, id: number) {
+    this.utenteService.getById(id).subscribe(async (response: any) => {
+      this.modalService.open(content, {
+        size: 'lg'
+      });
+      this.bodyUpdateUtente = response;
+      (document.getElementById('updateNome') as HTMLInputElement).value = this.bodyUpdateUtente.nome;
+      (document.getElementById('updateEmail') as HTMLInputElement).value = this.bodyUpdateUtente.email;
+      (document.getElementById('updateUsername') as HTMLInputElement).value = this.bodyUpdateUtente.username;
+      await this.sleep(200);
+    });
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   openCreateModal(content) {
     this.modalService.open(content, {
       size: 'lg'
@@ -95,5 +124,109 @@ export class UtenteAdminComponent implements OnInit {
 
   createUtente() {
 
+    if (this.controlloInputCreate()) {
+      return;
+    }
+
+    this.utente.nome=(document.getElementById('addNome') as HTMLInputElement).value;
+    this.utente.email=(document.getElementById('addEmail') as HTMLInputElement).value;
+    this.utente.username=(document.getElementById('addUsername') as HTMLInputElement).value;
+    this.utente.password=(document.getElementById('addPassword') as HTMLInputElement).value;
+    this.utente.ruolo=(document.getElementById('addRuolo') as HTMLInputElement).value;
+    this.utente.IndirizzoDTO=null;
+    this.utenteService.registraUtente(this.utente).subscribe((response: any) => {
+      this.listaUtenti.push(response);
+      this.ordinaUtenti();
+    });
+    this.modalService.dismissAll();
+  }
+
+  controlloInputCreate() {
+    this.resultControllo = false;
+    if ((document.getElementById('addNome') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloNome').style.color = '#FF0000';
+      document.getElementById('ControlloNome').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloNome').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('addUsername') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloUsername').style.color = '#FF0000';
+      document.getElementById('ControlloUsername').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloUsername').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('addPassword') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloPassword').style.color = '#FF0000';
+      document.getElementById('ControlloPassword').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloPassword').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('addEmail') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloEmail').style.color = '#FF0000';
+      document.getElementById('ControlloEmail').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloEmail').setAttribute('hidden', '');
+    }
+    return this.resultControllo;
+  }
+
+  updateUtente() {
+    if (this.controlloInputUpdate()) {
+      return;
+    }
+    this.bodyUpdateUtente.nome=(document.getElementById('updateNome') as HTMLInputElement).value;
+    this.bodyUpdateUtente.email=(document.getElementById('updateEmail') as HTMLInputElement).value;
+    this.bodyUpdateUtente.username=(document.getElementById('updateUsername') as HTMLInputElement).value;
+    this.bodyUpdateUtente.password=(document.getElementById('updatePassword') as HTMLInputElement).value;
+    this.bodyUpdateUtente.ruolo=(document.getElementById('updateRuolo') as HTMLInputElement).value;
+    this.bodyUpdateUtente.IndirizzoDTO=null;
+
+    this.utenteService.updateUtente(this.bodyUpdateUtente).subscribe(element => {
+      for (var index = 0; index < this.listaUtenti.length; index++) {
+        if (this.listaUtenti[index].id == element.id) {
+          this.listaUtenti[index] = element;
+          this.listaUtenti = [...this.listaUtenti];
+        }
+      }
+    });
+    this.modalService.dismissAll();
+  }
+
+
+  controlloInputUpdate() {
+    this.resultControllo = false;
+    if ((document.getElementById('updateNome') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloNomeUpdate').style.color = '#FF0000';
+      document.getElementById('ControlloNomeUpdate').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloNomeUpdate').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('updateUsername') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloUsernameUpdate').style.color = '#FF0000';
+      document.getElementById('ControlloUsernameUpdate').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloUsernameUpdate').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('updatePassword') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloPasswordUpdate').style.color = '#FF0000';
+      document.getElementById('ControlloPasswordUpdate').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloPasswordUpdate').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('updateEmail') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloEmailUpdate').style.color = '#FF0000';
+      document.getElementById('ControlloEmailUpdate').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloEmailUpdate').setAttribute('hidden', '');
+    }
+    return this.resultControllo;
   }
 }

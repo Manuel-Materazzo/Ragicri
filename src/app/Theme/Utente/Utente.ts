@@ -8,7 +8,7 @@ export class Utente{
     email: string;
     username: string;
     password: string;
-    indirizzo: Indirizzo;
+    IndirizzoDto: Indirizzo;
     ruolo: Role;
 }
 
@@ -22,7 +22,19 @@ export class AddUtenteDTO {
     email: string;
     username: string;
     password: string;
-    indirizzo: Indirizzo;
+    IndirizzoDTO: Indirizzo;
+    ruolo: string;
+
+    constructor() {
+    }
+}
+export class UpdateUtenteDTO {
+    id: number;
+    nome: string;
+    email: string;
+    username: string;
+    password: string;
+    IndirizzoDTO: Indirizzo;
     ruolo: string;
 
     constructor() {

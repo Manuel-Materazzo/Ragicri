@@ -177,8 +177,7 @@ export class PiattiAdminComponent implements OnInit {
         this.controlloAllergeni();
         this.piatto.allergeni = this.allergeni;
         this.nomeImmagine = (document.getElementById('addNomeFile') as HTMLInputElement).value;
-        //this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
-        this.piatto.tipologia = 'Prova';
+        this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
         let input = new FormData();
         input.append('nomePiatto', this.piatto.nome);
         input.append('prezzoPiatto', this.piatto.prezzo + '');
