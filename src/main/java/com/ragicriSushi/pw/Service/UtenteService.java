@@ -5,6 +5,7 @@ import com.ragicriSushi.pw.DAO.RoleDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
+import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.RoleRepository;
@@ -87,9 +88,7 @@ public class UtenteService implements UserDetailsService {
         }
         dao.setNome(dto.getNome());
         dao.setEmail(dto.getEmail());
-        RoleDAO roleDao = new RoleDAO();
-        roleDao.setId(dto.getRuolo().getId());
-        roleDao.setName(dto.getRuolo().getName());
+        RoleDAO roleDao = roleRepository.findByName(dto.getRuolo()).get();
 
         dao.setRuolo(roleDao);
         dao.setUsername(dto.getUsername());
@@ -100,12 +99,17 @@ public class UtenteService implements UserDetailsService {
         return conversioni.toDTO(dao);
     }
 
-    public UtenteDTO update(UtenteDTO dto) {
+    public UtenteDTO update(UpdateUtenteDto dto) {
         Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
         if (dao.isPresent()) {
-            UtenteDAO utente = conversioni.toDAO(dto);
-            utenteRepository.save(utente);
-            return conversioni.toDTO(utente);
+            dao.get().setNome(dto.getNome());
+            dao.get().setIndirizzo(conversioni.toDTO(dto.getIndirizzo()));
+            dao.get().setEmail(dto.getEmail());
+            dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
+            dao.get().setUsername(dto.getUsername());
+            dao.get().setRuolo(roleRepository.findByName(dto.getRuolo()).get());
+            utenteRepository.save(dao.get());
+            return conversioni.toDTO(dao.get());
         } else {
             return null;
         }

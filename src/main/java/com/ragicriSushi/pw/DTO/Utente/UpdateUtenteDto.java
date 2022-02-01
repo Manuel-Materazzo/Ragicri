@@ -8,7 +8,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AddUtenteDTO {
+public class UpdateUtenteDto {
+
+    private int id;
 
     private String nome;
 
@@ -18,7 +20,7 @@ public class AddUtenteDTO {
 
     private String password;
 
-    private IndirizzoDTO indirizzoDTO;
+    private IndirizzoDTO indirizzo;
 
     private String ruolo;
 }

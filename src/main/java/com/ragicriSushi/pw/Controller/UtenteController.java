@@ -3,6 +3,7 @@ package com.ragicriSushi.pw.Controller;
 import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
 import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
+import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Service.RoleService;
 import com.ragicriSushi.pw.Service.UtenteService;
@@ -104,7 +105,7 @@ public class UtenteController {
     public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {
         if (utenteService.checkPresenzaUsername(dto.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Username già in uso.\"}");
-        } else if (roleService.checkByName(dto.getRuolo().getName())) {
+        } else if (roleService.checkByName(dto.getRuolo())) {
             UtenteDTO result = utenteService.save(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
@@ -114,7 +115,7 @@ public class UtenteController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un utente")
-    public ResponseEntity<Object> update(@RequestBody UtenteDTO dto) {
+    public ResponseEntity<Object> update(@RequestBody UpdateUtenteDto dto) {
         UtenteDTO result = utenteService.update(dto);
         if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
