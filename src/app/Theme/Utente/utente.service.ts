@@ -17,14 +17,19 @@ export class UtenteService {
   };
 
   getAllUtente(): Observable<any>{
-    return this.http.get("http://localhost:8080/ragicri/utente",this.header);
+    return this.http.get(`${this.baseUrl}`,this.header);
   }
-  registraUtente(json): Observable<any>{
-    return this.http.post("http://localhost:8080/ragicri/utente/add", JSON.parse(json));
+  getById(id:number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/${id}`,this.header);
   }
-
+  registraUtente(addUtente: any): Observable<any>{
+    return this.http.post(`${this.baseUrl}/add`, addUtente);
+  }
+  updateUtente(utente: any): Observable<any>{
+    return this.http.post(`${this.baseUrl}/update`, utente,this.header);
+  }
   getAllUtentiAzienda(): Observable<any>{
-    return this.http.get("http://localhost:8080/ragicri/utente/utentiAzienda",this.header);
+    return this.http.get(`${this.baseUrl}/utentiAzienda`,this.header);
   }
 
   getNonPagato(): Observable<any>{
