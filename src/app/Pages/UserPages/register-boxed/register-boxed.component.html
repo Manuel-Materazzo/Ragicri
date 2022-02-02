@@ -58,13 +58,14 @@
             </div>
             <div id="exampleInputGroup12" role="group" class="form-group">
               <div><input id="username" type="text" placeholder="Inserisci l'username..." class="form-control"></div>
+              <label id="erroreUsername" hidden class="erroreInserimento">Username già in uso</label>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div id="exampleInputGroup2" role="group" class="form-group">
                   <div><input id="password" type="password" placeholder="Inserisci la password..." class="form-control">
                   </div>
-                  <label id="errorePass" hidden class="errorePassword">Le due password non corrispondono</label>
+                  <label id="errorePass" hidden class="erroreInserimento">Le due password non corrispondono</label>
                 </div>
               </div>
               <div class="col-md-6">
@@ -80,7 +81,7 @@
                 Accetto i <a [routerLink]="">Termini e Condizioni</a>.
               </label>
             </div>
-            <label id="erroreTermini" hidden class="errorePassword">Accetta i termini e condizioni</label>
+            <label id="erroreTermini" hidden class="erroreInserimento">Accetta i termini e condizioni</label>
             <div class="divider"></div>
             <h6 class="mb-0">
               Hai già un altro account?

@@ -23,7 +23,7 @@ export class UtenteService {
     return this.http.get(`${this.baseUrl}/${id}`,this.header);
   }
   registraUtente(addUtente: any): Observable<any>{
-    return this.http.post(`${this.baseUrl}/add`, addUtente);
+    return this.http.post(`${this.baseUrl}/add`, JSON.parse(addUtente));
   }
   updateUtente(utente: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/update`, utente,this.header);

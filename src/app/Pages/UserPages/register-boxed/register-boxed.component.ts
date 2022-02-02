@@ -49,7 +49,7 @@ export class RegisterBoxedComponent implements OnInit {
     console.log(this.checkBox);
 
     if (this.ControlloDati()) {
-      let json = '{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": ' + this.civico + ', "provincia": "' + this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": {"id": 3, "name": "ROLE_UTENTE"}, "username": "' + this.username + '"}';
+      let json = '{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": ' + this.civico + ', "provincia": "' + this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": "ROLE_UTENTE", "username": "' + this.username + '"}';
       this.utenteService.registraUtente(json).subscribe(data1 => {
 
         let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
@@ -60,9 +60,14 @@ export class RegisterBoxedComponent implements OnInit {
             sessionStorage.setItem("username", String(this.username));
             window.location.replace("/");
           }
-        });
+          });
       }, error => {
-        document.getElementById('ErroreLogin').removeAttribute('hidden');
+        if("{\"status\": \"Username già in uso.\"}"){
+          document.getElementById('erroreUsername').removeAttribute('hidden');
+          (document.getElementById('username') as HTMLInputElement).value = "";
+          (document.getElementById('password') as HTMLInputElement).value = "";
+          (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
+        }
       });
 
     } else {
@@ -73,6 +78,10 @@ export class RegisterBoxedComponent implements OnInit {
   ControlloDati() {
     this.controllo = true;
 
+    document.getElementById('erroreUsername').setAttribute('hidden', '');
+    document.getElementById('errorePass').setAttribute('hidden', '');
+    document.getElementById('erroreTermini').setAttribute('hidden', '');
+    
     if (this.nome == "")
       return false;
     if (this.email == "")
@@ -91,18 +100,21 @@ export class RegisterBoxedComponent implements OnInit {
       return false;
     if (this.ripetipass == "")
       return false;
-
+    
     if (this.password != this.ripetipass) {
       document.getElementById('errorePass').removeAttribute('hidden');
       (document.getElementById('password') as HTMLInputElement).value = "";
       (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
       return false;
     }
-
+    else{
+      
+    }
     if (this.checkBox == false) {
       document.getElementById('erroreTermini').removeAttribute('hidden');
       return false;
     }
+
     return true;
   }
 
