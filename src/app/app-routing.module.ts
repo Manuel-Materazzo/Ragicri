@@ -124,9 +124,9 @@ const routes: Routes = [
 
       // User Pages
 
-      {path: 'pages/login-boxed', component: LoginBoxedComponent, data: {extraParameter: ''}},
-      {path: 'pages/register-boxed', component: RegisterBoxedComponent, data: {extraParameter: ''}},
-      {path: 'pages/forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
+      {path: 'login', component: LoginBoxedComponent, data: {extraParameter: ''}},
+      {path: 'registra', component: RegisterBoxedComponent, data: {extraParameter: ''}},
+      {path: 'passwordDimenticata', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
     ]
   },
     //se non trova la pagina

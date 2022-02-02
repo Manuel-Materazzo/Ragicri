@@ -2,10 +2,17 @@
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-left">
-      <app-search-box></app-search-box>
     </div>
     <div class="app-header-right">
-      <app-user-box></app-user-box>
+<!--      <app-user-box></app-user-box> -->
+      <div *ngIf="token == false">
+        <button id="btnLogin" class="btn btn-secondary btnHeader" style="margin-right: 5px;" routerLink="/login">Login</button>
+        <button id="btnRegistrati" class="btn btn-secondary btnHeader" routerLink="/registrati">Registrati</button>
+      </div>
+      <div *ngIf="token == true">
+        <button id="btnLogout" class="btn btn-secondary btnHeader" style="margin-right: 5px;" (click)="logout()">Logout</button>
+        <button id="btnAreaUtente" class="btn btn-secondary btnHeader" routerLink="/areaUtente">Area Utente</button>
+      </div>
     </div>
   </div>
   <div class="app-header__mobile-menu">
@@ -18,8 +25,7 @@
   </div>
   <div class="app-header__menu">
     <span>
-        <button class="btn-icon btn-icon-only btn btn-primary" [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
-                (click)="toggleHeaderMobile()">
+        <button class="btn-icon btn-icon-only btn btn-primary" [ngClass]="{'is-active' : globals.toggleHeaderMobile}" (click)="toggleHeaderMobile()">
             <div class="btn-icon-wrapper">
                 <fa name="ellipsis-v"></fa>
             </div>

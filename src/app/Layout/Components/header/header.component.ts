@@ -6,10 +6,19 @@ import {ThemeOptions} from '../../../theme-options';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
 
+  token = false;
+
   constructor(public globals: ThemeOptions) {
+    if(sessionStorage.getItem("token") == null) {
+      this.token = false;
+    }
+    else {
+      this.token = true;
+    }
   }
 
   @HostBinding('class.isActive')
@@ -27,6 +36,11 @@ export class HeaderComponent {
 
   toggleHeaderMobile() {
     this.globals.toggleHeaderMobile = !this.globals.toggleHeaderMobile;
+  }
+
+  logout(){
+    sessionStorage.clear();
+    window.location.replace("/");
   }
 
 }
