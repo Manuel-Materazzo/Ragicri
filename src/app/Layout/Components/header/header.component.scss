@@ -1,0 +1,10 @@
+.btnHeader{
+    background: #FF530D linear-gradient(180deg, #FF530D, #FF7B3C) repeat-x;
+    color: white;
+    border-color: #FF7B3C;
+}
+  
+.btnHeader:active{
+    background: #FF290D linear-gradient(180deg, #FF290D, #FF290D) repeat-x !important;
+    color: white !important;
+}
