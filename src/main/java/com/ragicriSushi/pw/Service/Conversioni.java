@@ -223,8 +223,8 @@ public class Conversioni {
     }
 
     public IndirizzoDAO fromDtoToDao(IndirizzoDTO dto){
-        IndirizzoDAO dao=new IndirizzoDAO();
-
+        IndirizzoDAO dao=this.indirizzoRepository.getById(dto.getIdIndirizzo());
+        dao.setIdIndirizzo(dto.getIdIndirizzo());
         dao.setVia(dto.getVia());
         dao.setProvincia(dto.getProvincia());
         dao.setCAP(dto.getCAP());

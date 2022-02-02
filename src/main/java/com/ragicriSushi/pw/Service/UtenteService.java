@@ -103,7 +103,10 @@ public class UtenteService implements UserDetailsService {
         Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
         if (dao.isPresent()) {
             dao.get().setNome(dto.getNome());
-            dao.get().setIndirizzo(conversioni.toDTO(dto.getIndirizzo()));
+            dao.get().getIndirizzo().setVia(dto.getIndirizzo().getVia());
+            dao.get().getIndirizzo().setCivico(dto.getIndirizzo().getCivico());
+            dao.get().getIndirizzo().setProvincia(dto.getIndirizzo().getProvincia());
+            dao.get().getIndirizzo().setCAP(dto.getIndirizzo().getCAP());
             dao.get().setEmail(dto.getEmail());
             dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
             dao.get().setUsername(dto.getUsername());

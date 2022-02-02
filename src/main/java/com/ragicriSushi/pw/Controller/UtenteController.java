@@ -58,6 +58,18 @@ public class UtenteController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_UTENTE')")
+    @GetMapping(path = "/username/{username}")
+    @ApiOperation("Ritorna un utente con lo username inserito")
+    public ResponseEntity<Object> getByUsername(@PathVariable String username) {
+        UtenteDTO dto = utenteService.getByUsername(username);
+
+        if (dto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
+        } else {
+            return ResponseEntity.ok(dto);
+        }
+    }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/ruolo/{ruolo}")
     @ApiOperation("Ritorna tutti gli utenti con un ruolo")
@@ -112,7 +124,7 @@ public class UtenteController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Ruolo non esistente.\"}");
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_UTENTE')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un utente")
     public ResponseEntity<Object> update(@RequestBody UpdateUtenteDto dto) {
