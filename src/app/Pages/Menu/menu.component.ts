@@ -50,6 +50,7 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.tipologie = 1;
     }
 
     parseJwt(token) {
