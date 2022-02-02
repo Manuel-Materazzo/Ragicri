@@ -132,7 +132,7 @@ const routes: Routes = [
     ]
   },
     //se non trova la pagina
-  {path: '**', redirectTo: 'charts/chartjs'}
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
