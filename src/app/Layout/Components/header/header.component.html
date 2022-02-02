@@ -7,7 +7,7 @@
 <!--      <app-user-box></app-user-box> -->
       <div *ngIf="token == false">
         <button id="btnLogin" class="btn btn-secondary btnHeader" style="margin-right: 5px;" routerLink="/login">Login</button>
-        <button id="btnRegistrati" class="btn btn-secondary btnHeader" routerLink="/registrati">Registrati</button>
+        <button id="btnRegistrati" class="btn btn-secondary btnHeader" routerLink="/registra">Registrati</button>
       </div>
       <div *ngIf="token == true">
         <button id="btnLogout" class="btn btn-secondary btnHeader" style="margin-right: 5px;" (click)="logout()">Logout</button>
