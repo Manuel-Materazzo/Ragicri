@@ -8,7 +8,7 @@ export class Utente{
     email: string;
     username: string;
     password: string;
-    IndirizzoDto: Indirizzo;
+    indirizzo: Indirizzo;
     ruolo: Role;
 }
 
@@ -34,7 +34,7 @@ export class UpdateUtenteDTO {
     email: string;
     username: string;
     password: string;
-    IndirizzoDTO: Indirizzo;
+    indirizzo: Indirizzo;
     ruolo: string;
 
     constructor() {

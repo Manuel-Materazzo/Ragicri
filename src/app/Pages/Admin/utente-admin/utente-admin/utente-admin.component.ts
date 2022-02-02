@@ -183,7 +183,7 @@ export class UtenteAdminComponent implements OnInit {
     this.bodyUpdateUtente.username=(document.getElementById('updateUsername') as HTMLInputElement).value;
     this.bodyUpdateUtente.password=(document.getElementById('updatePassword') as HTMLInputElement).value;
     this.bodyUpdateUtente.ruolo=(document.getElementById('updateRuolo') as HTMLInputElement).value;
-    this.bodyUpdateUtente.IndirizzoDTO=null;
+    this.bodyUpdateUtente.indirizzo=null;
 
     this.utenteService.updateUtente(this.bodyUpdateUtente).subscribe(element => {
       for (var index = 0; index < this.listaUtenti.length; index++) {

@@ -59,6 +59,7 @@ import {PiattiAdminComponent} from './Pages/Admin/piatti-admin/piatti-admin.comp
 import {CarrelloComponent} from './Pages/Carrello/carrello/carrello.component';
 import {OrdiniAsportoComponent} from './Pages/ordini-asporto/ordini-asporto.component';
 import {UtenteAdminComponent} from './Pages/Admin/utente-admin/utente-admin/utente-admin.component';
+import {AreaUtenteComponent} from './Pages/areaUtente/area-utente/area-utente.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,7 @@ const routes: Routes = [
       {path: 'adminPiatti', component: PiattiAdminComponent, data:{extraParameter: 'admin'}},
       {path: 'adminUtenti', component: UtenteAdminComponent, data:{extraParameter: 'admin'}},
       {path: 'ordiniAsporto', component: OrdiniAsportoComponent, data:{extraParameter: 'ordiniAsporto'}},
+      {path: 'areaUtente', component: AreaUtenteComponent, data:{extraParameter: ''}},
 
       {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
