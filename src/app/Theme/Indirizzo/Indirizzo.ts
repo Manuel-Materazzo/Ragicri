@@ -5,12 +5,12 @@ export class Indirizzo{
     
     idIndirizzo: number;
 
-    via: String;
+    via: string;
 
-    provincia: number;
+    provincia: string;
 
-    CAP: number;
+    cap: number;
 
-    civico: number;
+    civico: string;
 
 }

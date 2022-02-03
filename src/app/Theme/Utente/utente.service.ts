@@ -22,6 +22,9 @@ export class UtenteService {
   getById(id:number): Observable<any>{
     return this.http.get(`${this.baseUrl}/${id}`,this.header);
   }
+  getByUsername(username:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/username/${username}`,this.header);
+  }
   registraUtente(addUtente: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/add`, JSON.parse(addUtente));
   }
