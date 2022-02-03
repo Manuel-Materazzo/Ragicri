@@ -32,7 +32,7 @@ export class RegisterBoxedComponent implements OnInit {
   }
 
   Login() {
-    window.location.replace("/pages/login-boxed");
+    window.location.replace("/login");
   }
 
   Registrazione() {

@@ -44,7 +44,7 @@ export class LoginBoxedComponent implements OnInit {
   }
 
   Registrati(){
-    window.location.replace("/pages/register-boxed");
+    window.location.replace("/registra");
   }
   
   keyPressFunction(event) {
