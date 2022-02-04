@@ -95,3 +95,8 @@
 // DEMO
 
 @import "demo-ui/demo";
+
+.form-control:focus{
+    box-shadow: 0 0 0 0.2rem rgb(255 89 20 / 25%) !important;
+    border-color: rgb(255, 165, 0);
+}

@@ -49,7 +49,7 @@
 
 .btn-primary{
   color: #fff !important;
-  background: #FF530D linear-gradient(180deg, #FF530D, #FF7B3C) repeat-x !important;
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x !important;
   border-color: #FF7B3C !important;
 }
 
@@ -78,13 +78,13 @@ input[type="checkbox"]:checked + label img{
 }
 
 .btn-secondary{
-  background: #FF530D linear-gradient(180deg, #FF530D, #FF7B3C) repeat-x;
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x;
   color: white;
   border-color: #FF7B3C;
 }
 
 .btn-secondary:active{
-  background: #FF290D linear-gradient(180deg, #FF290D, #FF290D) repeat-x !important;
+  background: #d84f00 linear-gradient(180deg, #ee5e0a, #d84f00) repeat-x !important;
   color: white !important;
 }
 

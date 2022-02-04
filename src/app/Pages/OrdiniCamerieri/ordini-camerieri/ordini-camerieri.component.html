@@ -9,7 +9,7 @@
                 <input name="numeroTavolo" placeholder="Inserisci numero " (keyup)="inputTavolo($event)" type="text"
                     class="form-control" required>
                 <div class="input-group-append mr-2">
-                    <button type="submit" class="btn btn-primary " (click)="InfoTavolo(numeroTavolo)">Cerca</button>
+                    <button type="submit" class="btn btn-secondary" (click)="InfoTavolo(numeroTavolo)">Cerca</button>
                 </div>
                 <label id="statusTavolo" class="mr-sm-2" hidden>Tavolo libero!</label>
             </div>
@@ -44,7 +44,7 @@
                     esistente </label></div>
         </form>
         <form class="form-inline">
-            <button class="mb-2 mr-2 btn btn-primary btn-lg" (click)="AggiungiPiatto()">Aggiungi piatto</button>
+            <button class="mb-2 mr-2 btn btn-secondary btn-lg" (click)="AggiungiPiatto()">Aggiungi piatto</button>
             <button class="mb-2 mr-2 btn btn-success btn-lg" (click)="openSmall(content7)">Invia ordinazione</button>
             <div class="card-body">
                 <ng-template #content7 let-c="close" let-d="dismiss">
