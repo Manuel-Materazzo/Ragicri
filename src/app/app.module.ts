@@ -111,6 +111,7 @@ import { CarrelloComponent } from './Pages/Carrello/carrello/carrello.component'
 import { OrdiniAsportoComponent } from './Pages/ordini-asporto/ordini-asporto.component';
 import { UtenteAdminComponent } from './Pages/Admin/utente-admin/utente-admin/utente-admin.component';
 import { AreaUtenteComponent } from './Pages/areaUtente/area-utente/area-utente.component';
+import { CassaComponent } from './Pages/cassa/cassa.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -209,6 +210,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OrdiniAsportoComponent,
     UtenteAdminComponent,
     AreaUtenteComponent,
+    CassaComponent,
   ],
   imports: [
     BrowserModule,

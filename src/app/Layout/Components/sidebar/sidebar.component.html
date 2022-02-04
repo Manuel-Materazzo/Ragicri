@@ -93,11 +93,25 @@
                             <ngb-panel *ngIf="ruolo!=3" id="ordiniAsporto">
                                 <ng-template ngbPanelHeader>
                                     <button ngbPanelToggle class="vsm-link">
-                                        <i class="vsm-icon fa fa-car icon-gradient bg-plum-plate"></i>
+                                        <i class="vsm-icon fa fa-car icon-gradient bg-mixed-hopes"></i>
                                         <div class="vsm-item">
                                             <a routerLinkActive="active-item" routerLink="/ordiniAsporto"
                                                 [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
                                                 <span class="vsm-title">Ordinazioni</span>
+                                            </a>
+                                        </div>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+
+                            <ngb-panel *ngIf="ruolo!=3" id="cassa">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon fa fa-eur icon-gradient bg-plum-plate"></i>
+                                        <div class="vsm-item">
+                                            <a routerLinkActive="active-item" routerLink="/cassa"
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                                <span class="vsm-title">Pagamenti</span>
                                             </a>
                                         </div>
                                     </button>

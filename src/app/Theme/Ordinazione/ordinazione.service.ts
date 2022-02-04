@@ -62,4 +62,8 @@ export class OrdinazioneService {
     console.log(json);
     return this.http.post(`${this.baseUrl}/setConsegnato`, JSON.parse(json), this.header);
   }
+
+  setPagato(tavolo: any): Observable<any>{
+    return this.http.get(`${this.baseUrl}/pagato/${tavolo}`, this.header);
+  }
 }
