@@ -5,6 +5,7 @@ import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.TavoloDTO;
+import com.ragicriSushi.pw.Service.MailService;
 import com.ragicriSushi.pw.Service.OrdinazioneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,16 @@ public class OrdinazioneController {
 
     @Autowired
     private OrdinazioneService ordinazioneService;
+
+    @Autowired
+    private MailService mailService;
+
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "/inviaMail/{email}")
+    @ApiOperation("Invia Mail")
+    public ResponseEntity<Object> inviaMail(@PathVariable String email) {
+        return ResponseEntity.ok(mailService.sendEmail(email));
+    }
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
