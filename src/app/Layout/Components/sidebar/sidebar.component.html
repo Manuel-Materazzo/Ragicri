@@ -1,7 +1,7 @@
 <div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
     (mouseout)="sidebarHover()">
     <div class="app-header__logo">
-        <div class="logo-src"></div>
+        <div class="logo-src" routerLink="/"></div>
         <div class="header__pane ml-auto">
             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
                 [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
@@ -28,7 +28,7 @@
                                     <button ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon fa fa-home icon-gradient bg-malibu-beach"></i>
                                         <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
-                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link"><span
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link link"><span
                                                     class="vsm-title">Home</span></a>
                                         </div>
                                     </button>
@@ -42,7 +42,7 @@
                                         <i class="vsm-icon fa fa-bars icon-gradient bg-warm-flame"></i>
                                         <div class="vsm-item"><a routerLinkActive="active-item"
                                                 routerLink="/menuComponent" [routerLinkActiveOptions]="{exact: true}"
-                                                class="vsm-link"><span class="vsm-title">Menù</span></a>
+                                                class="vsm-link link"><span class="vsm-title">Menù</span></a>
                                         </div>
                                     </button>
                                 </ng-template>
@@ -55,7 +55,7 @@
                                         <div class="vsm-item">
                                             <div class="vsm-item"><a routerLinkActive="active-item"
                                                 routerLink="/carrello" [routerLinkActiveOptions]="{exact: true}"
-                                                class="vsm-link"><span class="vsm-title">Carrello</span></a>
+                                                class="vsm-link link"><span class="vsm-title">Carrello</span></a>
                                         </div>
                                         </div>
                                     </button>
@@ -68,7 +68,7 @@
                                         <i class="vsm-icon fa fa-pencil-square-o icon-gradient bg-love-kiss"></i>
                                         <div class="vsm-item">
                                             <a routerLinkActive="active-item" routerLink="/camerieri"
-                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link link">
                                                 <span class="vsm-title">Camerieri</span>
                                             </a>
                                         </div>
@@ -82,7 +82,7 @@
                                         <i class="vsm-icon fa fa-book icon-gradient bg-strong-bliss"></i>
                                         <div class="vsm-item">
                                             <a routerLinkActive="active-item" routerLink="/cucina"
-                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link link">
                                                 <span class="vsm-title">Cucina</span>
                                             </a>
                                         </div>
@@ -96,7 +96,7 @@
                                         <i class="vsm-icon fa fa-car icon-gradient bg-mixed-hopes"></i>
                                         <div class="vsm-item">
                                             <a routerLinkActive="active-item" routerLink="/ordiniAsporto"
-                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link link">
                                                 <span class="vsm-title">Ordinazioni</span>
                                             </a>
                                         </div>
@@ -110,7 +110,7 @@
                                         <i class="vsm-icon fa fa-eur icon-gradient bg-plum-plate"></i>
                                         <div class="vsm-item">
                                             <a routerLinkActive="active-item" routerLink="/cassa"
-                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                                [routerLinkActiveOptions]="{exact: true}" class="vsm-link link">
                                                 <span class="vsm-title">Pagamenti</span>
                                             </a>
                                         </div>
