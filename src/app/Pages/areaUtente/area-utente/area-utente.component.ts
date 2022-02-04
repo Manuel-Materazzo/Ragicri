@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UtenteService} from '../../../Theme/Utente/utente.service';
-import {UpdateUtenteDTO, Utente} from '../../../Theme/Utente/Utente';
+import {UpdateUtenteDTO, Utente, UtentePassword} from '../../../Theme/Utente/Utente';
 import {Indirizzo} from '../../../Theme/Indirizzo/Indirizzo';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-area-utente',
@@ -15,7 +16,9 @@ export class AreaUtenteComponent implements OnInit {
   resultControllo: boolean;
   bodyUpdateUtente: UpdateUtenteDTO= new UpdateUtenteDTO();
   indirizzo:Indirizzo = new Indirizzo();
-  constructor(private router: Router,private utenteService:UtenteService) {
+  utentePassword: UtentePassword= new UtentePassword();
+
+  constructor(private router: Router,private utenteService:UtenteService,private modalService: NgbModal) {
     if (sessionStorage.getItem("token") == null) {
       window.location.replace("/");
     }
@@ -24,15 +27,6 @@ export class AreaUtenteComponent implements OnInit {
     }
   }
 
-  parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-  };
   ngOnInit() {
     this.utenteService.getByUsername(sessionStorage.getItem("username"))
         .subscribe(async(response: any) => {
@@ -51,6 +45,29 @@ export class AreaUtenteComponent implements OnInit {
 
   }
 
+  //funzione per il model di conferma
+  openConfermaModal(content) {
+    this.modalService.open(content, {
+      size: 'sm'
+    });
+  }
+
+  //funzione per il model modifica
+  openCambiaPasswordModal(content) {
+      this.modalService.open(content, {
+        size: 'lg'
+      });
+
+  }
+  parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  };
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -62,7 +79,7 @@ export class AreaUtenteComponent implements OnInit {
     this.bodyUpdateUtente.id=this.utente.id;
     this.bodyUpdateUtente.nome=(document.getElementById('nome') as HTMLInputElement).value;
     this.bodyUpdateUtente.email=(document.getElementById('email') as HTMLInputElement).value;
-    this.bodyUpdateUtente.password=(document.getElementById('password') as HTMLInputElement).value;
+    this.bodyUpdateUtente.password=null;
     this.bodyUpdateUtente.username=this.utente.username;
     this.indirizzo.idIndirizzo=this.utente.indirizzo.idIndirizzo;
     this.indirizzo.via=(document.getElementById('via') as HTMLInputElement).value;
@@ -71,10 +88,10 @@ export class AreaUtenteComponent implements OnInit {
     this.indirizzo.provincia=(document.getElementById('provincia') as HTMLInputElement).value;
     this.bodyUpdateUtente.indirizzo=this.indirizzo;
     this.bodyUpdateUtente.ruolo=this.utente.ruolo.name;
-    console.log(this.bodyUpdateUtente.indirizzo);
     this.utenteService.updateUtente(this.bodyUpdateUtente).subscribe(element => {
       this.utente=element;
     });
+    this.modalService.dismissAll();
   }
 
   controlloInputUpdate() {
@@ -85,13 +102,6 @@ export class AreaUtenteComponent implements OnInit {
       this.resultControllo = true;
     } else {
       document.getElementById('ControlloNome').setAttribute('hidden', '');
-    }
-    if ((document.getElementById('password') as HTMLInputElement).value == '') {
-      document.getElementById('ControlloPassword').style.color = '#FF0000';
-      document.getElementById('ControlloPassword').removeAttribute('hidden');
-      this.resultControllo = true;
-    } else {
-      document.getElementById('ControlloPassword').setAttribute('hidden', '');
     }
     if ((document.getElementById('email') as HTMLInputElement).value == '') {
       document.getElementById('ControlloEmail').style.color = '#FF0000';
@@ -127,6 +137,57 @@ export class AreaUtenteComponent implements OnInit {
       this.resultControllo = true;
     } else {
       document.getElementById('ControlloCap').setAttribute('hidden', '');
+    }
+    return this.resultControllo;
+  }
+
+  aggiornaPassword() {
+    if (this.controlloPassword()) {
+      return;
+    }
+    // if(this.utenteService.verificaPassword()){
+    //   return;
+    // }
+    var nuovaPassword=(document.getElementById('nuovaPassword') as HTMLInputElement).value;
+    this.utentePassword.id=this.utente.id;
+    this.utentePassword.password=nuovaPassword;
+
+    this.utenteService.updateUtente(this.utentePassword).subscribe(element => {
+      this.utente=element;
+    });
+    this.modalService.dismissAll();
+
+  }
+  private controlloPassword() {
+    this.resultControllo = false;
+    if ((document.getElementById('vecchiaPassword') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloVecchiaPassword').style.color = '#FF0000';
+      document.getElementById('ControlloVecchiaPassword').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloVecchiaPassword').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('nuovaPassword') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloNuovaPassword').style.color = '#FF0000';
+      document.getElementById('ControlloNuovaPassword').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloNuovaPassword').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('confermaPassword') as HTMLInputElement).value == '') {
+      document.getElementById('ControlloConfermaPassword').style.color = '#FF0000';
+      document.getElementById('ControlloConfermaPassword').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('ControlloConfermaPassword').setAttribute('hidden', '');
+    }
+    if ((document.getElementById('confermaPassword') as HTMLInputElement).value !=
+        (document.getElementById('nuovaPassword') as HTMLInputElement).value) {
+      document.getElementById('verificaPasswordUguali').style.color = '#FF0000';
+      document.getElementById('verificaPasswordUguali').removeAttribute('hidden');
+      this.resultControllo = true;
+    } else {
+      document.getElementById('verificaPasswordUguali').setAttribute('hidden', '');
     }
     return this.resultControllo;
   }

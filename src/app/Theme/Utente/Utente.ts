@@ -40,3 +40,7 @@ export class UpdateUtenteDTO {
     constructor() {
     }
 }
+export class UtentePassword{
+    id:number
+    password:string
+}

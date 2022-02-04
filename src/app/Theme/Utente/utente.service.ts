@@ -38,7 +38,9 @@ export class UtenteService {
   getNonPagato(): Observable<any>{
     return this.http.get(`${this.baseUrl}/nonPagato`, this.header);
   }
-
+  verificaPassword(verificaPassword: any): Observable<any>{
+    return this.http.post(`${this.baseUrl}/checkPassword`, JSON.parse(verificaPassword), this.header);
+  }
   getInfoTavolo(numeroTavolo: number): Observable<any>{
     return this.http.get(`${this.baseUrl}/info/${numeroTavolo}`, this.header);
   }
