@@ -3,16 +3,12 @@ package com.ragicriSushi.pw.Service;
 import com.ragicriSushi.pw.DAO.IndirizzoDAO;
 import com.ragicriSushi.pw.DAO.RoleDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
-import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
-import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
-import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
-import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
+import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.RoleRepository;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +32,7 @@ public class UtenteService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private  PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public List<UtenteDTO> getAll() {
         return conversioni.toDTO(utenteRepository.findAll());
@@ -45,6 +41,7 @@ public class UtenteService implements UserDetailsService {
     public List<UtenteDTO> getAllUtentiAzienda() {
         return conversioni.toDTO(utenteRepository.getUtentiAzienda());
     }
+
     public UtenteDTO getById(int id) {
         Optional<UtenteDAO> optional = utenteRepository.findById(id);
 
@@ -75,7 +72,7 @@ public class UtenteService implements UserDetailsService {
     public UtenteDTO save(AddUtenteDTO dto) {
 
         UtenteDAO dao = new UtenteDAO();
-        if(dto.getIndirizzoDTO()!=null) {
+        if (dto.getIndirizzoDTO() != null) {
             IndirizzoDAO daoIndi = new IndirizzoDAO();
 
             daoIndi.setVia(dto.getIndirizzoDTO().getVia());
@@ -102,15 +99,27 @@ public class UtenteService implements UserDetailsService {
     public UtenteDTO update(UpdateUtenteDto dto) {
         Optional<UtenteDAO> dao = utenteRepository.findById(dto.getId());
         if (dao.isPresent()) {
-            dao.get().setNome(dto.getNome());
-            dao.get().getIndirizzo().setVia(dto.getIndirizzo().getVia());
-            dao.get().getIndirizzo().setCivico(dto.getIndirizzo().getCivico());
-            dao.get().getIndirizzo().setProvincia(dto.getIndirizzo().getProvincia());
-            dao.get().getIndirizzo().setCAP(dto.getIndirizzo().getCAP());
-            dao.get().setEmail(dto.getEmail());
-            dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
-            dao.get().setUsername(dto.getUsername());
-            dao.get().setRuolo(roleRepository.findByName(dto.getRuolo()).get());
+            if (dto.getNome() != null) {
+                dao.get().setNome(dto.getNome());
+            }
+            if (dto.getIndirizzo() != null) {
+                dao.get().getIndirizzo().setVia(dto.getIndirizzo().getVia());
+                dao.get().getIndirizzo().setCivico(dto.getIndirizzo().getCivico());
+                dao.get().getIndirizzo().setProvincia(dto.getIndirizzo().getProvincia());
+                dao.get().getIndirizzo().setCAP(dto.getIndirizzo().getCAP());
+            }
+            if (dto.getEmail() != null) {
+                dao.get().setEmail(dto.getEmail());
+            }
+            if (dto.getPassword() != null) {
+                dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
+            }
+            if (dto.getUsername() != null) {
+                dao.get().setUsername(dto.getUsername());
+            }
+            if (dto.getRuolo() != null) {
+                dao.get().setRuolo(roleRepository.findByName(dto.getRuolo()).get());
+            }
             utenteRepository.save(dao.get());
             return conversioni.toDTO(dao.get());
         } else {
@@ -118,44 +127,56 @@ public class UtenteService implements UserDetailsService {
         }
     }
 
-    public boolean checkPresenzaUsername (String username) {
+    public Boolean checkPassword(String vecchiaPassword, String nuovaPassword) {
+            String passwordCryptata=passwordEncoder.encode(nuovaPassword);
+        if (passwordCryptata==vecchiaPassword) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkPresenzaUsername(String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
         return dao.isPresent();
     }
 
-    public UtenteDTO getByUsername (String username){
+    public boolean checkById(int id) {
+        Optional<UtenteDAO> dao = utenteRepository.findById(id);
+        return dao.isPresent();
+    }
+
+    public UtenteDTO getByUsername(String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
-        if (!dao.isPresent()){
+        if (!dao.isPresent()) {
             return null;
-        }
-        else {
+        } else {
             return conversioni.toDTO(dao.get());
         }
     }
 
-    public IndirizzoDTO getIndirizzoByUsername (String username){
+    public IndirizzoDTO getIndirizzoByUsername(String username) {
         Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
-        if (!dao.isPresent()){
+        if (!dao.isPresent()) {
             return null;
-        }
-        else {
+        } else {
             return conversioni.toDTO(dao.get().getIndirizzo());
         }
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UtenteDAO> utente=utenteRepository.findUtenteByUsername(username);
-        if(!utente.isPresent())
-        {
+        Optional<UtenteDAO> utente = utenteRepository.findUtenteByUsername(username);
+        if (!utente.isPresent()) {
             throw new UsernameNotFoundException("Utente non trovato");
         }
-        Collection<SimpleGrantedAuthority> authorities= new ArrayList<>();
-        roleRepository.findAll().forEach(ruolo ->{ authorities.add(new SimpleGrantedAuthority(
-                ruolo.getName()));
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        roleRepository.findAll().forEach(ruolo -> {
+            authorities.add(new SimpleGrantedAuthority(
+                    ruolo.getName()));
         });
         return new org.springframework.security.core.userdetails.User(utente.get().getUsername(),
-                utente.get().getPassword(),authorities);
+                utente.get().getPassword(), authorities);
     }
 }
 
