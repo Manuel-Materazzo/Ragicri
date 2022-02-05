@@ -3,6 +3,7 @@ import { PiattoService } from '../../../Theme/piatto/piatto.service';
 import { Router } from '@angular/router';
 import { AddPiattoDTO, Piatto, TipologieDTO } from '../../../Theme/piatto/Piatto';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -25,8 +26,9 @@ export class PiattiAdminComponent implements OnInit {
     resultControllo: boolean;
     allergeniSingoloPiatto: string = '';
     nomeImmagine: string = "";
-
-    constructor(private piattoService: PiattoService, private router: Router, private modalService: NgbModal) {
+    immagineDatabase: SafeUrl;
+    constructor(private piattoService: PiattoService, private router: Router, private modalService: NgbModal,
+                private sanitizer: DomSanitizer) {
         if (sessionStorage.getItem("token") == null){
             window.location.replace("/");
         }
@@ -70,6 +72,8 @@ export class PiattiAdminComponent implements OnInit {
             });
             this.piatto = response;
             this.allergeniSingoloPiatto = this.piatto.allergeni;
+            //this.immagineDatabase=this.sanitizeImageUrl(this.piatto.img);
+
             this.riempimentoAllergeniUpdate();
             (document.getElementById('updateNomePiatto') as HTMLInputElement).value = this.piatto.nome;
             (document.getElementById('updatePrezzo') as HTMLInputElement).value = this.piatto.prezzo + '';
@@ -79,6 +83,10 @@ export class PiattiAdminComponent implements OnInit {
         });
     }
 
+
+    getSafeUrl() {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(this.piatto.img);
+    }
     //funzione per il model
     open(content) {
         this.modalService.open(content).result.then((result) => {
@@ -162,38 +170,43 @@ export class PiattiAdminComponent implements OnInit {
         if (this.controlloInputCreate()) {
             return;
         }
-        if (this.piattoService.getEsiste(this.piatto.numero)) {
-            (document.getElementById('ControlloNumeretto') as HTMLInputElement).innerHTML = 'Numeretto già esistente';
-            document.getElementById('ControlloNumeretto').style.color = '#FF0000';
-            document.getElementById('ControlloNumeretto').removeAttribute('hidden');
-            return;
-        }
-        document.getElementById('ControlloNumeretto').setAttribute('hidden', '');
-        (document.getElementById('ControlloNumeretto') as HTMLInputElement).value = 'Inserire numeretto';
-
-        this.piatto.nome = (document.getElementById('addPiatto') as HTMLInputElement).value;
-        this.piatto.prezzo = parseInt((document.getElementById('addPrezzo') as HTMLInputElement).value);
         this.piatto.numero = parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
-        this.controlloAllergeni();
-        this.piatto.allergeni = this.allergeni;
-        this.nomeImmagine = (document.getElementById('addNomeFile') as HTMLInputElement).value;
-        this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
-        let input = new FormData();
-        input.append('nomePiatto', this.piatto.nome);
-        input.append('prezzoPiatto', this.piatto.prezzo + '');
-        input.append('numeroPiatto', this.piatto.numero + '');
-        input.append('allergeniPiatto', this.piatto.allergeni);
-        input.append('imgPiatto', this.immaginePiatto);
-        input.append('tipologiaPiatto', this.piatto.tipologia);
-        input.append('nomeFile', this.nomeImmagine);
-        this.piattoService.addPiatto(input).subscribe((response: any) => {
-            this.listiPiattini.push(response);
-            //
-            this.ordinaLista();
+        this.piattoService.getEsiste(this.piatto.numero).subscribe((response: any) => {
+          this.resultControllo=response;
+            console.log(this.resultControllo);
+            if (this.resultControllo) {
+                (document.getElementById('ControlloNumeretto') as HTMLInputElement).innerHTML = 'Numeretto già esistente';
+                document.getElementById('ControlloNumeretto').style.color = '#FF0000';
+                document.getElementById('ControlloNumeretto').removeAttribute('hidden');
+                return;
+            }
+            document.getElementById('ControlloNumeretto').setAttribute('hidden', '');
+            (document.getElementById('ControlloNumeretto') as HTMLInputElement).value = 'Inserire numeretto';
+
+            this.piatto.nome = (document.getElementById('addPiatto') as HTMLInputElement).value;
+            this.piatto.prezzo = parseInt((document.getElementById('addPrezzo') as HTMLInputElement).value);
+            this.controlloAllergeni();
+            this.piatto.allergeni = this.allergeni;
+            this.nomeImmagine = (document.getElementById('addNomeFile') as HTMLInputElement).value;
+            this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
+            let input = new FormData();
+            input.append('nomePiatto', this.piatto.nome);
+            input.append('prezzoPiatto', this.piatto.prezzo + '');
+            input.append('numeroPiatto', this.piatto.numero + '');
+            input.append('allergeniPiatto', this.piatto.allergeni);
+            input.append('imgPiatto', this.immaginePiatto);
+            input.append('tipologiaPiatto', this.piatto.tipologia);
+            input.append('nomeFile', this.nomeImmagine);
+            this.piattoService.addPiatto(input).subscribe((response: any) => {
+                this.listiPiattini.push(response);
+                //
+                this.ordinaLista();
+            });
+            this.url = '';
+            this.nomeImmagine = "";
+            this.modalService.dismissAll();
         });
-        this.url = '';
-        this.nomeImmagine = "";
-        this.modalService.dismissAll();
+
         //window.location.reload();
     }
 
@@ -243,9 +256,9 @@ export class PiattiAdminComponent implements OnInit {
     }
 
 
-    //SIstemare
+    //Sistemare
     controlloAllergeni() {
-
+        this.allergeni=" ";
         if ((document.getElementById('Glutine') as HTMLInputElement).checked == true) {
             this.allergeni += 'Glutine ';
         }

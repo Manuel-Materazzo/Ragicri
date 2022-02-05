@@ -160,7 +160,7 @@
                         <div class="col-md-6">
                             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
 
-                                <input type="file" id="addFile" (change)="riceviFile($event.target)">
+                                <input type="file" id="addFile" (change)="riceviFile($event.target) "accept="image/x-png,image/gif,image/jpeg">
                                 <label class="mr-sm-2">Nome nuova immagine:</label>
                                 <input type="text" id="addNomeFile">
                                 <img *ngIf=url [src]="url" alt="Inserisci nuova immagine"
@@ -303,7 +303,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <input type="file" id="file" (change)="riceviFile($event.target)">
+                            <input type="file" id="file" (change)="riceviFile($event.target)" accept="image/x-png,image/gif,image/jpeg">
                             <label class="mr-sm-2">Nome nuova immagine:</label>
                             <input type="text" id="updateNomeFile">
                             <!--<input name="text" id="img" value=""  type="file" class="mr-sm-2">-->
@@ -314,7 +314,7 @@
                     <!--Nuova immagine piatto -->
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
-                            <img src="{{piatto.img}}" id="vecchiaImmagine" alt="Card image cap"
+                            <img [src]="getSafeUrl()" id="vecchiaImmagine" alt="Card image cap"
                                 class="mr-sm-2 card-img-top imgPiatto">
                         </div>
                     </div>
