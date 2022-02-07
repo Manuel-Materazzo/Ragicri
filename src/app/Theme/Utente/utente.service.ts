@@ -23,6 +23,13 @@ export class UtenteService {
         return this.http.get(`${this.baseUrl}/username/${username}`, this.header);
     }
 
+    getEmail(username: string, token): Observable<any> {
+        let header = {
+            headers: new HttpHeaders({Authorization: 'Bearer ' +  token}),
+        };
+        return this.http.get(`${this.baseUrl}/email/${username}`, header);
+    }
+
     registraUtente(addUtente: any): Observable<any> {
         return this.http.post(`${this.baseUrl}/add`, JSON.parse(addUtente));
     }
