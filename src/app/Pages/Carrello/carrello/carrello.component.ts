@@ -67,9 +67,10 @@ export class CarrelloComponent implements OnInit {
     this.utenteService.getIdIndirizzoByUsername(sessionStorage.getItem("username")).subscribe(data => {
       let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
       '"idIndirizzo": ' + data.numero + ', "orarioConsegna": "' + orario + '"}';
+      console.log(sessionStorage.getItem("email"));
       this.ordinazioneService.inviaMail(sessionStorage.getItem("email")).subscribe();
       this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data2 => {
-        window.location.reload();
+        //window.location.reload();
       });
     });
   }

@@ -10,8 +10,8 @@ import { UtenteService } from 'src/app/Theme/Utente/utente.service';
 })
 export class LoginBoxedComponent implements OnInit {
 
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 
 
   constructor(private router: Router, private utenteService: UtenteService, private modalService: NgbModal) {
