@@ -195,7 +195,7 @@ public class PiattoService {
         } catch (Exception e) {
             throw new IllegalStateException("Failed to upload file", e);
         }
-        String prova=(dirName+"/"+nomeFile+"."+StringUtils.getFilenameExtension(multipartFile.getOriginalFilename())).replace("\\","/");
-        return prova;
+
+        return "../../../../assets/images/piatti/"+nomeFile+"."+StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
     }
 }
