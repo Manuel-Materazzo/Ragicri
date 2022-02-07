@@ -160,13 +160,6 @@ export class AreaUtenteComponent implements OnInit {
   }
   private controlloPassword() {
     this.resultControllo = false;
-    if ((document.getElementById('vecchiaPassword') as HTMLInputElement).value == '') {
-      document.getElementById('ControlloVecchiaPassword').style.color = '#FF0000';
-      document.getElementById('ControlloVecchiaPassword').removeAttribute('hidden');
-      this.resultControllo = true;
-    } else {
-      document.getElementById('ControlloVecchiaPassword').setAttribute('hidden', '');
-    }
     if ((document.getElementById('nuovaPassword') as HTMLInputElement).value == '') {
       document.getElementById('ControlloNuovaPassword').style.color = '#FF0000';
       document.getElementById('ControlloNuovaPassword').removeAttribute('hidden');
