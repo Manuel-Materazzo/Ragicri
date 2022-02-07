@@ -142,6 +142,11 @@ public class UtenteService implements UserDetailsService {
         return dao.isPresent();
     }
 
+    public boolean checkPresenzaEmail(String email) {
+        Optional<UtenteDAO> dao = utenteRepository.findUtenteByEmail(email);
+        return dao.isPresent();
+    }
+
     public boolean checkById(int id) {
         Optional<UtenteDAO> dao = utenteRepository.findById(id);
         return dao.isPresent();

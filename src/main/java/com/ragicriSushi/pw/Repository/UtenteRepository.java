@@ -14,6 +14,8 @@ public interface UtenteRepository extends JpaRepository<UtenteDAO, Integer> {
 
     Optional<UtenteDAO> findUtenteByUsername(String username);
 
+    Optional<UtenteDAO> findUtenteByEmail(String email);
+
     //ritorna tutti gli utenti dell'azienda(admin,dipendenti)
     @Query(
             value = "SELECT * FROM utente WHERE ruolo!=3 ",

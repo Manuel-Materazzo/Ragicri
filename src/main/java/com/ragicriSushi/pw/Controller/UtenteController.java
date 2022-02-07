@@ -131,6 +131,8 @@ public class UtenteController {
     public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {
         if (utenteService.checkPresenzaUsername(dto.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Username già in uso.\"}");
+        } else if (utenteService.checkPresenzaEmail(dto.getEmail())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Email già in uso.\"}");
         } else if (roleService.checkByName(dto.getRuolo())) {
             UtenteDTO result = utenteService.save(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
