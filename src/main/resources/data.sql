@@ -5,10 +5,24 @@ INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via bob', 'GG', 1565
 INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via utente', 'UT', 36047, 33);
 INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via dipendente', 'DP', 69033, 87);
 
+-- PRIVILEGI
+INSERT INTO privilege(name) VALUES ('ADMIN_PRIVILEGE');
+    INSERT INTO privilege(name) VALUES ('DIPENDENTE_PRIVILEGE');
+INSERT INTO privilege(name) VALUES ('UTENTE_PRIVILEGE');
+
 -- RUOLI
 INSERT INTO ruolo (name) VALUES('ROLE_ADMIN');
 INSERT INTO ruolo (name) VALUES('ROLE_DIPENDENTE');
 INSERT INTO ruolo (name) VALUES('ROLE_UTENTE');
+
+--COLLEGAMENTO RUOLI PRIVILEGI
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (1,1);
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (1,2);
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (1,3);
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (2,2);
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (2,3);
+INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (3,3);
+
 
 -- UTENTI
 INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Radu', 'radu01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "radusclifos@gmail.com", 1, 1);

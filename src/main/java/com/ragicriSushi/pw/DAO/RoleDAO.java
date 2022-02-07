@@ -3,6 +3,7 @@ package com.ragicriSushi.pw.DAO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -22,4 +23,12 @@ public class RoleDAO {
     @Column(nullable = false)
     private String name;
 
+    @ManyToMany
+    @JoinTable(
+            name = "roles_privileges",
+            joinColumns = @JoinColumn(
+                    name = "roledao_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "privilege_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges;
 }
