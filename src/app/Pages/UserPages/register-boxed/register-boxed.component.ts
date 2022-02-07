@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddUtenteDTO } from 'src/app/Theme/Utente/Utente';
 import { UtenteService } from 'src/app/Theme/Utente/utente.service';
 
 @Component({
@@ -46,7 +45,6 @@ export class RegisterBoxedComponent implements OnInit {
     this.cap = parseInt((document.getElementById('cap') as HTMLInputElement).value);
     this.civico = parseInt((document.getElementById('civico') as HTMLInputElement).value);
     this.checkBox = (document.getElementById('checkTermini') as HTMLInputElement).checked;
-    console.log(this.checkBox);
 
     if (this.ControlloDati()) {
       let json = '{"email": "' + this.email + '", "indirizzoDTO": {"cap": ' + this.cap + ', "civico": ' + this.civico + ', "provincia": "' + this.provincia + '", "via": "' + this.via + '" }, "nome": "' + this.nome + '", "password": "' + this.password + '", "ruolo": "ROLE_UTENTE", "username": "' + this.username + '"}';
@@ -61,14 +59,21 @@ export class RegisterBoxedComponent implements OnInit {
             this.utenteService.inviaMail(this.email).subscribe();
             window.location.replace("/");
           }
-          });
+        });
       }, error => {
-        if("{\"status\": \"Username già in uso.\"}"){
+        if (error.error.status == "Email già in uso.") {
+          document.getElementById('erroreEmail').removeAttribute('hidden');
+          (document.getElementById('email') as HTMLInputElement).value = "";
+          (document.getElementById('password') as HTMLInputElement).value = "";
+          (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
+        }
+        else if (error.error.status == "Username già in uso.") {
           document.getElementById('erroreUsername').removeAttribute('hidden');
           (document.getElementById('username') as HTMLInputElement).value = "";
           (document.getElementById('password') as HTMLInputElement).value = "";
           (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
         }
+
       });
 
     } else {
@@ -82,7 +87,9 @@ export class RegisterBoxedComponent implements OnInit {
     document.getElementById('erroreUsername').setAttribute('hidden', '');
     document.getElementById('errorePass').setAttribute('hidden', '');
     document.getElementById('erroreTermini').setAttribute('hidden', '');
-    
+    document.getElementById('erroreEmail').setAttribute('hidden', '');
+
+
     if (this.nome == "")
       return false;
     if (this.email == "")
@@ -101,16 +108,14 @@ export class RegisterBoxedComponent implements OnInit {
       return false;
     if (this.ripetipass == "")
       return false;
-    
+
     if (this.password != this.ripetipass) {
       document.getElementById('errorePass').removeAttribute('hidden');
       (document.getElementById('password') as HTMLInputElement).value = "";
       (document.getElementById('ripetiPassword') as HTMLInputElement).value = "";
       return false;
     }
-    else{
-      
-    }
+    
     if (this.checkBox == false) {
       document.getElementById('erroreTermini').removeAttribute('hidden');
       return false;
