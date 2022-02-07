@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { PiattoService } from '../../../Theme/piatto/piatto.service';
-import { Router } from '@angular/router';
-import { AddPiattoDTO, Piatto, TipologieDTO } from '../../../Theme/piatto/Piatto';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {PiattoService} from '../../../Theme/piatto/piatto.service';
+import {Router} from '@angular/router';
+import {AddPiattoDTO, Piatto, TipologieDTO} from '../../../Theme/piatto/Piatto';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 
 @Component({
@@ -25,15 +25,17 @@ export class PiattiAdminComponent implements OnInit {
     tipologie: TipologieDTO[];
     resultControllo: boolean;
     allergeniSingoloPiatto: string = '';
-    nomeImmagine: string = "";
+    nomeImmagine: string = '';
     immagineDatabase: SafeUrl;
+    parts: string[];
+
     constructor(private piattoService: PiattoService, private router: Router, private modalService: NgbModal,
                 private sanitizer: DomSanitizer) {
-        if (sessionStorage.getItem("token") == null){
-            window.location.replace("/");
+        if (sessionStorage.getItem('token') == null) {
+            window.location.replace('/');
         }
-        if (this.parseJwt(sessionStorage.getItem("token")).roles.id != 1) {
-            window.location.replace("/");
+        if (this.parseJwt(sessionStorage.getItem('token')).roles.id != 1) {
+            window.location.replace('/');
         }
     }
 
@@ -53,7 +55,7 @@ export class PiattiAdminComponent implements OnInit {
     parseJwt(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -87,6 +89,7 @@ export class PiattiAdminComponent implements OnInit {
     getSafeUrl() {
         return this.sanitizer.bypassSecurityTrustResourceUrl(this.piatto.img);
     }
+
     //funzione per il model
     open(content) {
         this.modalService.open(content).result.then((result) => {
@@ -127,9 +130,13 @@ export class PiattiAdminComponent implements OnInit {
         this.piatto.prezzo = parseInt((document.getElementById('updatePrezzo') as HTMLInputElement).value);
         this.controlloAllergeniUpdate();
         this.piatto.allergeni = this.allergeni;
-        //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
         this.piatto.tipologia = (document.getElementById('updateTipologia') as HTMLInputElement).value;
-        this.nomeImmagine = (document.getElementById('updateNomeFile') as HTMLInputElement).value;
+        if ((document.getElementById('updateNomeFile') as HTMLInputElement).value == '') {
+            this.parts = this.piatto.img.split('/');
+            this.nomeImmagine = this.parts[this.parts.length - 1].split('.')[0];
+        } else {
+            this.nomeImmagine = (document.getElementById('updateNomeFile') as HTMLInputElement).value;
+        }
         if (this.url == '') {
             this.piattoService.updatePiatto(this.piatto).subscribe(element => {
                 for (var index = 0; index < this.listiPiattini.length; index++) {
@@ -139,8 +146,7 @@ export class PiattiAdminComponent implements OnInit {
                     }
                 }
             });
-        }
-        else {
+        } else {
             let input = new FormData();
             input.append('nomePiatto', this.piatto.nome);
             input.append('prezzoPiatto', this.piatto.prezzo + '');
@@ -160,7 +166,7 @@ export class PiattiAdminComponent implements OnInit {
         }
         this.allergeni = '';
         this.url = '';
-        this.nomeImmagine = "";
+        this.nomeImmagine = '';
         this.modalService.dismissAll();
         //window.location.reload();
     }
@@ -172,7 +178,7 @@ export class PiattiAdminComponent implements OnInit {
         }
         this.piatto.numero = parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
         this.piattoService.getEsiste(this.piatto.numero).subscribe((response: any) => {
-          this.resultControllo=response;
+            this.resultControllo = response;
             console.log(this.resultControllo);
             if (this.resultControllo) {
                 (document.getElementById('ControlloNumeretto') as HTMLInputElement).innerHTML = 'Numeretto già esistente';
@@ -188,7 +194,7 @@ export class PiattiAdminComponent implements OnInit {
             this.controlloAllergeni();
             this.piatto.allergeni = this.allergeni;
             this.nomeImmagine = (document.getElementById('addNomeFile') as HTMLInputElement).value;
-            this.piatto.tipologia=(document.getElementById('addTipologia') as HTMLInputElement).value;
+            this.piatto.tipologia = (document.getElementById('addTipologia') as HTMLInputElement).value;
             let input = new FormData();
             input.append('nomePiatto', this.piatto.nome);
             input.append('prezzoPiatto', this.piatto.prezzo + '');
@@ -203,7 +209,7 @@ export class PiattiAdminComponent implements OnInit {
                 this.ordinaLista();
             });
             this.url = '';
-            this.nomeImmagine = "";
+            this.nomeImmagine = '';
             this.modalService.dismissAll();
         });
 
@@ -258,7 +264,7 @@ export class PiattiAdminComponent implements OnInit {
 
     //Sistemare
     controlloAllergeni() {
-        this.allergeni=" ";
+        this.allergeni = ' ';
         if ((document.getElementById('Glutine') as HTMLInputElement).checked == true) {
             this.allergeni += 'Glutine ';
         }
@@ -344,16 +350,16 @@ export class PiattiAdminComponent implements OnInit {
     }
 
     riceviFile(eventTarget: EventTarget) {
-        if ((<HTMLInputElement>eventTarget).files && (<HTMLInputElement>eventTarget).files[0]) {
+        if ((<HTMLInputElement> eventTarget).files && (<HTMLInputElement> eventTarget).files[0]) {
             var reader = new FileReader();
 
             reader.onload = (event: ProgressEvent) => {
-                this.url = (<FileReader>event.target).result;
+                this.url = (<FileReader> event.target).result;
             };
 
-            reader.readAsDataURL((<HTMLInputElement>eventTarget).files[0]);
+            reader.readAsDataURL((<HTMLInputElement> eventTarget).files[0]);
         }
-        this.immaginePiatto = (<HTMLInputElement>eventTarget).files[0];
+        this.immaginePiatto = (<HTMLInputElement> eventTarget).files[0];
     }
 
     ordinaLista() {
