@@ -3,6 +3,7 @@ package com.ragicriSushi.pw.Service;
 import com.ragicriSushi.pw.DAO.IndirizzoDAO;
 import com.ragicriSushi.pw.DAO.RoleDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
+import com.ragicriSushi.pw.DTO.EmailDTO;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
 import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
@@ -153,6 +154,17 @@ public class UtenteService implements UserDetailsService {
             return null;
         } else {
             return conversioni.toDTO(dao.get());
+        }
+    }
+
+    public EmailDTO getEmail(String username) {
+        Optional<UtenteDAO> dao = utenteRepository.findUtenteByUsername(username);
+        if (!dao.isPresent()) {
+            return null;
+        } else {
+            EmailDTO dto = new EmailDTO();
+            dto.setEmail(dao.get().getEmail());
+            return dto;
         }
     }
 
