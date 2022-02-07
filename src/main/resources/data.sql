@@ -54,28 +54,28 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Zuppa agropiccante', 10, "Antipasti", 4.00, 'Soia Uova/Derivati', '../../../../assets/images/piatti/zuppaAgropiccante.jpg');
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Salmone', 31, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriSalmone.jpg');
+    VALUES ('Nigiri Salmone', 31, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriSalmone.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Gambero cotto', 32, "Nigiri", 3.50, 'Crostacei Glutine', '../../../../assets/images/piatti/nigiriGambero.jpg');
+    VALUES ('Nigiri Gambero cotto', 32, "Nigiri", 3.50, 'Crostacei Glutine', '../../../../assets/images/piatti/nigiriGambero.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Branzino', 33, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriBranzino.jpg');
+    VALUES ('Nigiri Branzino', 33, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriBranzino.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Tonno', 34, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriTonno.jpg');
+    VALUES ('Nigiri Tonno', 34, "Nigiri", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriTonno.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Salmone Scottato', 35, "Nigiri", 3.50, 'Crostacei Pesce Glutine', '../../../../assets/images/piatti/nigiriScottato.jpg');
+    VALUES ('Nigiri Salmone Scottato', 35, "Nigiri", 3.50, 'Crostacei Pesce Glutine', '../../../../assets/images/piatti/nigiriScottato.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Anguilla', 36, "Nigiri", 2.50, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriAnguilla.jpg');
+    VALUES ('Nigiri Anguilla', 36, "Nigiri", 2.50, 'Pesce Glutine', '../../../../assets/images/piatti/nigiriAnguilla.jpg');
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Salmone', 41, "Sashimi", 8.00, 'Pesce', '../../../../assets/images/piatti/sashimiSalmone.jpg');
+    VALUES ('Sashimi Salmone', 41, "Sashimi", 8.00, 'Pesce', '../../../../assets/images/piatti/sashimiSalmone.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Tonno', 42, "Sashimi", 7.00, 'Pesce', '../../../../assets/images/piatti/sashimiTonno.jpg');
+    VALUES ('Sashimi Tonno', 42, "Sashimi", 7.00, 'Pesce', '../../../../assets/images/piatti/sashimiTonno.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Branzino', 43, "Sashimi", 9.00, 'Pesce', '../../../../assets/images/piatti/sashimiBranzino.jpg');
+    VALUES ('Sashimi Branzino', 43, "Sashimi", 9.00, 'Pesce', '../../../../assets/images/piatti/sashimiBranzino.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Misto', 44, "Sashimi", 10.00, 'Pesce', '../../../../assets/images/piatti/sashimiMisto.jpg');
+    VALUES ('Sashimi Misto', 44, "Sashimi", 10.00, 'Pesce', '../../../../assets/images/piatti/sashimiMisto.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Speciale', 45, "Sashimi", 16.00, 'Pesce', '../../../../assets/images/piatti/sashimiSpeciale.jpg');
+    VALUES ('Sashimi Speciale', 45, "Sashimi", 16.00, 'Pesce', '../../../../assets/images/piatti/sashimiSpeciale.jpg');
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Sake maki', 51, "Hosomaki", 3.00, 'Pesce Glutine', '../../../../assets/images/piatti/hosomakiSake.jpg');
@@ -93,21 +93,21 @@ INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
     VALUES ('Misto maki', 57, "Hosomaki", 3.00, 'Pesce Crostacei Glutine Verdura', '../../../../assets/images/piatti/mistoMaki.jpg');
 
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Sake', 61, "Temaki", 4.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSake.jpg');
+    VALUES ('Temaki Sake', 61, "Temaki", 4.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSake.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Maguro', 62, "Temaki", 4.00, 'Pesce Sesamo Glutine Uova/Derivati', '../../../../assets/images/piatti/temakiMaguro.jpg');
+    VALUES ('Temaki Maguro', 62, "Temaki", 4.00, 'Pesce Sesamo Glutine Uova/Derivati', '../../../../assets/images/piatti/temakiMaguro.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Ebiten', 63, "Temaki", 4.00, 'Sesamo Glutine Crostacei Uova/Derivati', '../../../../assets/images/piatti/temakiEbiten.jpg');
+    VALUES ('Temaki Ebiten', 63, "Temaki", 4.00, 'Sesamo Glutine Crostacei Uova/Derivati', '../../../../assets/images/piatti/temakiEbiten.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Veggie', 64, "Temaki", 4.00, 'Sesamo Glutine Uova/Derivati', '../../../../assets/images/piatti/temakiVerdura.jpg');
+    VALUES ('Temaki Veggie', 64, "Temaki", 4.00, 'Sesamo Glutine Uova/Derivati', '../../../../assets/images/piatti/temakiVerdura.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Spicy Sake', 65, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSpicySake.jpg');
+    VALUES ('Temaki Spicy Sake', 65, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSpicySake.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Spicy Tuna', 66, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSpicyTuna.jpg');
+    VALUES ('Temaki Spicy Tuna', 66, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiSpicyTuna.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Miura', 67, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiMiura.jpg');
+    VALUES ('Temaki Miura', 67, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiMiura.jpg');
 INSERT INTO piatto (nome, numero, tipologia, prezzo, allergeni, img)
-    VALUES ('Tempura', 68, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiTempura.jpg');
+    VALUES ('Temaki Tempura', 68, "Temaki", 5.00, 'Pesce Sesamo Glutine', '../../../../assets/images/piatti/temakiTempura.jpg');
 
 -- ORDINAZIONI:
 -- 1
