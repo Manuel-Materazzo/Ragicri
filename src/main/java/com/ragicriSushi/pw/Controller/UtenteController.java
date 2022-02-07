@@ -2,6 +2,7 @@ package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
+import com.ragicriSushi.pw.Service.MailService;
 import com.ragicriSushi.pw.Service.RoleService;
 import com.ragicriSushi.pw.Service.UtenteService;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,9 @@ public class UtenteController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private MailService mailService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
@@ -82,9 +86,21 @@ public class UtenteController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/indirizzo/{username}")
-    @ApiOperation("Ritorna l'indirozzo dell'utente con lo username specificato")
+    @ApiOperation("Ritorna l'indirizzo dell'utente con lo username specificato")
     public ResponseEntity<Object> getIndirizzoByUsername(@PathVariable String username) {
         IndirizzoDTO result = utenteService.getIndirizzoByUsername(username);
+
+        if (result == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @GetMapping(path = "/IdIndirizzo/{username}")
+    @ApiOperation("Ritorna l'id dell'indirizzo dell'utente con lo username specificato")
+    public ResponseEntity<Object> getIdIndirizzoByUsername(@PathVariable String username) {
+        NumeroDTO result = utenteService.getIdIndirizzoByUsername(username);
 
         if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
@@ -150,5 +166,12 @@ public class UtenteController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
         }
+    }
+
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "/inviaMail/{email}")
+    @ApiOperation("Invia Mail")
+    public ResponseEntity<Object> inviaMail(@PathVariable String email) {
+        return ResponseEntity.ok(mailService.sendEmail(email,2));
     }
 }

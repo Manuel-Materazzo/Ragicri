@@ -34,7 +34,7 @@ public class OrdinazioneController {
     @GetMapping(path = "/inviaMail/{email}")
     @ApiOperation("Invia Mail")
     public ResponseEntity<Object> inviaMail(@PathVariable String email) {
-        return ResponseEntity.ok(mailService.sendEmail(email));
+        return ResponseEntity.ok(mailService.sendEmail(email,1));
     }
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
