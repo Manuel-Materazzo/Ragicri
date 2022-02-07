@@ -186,7 +186,7 @@ public class PiattoService {
         metadata.put("Content-Type", multipartFile.getContentType());
         metadata.put("Content-Length", String.valueOf(multipartFile.getSize()));
 
-        String dirName = "C:\\immaginiRagicri";
+        String dirName = "C:/RagicriSushi/ragicripw_frontend/src/assets/images/piatti";
 
         try {
             //File actualFile = new File (dirName, nomeFile+"."+multipartFile.getOriginalFilename().split("\\.")[0]);
