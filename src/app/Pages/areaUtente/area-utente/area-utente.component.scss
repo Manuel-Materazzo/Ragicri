@@ -12,66 +12,24 @@
           1px 1px 0 #000;
 }
 
-
 .btn-update {
   color: black;
-  background-color: rgba(251,255,10,0.8);
-  border-color: blanchedalmond;
+  background: #fbff0a linear-gradient(180deg, #fbff0a, #d9dd00) repeat-x;
+  border-color: #fbff0acc;
 }
 
-.btn-update:hover {
+.btn-update:active {
   color: black;
-  background-color: rgba(188,191,0,0.5);
-  border-color: blanchedalmond;
+  background: #d9dd04 linear-gradient(180deg, #d9dd04, #bfc200) repeat-x;
 }
 
-.btn-update:focus, .btn-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(188,191,0,0.5);
+.btn-secondary{
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x;
+  color: white;
+  border-color: #FF7B3C;
 }
 
-.btn-update.disabled, .btn-primary:disabled {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-update:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
-}
-
-.btn-update:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-}
-
-
-.btn-close:hover {
-  color: black;
-  background-color: rgba(255,78,8,0.48);
-  border-color: blanchedalmond;
-}
-
-.btn-close:focus, .btn-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(255,78,8,0.48);
-}
-
-.btn-close.disabled, .btn-primary:disabled {
-  color: #fff;
-  background-color: rgba(255,78,8,0.48);
-  border-color: #007bff;
-}
-
-.btn-close:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
-}
-
-.btn-close:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+.btn-secondary:active{
+  background: #d84f00 linear-gradient(180deg, #ee5e0a, #d84f00) repeat-x !important;
+  color: white !important;
 }

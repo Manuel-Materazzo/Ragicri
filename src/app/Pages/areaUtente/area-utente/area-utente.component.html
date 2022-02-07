@@ -3,66 +3,70 @@
 <div class="main-card mb-3 card">
 
     <div class="card-body">
+        <h3>Ciao {{nomeUtente}}!</h3>
         <form>
             <fieldset>
-                <legend>Informazioni personali:</legend>
+                <br>
+                <h5>Informazioni personali:</h5>
 
                 <div class="form-row">
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label for="nome">Nome</label>
                             <label hidden id="ControlloNome" class="mr-sm-2">Inserire nome</label>
-                            <input name="nome" id="nome"
-                                   placeholder="Inserisci un nome" type="text" class="form-control">
+                            <input name="nome" id="nome" placeholder="Inserisci un nome" type="text"
+                                class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label for="email">Email</label>
                             <label hidden id="ControlloEmail" class="mr-sm-2">Inserire email</label>
-                            <input name="email" id="email"
-                                   placeholder="inserisci l'email" type="email"
-                                   class="form-control"></div>
+                            <input name="email" id="email" placeholder="Inserisci l'email" type="email"
+                                class="form-control">
+                        </div>
                     </div>
                 </div>
+
+                <br>
+                <h5>Indirizzo di spedizione:</h5>
                 <div class="form-row">
                     <div class="col-md-4">
                         <div class="position-relative form-group">
                             <label for="via">Via</label>
                             <label hidden id="ControlloVia" class="mr-sm-2">Inserire via</label>
-                            <input name="via" id="via"
-                                   placeholder="Inserisci un via" type="text" class="form-control">
+                            <input name="via" id="via" placeholder="Inserisci la via" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="position-relative form-group">
                             <label for="civico">Civico</label>
                             <label hidden id="ControlloCivico" class="mr-sm-2">Inserire civico</label>
-                            <input name="civico" id="civico"
-                                   placeholder="inserisci il civico" type="text"
-                                   class="form-control"></div>
+                            <input name="civico" id="civico" placeholder="Inserisci il civico" type="text"
+                                class="form-control">
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <div class="position-relative form-group">
                             <label for="provincia">Provincia</label>
                             <label hidden id="ControlloProvincia" class="mr-sm-2">Inserire provincia</label>
-                            <input name="provincia" id="provincia"
-                                   placeholder="inserisci la provincia" type="text"
-                                   class="form-control"></div>
+                            <input name="provincia" id="provincia" placeholder="Inserisci la provincia" type="text"
+                                class="form-control">
+                        </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="position-relative form-group">
                             <label for="cap">Cap</label>
                             <label hidden id="ControlloCap" class="mr-sm-2">Inserire cap</label>
-                            <input name="cap" id="cap"
-                                   placeholder="inserisci la cap" type="text"
-                                   class="form-control"></div>
+                            <input name="cap" id="cap" placeholder="Inserisci il cap" type="text" class="form-control">
+                        </div>
                     </div>
                 </div>
             </fieldset>
-            <div class="form-row">
 
+            <br>
+            <div class="form-row">
                 <div class="col-md-12">
                     <div class="position-relative form-group">
                         <label>Modifica Password</label>
@@ -74,7 +78,7 @@
                 </div>
             </div>
 
-            <button class="mt-2 btn btn-primary" (click)="openConfermaModal(modifica)">Modifica</button>
+            <button class="mt-2 btn btn-secondary" (click)="openConfermaModal(modifica)">Conferma modifiche</button>
         </form>
     </div>
 </div>
@@ -99,8 +103,7 @@
                     <div class="col-md-6">
                         <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
                             <label for="nuovaPassword" class="mr-sm-2">Nuova Password:</label>
-                            <input name="text" id="nuovaPassword"
-                                   value="" type="text" class="form-control">
+                            <input name="text" id="nuovaPassword" value="" type="text" class="form-control">
                             <label hidden id="ControlloNuovaPassword" class="mr-sm-2">Inserisci la nuova
                                 password:</label>
                         </div>
@@ -108,8 +111,7 @@
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label for="confermaPassword">Conferma Nuova Password:</label>
-                            <input name="confermaPassword" id="confermaPassword"
-                                   type="password" class="form-control">
+                            <input name="confermaPassword" id="confermaPassword" type="password" class="form-control">
                             <label hidden id="ControlloConfermaPassword" class="mr-sm-2">Conferma la nuova
                                 password</label>
                         </div>

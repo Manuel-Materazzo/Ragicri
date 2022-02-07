@@ -37,9 +37,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let ord of piattiOrdinati">
-        <td *ngIf="ord.consegnato == false">{{ord.nome}}</td>
-        <td *ngIf="ord.consegnato == false">{{ord.quantita}}</td>
-        <td *ngIf="ord.consegnato == false">{{ord.numeretto}}</td>
+        <td>{{ord.nome}}</td>
+        <td>{{ord.quantita}}</td>
+        <td>{{ord.numeretto}}</td>
       </tr>
     </tbody>
   </table>

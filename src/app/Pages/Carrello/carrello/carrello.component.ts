@@ -14,23 +14,40 @@ export class CarrelloComponent implements OnInit {
 
   carrello;
   email: string;
+  quantitaTot = 0;
+  prezzoTot = 0;
+  formatter = new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: 'EUR'
+  });
 
   constructor(private router: Router, private ordinazioneService: OrdinazioneService, private piattoservice: PiattoService, private utenteService: UtenteService, private modalService: NgbModal) {
 
   }
 
+
   ngOnInit() {
-    if (sessionStorage.getItem("carrello") == null){
+    if(sessionStorage.getItem("token") == null){
       document.getElementById("contenutoPrincipale").setAttribute('hidden', '');
+      document.getElementById("carrelloVuoto").setAttribute('hidden', '');
+    }
+    else if (sessionStorage.getItem("carrello") == null){
+      document.getElementById("contenutoPrincipale").setAttribute('hidden', '');
+      document.getElementById("nonLoggato").setAttribute('hidden', '');
     }
     else {
-      this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
       document.getElementById("carrelloVuoto").setAttribute('hidden', '');
+      document.getElementById("nonLoggato").setAttribute('hidden', '');
+      this.carrello = JSON.parse(sessionStorage.getItem("carrello")).carrello;
+      for (let i = 0; i < this.carrello.length; i++){
+        this.quantitaTot += this.carrello[i].quantita;
+        this.prezzoTot += this.carrello[i].prezzo;
+      }
     }
   }
 
-  elimina(numeretto: number) {
 
+  elimina(numeretto: number) {
     for (let i = 0; i < this.carrello.length; i++) {
       if (this.carrello[i].numeretto == numeretto){
         this.carrello.splice(i, 1);
@@ -39,25 +56,32 @@ export class CarrelloComponent implements OnInit {
         sessionStorage.setItem("carrello", json);
       }
     }
+
+    if (this.carrello.length == 0){
+      sessionStorage.removeItem("carrello");
+      window.location.reload();
+    }
+    else{
+      this.quantitaTot = 0;
+      this.prezzoTot = 0;
+      for (let i = 0; i < this.carrello.length; i++){
+        this.quantitaTot += this.carrello[i].quantita;
+        this.prezzoTot += this.carrello[i].prezzo;
+      }
+    }
   }
 
+
   removeEmptyOrNull = (obj) => { 
-
-    Object.keys(obj).forEach(k => 
-
-      (obj[k] && typeof obj[k] === 'object') && this.removeEmptyOrNull(obj[k]) || 
-
-      (!obj[k] && obj[k] !== undefined) && delete obj[k] 
-
-    ); 
-
+    Object.keys(obj).forEach(k => (obj[k] && typeof obj[k] === 'object') && this.removeEmptyOrNull(obj[k]) || (!obj[k] && obj[k] !== undefined) && delete obj[k]); 
     return obj; 
-
   };
+
 
   annulla(){
     this.modalService.dismissAll();
   }
+
 
   conferma(){
     this.modalService.dismissAll();
@@ -67,13 +91,13 @@ export class CarrelloComponent implements OnInit {
     this.utenteService.getIdIndirizzoByUsername(sessionStorage.getItem("username")).subscribe(data => {
       let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
       '"idIndirizzo": ' + data.numero + ', "orarioConsegna": "' + orario + '"}';
-      console.log(sessionStorage.getItem("email"));
       this.ordinazioneService.inviaMail(sessionStorage.getItem("email")).subscribe();
       this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data2 => {
         window.location.reload();
       });
     });
   }
+
 
   pagamento(contentTrue, contentFalse) {
     if((<HTMLInputElement>document.getElementById("orario")).value == null || (<HTMLInputElement>document.getElementById("orario")).value == undefined

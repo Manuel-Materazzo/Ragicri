@@ -7,6 +7,13 @@
   </div>
 </div>
 
+<div class="main-card mb-3 card" id="nonLoggato">
+  <div class="card-body">
+    <h5 class="card-title">Registrati per poter ordinare!</h5>
+    <p>Prima di poter utilizzare il carrello è necessario effettuare il <a routerLink="/login">login</a> o la <a routerLink="/registra">registrazione</a>.</p>
+  </div>
+</div>
+
 <div class="main-card mb-3 card" id="contenutoPrincipale">
   <div class="card-body">
     <h5 class="card-title">Ordinazioni:</h5>
@@ -25,7 +32,7 @@
           <tr *ngFor="let piatto of carrello">
             <td>{{piatto.nome}}</td>
             <td>{{piatto.quantita}}</td>
-            <td>{{piatto.prezzo}}</td>
+            <td>{{this.formatter.format(piatto.prezzo)}}</td>
             <td>{{piatto.numeretto}}</td>
             <td class="text-center">
               <div>
@@ -34,6 +41,13 @@
                 </button>
               </div>
             </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td>Totale</td>
+            <td>{{quantitaTot}}</td>
+            <td>{{formatter.format(prezzoTot)}}</td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
