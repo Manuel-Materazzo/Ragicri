@@ -60,7 +60,7 @@ public class UtenteController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_UTENTE')")
     @GetMapping(path = "/username/{username}")
     @ApiOperation("Ritorna un utente con lo username inserito")
     public ResponseEntity<Object> getByUsername(@PathVariable String username) {
