@@ -1,5 +1,6 @@
 package com.ragicriSushi.pw.Controller;
 
+import com.ragicriSushi.pw.DTO.EmailDTO;
 import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
 import com.ragicriSushi.pw.Service.MailService;
@@ -59,11 +60,24 @@ public class UtenteController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_UTENTE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/username/{username}")
     @ApiOperation("Ritorna un utente con lo username inserito")
     public ResponseEntity<Object> getByUsername(@PathVariable String username) {
         UtenteDTO dto = utenteService.getByUsername(username);
+
+        if (dto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
+        } else {
+            return ResponseEntity.ok(dto);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_UTENTE')")
+    @GetMapping(path = "/email/{username}")
+    @ApiOperation("Ritorna un utente con lo username inserito")
+    public ResponseEntity<Object> getEmail(@PathVariable String username) {
+        EmailDTO dto = utenteService.getEmail(username);
 
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");

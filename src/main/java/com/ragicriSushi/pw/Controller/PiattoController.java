@@ -34,7 +34,7 @@ public class PiattoController {
         return ResponseEntity.ok(piattoService.getAll());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_DIPENDENTE')")
     @GetMapping(path = "/{id}")
     @ApiOperation("Ritorna il piatto con l'id inserito")
     public ResponseEntity<Object> getById(@PathVariable int id) {
@@ -47,7 +47,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_DIPENDENTE')")
     @GetMapping(path = "/numero/{numero}")
     @ApiOperation("Controlla se il numero inserito è un piatto esistente (ritorna un booleano)")
     public ResponseEntity<Boolean> checkNumero(@PathVariable int numero) {
@@ -154,7 +154,7 @@ public class PiattoController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_DIPENDENTE')")
     @GetMapping(path = "/getByNumero/{numero}")
     @ApiOperation("Restituisce il piatto con il numero inserito")
     public ResponseEntity<Object> getByNumero(@PathVariable int numero) {
