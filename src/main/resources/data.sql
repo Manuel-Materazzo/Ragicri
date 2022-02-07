@@ -7,7 +7,7 @@ INSERT INTO indirizzo(via, provincia, cap, civico) VALUES ('via dipendente', 'DP
 
 -- PRIVILEGI
 INSERT INTO privilege(name) VALUES ('ADMIN_PRIVILEGE');
-    INSERT INTO privilege(name) VALUES ('DIPENDENTE_PRIVILEGE');
+INSERT INTO privilege(name) VALUES ('DIPENDENTE_PRIVILEGE');
 INSERT INTO privilege(name) VALUES ('UTENTE_PRIVILEGE');
 
 -- RUOLI
@@ -28,7 +28,7 @@ INSERT INTO roles_privileges(roledao_id,privilege_id) VALUES (3,3);
 INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Radu', 'radu01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "radusclifos@gmail.com", 1, 1);
 INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Giacomo', 'Jeck01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "giacomocortese@gmail.com", 2, 1);
 INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Cristian', 'cri01', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "cristian.tom01@gmail.com", 3, 1);
-INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Test Utente', 'utente', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "utente@gmail.com", 4, 3);
+INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Test Utente', 'utente', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "radu.sclifos@stud.tecnicosuperiorekennedy.it", 4, 3);
 INSERT INTO utente (nome, username, password, email, indirizzo, ruolo) VALUES ('Test Dipendente', 'dipendente', '$2a$10$sHZGHYyjUx9jlIuzbHU06ehsfu0eIct9FRxiOUS96Z5jioih1kOZK', "dipendente@gmail.com", 5, 2);
 
 -- PIATTI

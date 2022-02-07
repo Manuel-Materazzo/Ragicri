@@ -97,6 +97,7 @@ public class UtenteController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_UTENTE')")
     @GetMapping(path = "/IdIndirizzo/{username}")
     @ApiOperation("Ritorna l'id dell'indirizzo dell'utente con lo username specificato")
     public ResponseEntity<Object> getIdIndirizzoByUsername(@PathVariable String username) {
@@ -125,7 +126,6 @@ public class UtenteController {
         }
     }
 
-    //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     @ApiOperation("Crea un utente")
     public ResponseEntity<Object> add(@RequestBody AddUtenteDTO dto) {
@@ -168,7 +168,6 @@ public class UtenteController {
         }
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/inviaMail/{email}")
     @ApiOperation("Invia Mail")
     public ResponseEntity<Object> inviaMail(@PathVariable String email) {
