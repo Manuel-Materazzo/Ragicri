@@ -10,7 +10,7 @@ import java.util.Properties;
 @Service
 public class MailService {
 
-    public boolean sendEmail(String email) {
+    public boolean sendEmail(String email, int mex) {
 
         // Recipient's email ID needs to be mentioned.
         String to = email;
@@ -57,18 +57,28 @@ public class MailService {
             // Set Subject: header field
             message.setSubject("Congratulazioni, ordine effettuato!");
 
-            // Now set the actual message
-            message.setContent(
-                    "<h1>La ringraziamo di aver scelto Ragicri-sushi!</h1>",
-                    "text/html");
+            if(mex==1) {
+                message.setContent(
+                        "<h1>La ringraziamo di aver scelto Ragicri-sushi!</h1>",
+                        "text/html");
+            }
+
+            if(mex==2) {
+                message.setContent(
+                        "<h1>Benvenuto,</h1>" +
+                                "<p>la ringraziamo per essersi iscritto nel nostro sito Ragicri-sushi,</p>" +
+                                "<p>per eventuali domande o di assistenza tecnica non esitare a scriverci!</p>" +
+                                "<h5>La aspettiamo per soddisfare la sua voglia di sushi!</h5>",
+                        "text/html");
+            }
 
             System.out.println("sending...");
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
             return true;
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
         return false;
     }

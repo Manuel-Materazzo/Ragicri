@@ -2,6 +2,7 @@ package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
+import com.ragicriSushi.pw.Service.MailService;
 import com.ragicriSushi.pw.Service.RoleService;
 import com.ragicriSushi.pw.Service.UtenteService;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,9 @@ public class UtenteController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private MailService mailService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "")
@@ -150,5 +154,12 @@ public class UtenteController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
         }
+    }
+
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(path = "/inviaMail/{email}")
+    @ApiOperation("Invia Mail")
+    public ResponseEntity<Object> inviaMail(@PathVariable String email) {
+        return ResponseEntity.ok(mailService.sendEmail(email,2));
     }
 }
