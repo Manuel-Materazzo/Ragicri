@@ -86,9 +86,21 @@ public class UtenteController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/indirizzo/{username}")
-    @ApiOperation("Ritorna l'indirozzo dell'utente con lo username specificato")
+    @ApiOperation("Ritorna l'indirizzo dell'utente con lo username specificato")
     public ResponseEntity<Object> getIndirizzoByUsername(@PathVariable String username) {
         IndirizzoDTO result = utenteService.getIndirizzoByUsername(username);
+
+        if (result == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @GetMapping(path = "/IdIndirizzo/{username}")
+    @ApiOperation("Ritorna l'id dell'indirizzo dell'utente con lo username specificato")
+    public ResponseEntity<Object> getIdIndirizzoByUsername(@PathVariable String username) {
+        NumeroDTO result = utenteService.getIdIndirizzoByUsername(username);
 
         if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": \"Utente non trovato.\"}");

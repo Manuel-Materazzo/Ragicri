@@ -66,7 +66,7 @@ public class MailService {
             if(mex==2) {
                 message.setContent(
                         "<h1>Benvenuto,</h1>" +
-                                "<p>la ringraziamo per essersi iscritto nel nostro sito Ragicri-sushi,</p>" +
+                                "<p>la ringraziamo per essersi iscritto a Ragicri-sushi,</p>" +
                                 "<p>per eventuali domande o di assistenza tecnica non esitare a scriverci!</p>" +
                                 "<h5>La aspettiamo per soddisfare la sua voglia di sushi!</h5>",
                         "text/html");
