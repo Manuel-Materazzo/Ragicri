@@ -70,7 +70,7 @@ export class CarrelloComponent implements OnInit {
       console.log(sessionStorage.getItem("email"));
       this.ordinazioneService.inviaMail(sessionStorage.getItem("email")).subscribe();
       this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data2 => {
-        //window.location.reload();
+        window.location.reload();
       });
     });
   }
