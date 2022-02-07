@@ -54,12 +54,10 @@ export class RegisterBoxedComponent implements OnInit {
 
         let json = '{"username": "' + this.username + '", "password": "' + this.password + '"}';
         this.utenteService.authenticate(json).subscribe(data => {
-          console.log("--------------------------------------------------------------------")
-          this.utenteService.inviaMail(this.email).subscribe();
           if (data.token != null) {
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("username", String(this.username));
-            console.log("--------------------------------------------------------------------")
+            sessionStorage.setItem("email", String(this.email));
             this.utenteService.inviaMail(this.email).subscribe();
             window.location.replace("/");
           }

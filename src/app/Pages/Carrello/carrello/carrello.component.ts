@@ -60,16 +60,14 @@ export class CarrelloComponent implements OnInit {
   }
 
   conferma(){
-    this.email = (document.getElementById('emailFatt') as HTMLInputElement).value;
     this.modalService.dismissAll();
     sessionStorage.removeItem("carrello");
     let tipologia = (<HTMLInputElement>document.getElementById("modalita")).value;
     let orario = String((<HTMLInputElement>document.getElementById("orario")).value);
-    this.utenteService.getIndirizzoByUsername(sessionStorage.getItem("username")).subscribe(data => {
+    this.utenteService.getIdIndirizzoByUsername(sessionStorage.getItem("username")).subscribe(data => {
       let json = '{"pagato": true, "persone": 0, "piattiOrdinati": ' + JSON.stringify(this.carrello) + ', "tavolo": 0, "tipologia": "' + tipologia + '",' +
-      '"idIndirizzo": ' + data.idIndirizzo + ', "orarioConsegna": "' + orario + '"}';
-      console.log(this.email);
-      this.ordinazioneService.inviaMail(this.email).subscribe();
+      '"idIndirizzo": ' + data.numero + ', "orarioConsegna": "' + orario + '"}';
+      this.ordinazioneService.inviaMail(sessionStorage.getItem("email")).subscribe();
       this.ordinazioneService.aggiungiOrdinazioneIndirizzo(JSON.parse(json)).subscribe(data2 => {
         window.location.reload();
       });

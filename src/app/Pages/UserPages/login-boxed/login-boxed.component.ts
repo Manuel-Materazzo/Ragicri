@@ -31,6 +31,7 @@ export class LoginBoxedComponent implements OnInit {
       if(data.token != null){
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("username", String(this.username));
+        sessionStorage.setItem("email", String(data.email));
         window.location.replace("/");
       }
       else{

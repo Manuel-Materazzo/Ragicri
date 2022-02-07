@@ -49,6 +49,10 @@ export class UtenteService {
     return this.http.get(`${this.baseUrl}/indirizzo/${username}`, this.header);
   }
 
+  getIdIndirizzoByUsername(username: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/IdIndirizzo/${username}`);
+  }
+
   aggiungiOrdinazione(ordinazione: any) :Observable<any>{
     return this.http.post(`${this.baseUrl}/addOrdinazione`, ordinazione, this.header);
   }
@@ -66,6 +70,6 @@ export class UtenteService {
     return this.http.post("http://localhost:8080/ragicri/authenticate", JSON.parse(json));
   } 
   inviaMail(email: String): Observable<any>{
-    return this.http.get(`${this.baseUrl}/inviaMail/${email}`, this.header);
+    return this.http.get(`${this.baseUrl}/inviaMail/${email}`);
   }
 }
