@@ -66,4 +66,8 @@ export class OrdinazioneService {
   setPagato(tavolo: any): Observable<any>{
     return this.http.get(`${this.baseUrl}/pagato/${tavolo}`, this.header);
   }
+
+  inviaMail(email: String): Observable<any>{
+    return this.http.get(`${this.baseUrl}/inviaMail/${email}`, this.header);
+  }
 }
