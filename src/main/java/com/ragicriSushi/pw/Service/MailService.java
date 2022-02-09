@@ -54,16 +54,19 @@ public class MailService {
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            // Set Subject: header field
-            message.setSubject("Congratulazioni, ordine effettuato!");
-
             if(mex==1) {
+                // Set Subject: header field
+                message.setSubject("Congratulazioni, ordine effettuato!");
+
                 message.setContent(
                         "<h1>La ringraziamo di aver scelto Ragicri-sushi!</h1>",
                         "text/html");
             }
 
             if(mex==2) {
+                // Set Subject: header field
+                message.setSubject("Registrazione completata!");
+
                 message.setContent(
                         "<h1>Benvenuto,</h1>" +
                                 "<p>la ringraziamo per essersi iscritto a Ragicri-sushi,</p>" +
