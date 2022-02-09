@@ -214,13 +214,6 @@ export class UtenteAdminComponent implements OnInit {
     } else {
       document.getElementById('ControlloUsernameUpdate').setAttribute('hidden', '');
     }
-    if ((document.getElementById('updatePassword') as HTMLInputElement).value == '') {
-      document.getElementById('ControlloPasswordUpdate').style.color = '#FF0000';
-      document.getElementById('ControlloPasswordUpdate').removeAttribute('hidden');
-      this.resultControllo = true;
-    } else {
-      document.getElementById('ControlloPasswordUpdate').setAttribute('hidden', '');
-    }
     if ((document.getElementById('updateEmail') as HTMLInputElement).value == '') {
       document.getElementById('ControlloEmailUpdate').style.color = '#FF0000';
       document.getElementById('ControlloEmailUpdate').removeAttribute('hidden');
