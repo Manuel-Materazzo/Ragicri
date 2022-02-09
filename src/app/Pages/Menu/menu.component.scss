@@ -88,6 +88,10 @@ input[type="checkbox"]:checked + label img{
   color: white !important;
 }
 
+.card-body{
+  padding: 0px 10px 10px 10px;
+}
+
 @media only screen and (max-width: 770px) {
   .imgPiatto{
     height: 150px;
@@ -112,7 +116,7 @@ input[type="checkbox"]:checked + label img{
   
   /* width */
   ::-webkit-scrollbar {
-    width: 7px;
+    width: 0px;
   }
 
   /* Track */
