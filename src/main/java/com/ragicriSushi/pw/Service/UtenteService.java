@@ -113,7 +113,7 @@ public class UtenteService implements UserDetailsService {
             if (dto.getEmail() != null) {
                 dao.get().setEmail(dto.getEmail());
             }
-            if (dto.getPassword() != null) {
+            if (dto.getPassword()!="") {
                 dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
             }
             if (dto.getUsername() != null) {
