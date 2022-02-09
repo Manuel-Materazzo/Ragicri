@@ -1,0 +1,34 @@
+.testo-centrato-titolo {
+  text-align: center;
+  color: #FF530D;
+  margin-bottom: 25px;
+  font-family: "MaybugMSHandwritten", Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+#statusPiatto{
+  color:red;
+}
+
+.btn-secondary{
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x;
+  color: white;
+  border-color: #FF7B3C;
+}
+
+.btn-secondary:active{
+  background: #d84f00 linear-gradient(180deg, #ee5e0a, #d84f00) repeat-x !important;
+  color: white !important;
+}
+
+.btn-success{
+  background: #83B150 linear-gradient(180deg, #83B150, #67a520) repeat-x;
+  color: white;
+  border-color: #6ea72d;
+}

@@ -1,0 +1,44 @@
+<div class="h-100 bg-plum-plate bg-animation">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <div class="logo-src pointer" style="margin: auto" routerLink="/"></div>
+      <div class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="h5 modal-title text-center">
+              <h4 class="mt-2">
+                <div>Benvenuto!</div>
+                <span>Per favore inserisci i tuoi dati personali.</span>
+              </h4>
+            </div>
+
+            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_" class="form-group">
+              <div>
+                <input id="username" type="email" placeholder="Inserisci username..." class="form-control">
+              </div>
+            </div>
+            <div id="exampleInputGroup2" role="group" class="form-group">
+              <div>
+                <form (keypress)="keyPressFunction($event)"><input id="password" type="password" placeholder="Inserisci password..." class="form-control"></form>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+            <h6 class="mb-0">
+              Non sei ancora registrato? <a class="text-primary" routerLink="/registra">Registrati ora!</a>
+            </h6>
+          </div>
+          <div class="modal-footer clearfix">
+            <div class="float-left"><label hidden id="ErroreLogin">Username e password non corretti </label></div>
+            <div class="float-right">
+              <button type="button" class="btn btn-primary btn-lg" (click)="Login()">Accedi alla pagina</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-white opacity-8 mt-3">
+        Copyright © Ragicri 2022
+      </div>
+    </div>
+  </div>
+</div>

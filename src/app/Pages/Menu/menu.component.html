@@ -1,0 +1,95 @@
+<h1 class="testo-centrato-titolo">Menù</h1>
+
+<div class="card-border mb-3 card card-body border-warning" style="padding: 10px 10px 7px 10px !important;">
+    <div>
+        <div class="riga inline">
+            <div class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary bottone">
+                    <input ngbButton type="radio" [value]="1" (click)="filtroTipologie('')">Menù completo
+                </label>
+            </div>
+            <div *ngFor="let tipo of tipologiePiatto" class="btn-group btn-group-toggle inline elementoRiga" ngbRadioGroup name="radioBasic" [(ngModel)]="tipologie">
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="tipo" (click)="filtroTipologie(tipo) ">{{tipo}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px; margin-left: 5px;">
+        <div class="riga inline">
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Glutine')" id="checkbox1">
+                <label for="checkbox1">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Crostacei')" id="checkbox2">
+                <label for="checkbox2">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Pesce')" id="checkbox3">
+                <label for="checkbox3">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Molluschi')" id="checkbox4">
+                <label for="checkbox4">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Soia')" id="checkbox5">
+                <label for="checkbox5">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/soia.png" alt="soia">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Uova/Derivati')" id="checkbox6">
+                <label for="checkbox6">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                </label>
+            </div>
+            <div class="elementoRiga">
+                <input class="checkboxNone" type="checkbox" (click)="filtroAllergeni('Verdura')" id="checkbox7">
+                <label for="checkbox7">
+                    <img class="iconaAllergene" src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                </label>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-3" *ngFor="let piatto of listaPiatti;">
+        <div class="main-card mb-3 card cardPiatti">
+            <div class="divPiatto">
+                <img src="{{piatto.img}}" alt="Card image cap" class="card-img-top imgPiatto">
+            </div>
+
+            <div class="col">
+                <div class="card-body">
+                    <div class="testa">
+                        <h4 class="card-title"><b>{{piatto.nome}}</b></h4>
+                        <h5 class="card-subtitle">Numero: {{piatto.numero}}</h5>
+                        <h6 style="margin-top: 3px;">Prezzo: {{this.formatter.format(piatto.prezzo)}}</h6>
+                        <p>Allergeni: {{piatto.allergeni}}</p>
+                    </div>
+
+                    <div *ngIf="token">
+                        <button class="btn btn-secondary btnCarrello" style="margin-top: -6px;" (click)="aggiungiCarrello(piatto.numero, piatto.nome, piatto.prezzo)">
+                            Aggiungi al carrello</button> X
+                        <div style="width: 60px; display: inline-block;">
+                            <input id="quantita{{piatto.numero}}" value="1" min="1" step="1" type="number" class="mr-2 form-control" style="height: 34px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

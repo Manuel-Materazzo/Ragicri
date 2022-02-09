@@ -1,0 +1,47 @@
+<h1 class="testo-centrato-titolo">Pagamenti tavoli</h1>
+
+<div class="main-card mb-3 card riga">
+  <div id="ordinazioniNonPresenti" class="elementoRiga">
+    <h4>Ordinazioni in ristorante non presenti.</h4>
+  </div>
+  <div class="elementoRiga" *ngFor="let ord of ordinazioni">
+    <div class="mb-0 card text-white card-body bg-info">
+      <h4 class="text-white card-title" style="margin-top: -10px;">Tavolo {{ord.tavolo}}</h4>
+      <p>
+        Piatti ordinati: {{ord.piattiOrdinati.length}} <br />
+        Persone: {{ord.persone}} <br />
+        Tipologia: {{ord.tipologia}} <br />
+        Preparato: {{ord.preparato}}<br />
+        <button type="button" class="btn btn-warning" style="margin:0px 0px -30px 27px;" (click)="infoTavolo(ord.tavolo)">Mostra</button> &nbsp;
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="main-card mb-3 card" style="padding: 10px;">
+
+  <h4 id="tavoloOrdinazione">Seleziona un'ordine.</h4>
+
+  <button type="button" id="bottonePronto" class="btn btn-success bottonePronto" (click)="pagato()">Pagato</button>
+
+  <br />
+
+  <table class="mb-0 table table-hover">
+    <thead class="intestazioneTabella">
+      <tr>
+        <th>Nome</th>
+        <th>Quantità</th>
+        <th>Numeretto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ord of piattiOrdinati">
+        <td>{{ord.nome}}</td>
+        <td>{{ord.quantita}}</td>
+        <td>{{ord.numeretto}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

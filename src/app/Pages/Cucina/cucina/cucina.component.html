@@ -1,0 +1,66 @@
+<h1 class="testo-centrato-titolo">Cucina</h1>
+
+<div class="main-card mb-3 card riga">
+  <div id="ordinazioniNonPresenti" class="elementoRiga">
+    <h4>Ordinazioni in ristorante non presenti.</h4>
+  </div>
+  <div class="elementoRiga" *ngFor="let ord of ordinazioni">
+    <div class="mb-0 card text-white card-body bg-info">
+      <h4 class="text-white card-title" style="margin-top: -10px;">Tavolo {{ord.tavolo}}</h4>
+      <p>
+        Piatti ordinati: {{ord.piattiOrdinati.length}} <br />
+        Persone: {{ord.persone}} <br />
+        Tipologia: {{ord.tipologia}} <br />
+        Preparato: {{ord.preparato}}<br />
+        <button type="button" class="btn btn-warning" style="margin:0px 0px -30px 27px;" (click)="infoTavolo(ord.tavolo)">Mostra</button> &nbsp;
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="main-card mb-3 card riga">
+  <div id="ordinazioniAsportoNonPresenti" class="elementoRiga">
+    <h4>Ordinazioni Asporto/Domicilio non presenti.</h4>
+  </div>
+  <div class="elementoRiga" *ngFor="let ord of ordinazioniAsporto">
+    <div class="mb-0 card text-white card-body bg-info">
+      <h4 class="text-white card-title" style="margin-top: -10px;">{{ord.tipologia}} {{ord.idOrdinazione}}</h4>
+      <p>
+        Piatti ordinati: {{ord.piattiOrdinati.length}} <br />
+        Tipologia: {{ord.tipologia}} <br />
+        Preparato: {{ord.preparato}}<br />
+        <button type="button" class="btn btn-warning" style="margin:0px 0px -30px 27px;" (click)="infoOrdinazione(ord.idOrdinazione)">Mostra</button> &nbsp;
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="main-card mb-3 card" style="padding: 10px;">
+
+  <h4 id="tavoloOrdinazione">Seleziona un'ordine.</h4>
+
+  <button type="button" id="bottonePronto" class="btn btn-success bottonePronto" (click)="consegnato()">Pronto</button>
+  <button type="button" id="bottoneProntoAsporto" class="btn btn-success bottonePronto" (click)="consegnatoAsporto()">Pronto</button>
+
+  <br />
+
+  <table class="mb-0 table table-hover">
+    <thead class="intestazioneTabella">
+      <tr>
+        <th>Nome</th>
+        <th>Quantità</th>
+        <th>Numeretto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ord of piattiOrdinati">
+        <td *ngIf="ord.consegnato == false">{{ord.nome}}</td>
+        <td *ngIf="ord.consegnato == false">{{ord.quantita}}</td>
+        <td *ngIf="ord.consegnato == false">{{ord.numeretto}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

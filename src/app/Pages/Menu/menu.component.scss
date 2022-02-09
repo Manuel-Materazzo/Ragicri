@@ -1,0 +1,136 @@
+.testo-centrato-titolo {
+  text-align: center;
+  color: #FF530D;
+  margin-bottom: 25px;
+  font-family: "MaybugMSHandwritten", Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.testo-Sinistra{
+  float:left;
+}
+
+.imgPiatto{
+  display: inline-block;
+  object-fit: contain;
+  position: relative;
+  margin-top: 5%;
+  height: 325px;
+}
+
+.divPiatto{
+  display: inline-block;
+  margin: auto;
+  width: 90%;
+}
+
+.iconaAllergene{
+  width: 45px;
+  height: 45px;
+}
+
+.iconaAllergene:hover{
+  cursor: pointer;
+}
+
+.checkboxNone{
+  display: none;
+}
+
+.inline{
+  display: inline-block !important;
+}
+
+.btn-primary{
+  color: #fff !important;
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x !important;
+  border-color: #FF7B3C !important;
+}
+
+.active{
+  background: #2C2C2C linear-gradient(180deg, #2C2C2C, #585155) repeat-x !important;
+  border-color: #585155 !important;
+}
+
+input[type="checkbox"]:checked + label img{
+  filter: grayscale(100%);
+}
+
+.riga{
+  align-items: stretch !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.elementoRiga {
+  margin-right: 5px;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.btn-secondary{
+  background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x;
+  color: white;
+  border-color: #FF7B3C;
+}
+
+.btn-secondary:active{
+  background: #d84f00 linear-gradient(180deg, #ee5e0a, #d84f00) repeat-x !important;
+  color: white !important;
+}
+
+.card-body{
+  padding: 0px 10px 10px 10px;
+}
+
+@media only screen and (max-width: 770px) {
+  .imgPiatto{
+    height: 150px;
+  }
+
+  .iconaAllergene{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .testa{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    padding: 10px 0px 10px 0px;
+    height: 172px;
+  }
+  
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}

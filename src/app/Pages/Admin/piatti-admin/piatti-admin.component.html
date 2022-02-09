@@ -1,0 +1,369 @@
+<h1 class="testo-centrato-titolo">Piatti</h1>
+
+<div class="card main-card mb-3">
+    <table class="mb-0 table table-hover">
+        <!--Intestazione tabella  iniziale-->
+        <thead class="intestazioneTabella">
+            <tr>
+                <th>Numero</th>
+                <th>Nome</th>
+                <th>Prezzo</th>
+                <th>Allergeni</th>
+                <th>Tipologia</th>
+                <th class="text-center">
+                    <button class="mb-2s mr-2 btn btn-success " (click)="openCreateModal(create)">
+                        <i class="pe-7s-plus"></i>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <!--Corpo tabella iniziale-->
+        <tbody>
+            <tr *ngFor="let piattino of listiPiattini">
+                <td>{{piattino.numero}}</td>
+                <td>{{piattino.nome}}</td>
+                <td>{{piattino.prezzo}}</td>
+                <td>{{piattino.allergeni}}</td>
+                <td>{{piattino.tipologia}}</td>
+                <td class="text-center">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <button class="mb-2 mr-2 btn btn-update" (click)="openUpdateModal(update,piattino.numero)">
+                            <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
+                        </button>
+                        <button class="mb-2 mr-2 btn btn-danger"
+                            (click)="openDeleteModal(delete, piattino.numero,piattino.nome)">
+                            <i class="pe-7s-trash"> </i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--Model per il Create -->
+<ng-template #create let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Creazione Piatto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form (ngSubmit)="createPiatto()" #form="ngForm">
+        <div class="modal-body">
+            <div class="card-body">
+                <div class="form-row">
+                    <!--Nome piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addPiatto" class="mr-sm-2">Nome:</label>
+                            <label hidden id="ControlloNome" class="mr-sm-2">Inserire nome</label>
+                            <input name="text" id="addPiatto" value="" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!--Prezzo piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addPrezzo" class="mr-sm-2">Prezzo:</label>
+                            <label hidden id="ControlloPrezzo" class="mr-sm-2">Inserire prezzo</label>
+                            <input name="text" id="addPrezzo" value="" type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row input">
+                    <!--Numeretto piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="addNumerettoPiatto" class="mr-sm-2">Numeretto:</label>
+                            <label hidden id="ControlloNumeretto" class="mr-sm-2">Inserire numeretto</label>
+                            <input name="text" id="addNumerettoPiatto" value="" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <!--Allergeni piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label class="mr-sm-2">Allergeni:</label>
+                            <form>
+                                <div class="form-row input">
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Glutine">
+                                            <label for="Glutine">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Crostacei">
+                                            <label for="Crostacei">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Pesce">
+                                            <label for="Pesce">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Molluschi">
+                                            <label for="Molluschi">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row input">
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Soia">
+                                            <label for="Soia">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/soia.png" alt="soia">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Uova/Derivati">
+                                            <label for="Uova/Derivati">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="Verdura">
+                                            <label for="Verdura">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-row input">
+                        <!--Immagine piatto-->
+                        <div class="col-md-6">
+                            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+
+                                <input type="file" id="addFile" (change)="riceviFile($event.target) "accept="image/x-png,image/gif,image/jpeg">
+                                <label class="mr-sm-2">Nome nuova immagine:</label>
+                                <input type="text" id="addNomeFile">
+                                <img *ngIf=url [src]="url" alt="Inserisci nuova immagine"
+                                    class="mr-sm-2 card-img-top imgPiatto ">
+                                <label hidden id="ControlloImmagine" class="mr-sm-2">Inserire immagine o nome
+                                    immagine</label>
+                            </div>
+                        </div>
+                        <!--Tipologia -->
+                        <div class="col-md-6">
+                            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                                <label for="addTipologia" class="mr-sm-2">Tipologia:</label>
+                                <select class="form-control" id="addTipologia" name="addTipologia">
+                                    <option *ngFor="let tipo of tipologie" value="{{tipo}}">{{tipo}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="c('Close click')">Chiudi</button>
+                <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Crea</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<!--Model per il modifica -->
+<ng-template #update let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Piatto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card-body">
+            <form>
+                <div class="form-row">
+                    <!--Nome piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="updateNomePiatto" class="mr-sm-2">Nome:</label>
+                            <input name="text" id="updateNomePiatto" value="" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!--Prezzo piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="updatePrezzo" class="mr-sm-2">Prezzo:</label>
+                            <input name="text" id="updatePrezzo" value="" type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <!--Numeretto piatto -->
+                <div class="form-row input">
+                    <div class="col-md-12">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label class="mr-sm-2">Allergeni:</label>
+                            <form>
+                                <div class="form-row input">
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateGlutine">
+                                            <label for="updateGlutine">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/glutine.png" alt="glutine">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateCrostacei">
+                                            <label for="updateCrostacei">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/crostacei.png" alt="crostacei">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updatePesce">
+                                            <label for="updatePesce">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/pesce.png" alt="pesce">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateMolluschi">
+                                            <label for="updateMolluschi">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/molluschi.png" alt="molluschi">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateSoia">
+                                            <label for="updateSoia">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/soia.png" alt="soia">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateUova/Derivati">
+                                            <label for="updateUova/Derivati">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/uovo.png" alt="uovo">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="elementoRiga">
+                                            <input class="checkboxNone" type="checkbox" id="updateVerdura">
+                                            <label for="updateVerdura">
+                                                <img class="iconaAllergene"
+                                                    src="../../../../assets/images/icone/sedano.png" alt="verdura">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Vecchia Immagine piatto-->
+                <div class="form-row input">
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label class="mr-sm-2">Vecchia Immagine:</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <input type="file" id="file" (change)="riceviFile($event.target)" accept="image/x-png,image/gif,image/jpeg">
+                            <label class="mr-sm-2">Nome nuova immagine:</label>
+                            <input type="text" id="updateNomeFile">
+                            <!--<input name="text" id="img" value=""  type="file" class="mr-sm-2">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!--Nuova immagine piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <img [src]="getSafeUrl()" id="vecchiaImmagine" alt="Card image cap"
+                                class="mr-sm-2 card-img-top imgPiatto">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <img [src]="url" id="nuovaImmagine" alt="Inserisci nuova immagine"
+                                class="mr-sm-2 card-img-top imgPiatto ">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!--tipologia piatto -->
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="updateTipologia" class="mr-sm-2">Tipologia:</label>
+                            <select class="form-control" id="updateTipologia" name="addTipologia">
+                                <option *ngFor="let tipo of tipologie" value="{{tipo}}">{{tipo}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="mb-2 mr-2 btn btn-danger" (click)="c('Close click')">Chiudi</button>
+        <button type="button" class="mb-2 mr-2 btn btn-update " (click)="updatePiatto()">Aggiorna</button>
+    </div>
+</ng-template>
+
+<!--Model di sicurezza per l'eliminazione -->
+<div class="card-body">
+    <ng-template #delete let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Eliminazione piatto</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                Sei sicuro di voler eliminare {{this.piatto.nome}}?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">No</button>
+            <button type="button" class="btn btn-success" (click)="deletePiatto(numerettoPiatto)">Si</button>
+        </div>
+    </ng-template>
+</div>

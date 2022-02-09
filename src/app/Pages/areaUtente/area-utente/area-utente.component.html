@@ -1,0 +1,148 @@
+<h1 class="testo-centrato-titolo">Area Utente</h1>
+
+<div class="main-card mb-3 card">
+
+    <div class="card-body">
+        <h3>Ciao {{nomeUtente}}!</h3>
+        <form>
+            <fieldset>
+                <br>
+                <h5>Informazioni personali:</h5>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="nome">Nome</label>
+                            <label hidden id="ControlloNome" class="mr-sm-2">Inserire nome</label>
+                            <input name="nome" id="nome" placeholder="Inserisci un nome" type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="email">Email</label>
+                            <label hidden id="ControlloEmail" class="mr-sm-2">Inserire email</label>
+                            <input name="email" id="email" placeholder="Inserisci l'email" type="email"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <h5>Indirizzo di spedizione:</h5>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="via">Via</label>
+                            <label hidden id="ControlloVia" class="mr-sm-2">Inserire via</label>
+                            <input name="via" id="via" placeholder="Inserisci la via" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="position-relative form-group">
+                            <label for="civico">Civico</label>
+                            <label hidden id="ControlloCivico" class="mr-sm-2">Inserire civico</label>
+                            <input name="civico" id="civico" placeholder="Inserisci il civico" type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="position-relative form-group">
+                            <label for="provincia">Provincia</label>
+                            <label hidden id="ControlloProvincia" class="mr-sm-2">Inserire provincia</label>
+                            <input name="provincia" id="provincia" placeholder="Inserisci la provincia" type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="position-relative form-group">
+                            <label for="cap">Cap</label>
+                            <label hidden id="ControlloCap" class="mr-sm-2">Inserire cap</label>
+                            <input name="cap" id="cap" placeholder="Inserisci il cap" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <br>
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="position-relative form-group">
+                        <label>Modifica Password</label>
+                        <br>
+                        <button class="mb-2 mr-2 btn btn-update" (click)="openCambiaPasswordModal(updatePassword)">
+                            <i class="fa fa-fw" aria-hidden="true" title="pencil"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="mt-2 btn btn-secondary" (click)="openConfermaModal(modifica)">Conferma modifiche</button>
+        </form>
+    </div>
+</div>
+
+<!--Model per l'update -->
+<ng-template #updatePassword let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modifica password</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label hidden id="verificaPasswordUguali" class="mr-sm-2">Le password non coincidono</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="nuovaPassword" class="mr-sm-2">Nuova Password:</label>
+                            <input name="text" id="nuovaPassword" value="" type="text" class="form-control">
+                            <label hidden id="ControlloNuovaPassword" class="mr-sm-2">Inserisci la nuova
+                                password:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="confermaPassword">Conferma Nuova Password:</label>
+                            <input name="confermaPassword" id="confermaPassword" type="password" class="form-control">
+                            <label hidden id="ControlloConfermaPassword" class="mr-sm-2">Conferma la nuova
+                                password</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="mb-2 mr-2 btn btn-danger" (click)="c('Close click')">Chiudi</button>
+                <button type="button" class="mb-2 mr-2 btn btn-update " (click)="aggiornaPassword()">Aggiorna</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<!--Model di sicurezza per la modifica -->
+<div class="card-body">
+    <ng-template #modifica let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Modifica utente</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                Sei sicuro di voler modificare i tuoi campi?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">No</button>
+            <button type="button" class="btn btn-success" (click)="modificaUtente()">Si</button>
+        </div>
+    </ng-template>
+</div>

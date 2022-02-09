@@ -1,0 +1,53 @@
+.testo-centrato-titolo {
+    text-align: center;
+    color: #FF530D;
+    margin-bottom: 25px;
+    font-family: "MaybugMSHandwritten", Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-shadow:
+      3px 3px 0 #000,
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+}
+
+.intestazioneTabella{
+    font-size: 17px;
+}
+
+.inputInfo{
+    width: 100%;
+}
+
+.divInfo{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.elementoRiga {
+    margin-left: 10px;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.riga{
+    align-items: stretch !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 10px 0px 10px 0px;
+}
+
+.btn-secondary{
+    background: #FF530D linear-gradient(180deg, #FF7B3C, #FF530D) repeat-x;
+    color: white;
+    border-color: #FF7B3C;
+}
+  
+.btn-secondary:active{
+    background: #d84f00 linear-gradient(180deg, #ee5e0a, #d84f00) repeat-x !important;
+    color: white !important;
+}

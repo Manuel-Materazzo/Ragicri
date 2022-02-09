@@ -1,0 +1,55 @@
+<h1 class="testo-centrato-titolo">Ragicri Sushi</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <p class="testo">
+                    Ragicri Sushi è un nuovissimo ristorante di cucina giapponese e cinese di Padova.
+                    Tutti i piatti tipici della migliore tradizione orientale sono da noi disponibili in un ambiente
+                    appena rinnovato che punta a ricreare il comfort dei ristoranti asiatici e che vi conquisterà fin
+                    da subito con la sua raffinatezza e accoglienza.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=Via%20P.%20d'Abano,%2013,%2035031%20Abano%20Terme%20PD&t=k&z=13&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+                <a href="https://123movies-to.org"></a><br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+    <!--Carosello di sinistra   -->
+    <div class="col-md-6" id="caroselloSinistra">
+        <ngb-carousel *ngIf="listaImmaginiRistorante!=null">
+            <ng-template ngbSlide *ngFor="let img of listaImmaginiRistorante;">
+                <img class = "imgCarosello" [src]="img" width="100%" alt="Random first slide">
+                <div class="carousel-caption">
+                    <h3>Il ristorante</h3>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+
+    <br />
+
+    <!--Carosello di destra  -->
+    <div class="col-md-6" id="caroselloDestra">
+        <ngb-carousel *ngIf="listaImmaginiPiatti!=null">
+            <ng-template ngbSlide *ngFor="let img of listaImmaginiPiatti;">
+                <img class = "imgCarosello" [src]="img" width="100%" alt="Random first slide">
+                <div class="carousel-caption">
+                    <h3>Alcuni piatti</h3>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+</div>
