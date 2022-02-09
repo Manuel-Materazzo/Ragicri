@@ -65,6 +65,6 @@ export class UtenteService {
     }
 
     inviaMail(email: String): Observable<any> {
-        return this.http.get(`${this.baseUrl}/inviaMail/${email}`, this.header);
+        return this.http.get(`${this.baseUrl}/inviaMail/${email}`);
     }
 }

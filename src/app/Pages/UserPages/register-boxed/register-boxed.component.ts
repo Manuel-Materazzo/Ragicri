@@ -56,8 +56,9 @@ export class RegisterBoxedComponent implements OnInit {
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("username", String(this.username));
             sessionStorage.setItem("email", String(this.email));
-            this.utenteService.inviaMail(this.email).subscribe();
-            window.location.replace("/");
+            this.utenteService.inviaMail(this.email).subscribe(data3 => {
+              window.location.replace("/");
+            });
           }
         });
       }, error => {
