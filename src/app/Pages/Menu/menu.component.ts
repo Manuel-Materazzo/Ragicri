@@ -41,8 +41,8 @@ export class MenuComponent implements OnInit {
       this.listaPiatti = [];
       response.forEach(element => {
         this.listaPiatti.push(element);
-        this.listaPiatti = [...this.listaPiatti];
       });
+      this.ordinaLista();
     });
 
     this.getTipologie();
@@ -55,6 +55,18 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  ordinaLista() {
+    this.listaPiatti.sort((a: Piatto, b: Piatto) => {
+        if (a.numero > b.numero) {
+            return 1;
+        }
+        if (a.numero < b.numero) {
+            return -1;
+        }
+        return 0;
+    });
+    this.listaPiatti = [...this.listaPiatti];
+}
 
   ngOnInit() {
     this.tipologie = 1;
@@ -95,6 +107,7 @@ export class MenuComponent implements OnInit {
       response.forEach(element => {
         this.listaPiatti.push(element);
       });
+      this.ordinaLista();
     });
   }
 

@@ -39,18 +39,20 @@ export class PiattiAdminComponent implements OnInit {
         }
     }
 
+
     ngOnInit() {
         this.piattoService.getPiatti().subscribe((response: any) => {
             this.listiPiattini = [];
             response.forEach(element => {
                 this.listiPiattini.push(element);
-                this.ordinaLista();
             });
+            this.ordinaLista();
         });
         this.piattoService.getTipologie().subscribe(data => {
             this.tipologie = data.tipologie;
         });
     }
+
 
     parseJwt(token) {
         var base64Url = token.split('.')[1];
@@ -66,6 +68,7 @@ export class PiattiAdminComponent implements OnInit {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+
     //funzione per il model modfica
     openUpdateModal(content, numeretto: number) {
         this.piattoService.getPiatto(numeretto).subscribe(async (response: any) => {
@@ -74,12 +77,10 @@ export class PiattiAdminComponent implements OnInit {
             });
             this.piatto = response;
             this.allergeniSingoloPiatto = this.piatto.allergeni;
-            //this.immagineDatabase=this.sanitizeImageUrl(this.piatto.img);
 
             this.riempimentoAllergeniUpdate();
             (document.getElementById('updateNomePiatto') as HTMLInputElement).value = this.piatto.nome;
             (document.getElementById('updatePrezzo') as HTMLInputElement).value = this.piatto.prezzo + '';
-            //(document.getElementById('img') as HTMLInputElement).value = this.piatto.img;
             await this.sleep(200);
             (document.getElementById('updateTipologia') as HTMLInputElement).value = this.piatto.tipologia;
         });
@@ -90,6 +91,7 @@ export class PiattiAdminComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustResourceUrl(this.piatto.img);
     }
 
+
     //funzione per il model
     open(content) {
         this.modalService.open(content).result.then((result) => {
@@ -98,6 +100,7 @@ export class PiattiAdminComponent implements OnInit {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
+
 
     //funzione per il model elimina
     openDeleteModal(content, numeretto: number, nomePiatto: string) {
@@ -108,11 +111,13 @@ export class PiattiAdminComponent implements OnInit {
         this.numerettoPiatto = numeretto;
     }
 
+
     openCreateModal(content) {
         this.modalService.open(content, {
             size: 'lg'
         });
     }
+
 
     //funzione per il model
     private getDismissReason(reason: any): string {
@@ -124,6 +129,7 @@ export class PiattiAdminComponent implements OnInit {
             return `with: ${reason}`;
         }
     }
+
 
     updatePiatto() {
         this.piatto.nome = (document.getElementById('updateNomePiatto') as HTMLInputElement).value;
@@ -168,18 +174,16 @@ export class PiattiAdminComponent implements OnInit {
         this.url = '';
         this.nomeImmagine = '';
         this.modalService.dismissAll();
-        //window.location.reload();
     }
 
+
     createPiatto() {
-        //aggoiungere controllo dei dati
         if (this.controlloInputCreate()) {
             return;
         }
         this.piatto.numero = parseInt((document.getElementById('addNumerettoPiatto') as HTMLInputElement).value);
         this.piattoService.getEsiste(this.piatto.numero).subscribe((response: any) => {
             this.resultControllo = response;
-            console.log(this.resultControllo);
             if (this.resultControllo) {
                 (document.getElementById('ControlloNumeretto') as HTMLInputElement).innerHTML = 'Numeretto già esistente';
                 document.getElementById('ControlloNumeretto').style.color = '#FF0000';
@@ -205,16 +209,14 @@ export class PiattiAdminComponent implements OnInit {
             input.append('nomeFile', this.nomeImmagine);
             this.piattoService.addPiatto(input).subscribe((response: any) => {
                 this.listiPiattini.push(response);
-                //
                 this.ordinaLista();
             });
             this.url = '';
             this.nomeImmagine = '';
             this.modalService.dismissAll();
         });
-
-        //window.location.reload();
     }
+
 
     deletePiatto(numeretto: number) {
         this.piattoService.deletePiatto(numeretto).subscribe();
@@ -226,6 +228,7 @@ export class PiattiAdminComponent implements OnInit {
         }
         this.modalService.dismissAll();
     }
+
 
     controlloInputCreate() {
         this.resultControllo = false;
@@ -262,7 +265,6 @@ export class PiattiAdminComponent implements OnInit {
     }
 
 
-    //Sistemare
     controlloAllergeni() {
         this.allergeni = ' ';
         if ((document.getElementById('Glutine') as HTMLInputElement).checked == true) {
@@ -289,6 +291,7 @@ export class PiattiAdminComponent implements OnInit {
         }
 
     }
+
 
     riempimentoAllergeniUpdate() {
         if (this.allergeniSingoloPiatto != null || this.allergeniSingoloPiatto != '') {
@@ -323,8 +326,8 @@ export class PiattiAdminComponent implements OnInit {
         }
     }
 
-    controlloAllergeniUpdate() {
 
+    controlloAllergeniUpdate() {
         if ((document.getElementById('updateGlutine') as HTMLInputElement).checked == true) {
             this.allergeni += 'Glutine ';
         }
@@ -349,6 +352,7 @@ export class PiattiAdminComponent implements OnInit {
 
     }
 
+
     riceviFile(eventTarget: EventTarget) {
         if ((<HTMLInputElement> eventTarget).files && (<HTMLInputElement> eventTarget).files[0]) {
             var reader = new FileReader();
@@ -362,6 +366,7 @@ export class PiattiAdminComponent implements OnInit {
         this.immaginePiatto = (<HTMLInputElement> eventTarget).files[0];
     }
 
+
     ordinaLista() {
         this.listiPiattini.sort((a: Piatto, b: Piatto) => {
             if (a.numero > b.numero) {
@@ -374,25 +379,4 @@ export class PiattiAdminComponent implements OnInit {
         });
         this.listiPiattini = [...this.listiPiattini];
     }
-
-    /**
-     * Metodo per file in cloud
-     uploadFileToActivity() {
-        this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
-            // do something, if upload success
-        }, error => {
-            console.log(error);
-        });
-    }
-
-     postFile(fileToUpload: File): Observable<boolean> {
-    const endpoint = 'your-destination-url';
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this.httpClient
-      .post(endpoint, formData, { headers: yourHeadersConfig })
-      .map(() => { return true; })
-      .catch((e) => this.handleError(e));
-}
-     */
 }
