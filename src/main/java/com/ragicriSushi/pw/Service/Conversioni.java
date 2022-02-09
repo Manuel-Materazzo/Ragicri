@@ -1,7 +1,15 @@
 package com.ragicriSushi.pw.Service;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat;
 import com.ragicriSushi.pw.DAO.*;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.OrdinazioniPiatto.PiattoOrdinatoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
+import com.ragicriSushi.pw.DTO.Role.RoleDTO;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
+import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
+import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
+import com.ragicriSushi.pw.Repository.*;
 import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
@@ -19,6 +27,10 @@ public class Conversioni {
 
     @Autowired
     PiattoRepository piattoRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
     @Autowired
     OrdinazioneRepository ordinazioneRepository;
     @Autowired
@@ -33,6 +45,8 @@ public class Conversioni {
             return (T) fromDaoToDto((IndirizzoDAO) dao);
         } else if (dao instanceof OrdinazioneDAO) {
             return (T) fromDaoToDto((OrdinazioneDAO) dao);
+        } else if (dao instanceof RoleDAO) {
+            return (T) fromDaoToDto((RoleDAO) dao);
         }
         return null;
     }
@@ -52,6 +66,7 @@ public class Conversioni {
         return null;
     }
 
+
     public <T, S> List<T> toDTO(List<S> daoList){
         List<T> dtoList = new ArrayList<T>();
         for(S dao: daoList) {
@@ -63,6 +78,8 @@ public class Conversioni {
                 dtoList.add((T) fromDaoToDto((IndirizzoDAO) dao));
             } else if(dao instanceof OrdinazioneDAO) {
                 dtoList.add((T) fromDaoToDto((OrdinazioneDAO) dao));
+            } else if(dao instanceof RoleDAO) {
+                dtoList.add((T) fromDaoToDto((RoleDAO) dao));
             }
         }
         return dtoList;
@@ -143,11 +160,17 @@ public class Conversioni {
 
         dto.setId(dao.getIdUtente());
         dto.setNome(dao.getNome());
-        dto.setRuolo(dao.getRuolo());
         dto.setEmail(dao.getEmail());
+        RoleDTO roleDto=new RoleDTO();
+        roleDto.setId(dao.getRuolo().getId());
+        roleDto.setName(dao.getRuolo().getName());
+
+        dto.setRuolo(roleDto);
         dto.setUsername(dao.getUsername());
         dto.setPassword((dao.getPassword()));
-        dto.setIndirizzoDTO(fromDaoToDto(dao.getIndirizzo()));
+        if(dao.getIndirizzo()!=null) {
+            dto.setIndirizzo(fromDaoToDto(dao.getIndirizzo()));
+        }
 
         return dto;
     }
@@ -164,6 +187,12 @@ public class Conversioni {
         return dto;
     }
 
+    private RoleDTO fromDaoToDto(RoleDAO dao) {
+        RoleDTO dto= new RoleDTO();
+        dto.setId(dao.getId());
+        dto.setName(dao.getName());
+        return dto;
+    }
 
 
     //TODO tutte le conversioni in DAO mancano
@@ -175,17 +204,27 @@ public class Conversioni {
         UtenteDAO dao=new UtenteDAO();
 
         dao.setNome(dto.getNome());
-        dao.setRuolo(dao.getRuolo());
-        dao.setEmail(dao.getEmail());
-        dao.setUsername(dao.getUsername());
-        dao.setPassword(dao.getPassword());
+        dao.setEmail(dto.getEmail());
+        RoleDAO roleDao=new RoleDAO();
+        roleDao.setId(dto.getRuolo().getId());
+        roleDao.setName(dto.getRuolo().getName());
+        IndirizzoDAO indirizzoDao= new IndirizzoDAO();
+        dao.setIndirizzo(indirizzoRepository.getById(dto.getIndirizzo().getIdIndirizzo()));
+        indirizzoDao.setCAP(dto.getIndirizzo().getCAP());
+        indirizzoDao.setProvincia(dto.getIndirizzo().getProvincia());
+        indirizzoDao.setCivico(dto.getIndirizzo().getCivico());
+        indirizzoDao.setVia(dto.getIndirizzo().getVia());
 
+        dao.setIndirizzo(indirizzoDao);
+        dao.setRuolo(roleDao);
+        dao.setUsername(dto.getUsername());
+        dao.setPassword(dto.getPassword());
         return dao;
     }
 
     public IndirizzoDAO fromDtoToDao(IndirizzoDTO dto){
-        IndirizzoDAO dao=new IndirizzoDAO();
-
+        IndirizzoDAO dao=this.indirizzoRepository.getById(dto.getIdIndirizzo());
+        dao.setIdIndirizzo(dto.getIdIndirizzo());
         dao.setVia(dto.getVia());
         dao.setProvincia(dto.getProvincia());
         dao.setCAP(dto.getCAP());

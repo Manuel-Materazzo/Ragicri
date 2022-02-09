@@ -1,4 +1,4 @@
-package com.ragicriSushi.pw.DTO;
+package com.ragicriSushi.pw.DTO.Utente;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

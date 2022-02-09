@@ -2,14 +2,21 @@ package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DTO.*;
+import com.ragicriSushi.pw.DTO.Piatto.AddPiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
+import com.ragicriSushi.pw.DTO.Piatto.TipologieDTO;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,7 +104,10 @@ public class PiattoService {
         Optional<PiattoDAO> dao = piattoRepository.findPiattoByNumero(dto.getNumero());
         if(dao.isPresent()){
             dao.get().setAllergeni(dto.getAllergeni());
-            dao.get().setImg(dto.getImg());
+            if(dto.getImg()!=null) {
+                dao.get().setImg(dto.getImg());
+            }
+
             dao.get().setNome(dto.getNome());
             dao.get().setNumero(dto.getNumero());
             dao.get().setPrezzo(dto.getPrezzo());
@@ -176,14 +186,16 @@ public class PiattoService {
         metadata.put("Content-Type", multipartFile.getContentType());
         metadata.put("Content-Length", String.valueOf(multipartFile.getSize()));
 
-        String dirName = "C:\\immaginiRagicri";
+        String dirName = "C:/RagicriSushi/ragicripw_frontend/src/assets/images/piatti";
 
         try {
-            File actualFile = new File (dirName, nomeFile+"."+multipartFile.getOriginalFilename().split("\\.")[1]);
+            //File actualFile = new File (dirName, nomeFile+"."+multipartFile.getOriginalFilename().split("\\.")[0]);
+            File actualFile = new File (dirName, nomeFile+"."+ StringUtils.getFilenameExtension(multipartFile.getOriginalFilename()));
             multipartFile.transferTo(actualFile);
         } catch (Exception e) {
             throw new IllegalStateException("Failed to upload file", e);
         }
-        return dirName+"\\"+nomeFile;
+
+        return "../../../../assets/images/piatti/"+nomeFile+"."+StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
     }
 }

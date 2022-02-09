@@ -3,9 +3,9 @@ package com.ragicriSushi.pw.Service;
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
-import com.ragicriSushi.pw.DTO.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
-import com.ragicriSushi.pw.DTO.OrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +61,7 @@ public class OrdinazioneService {
         }
     }
 
-    public OrdinazioneDTO addConIndirizzo(NewOrdinazioneIndirizzoDTO dto){
+    public OrdinazioneDTO addConIndirizzo(NewOrdinazioneIndirizzoDTO dto) {
         OrdinazioneDAO dao = conversioni.toDAO(dto);
 
         ordinazioneRepository.save(dao);
@@ -174,28 +174,26 @@ public class OrdinazioneService {
         }
     }
 
-    public OrdinazioneDTO setPreparato(int id){
+    public OrdinazioneDTO setPreparato(int id) {
         Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
 
-        if(dao.isPresent()){
+        if (dao.isPresent()) {
             dao.get().setPreparato(true);
             ordinazioneRepository.save(dao.get());
             return conversioni.toDTO(dao.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public OrdinazioneDTO setConsegnato(int id){
+    public OrdinazioneDTO setConsegnato(int id) {
         Optional<OrdinazioneDAO> dao = ordinazioneRepository.findById(id);
 
-        if(dao.isPresent()){
+        if (dao.isPresent()) {
             dao.get().setConsegnato(true);
             ordinazioneRepository.save(dao.get());
             return conversioni.toDTO(dao.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
