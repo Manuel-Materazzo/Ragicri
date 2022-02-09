@@ -71,6 +71,36 @@ p{
   }
 }
 
+.testo{
+  color: #a6a6a6;
+  position: absolute;
+  text-align: center !important;
+  font-family: cursive;
+  padding-right: 55%;
+  font-size: 12pt;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: 280px !important;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.card-body {
+  float: center;
+  display: block;
+  height: 300px;
+  padding: 15px;
+  background: url(http://www.sfondifree.it/sfondihd/wp-content/uploads/2016/05/Sfondo-piatto-di-sushi.jpg);
+  background-size: cover !important;
+  background-repeat: no-repeat;
+  background-attachment: local;
+}
+
 @media only screen and (max-width: 400px) {
   .imgCarosello{
     height: 200px;
