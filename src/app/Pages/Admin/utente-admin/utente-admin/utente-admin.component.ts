@@ -134,7 +134,8 @@ export class UtenteAdminComponent implements OnInit {
     this.utente.password=(document.getElementById('addPassword') as HTMLInputElement).value;
     this.utente.ruolo=(document.getElementById('addRuolo') as HTMLInputElement).value;
     this.utente.IndirizzoDTO=null;
-    this.utenteService.registraUtente(this.utente).subscribe((response: any) => {
+    let json = JSON.stringify(this.utente);
+    this.utenteService.registraUtente(json).subscribe((response: any) => {
       this.listaUtenti.push(response);
       this.ordinaUtenti();
     });

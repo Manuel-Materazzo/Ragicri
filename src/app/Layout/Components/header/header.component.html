@@ -11,7 +11,7 @@
       </div>
       <div *ngIf="token == true">
         <button id="btnLogout" class="btn btn-secondary btnHeader" style="margin-right: 5px;" (click)="logout()">Logout</button>
-        <button id="btnAreaUtente" class="btn btn-secondary btnHeader" routerLink="/areaUtente">Area Utente</button>
+        <button *ngIf="ruolo==3" id="btnAreaUtente" class="btn btn-secondary btnHeader" routerLink="/areaUtente">Area Utente</button>
       </div>
     </div>
   </div>

@@ -14,7 +14,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class OrdiniCamerieriComponent implements OnInit {
 
     esiste: boolean;
-    jsonRicevuto;
     numeroTavolo: number = 0;
     display: boolean = false;
     errore: string;
@@ -49,28 +48,38 @@ export class OrdiniCamerieriComponent implements OnInit {
     };
 
     InfoTavolo(n: number) {
+        document.getElementById('numeretto').removeAttribute('readOnly');
+        document.getElementById('quantita').removeAttribute('readOnly');
+        
         this.ordinazioneService.getInfoTavolo(n).subscribe(data => {
-            this.jsonRicevuto = data;
-            if (this.jsonRicevuto.Status == 'Tavolo libero.') {
+            if (data.status == 'Tavolo libero.') {
                 document.getElementById('statusTavolo').innerHTML = 'Tavolo libero!';
                 document.getElementById('statusTavolo').style.color = '#009933';
                 document.getElementById('statusTavolo').removeAttribute('hidden');
-                document.getElementById('persone').setAttribute('value', '');
-                document.getElementById('tipologia').setAttribute('value', '');
+                document.getElementById('tipologia').removeAttribute('readOnly');
+                document.getElementById('persone').removeAttribute('readOnly');
+                (document.getElementById('persone') as HTMLInputElement).value = "";
+                (document.getElementById('tipologia') as HTMLInputElement).value = "";
             }
             else {
-                this.persone = this.jsonRicevuto['persone'];
-                this.tipologia = this.jsonRicevuto['tipologia'];
+                this.persone = data['persone'];
+                this.tipologia = data['tipologia'];
                 document.getElementById('statusTavolo').setAttribute('hidden', '');
-                (document.getElementById('persone') as HTMLInputElement).value = this.jsonRicevuto['persone'];
-                (document.getElementById('tipologia') as HTMLInputElement).value = this.jsonRicevuto['tipologia'];
+                document.getElementById('tipologia').setAttribute('readOnly', '');
+                document.getElementById('persone').setAttribute('readOnly', '');
+                (document.getElementById('persone') as HTMLInputElement).value = data['persone'];
+                (document.getElementById('tipologia') as HTMLInputElement).value = data['tipologia'];
             }
         }, error => {
             document.getElementById('statusTavolo').innerHTML = 'Tavolo libero!';
             document.getElementById('statusTavolo').style.color = '#009933';
+            document.getElementById('statusTavolo').removeAttribute('hidden');
             document.getElementById('persone').setAttribute('value', '');
             document.getElementById('tipologia').setAttribute('value', '');
-            document.getElementById('statusTavolo').removeAttribute('hidden');
+            document.getElementById('tipologia').removeAttribute('readOnly');
+            document.getElementById('persone').removeAttribute('readOnly');
+            (document.getElementById('persone') as HTMLInputElement).value = "";
+            (document.getElementById('tipologia') as HTMLInputElement).value = "";
         });
     }
 
