@@ -23,7 +23,7 @@ public class IndirizzoController {
     @PreAuthorize("hasRole('ROLE_DIPENDENTE')")
     @GetMapping(path = "")
     @ApiOperation("Ritorna tutti gli indirizzi")
-    public ResponseEntity<Object> getAll(){
+    public ResponseEntity<Object> getAll() {
         return ResponseEntity.ok(indirizzoService.getAll());
     }
 
@@ -43,12 +43,11 @@ public class IndirizzoController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(path = "/update")
     @ApiOperation("Aggiorna un indirizzo")
-    public ResponseEntity<Object> update(@RequestBody IndirizzoDTO dto){
+    public ResponseEntity<Object> update(@RequestBody IndirizzoDTO dto) {
         IndirizzoDTO result = indirizzoService.update(dto);
-        if (dto == null){
+        if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"Indirizzo non trovato.\"}");
-        }
-        else {
+        } else {
             return ResponseEntity.ok(dto);
         }
     }

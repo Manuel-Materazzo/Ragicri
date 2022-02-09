@@ -1,6 +1,5 @@
 package com.ragicriSushi.pw.DTO.Utente;
 
-import com.ragicriSushi.pw.DTO.Role.RoleDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

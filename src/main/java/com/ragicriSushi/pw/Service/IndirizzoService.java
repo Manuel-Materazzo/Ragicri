@@ -17,24 +17,23 @@ public class IndirizzoService {
     @Autowired
     private Conversioni conversioni;
 
-    public List<IndirizzoDTO> getAll(){
+    public List<IndirizzoDTO> getAll() {
         return conversioni.toDTO(indirizzoRepository.findAll());
     }
 
-    public IndirizzoDTO getById(int id){
+    public IndirizzoDTO getById(int id) {
         Optional<IndirizzoDAO> optional = indirizzoRepository.findById(id);
 
         if (optional.isPresent()) {
             return conversioni.toDTO(optional.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public IndirizzoDTO update(IndirizzoDTO dto){
+    public IndirizzoDTO update(IndirizzoDTO dto) {
         Optional<IndirizzoDAO> dao = indirizzoRepository.findById(dto.getIdIndirizzo());
-        if(dao.isPresent()){
+        if (dao.isPresent()) {
 
             dao.get().setVia(dto.getVia());
             dao.get().setProvincia(dto.getProvincia());

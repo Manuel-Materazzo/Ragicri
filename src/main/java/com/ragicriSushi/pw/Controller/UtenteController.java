@@ -1,8 +1,8 @@
 package com.ragicriSushi.pw.Controller;
 
 import com.ragicriSushi.pw.DTO.EmailDTO;
-import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
+import com.ragicriSushi.pw.DTO.Utente.*;
 import com.ragicriSushi.pw.Service.MailService;
 import com.ragicriSushi.pw.Service.RoleService;
 import com.ragicriSushi.pw.Service.UtenteService;
@@ -172,8 +172,8 @@ public class UtenteController {
     public ResponseEntity<Object> checkPasswword(@RequestBody UtenteModificaPassword dto) {
 
         UtenteDTO utente = utenteService.getById(dto.getId());
-        if (utente!=null) {
-            Boolean result = utenteService.checkPassword(utente.getPassword(),dto.getPassword());
+        if (utente != null) {
+            Boolean result = utenteService.checkPassword(utente.getPassword(), dto.getPassword());
             if (result) {
                 return ResponseEntity.ok(result);
             } else {
@@ -187,6 +187,6 @@ public class UtenteController {
     @GetMapping(path = "/inviaMail/{email}")
     @ApiOperation("Invia Mail")
     public ResponseEntity<Object> inviaMail(@PathVariable String email) {
-        return ResponseEntity.ok(mailService.sendEmail(email,2));
+        return ResponseEntity.ok(mailService.sendEmail(email, 2));
     }
 }

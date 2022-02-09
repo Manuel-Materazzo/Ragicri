@@ -32,20 +32,20 @@ public class NewOrdinazioneDTO {
         return pagato;
     }
 
-    public boolean getPreparato() {
-        return preparato;
-    }
-
-    public boolean getConsegnato() {
-        return consegnato;
-    }
-
     public void setPagato(boolean pagato) {
         this.pagato = pagato;
     }
 
+    public boolean getPreparato() {
+        return preparato;
+    }
+
     public void setPreparato(boolean preparato) {
         this.preparato = preparato;
+    }
+
+    public boolean getConsegnato() {
+        return consegnato;
     }
 
     public void setConsegnato(boolean consegnato) {

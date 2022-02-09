@@ -1,19 +1,18 @@
 package com.ragicriSushi.pw.Service;
 
 import com.ragicriSushi.pw.DAO.*;
+import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
 import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.OrdinazioniPiatto.PiattoOrdinatoDTO;
 import com.ragicriSushi.pw.DTO.Piatto.PiattoDTO;
 import com.ragicriSushi.pw.DTO.Role.RoleDTO;
 import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
-import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
 import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
-import com.ragicriSushi.pw.Repository.*;
-import com.ragicriSushi.pw.DTO.*;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
+import com.ragicriSushi.pw.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,34 +66,34 @@ public class Conversioni {
     }
 
 
-    public <T, S> List<T> toDTO(List<S> daoList){
+    public <T, S> List<T> toDTO(List<S> daoList) {
         List<T> dtoList = new ArrayList<T>();
-        for(S dao: daoList) {
-            if(dao instanceof PiattoDAO) {
+        for (S dao : daoList) {
+            if (dao instanceof PiattoDAO) {
                 dtoList.add((T) fromDaoToDto((PiattoDAO) dao));
-            } else if(dao instanceof UtenteDAO) {
+            } else if (dao instanceof UtenteDAO) {
                 dtoList.add((T) fromDaoToDto((UtenteDAO) dao));
-            } else if(dao instanceof IndirizzoDAO) {
+            } else if (dao instanceof IndirizzoDAO) {
                 dtoList.add((T) fromDaoToDto((IndirizzoDAO) dao));
-            } else if(dao instanceof OrdinazioneDAO) {
+            } else if (dao instanceof OrdinazioneDAO) {
                 dtoList.add((T) fromDaoToDto((OrdinazioneDAO) dao));
-            } else if(dao instanceof RoleDAO) {
+            } else if (dao instanceof RoleDAO) {
                 dtoList.add((T) fromDaoToDto((RoleDAO) dao));
             }
         }
         return dtoList;
     }
 
-    public <T, S> List<T> toDAO(List<S> dtoList){
+    public <T, S> List<T> toDAO(List<S> dtoList) {
         List<T> daoList = new ArrayList<T>();
-        for(S dto: dtoList) {
-            if(dto instanceof PiattoDTO) {
+        for (S dto : dtoList) {
+            if (dto instanceof PiattoDTO) {
                 daoList.add((T) fromDtoToDao((PiattoDTO) dto));
-            } else if(dto instanceof UtenteDTO) {
+            } else if (dto instanceof UtenteDTO) {
                 daoList.add((T) fromDtoToDao((UtenteDTO) dto));
-            } else if(dto instanceof NewOrdinazioneDTO) {
+            } else if (dto instanceof NewOrdinazioneDTO) {
                 daoList.add((T) fromDtoToDao((NewOrdinazioneDTO) dto));
-            } else if(dto instanceof NewOrdinazioneIndirizzoDTO) {
+            } else if (dto instanceof NewOrdinazioneIndirizzoDTO) {
                 daoList.add((T) fromDtoToDao((NewOrdinazioneIndirizzoDTO) dto));
             }
         }
@@ -103,7 +102,7 @@ public class Conversioni {
 
     //TODO toDAO anche per le liste
 
-    public PiattoDTO fromDaoToDto(PiattoDAO dao){
+    public PiattoDTO fromDaoToDto(PiattoDAO dao) {
         PiattoDTO dto = new PiattoDTO();
         dto.setNome(dao.getNome());
         dto.setNumero(dao.getNumero());
@@ -114,7 +113,7 @@ public class Conversioni {
         return dto;
     }
 
-    public OrdinazioneDTO fromDaoToDto(OrdinazioneDAO dao){
+    public OrdinazioneDTO fromDaoToDto(OrdinazioneDAO dao) {
         OrdinazioneDTO dto = new OrdinazioneDTO();
         dto.setIdOrdinazione(dao.getIdOrdinazione());
         dto.setTipologia(dao.getTipologia());
@@ -124,17 +123,15 @@ public class Conversioni {
         dto.setConsegnato(dao.getConsegnato());
         dto.setPreparato(dao.getPreparato());
 
-        if (dao.getOrarioConsegna() == null){
+        if (dao.getOrarioConsegna() == null) {
             dto.setOrarioConsegna(null);
-        }
-        else {
+        } else {
             dto.setOrarioConsegna(dao.getOrarioConsegna().toString());
         }
-        if (dao.getIndirizzo() == null){
+        if (dao.getIndirizzo() == null) {
             dto.setIdIndirizzo(0);
             dto.setIndirizzo(null);
-        }
-        else {
+        } else {
             dto.setIdIndirizzo(dao.getIndirizzo().getIdIndirizzo());
             dto.setIndirizzo(toDTO(dao.getIndirizzo()));
         }
@@ -155,28 +152,28 @@ public class Conversioni {
         return dto;
     }
 
-    public UtenteDTO fromDaoToDto(UtenteDAO dao){
+    public UtenteDTO fromDaoToDto(UtenteDAO dao) {
         UtenteDTO dto = new UtenteDTO();
 
         dto.setId(dao.getIdUtente());
         dto.setNome(dao.getNome());
         dto.setEmail(dao.getEmail());
-        RoleDTO roleDto=new RoleDTO();
+        RoleDTO roleDto = new RoleDTO();
         roleDto.setId(dao.getRuolo().getId());
         roleDto.setName(dao.getRuolo().getName());
 
         dto.setRuolo(roleDto);
         dto.setUsername(dao.getUsername());
         dto.setPassword((dao.getPassword()));
-        if(dao.getIndirizzo()!=null) {
+        if (dao.getIndirizzo() != null) {
             dto.setIndirizzo(fromDaoToDto(dao.getIndirizzo()));
         }
 
         return dto;
     }
 
-    public IndirizzoDTO fromDaoToDto(IndirizzoDAO dao){
-        IndirizzoDTO dto=new IndirizzoDTO();
+    public IndirizzoDTO fromDaoToDto(IndirizzoDAO dao) {
+        IndirizzoDTO dto = new IndirizzoDTO();
 
         dto.setIdIndirizzo(dao.getIdIndirizzo());
         dto.setVia(dao.getVia());
@@ -188,7 +185,7 @@ public class Conversioni {
     }
 
     private RoleDTO fromDaoToDto(RoleDAO dao) {
-        RoleDTO dto= new RoleDTO();
+        RoleDTO dto = new RoleDTO();
         dto.setId(dao.getId());
         dto.setName(dao.getName());
         return dto;
@@ -196,19 +193,19 @@ public class Conversioni {
 
 
     //TODO tutte le conversioni in DAO mancano
-    public PiattoDAO fromDtoToDao(PiattoDTO dto){
+    public PiattoDAO fromDtoToDao(PiattoDTO dto) {
         return null;
     }
 
-    public UtenteDAO fromDtoToDao(UtenteDTO dto){
-        UtenteDAO dao=new UtenteDAO();
+    public UtenteDAO fromDtoToDao(UtenteDTO dto) {
+        UtenteDAO dao = new UtenteDAO();
 
         dao.setNome(dto.getNome());
         dao.setEmail(dto.getEmail());
-        RoleDAO roleDao=new RoleDAO();
+        RoleDAO roleDao = new RoleDAO();
         roleDao.setId(dto.getRuolo().getId());
         roleDao.setName(dto.getRuolo().getName());
-        IndirizzoDAO indirizzoDao= new IndirizzoDAO();
+        IndirizzoDAO indirizzoDao = new IndirizzoDAO();
         dao.setIndirizzo(indirizzoRepository.getById(dto.getIndirizzo().getIdIndirizzo()));
         indirizzoDao.setCAP(dto.getIndirizzo().getCAP());
         indirizzoDao.setProvincia(dto.getIndirizzo().getProvincia());
@@ -222,8 +219,8 @@ public class Conversioni {
         return dao;
     }
 
-    public IndirizzoDAO fromDtoToDao(IndirizzoDTO dto){
-        IndirizzoDAO dao=this.indirizzoRepository.getById(dto.getIdIndirizzo());
+    public IndirizzoDAO fromDtoToDao(IndirizzoDTO dto) {
+        IndirizzoDAO dao = this.indirizzoRepository.getById(dto.getIdIndirizzo());
         dao.setIdIndirizzo(dto.getIdIndirizzo());
         dao.setVia(dto.getVia());
         dao.setProvincia(dto.getProvincia());
@@ -258,10 +255,10 @@ public class Conversioni {
         return dao;
     }
 
-    public OrdinazioneDAO fromDtoToDao(NewOrdinazioneIndirizzoDTO dto){
+    public OrdinazioneDAO fromDtoToDao(NewOrdinazioneIndirizzoDTO dto) {
         Optional<IndirizzoDAO> indirizzoDao = indirizzoRepository.findById(dto.getIdIndirizzo());
 
-        if(!indirizzoDao.isPresent()){
+        if (!indirizzoDao.isPresent()) {
             return null;
         }
 

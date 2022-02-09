@@ -33,7 +33,7 @@ public class PiattoOrdinato {
     @Column
     int quantita;
 
-    public boolean getConsegnato(){
+    public boolean getConsegnato() {
         return this.consegnato;
     }
 
