@@ -56,21 +56,23 @@ public class MailService {
 
             if(mex==1) {
                 // Set Subject: header field
-                message.setSubject("Congratulazioni, ordine effettuato!");
+                message.setSubject("Ordine effettuato con successo!");
 
                 message.setContent(
-                        "<h1>La ringraziamo di aver scelto Ragicri-sushi!</h1>",
+                        "<h1>La ringraziamo di aver scelto Ragicri-sushi!</h1>" +
+                                "<p>Abbiamo ricevuto il suo ordine e faremo del nostro meglio per rispettare gli standard " +
+                                "qualitativi e le tempistiche da noi promosse.</p>",
                         "text/html");
             }
 
             if(mex==2) {
                 // Set Subject: header field
-                message.setSubject("Registrazione completata!");
+                message.setSubject("Registrazione avvenuta con successo!");
 
                 message.setContent(
                         "<h1>Benvenuto,</h1>" +
                                 "<p>la ringraziamo per essersi iscritto a Ragicri-sushi,</p>" +
-                                "<p>per eventuali domande o di assistenza tecnica non esitare a scriverci!</p>" +
+                                "<p>per eventuali domande o assistenza tecnica non esiti a contattarci!</p>" +
                                 "<h5>La aspettiamo per soddisfare la sua voglia di sushi!</h5>",
                         "text/html");
             }
