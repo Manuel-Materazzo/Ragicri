@@ -82,7 +82,7 @@
                     </div>
 
                     <div *ngIf="token">
-                        <button class="btn btn-secondary btnCarrello" style="margin-top: -6px;" (click)="aggiungiCarrello(piatto.numero, piatto.nome, piatto.prezzo)">
+                        <button class="btn btn-secondary btnCarrello" style="margin-top: -6px; margin-bottom: 5px;" (click)="aggiungiCarrello(piatto.numero, piatto.nome, piatto.prezzo)">
                             Aggiungi al carrello</button> X
                         <div style="width: 60px; display: inline-block;">
                             <input id="quantita{{piatto.numero}}" value="1" min="1" step="1" type="number" class="mr-2 form-control" style="height: 34px;">
