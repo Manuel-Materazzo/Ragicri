@@ -3,9 +3,9 @@ package com.ragicriSushi.pw.Service;
 import com.ragicriSushi.pw.DAO.OrdinazioneDAO;
 import com.ragicriSushi.pw.DAO.PiattoDAO;
 import com.ragicriSushi.pw.DAO.PiattoOrdinato;
-import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.DTO.NewOrdinazioneIndirizzoDTO;
 import com.ragicriSushi.pw.DTO.Ordinazione.NewOrdinazioneDTO;
+import com.ragicriSushi.pw.DTO.Ordinazione.OrdinazioneDTO;
 import com.ragicriSushi.pw.Repository.OrdinazioneRepository;
 import com.ragicriSushi.pw.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,11 +106,7 @@ public class OrdinazioneService {
     public boolean checkTavolo(int tavolo) {
         List<OrdinazioneDAO> daoList = ordinazioneRepository.findOrdinazioneByTavolo(tavolo);
 
-        if (daoList.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !daoList.isEmpty();
     }
 
     public List<OrdinazioneDTO> getNonPagato() {

@@ -54,7 +54,7 @@ public class MailService {
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            if(mex==1) {
+            if (mex == 1) {
                 // Set Subject: header field
                 message.setSubject("Ordine effettuato con successo!");
 
@@ -65,7 +65,7 @@ public class MailService {
                         "text/html");
             }
 
-            if(mex==2) {
+            if (mex == 2) {
                 // Set Subject: header field
                 message.setSubject("Registrazione avvenuta con successo!");
 

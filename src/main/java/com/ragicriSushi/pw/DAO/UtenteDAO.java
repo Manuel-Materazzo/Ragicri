@@ -36,6 +36,6 @@ public class UtenteDAO {
     private IndirizzoDAO Indirizzo;
 
     @ManyToOne
-    @JoinColumn(name="ruolo", nullable=false)
+    @JoinColumn(name = "ruolo", nullable = false)
     private RoleDAO ruolo;
 }

@@ -1,9 +1,5 @@
 package com.ragicriSushi.pw.security;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.Repository.RoleRepository;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
@@ -15,6 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
@@ -22,18 +22,18 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UtenteRepository utenteRepository;
     @Autowired
     private RoleRepository roleRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UtenteDAO> utente=utenteRepository.findUtenteByUsername(username);
-        if(!utente.isPresent())
-        {
+        Optional<UtenteDAO> utente = utenteRepository.findUtenteByUsername(username);
+        if (!utente.isPresent()) {
             throw new UsernameNotFoundException("Utente non trovato");
         }
-        Collection<SimpleGrantedAuthority> authorities= new ArrayList<>();
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(
                 utente.get().getRuolo().getName()));
         return new User(utente.get().getUsername(),
-                utente.get().getPassword(),authorities);
+                utente.get().getPassword(), authorities);
     }
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

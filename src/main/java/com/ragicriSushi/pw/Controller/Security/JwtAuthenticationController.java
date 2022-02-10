@@ -1,8 +1,6 @@
 package com.ragicriSushi.pw.Controller.Security;
 
 
-import java.util.Optional;
-
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
 import com.ragicriSushi.pw.security.JwtTokenUtil;
@@ -19,6 +17,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @RestController
@@ -46,9 +46,8 @@ public class JwtAuthenticationController {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        Optional<UtenteDAO> utente=utenteRepository.findUtenteByUsername(authenticationRequest.getUsername());
-        if(!utente.isPresent())
-        {
+        Optional<UtenteDAO> utente = utenteRepository.findUtenteByUsername(authenticationRequest.getUsername());
+        if (!utente.isPresent()) {
             throw new UsernameNotFoundException("Utente non trovato");
         }
 

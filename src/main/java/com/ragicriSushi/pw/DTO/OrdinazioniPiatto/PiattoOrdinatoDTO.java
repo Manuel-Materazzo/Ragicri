@@ -21,7 +21,7 @@ public class PiattoOrdinatoDTO {
 
     private int quantita;
 
-    public boolean getConsegnato(){
+    public boolean getConsegnato() {
         return this.consegnato;
     }
 

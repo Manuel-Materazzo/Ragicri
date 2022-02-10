@@ -5,7 +5,10 @@ import com.ragicriSushi.pw.DAO.RoleDAO;
 import com.ragicriSushi.pw.DAO.UtenteDAO;
 import com.ragicriSushi.pw.DTO.EmailDTO;
 import com.ragicriSushi.pw.DTO.NumeroDTO;
-import com.ragicriSushi.pw.DTO.Utente.*;
+import com.ragicriSushi.pw.DTO.Utente.AddUtenteDTO;
+import com.ragicriSushi.pw.DTO.Utente.IndirizzoDTO;
+import com.ragicriSushi.pw.DTO.Utente.UpdateUtenteDto;
+import com.ragicriSushi.pw.DTO.Utente.UtenteDTO;
 import com.ragicriSushi.pw.Repository.IndirizzoRepository;
 import com.ragicriSushi.pw.Repository.RoleRepository;
 import com.ragicriSushi.pw.Repository.UtenteRepository;
@@ -113,7 +116,7 @@ public class UtenteService implements UserDetailsService {
             if (dto.getEmail() != null) {
                 dao.get().setEmail(dto.getEmail());
             }
-            if (dto.getPassword()!="") {
+            if (dto.getPassword() != "") {
                 dao.get().setPassword(passwordEncoder.encode(dto.getPassword()));
             }
             if (dto.getUsername() != null) {
@@ -130,12 +133,8 @@ public class UtenteService implements UserDetailsService {
     }
 
     public Boolean checkPassword(String vecchiaPassword, String nuovaPassword) {
-            String passwordCryptata=passwordEncoder.encode(nuovaPassword);
-        if (passwordCryptata==vecchiaPassword) {
-            return true;
-        } else {
-            return false;
-        }
+        String passwordCryptata = passwordEncoder.encode(nuovaPassword);
+        return passwordCryptata == vecchiaPassword;
     }
 
     public boolean checkPresenzaUsername(String username) {
